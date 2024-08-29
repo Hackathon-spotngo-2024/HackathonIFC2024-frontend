@@ -6,10 +6,7 @@ import CardComponent from './components/CardComponent.vue';
 </script>
 
 <template>
-  <NavbarComponent/>
-  <BannerComponent/>
-  <CardSectionTitle/>
-  <CardComponent/>
+  <router-view></router-view>
 </template>
 
 <style scoped>

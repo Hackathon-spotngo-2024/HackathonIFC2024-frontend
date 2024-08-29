@@ -4,7 +4,8 @@
 
 <template>
   <div class="nav-container">
-    <a href="Homepage.vue" class="home-link"><img class="logo-img" src="../assets/logo.png" alt="" /></a>
+    <router-link to="/" class="home-link"><img class="logo-img" src="../assets/logo.png" alt="" /></router-link>
+    <router-link to="/alugar" id="alugar-link" class="nav-link"></router-link>
     <a href="AlugarComponent.vue" id="alugar-link" class="nav-link">Alugar</a>
     <a href="MinhasReservasComponent.vue" id="minhas-reservas-link" class="nav-link">Minhas reservas</a>
     <div class="search-bar">
@@ -32,7 +33,7 @@
 }
 
 a {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat';
   font-weight: 500;
   text-decoration: none;
   color: black;

@@ -11,5 +11,4 @@ app.component('NavbarComponent', NavbarComponent)
 app.component('BannerComponent', BannerComponent)
 
 app.use(router)
-
 app.mount('#app')
