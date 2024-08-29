@@ -33,7 +33,7 @@
 }
 
 a {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat';
   font-weight: 500;
   text-decoration: none;
   color: black;
