@@ -115,7 +115,7 @@ a {
   margin-top: 1rem;
   width: 100%;
   height: 1px;
-  margin: 1rem 8rem 0 8rem;
+  margin: 1.5rem 8rem 0 8rem;
   background-color: var(--cor-linha-divisoria)
 }
 </style>
