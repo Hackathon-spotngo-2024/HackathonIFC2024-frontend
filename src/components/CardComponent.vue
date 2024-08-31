@@ -28,7 +28,7 @@ import imgCard1 from '../assets/card-imgs/card-img-1.jpeg'
 }
 
 .card-img > img {
-  width: 350px;
+  width: 300px;
   height: 300px;
   border-radius: 15px;
 }
