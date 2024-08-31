@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import AnunciarPage from './AnunciarPage.vue'
+import AnunciarPage from '../views/AnunciarPage.vue'
 import HomePage from '../views/HomePage.vue'
 
 const router = createRouter({
