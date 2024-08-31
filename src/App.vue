@@ -7,6 +7,11 @@ import NavbarComponent from './components/NavbarComponent.vue';
     <NavbarComponent/>
   </header>
   <router-view></router-view>
+
+  <footer>
+    <RodapeComponent/>
+  </footer>
+
 </template>
 
 <style scoped>

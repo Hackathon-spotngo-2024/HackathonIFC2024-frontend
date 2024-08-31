@@ -13,6 +13,7 @@
     <CardComponent />
     <CardComponent />
     <CardComponent />
+   
   </div>
 </template>
 
