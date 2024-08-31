@@ -1,5 +1,4 @@
 <script setup>
-import RodapeComponentVue from "./components/RodapeComponent.vue";
 
 </script>
 
