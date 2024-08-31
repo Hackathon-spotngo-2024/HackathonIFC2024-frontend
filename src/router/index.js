@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import AnunciarPage from './AnunciarPage.vue'
-import HomePage from './HomePage.vue'
+import AnunciarPage from '../views/AnunciarPage.vue'
+import HomePage from '../views/HomePage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,7 +11,7 @@ const router = createRouter({
       component: HomePage,
     },
     {
-      path: '/',
+      path: '/anunciar',
       name: 'AnunciarPage',
       component: AnunciarPage,
     },
