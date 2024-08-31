@@ -1,76 +1,73 @@
-<script setup>
-
-</script>
-
+<script setup></script>
 
 <template>
-    <footer class="rodape">
-        <div class="info">
-
-            <div class="empresa">
-                <h3>Empresa</h3>
-                <div class="links">
-                    <p class="sobre">sobre<a href="sobre"></a></p>
-                    <p>termo <a href="termo"></a></p>
-                </div>
-            </div>
-            <div class="contato">
-                <h3>Contato</h3>
-                <div class="links">
-                    <p class="contato"> ajuda/FAQ <a href="ajuda"></a></p>
-                </div>
-            </div>
+  <div class="rodape">
+    <div class="info">
+      <div class="empresa">
+        <h3>Empresa</h3>
+        <div class="links" id="links-empresa">
+          <a class="sobre">Sobre</a>
+          <a class="termos">Termos</a>
         </div>
-        <div class="linha">
-            <hr>
+      </div>
+      <div class="contato" id="links-contato">
+        <h3>Contato</h3>
+        <div class="links">
+          <a class="contato">Ajuda/FAQ</a>
         </div>
-        <div>
-            <p class="mensagemFinal">2024 Spot'n GO &copy;</p>
-        </div>
-    </footer>
+      </div>
+    </div>
+    <div class="linha">
+      <hr />
+    </div>
+    <div>
+      <p class="copyright">&copy; 2024 Spot'n Go.</p>
+    </div>
+  </div>
 </template>
 
 <style scoped>
 .rodape {
-    background-color: rgba(239, 239, 239, 1);
-    color: #000000;
-    padding: 50px 0;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    height: 300px;
-    margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--search-bar-fill);
+  width: 100%;
+  height: 21rem;
+  margin-top: 6rem;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
 }
 
 .info {
-    margin-left: 95px;
-    display: flex;
-    gap: 95px;
-    font-family: "Montserrat";
+  margin: 2rem 0 0 6rem;
+  display: flex;
+  gap: 6rem;
+  font-family: 'Montserrat';
 }
 
 h3 {
-    margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
 
-p {
-    font-family: "Montserrat";
-    text-decoration: underline;
+a {
+  font-family: 'Montserrat';
+  text-decoration: none;
+  cursor: pointer;
 }
 
-p:hover {
-    text-decoration: none;
+a:hover {
+  text-decoration: underline;
 }
 
-.linha{
-margin-left: 30px;  
-margin-right: 30px;
-margin-top: 208px;
+.linha {
+  margin: 9rem 2rem 0 2rem;
 }
 
-.mensagemFinal{
-    font-family: "Montserrat";
-    margin-top: 30px;
-    margin-left: 95px;
+.copyright {
+  font-family: var(--fonte-principal);
+  margin: 2rem 0 2rem 6rem;
 }
 </style>
