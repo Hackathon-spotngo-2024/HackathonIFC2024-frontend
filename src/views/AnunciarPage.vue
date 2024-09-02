@@ -1,4 +1,5 @@
 <script setup>
+
 import { ref } from 'vue'
 import AnunciarPasso1Component from '../components/AnunciarPasso1Component.vue'
 import AnunciarPasso2Component from '../components/AnunciarPasso2Component.vue'
