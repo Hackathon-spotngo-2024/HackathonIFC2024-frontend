@@ -5,8 +5,7 @@
 <template>
   <div class="nav-container">
     <router-link to="/" class="home-link"><img class="logo-img" src="../assets/logo.png" alt="" /></router-link>
-    <router-link to="/alugar" id="alugar-link" class="nav-link"></router-link>
-    <a href="AlugarComponent.vue" id="alugar-link" class="nav-link">Alugar</a>
+    <router-link to="/alugar" id="alugar-link" class="nav-link">Alugar</router-link>
     <a href="MinhasReservasComponent.vue" id="minhas-reservas-link" class="nav-link">Minhas reservas</a>
     <div class="search-bar">
       <i class="fa fa-search"></i>
