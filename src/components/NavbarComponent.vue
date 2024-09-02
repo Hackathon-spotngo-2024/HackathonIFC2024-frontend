@@ -11,7 +11,7 @@
       <i class="fa fa-search"></i>
       <input type="text" placeholder="Procure seu spot" class="search-input" />
     </div>
-    <a href="AnunciarPage.vue" id="anunciar-link" class="nav-link">Anunciar</a>
+    <router-link to="/anunciar" id="anunciar-link" class="nav-link">Anunciar</router-link>
     <a href="LoginComponent.vue" class="entrar-link">Entrar</a>
   </div>
   <div class="linha-container">
