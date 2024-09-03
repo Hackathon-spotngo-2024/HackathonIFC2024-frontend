@@ -2,7 +2,8 @@
 import { ref } from 'vue';
 
 defineProps({
-    proximaEtapa: Function
+    proximaEtapa: Function,
+    etapaAnterior: Function
 })
 
 const tituloEtapa1 = ref("É muito fácil anunciar no Spot 'n Go")
