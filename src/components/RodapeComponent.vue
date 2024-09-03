@@ -32,10 +32,9 @@
   flex-direction: column;
   background-color: var(--search-bar-fill);
   width: 100%;
-  height: 21rem;
+  height: 22rem;
   margin-top: 6rem;
-  position: fixed;
-  bottom: 0;
+  margin-bottom: 0;
 }
 
 .links {
