@@ -34,6 +34,8 @@
   width: 100%;
   height: 21rem;
   margin-top: 6rem;
+  position: fixed;
+  bottom: 0;
 }
 
 .links {
