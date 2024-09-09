@@ -1,36 +1,103 @@
 <script setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 defineProps({
-    proximaEtapa: Function,
-    etapaAnterior: Function
+  proximaEtapa: Function,
+  etapaAnterior: Function
 })
 
-const tituloEtapa1 = ref("É muito fácil anunciar no Spot 'n Go")
-
+const tituloEtapa1 = ref("É muito fácil <br/> anunciar no Spot 'n Go")
 </script>
 
 <template>
-    <div class="container-etapa-1">
-      <h1 class="titulo-etapa-1">{{ tituloEtapa1 }}</h1>
-      <div class="instrucao-1">
-        <h2>1 Descreva sua locação</h2>
-        <p>Compartilhe algumas informações básicas, como a localização e capacidade de pessoas no local.</p>
+  <div class="container-etapa-1">
+    <div class="container-titulo">
+      <h1 class="titulo-etapa-1" v-html="tituloEtapa1"></h1>
+    </div>
+    <div class="instrucoes">
+      <div class="instrucao">
+        <h2 class="titulo-instrucao">1: Descreva sua locação</h2>
+        <p>
+          Compartilhe algumas informações básicas, como a localização e capacidade de pessoas no
+          local.
+        </p>
       </div>
-      <div class="instrucao-1">
-        <h2>2 Adicione detalhes para destaca-la</h2>
+      <div class="instrucao">
+        <h2 class="titulo-instrucao">2: Adicione detalhes para destaca-la</h2>
         <p>Adicione fotos, além de um título e uma descrição, molezinha.</p>
       </div>
-      <div class="instrucao-1">
-        <h2>3 publique!</h2>
+      <div class="instrucao">
+        <h2 class="titulo-instrucao">3: Publique!</h2>
         <p>Defina o preço e publique seu anúncio. Facinho, não é?</p>
       </div>
-      <div class="submit-botao-container">
-        <button class="continue-botao" @click="proximaEtapa">Continue</button>
-      </div>
     </div>
-  </template>
+    <div class="submit-botao-container">
+      <button class="continue-botao" @click="proximaEtapa">Continue</button>
+    </div>
+  </div>
+</template>
 
-  <style scoped>
+<style scoped>
+.container-etapa-1 {
+  display: flex;
+  flex-direction: column;
+}
 
-  </style>
+.titulo-etapa-1 {
+  display: flex;
+  font-size: 2rem;
+  text-align: center; 
+}
+
+.container-titulo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.instrucoes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin: 100px 0 100px 0;
+}
+
+.instrucao {
+  width: 270px;
+  height: 50px;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  margin: 0 35px 0 35px;
+}
+
+.titulo-instrucao {
+  margin: 0 0 32px 0;
+}
+
+.submit-botao-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 120px 0 0 0;
+}
+
+.continue-botao {
+  width: 580px;
+  height: 80px;
+  border-radius: 40px;
+  background-color: var(--cor-principal);
+  border: none;
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  transition: 300ms ease;
+}
+
+.continue-botao:hover {
+  background-color: var(--cor-principal-hover);
+  transform: scale(1.01);
+}
+</style>
