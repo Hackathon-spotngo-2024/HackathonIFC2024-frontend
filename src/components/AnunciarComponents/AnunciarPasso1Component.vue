@@ -16,19 +16,31 @@ const tituloEtapa1 = ref("É muito fácil <br/> anunciar no Spot 'n Go")
     </div>
     <div class="instrucoes">
       <div class="instrucao">
-        <h2 class="titulo-instrucao">1: Descreva sua locação</h2>
-        <p>
-          Compartilhe algumas informações básicas, como a localização e capacidade de pessoas no
-          local.
-        </p>
+        <div class="tiulo-instrucao-container">
+          <h2 class="titulo-instrucao">1: Descreva sua locação</h2>
+        </div>
+        <div class="descricao-instrucao-container">
+          <p>
+            Compartilhe algumas informações básicas, como a localização e capacidade de pessoas no
+            local.
+          </p>
+        </div>
       </div>
       <div class="instrucao">
-        <h2 class="titulo-instrucao">2: Adicione detalhes para destaca-la</h2>
-        <p>Adicione fotos, além de um título e uma descrição, molezinha.</p>
+        <div class="tiulo-instrucao-container">
+          <h2 class="titulo-instrucao">2: Adicione detalhes para destaca-la</h2>
+        </div>
+        <div class="descricao-instrucao-container">
+          <p>Adicione fotos, além de um título e uma descrição, molezinha.</p>
+        </div>
       </div>
       <div class="instrucao">
-        <h2 class="titulo-instrucao">3: Publique!</h2>
-        <p>Defina o preço e publique seu anúncio. Facinho, não é?</p>
+        <div class="tiulo-instrucao-container">
+          <h2 class="titulo-instrucao">3: Publique seu anúncio!</h2>
+        </div>
+        <div class="descricao-instrucao-container">
+          <p>Defina o preço e publique seu anúncio. Facinho, não é?</p>
+        </div>
       </div>
     </div>
     <div class="submit-botao-container">
@@ -46,7 +58,7 @@ const tituloEtapa1 = ref("É muito fácil <br/> anunciar no Spot 'n Go")
 .titulo-etapa-1 {
   display: flex;
   font-size: 2rem;
-  text-align: center; 
+  text-align: center;
 }
 
 .container-titulo {
