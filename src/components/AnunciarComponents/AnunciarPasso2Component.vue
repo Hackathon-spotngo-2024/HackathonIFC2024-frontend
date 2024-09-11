@@ -3,7 +3,7 @@ import { onMounted, ref, watch } from 'vue'
 
 const tituloEtapa2 = ref('Onde fica sua locação?')
 const inserirManualmente = ref(false)
-const tituloEnderecoManual = ref('Insira seu endereço')
+const tituloEnderecoForm = ref('Insira seu endereço')
 const dadosEndereco = ref({
   pais: '',
   endereco: '',
@@ -43,12 +43,12 @@ function inserirManualmenteTrue() {
 </script>
 
 <template>
-  <div class="container-etapa-2">
-    <div class="wrapper-infos">
-      <div class="container-titulo">
+  <div class="etapa-2-container">
+    <div class="infos-wrapper">
+      <div class="titulo-principal-container">
         <h1 class="titulo-etapa-2">{{ tituloEtapa2 }}</h1>
       </div>
-      <div class="container-subtitulo">
+      <div class="subtitulo-container">
         <p class="subtitulo">Insira o endereço pelo mapa ou manualmente.</p>
       </div>
       <!-- Aqui ficará o mapa da API do Google Maps -->
@@ -57,15 +57,14 @@ function inserirManualmenteTrue() {
       <button class="inserir-manualmente-btn" @click="inserirManualmenteTrue">
         Inserir maualmente
       </button>
-      <div class="endereco-manual-container" v-if="inserirManualmente == true">
-        <h1 class="titulo-endereco-manual">{{ tituloEnderecoManual }}</h1>
-        <div class="endereco-container">
+      <div class="endereco-form-container" v-if="inserirManualmente == true">
+        <h1 class="titulo-endereco-form">{{ tituloEnderecoForm }}</h1>
+          <form class="infos-endereco-container">
           <div class="pais-container">
             <label for="pais">País</label>
             <!--Esperar receber a key da Coutry State City API-->
             <input type="text" name="pais" id="pais-input" v-model="dadosEndereco.pais" />
           </div>
-          <form class="infos-endereco-container">
             <label for="endereco">Endereço</label>
             <input type="text" name="endereco" id="endereco-input" v-model="dadosEndereco.endereco" />
             <label for="numero">Número</label>
@@ -80,7 +79,6 @@ function inserirManualmenteTrue() {
             <label for="cep">CEP</label>
             <input type="number" name="cep" id="cep-input" v-model="dadosEndereco.cep" />
           </form>
-        </div>
         <div class="avancar-btn-container">
           <button class="avancar-btn" @click="proximaEtapa">Avançar</button>
         </div>
@@ -91,14 +89,14 @@ function inserirManualmenteTrue() {
 </template>
 
 <style scoped>
-.container-etapa-2 {
+.etapa-2-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.wrapper-infos {
+.infos-wrapper {
   width: 500px;
   display: flex;
   justify-content: center;
@@ -107,7 +105,7 @@ function inserirManualmenteTrue() {
   gap: 1rem;
 }
 
-.container-titulo {
+.titulo-principal-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -128,5 +126,43 @@ function inserirManualmenteTrue() {
 
 .inserir-manualmente-btn {
   align-self: end;
+  width: 150px;
+  height: 35px;
+  background-color: rgba(255, 255, 255, 0);
+  color: var(--cor-principal);
+  border: 0;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 8px;
+  transition: ease-in-out 250ms;
+}
+
+.titulo-endereco-form {
+  margin-bottom: 2rem;
+}
+
+.inserir-manualmente-btn:hover {
+  background-color: rgba(230, 230, 230);
+  color: var(--cor-principal);
+}
+
+.inserir-manualmente-btn:active {
+  transform: scale(1.05);
+}
+
+.endereco-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.infos-endereco-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 </style>
