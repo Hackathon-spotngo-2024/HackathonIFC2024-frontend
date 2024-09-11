@@ -44,7 +44,7 @@ function inserirManualmenteTrue() {
 
 <template>
   <div class="etapa-2-container">
-    <div class="infos-wrapper">
+    <div class="infos-container">
       <div class="titulo-principal-container">
         <h1 class="titulo-etapa-2">{{ tituloEtapa2 }}</h1>
       </div>
@@ -59,26 +59,40 @@ function inserirManualmenteTrue() {
       </button>
       <div class="endereco-form-container" v-if="inserirManualmente == true">
         <h1 class="titulo-endereco-form">{{ tituloEnderecoForm }}</h1>
-          <form class="infos-endereco-container">
-          <div class="pais-container">
+        <form class="infos-endereco-container">
+          <div class="pais-wrapper">
             <label for="pais">País</label>
             <!--Esperar receber a key da Coutry State City API-->
             <input type="text" name="pais" id="pais-input" v-model="dadosEndereco.pais" />
           </div>
-            <label for="endereco">Endereço</label>
-            <input type="text" name="endereco" id="endereco-input" v-model="dadosEndereco.endereco" />
-            <label for="numero">Número</label>
-            <input type="text" name="numero" id="numero-input" v-model="dadosEndereco.numero" />
-            <label for="bairro">Bairro</label>
-            <input type="text" name="bairro" id="bairro-input" v-model="dadosEndereco.bairro" />
-            <label for="estado">Estado</label>
-            <input type="text" name="estado" id="estado-input" v-model="dadosEndereco.estado" />
+          <div class="endereco-info">
+            <div class="info-wrapper">
+              <label for="endereco">Endereço</label>
+              <input type="text" name="endereco" id="endereco-input" v-model="dadosEndereco.endereco" />
+            </div>
+            <div class="info-wrapper">
+              <label for="numero">Número</label>
+              <input type="text" name="numero" id="numero-input" v-model="dadosEndereco.numero" />
+            </div>
+            <div class="info-wrapper">
+              <label for="bairro">Bairro</label>
+              <input type="text" name="bairro" id="bairro-input" v-model="dadosEndereco.bairro" />
+            </div>
+            <div class="info-wrapper">
+              <label for="estado">Estado</label>
+              <input type="text" name="estado" id="estado-input" v-model="dadosEndereco.estado" />
+            </div>
             <!--Mudar para campo select-->
-            <label for="cidade">Cidade</label>
-            <input type="text" name="cidade" id="cidade-input" v-model="dadosEndereco.cidade" />
-            <label for="cep">CEP</label>
-            <input type="number" name="cep" id="cep-input" v-model="dadosEndereco.cep" />
-          </form>
+            <div class="info-wrapper">
+              <label for="cidade">Cidade</label>
+              <input type="text" name="cidade" id="cidade-input" v-model="dadosEndereco.cidade" />
+            </div>
+            <div class="info-wrapper">
+              <label for="cep">CEP</label>
+              <input type="number" name="cep" id="cep-input" v-model="dadosEndereco.cep" />
+            </div>
+          </div>
+        </form>
         <div class="avancar-btn-container">
           <button class="avancar-btn" @click="proximaEtapa">Avançar</button>
         </div>
@@ -96,7 +110,7 @@ function inserirManualmenteTrue() {
   align-items: center;
 }
 
-.infos-wrapper {
+.infos-container {
   width: 500px;
   display: flex;
   justify-content: center;
@@ -134,7 +148,7 @@ function inserirManualmenteTrue() {
   border-radius: 20px;
   font-weight: bold;
   font-size: 12px;
-  padding: 8px;
+  padding: 4px;
   transition: ease-in-out 250ms;
 }
 
@@ -165,4 +179,37 @@ function inserirManualmenteTrue() {
   justify-content: center;
   gap: 1rem;
 }
+
+.pais-wrapper,
+.info-wrapper {
+  border: solid 1px var(--cor-bordas-input);
+  width: 500px;
+  height: 68px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pais-wrapper>input,
+.info-wrapper>input {
+  width: 500px;
+  border: 0;
+  border-radius: 10px;
+  outline: none;
+  align-self: center;
+  height: 100%;
+  padding-left: 16px;
+  padding-top: 0;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+label {
+  font-size: 12px;
+  color: var(--cor-bordas-input);
+  margin: 8px 0 0 16px;
+}
+
+.endereco-info {}
 </style>
