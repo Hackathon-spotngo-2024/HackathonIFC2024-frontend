@@ -1,11 +1,17 @@
 <script setup>
-import BannerComponent from './components/BannerComponent.vue';
 import NavbarComponent from './components/NavbarComponent.vue';
 </script>
 
 <template>
-  <NavbarComponent/>
-  <BannerComponent/>
+  <header>
+    <NavbarComponent/>
+  </header>
+  <router-view></router-view>
+
+  <footer>
+    <RodapeComponent/>
+  </footer>
+
 </template>
 
 <style scoped>
