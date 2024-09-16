@@ -40,6 +40,64 @@ defineProps({
 function inserirManualmenteTrue() {
   inserirManualmente.value = !inserirManualmente.value
 }
+
+//////
+import L from 'leaflet'
+import 'leaflet/dist/leaflet.css'
+
+const enderecoSearch = ref('')
+const sugestoes = ref([])
+let map
+let marker
+
+onMounted(() => {
+  // Inicializa o mapa
+  map = L.map('map').setView([51.505, -0.09], 13)
+
+  // Adiciona o tile layer do OpenStreetMap
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map)
+})
+
+const trazerSugestoes = async () => {
+  if (enderecoSearch.value.length < 3) {
+    sugestoes.value = []
+    return
+  }
+
+  try {
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/search?format=json&q=${enderecoSearch.value}&addressdetails=1&limit=5`
+    )
+    const data = await response.json()
+    sugestoes.value = data
+  } catch (error) {
+    console.error('Erro ao buscar sugestões:', error)
+  }
+}
+
+const selecionarSugestao = (suggestion) => {
+  const lat = suggestion.lat
+  const lon = suggestion.lon
+
+  // Centraliza o mapa nas coordenadas da sugestão selecionada
+  map.setView([lat, lon], 13)
+
+  // Adiciona ou atualiza o marcador
+  if (marker) {
+    marker.setLatLng([lat, lon])
+  } else {
+    marker = L.marker([lat, lon]).addTo(map)
+  }
+
+  marker.bindPopup(`Endereço selecionado: ${suggestion.display_name}`).openPopup()
+
+  // Limpa as sugestões e atualiza o campo de pesquisa
+  sugestoes.value = []
+  enderecoSearch.value = suggestion.display_name
+}
 </script>
 
 <template>
@@ -51,8 +109,25 @@ function inserirManualmenteTrue() {
       <div class="subtitulo-container">
         <p class="subtitulo">Insira o endereço pelo mapa ou manualmente.</p>
       </div>
+
+      <input
+        class="search-endereco"
+        v-model="enderecoSearch"
+        @input="trazerSugestoes"
+        type="text"
+        placeholder="Digite um endereço"
+      />
+      <ul v-if="sugestoes.length" class="autocomplete-list">
+        <li
+          v-for="(sugestao, index) in sugestoes"
+          :key="index"
+          @click="selecionarSugestao(sugestao)"
+        >
+          {{ sugestao.display_name }}
+        </li>
+      </ul>
       <!-- Aqui ficará o mapa da API do Google Maps -->
-      <div class="maps-container"></div>
+      <div id="map" class="maps-container"></div>
       <!-- Aqui ficará o mapa da API do Google Maps -->
       <button class="inserir-manualmente-btn" @click="inserirManualmenteTrue">
         Inserir maualmente
@@ -68,7 +143,12 @@ function inserirManualmenteTrue() {
           <div class="endereco-info">
             <div class="info-wrapper">
               <label for="endereco">Endereço</label>
-              <input type="text" name="endereco" id="endereco-input" v-model="dadosEndereco.endereco" />
+              <input
+                type="text"
+                name="endereco"
+                id="endereco-input"
+                v-model="dadosEndereco.endereco"
+              />
             </div>
             <div class="linha-divisoria"></div>
             <div class="info-wrapper">
@@ -133,7 +213,7 @@ function inserirManualmenteTrue() {
 
 .subtitulo {
   color: var(--cor-fonte-loc);
-  font-size: 1rem
+  font-size: 1rem;
 }
 
 .maps-container {
@@ -200,8 +280,8 @@ function inserirManualmenteTrue() {
   border: 0;
 }
 
-.pais-wrapper>input,
-.info-wrapper>input {
+.pais-wrapper > input,
+.info-wrapper > input {
   width: 500px;
   border: 0;
   border-radius: 10px;
@@ -222,7 +302,7 @@ label {
 }
 
 .endereco-info {
-  border: 1px solid var(--cor-bordas-input);;
+  border: 1px solid var(--cor-bordas-input);
   border-radius: 10px;
 }
 
@@ -254,5 +334,46 @@ label {
 .avancar-btn:hover {
   background-color: var(--cor-principal-hover);
   transform: scale(1.01);
+}
+
+#map {
+  height: 400px;
+  width: 100%;
+}
+
+.search-endereco {
+  width: calc(500px - 16px);
+  height: 40px;
+  border: 1px solid var(--cor-bordas-input);
+  border-radius: 20px 20px 20px 20px;
+  padding: 0 8px 0 8px;
+  outline: 0;
+  transition: 50ms ease-in-out;
+}
+
+.search-endereco:not(:placeholder-shown) {
+  border-radius: 20px 20px 0 0;
+  transition: 700ms ease-in-out;
+}
+
+.autocomplete-list {
+  width: 500px;
+  list-style-type: none;
+  padding: 0;
+  border: 1px solid var(--cor-bordas-input);
+  border-top: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: white;
+  border-radius: 0 0 20px 20px;
+}
+
+.autocomplete-list li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.autocomplete-list li:hover {
+  background-color: #f0f0f0;
 }
 </style>
