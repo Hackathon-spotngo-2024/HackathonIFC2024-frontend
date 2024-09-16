@@ -4,13 +4,15 @@ import imgCard1 from '../assets/card-imgs/card-img-1.jpeg'
 
 <template>
   <div class="card">
-    <div class="card-img"><img :src="imgCard1" alt="" /></div>
-    <div class="card-infos">
-      <div class="card-titulo">Exemplo titulo</div>
-      <div class="card-preco">R$xx,xx por dia</div>
-      <div class="card-loc">Exemplo localização</div>
+      <router-link to="/anuncio" class="link">
+      <div class="card-img"><img :src="imgCard1" alt="" /></div>
+      <div class="card-infos">
+        <div class="card-titulo">Exemplo titulo</div>
+        <div class="card-preco">R$xx,xx por dia</div>
+        <div class="card-loc">Exemplo localização</div>
+      </div>
+    </router-link>
     </div>
-  </div>
 </template>
 
 <style scoped>
@@ -27,7 +29,7 @@ import imgCard1 from '../assets/card-imgs/card-img-1.jpeg'
   flex-direction: column;
 }
 
-.card-img > img {
+.card-img>img {
   width: 300px;
   height: 300px;
   border-radius: 15px;
@@ -53,5 +55,9 @@ import imgCard1 from '../assets/card-imgs/card-img-1.jpeg'
   color: var(--cor-fonte-loc);
   font-size: 1rem;
   margin: 0 0 0 1rem;
+}
+.link {
+  text-decoration: none;
+  color: black;
 }
 </style>
