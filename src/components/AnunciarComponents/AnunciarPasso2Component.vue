@@ -70,32 +70,37 @@ function inserirManualmenteTrue() {
               <label for="endereco">Endereço</label>
               <input type="text" name="endereco" id="endereco-input" v-model="dadosEndereco.endereco" />
             </div>
+            <div class="linha-divisoria"></div>
             <div class="info-wrapper">
               <label for="numero">Número</label>
               <input type="text" name="numero" id="numero-input" v-model="dadosEndereco.numero" />
             </div>
+            <div class="linha-divisoria"></div>
             <div class="info-wrapper">
               <label for="bairro">Bairro</label>
               <input type="text" name="bairro" id="bairro-input" v-model="dadosEndereco.bairro" />
             </div>
+            <div class="linha-divisoria"></div>
             <div class="info-wrapper">
               <label for="estado">Estado</label>
               <input type="text" name="estado" id="estado-input" v-model="dadosEndereco.estado" />
             </div>
+            <div class="linha-divisoria"></div>
             <!--Mudar para campo select-->
             <div class="info-wrapper">
               <label for="cidade">Cidade</label>
               <input type="text" name="cidade" id="cidade-input" v-model="dadosEndereco.cidade" />
             </div>
+            <div class="linha-divisoria"></div>
             <div class="info-wrapper">
               <label for="cep">CEP</label>
               <input type="number" name="cep" id="cep-input" v-model="dadosEndereco.cep" />
             </div>
           </div>
         </form>
-        <div class="avancar-btn-container">
-          <button class="avancar-btn" @click="proximaEtapa">Avançar</button>
-        </div>
+      </div>
+      <div class="avancar-btn-container">
+        <button class="avancar-btn" @click="proximaEtapa">Avançar</button>
       </div>
       <button class="etapaAnterior" @click="etapaAnterior">Voltar</button>
     </div>
@@ -166,6 +171,7 @@ function inserirManualmenteTrue() {
 }
 
 .endereco-form-container {
+  margin-top: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -190,6 +196,10 @@ function inserirManualmenteTrue() {
   flex-direction: column;
 }
 
+.info-wrapper {
+  border: 0;
+}
+
 .pais-wrapper>input,
 .info-wrapper>input {
   width: 500px;
@@ -211,5 +221,38 @@ label {
   margin: 8px 0 0 16px;
 }
 
-.endereco-info {}
+.endereco-info {
+  border: 1px solid var(--cor-bordas-input);;
+  border-radius: 10px;
+}
+
+.linha-divisoria {
+  width: 100%;
+  background-color: var(--cor-bordas-input);
+  height: 1px;
+}
+
+.avancar-btn-container {
+  margin: 2rem 0 0 0;
+}
+
+.avancar-btn {
+  width: 350px;
+  height: 70px;
+  background-color: var(--cor-principal);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40px;
+  border: 0;
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  transition: 300ms ease;
+}
+
+.avancar-btn:hover {
+  background-color: var(--cor-principal-hover);
+  transform: scale(1.01);
+}
 </style>
