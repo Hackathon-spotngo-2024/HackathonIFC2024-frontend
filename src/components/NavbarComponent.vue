@@ -25,7 +25,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 1rem 8rem 0 8rem;
+  margin: 1rem 10rem 0 10rem;
   border-radius: 40px;
   padding: .5rem;
   box-shadow: 1px 3px 8px 3px rgba(0, 0, 0, 0.08);
@@ -114,7 +114,7 @@ a {
   margin-top: 1rem;
   width: 100%;
   height: 1px;
-  margin: 1.5rem 8rem 0 8rem;
+  margin: 1.5rem 10rem 0 10rem;
   background-color: var(--cor-linha-divisoria)
 }
 </style>
