@@ -1,12 +1,17 @@
 <script setup>
-import BannerComponent from './components/BannerComponent.vue';
 import NavbarComponent from './components/NavbarComponent.vue';
-import CardSectionTitle from './components/CardSectionTitle.vue';
-import CardComponent from './components/CardComponent.vue';
 </script>
 
 <template>
+  <header>
+    <NavbarComponent/>
+  </header>
   <router-view></router-view>
+
+  <footer>
+    <RodapeComponent/>
+  </footer>
+
 </template>
 
 <style scoped>

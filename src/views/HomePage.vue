@@ -1,7 +1,6 @@
 <script setup></script>
 
 <template>
-  <NavbarComponent />
   <BannerComponent />
   <CardSectionTitle />
   <div class="card-container">
@@ -14,6 +13,7 @@
     <CardComponent />
     <CardComponent />
     <CardComponent />
+   
   </div>
 </template>
 
