@@ -110,25 +110,27 @@ const selecionarSugestao = (suggestion) => {
         <p class="subtitulo">Insira o endereço pelo mapa ou manualmente.</p>
       </div>
 
-      <input
-        class="search-endereco"
-        v-model="enderecoSearch"
-        @input="trazerSugestoes"
-        type="text"
-        placeholder="Digite um endereço"
-      />
-      <ul v-if="sugestoes.length" class="autocomplete-list">
-        <li
-          v-for="(sugestao, index) in sugestoes"
-          :key="index"
-          @click="selecionarSugestao(sugestao)"
-        >
-          {{ sugestao.display_name }}
-        </li>
-      </ul>
-      <!-- Aqui ficará o mapa da API do Google Maps -->
-      <div id="map" class="maps-container"></div>
-      <!-- Aqui ficará o mapa da API do Google Maps -->
+      <div class="search-and-map-container">
+        <input
+          class="search-endereco"
+          v-model="enderecoSearch"
+          @input="trazerSugestoes"
+          type="text"
+          placeholder="Digite um endereço"
+        />
+        <ul v-if="sugestoes.length" class="autocomplete-list">
+          <li
+            v-for="(sugestao, index) in sugestoes"
+            :key="index"
+            @click="selecionarSugestao(sugestao)"
+          >
+            {{ sugestao.display_name }}
+          </li>
+        </ul>
+        <!-- Aqui ficará o mapa da API do Google Maps -->
+        <div id="map" class="maps-container"></div>
+        <!-- Aqui ficará o mapa da API do Google Maps -->
+      </div>
       <button class="inserir-manualmente-btn" @click="inserirManualmenteTrue">
         Inserir maualmente
       </button>
@@ -339,6 +341,7 @@ label {
 #map {
   height: 400px;
   width: 100%;
+  margin-top: 1rem;
 }
 
 .search-endereco {
