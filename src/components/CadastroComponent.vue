@@ -1,27 +1,31 @@
 <script setup>
-import { reactive, ref } from 'vue';
+import { reactive, ref, computed } from 'vue'
 
-const showModal = ref(false);
+const open = ref(false)
 
 const user = reactive({
   name: '',
   senha: ''
-});
+})
 
 const openModal = () => {
-  showModal.value = true;
-};
+  open.value = true
+}
 
 const closeModal = () => {
-  showModal.value = false;
-};
+  open.value = false
+}
+
+const blurClass = computed(() => (open.value ? 'divBlur' : ''))
 </script>
 
 <template>
-  <button class="Modal" @click="openModal">Abrir Modal</button>
+  <div :class="['content', blurClass]">
+    <button class="Modal" @click="openModal">Abrir Modal</button>
+  </div>
 
-  <div :class="['modal', showModal ? 'visible' : 'hidden']" @click="closeModal">
-    <div class="form-container" @click.stop>
+  <div class="modal" v-if="open">
+    <div class="form-container">
       <div @click="closeModal" class="fechar">
         <span class="fa fa-x"></span>
       </div>
@@ -41,14 +45,20 @@ const closeModal = () => {
 
           <div class="form-item">
             <label for="senha">Senha</label>
-            <input type="password" name="senha" id="senha" v-model="user.senha" placeholder="Senha" />
+            <input
+              type="password"
+              name="senha"
+              id="senha"
+              v-model="user.senha"
+              placeholder="Senha"
+            />
           </div>
 
           <button>Continuar</button>
 
           <p class="opcao">ou</p>
 
-          <button class="api">google api</button>
+          <button class="api">Google API</button>
 
           <div class="termo">
             <p>
@@ -71,28 +81,30 @@ const closeModal = () => {
 </template>
 
 <style scoped>
+.divBlur {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .modal {
+  backdrop-filter: blur(5px);
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 0;
   transition: visibility 0.3s, opacity 0.3s;
-}
-
-.hidden {
-  visibility: hidden;
-  opacity: 0;
-}
-
-.visible {
-  visibility: visible;
-  opacity: 1;
 }
 
 .form-container {
@@ -102,8 +114,7 @@ const closeModal = () => {
   background-color: #f2f2f2;
   margin: auto;
   font-family: 'Montserrat', sans-serif;
-  position: relative;
-  z-index: 1001;
+  z-index: 2 !important;
 }
 
 .containerInterno {
@@ -215,7 +226,5 @@ label {
   cursor: pointer;
 }
 
-.fechar:hover {
-  cursor: pointer;
-}
+
 </style>
