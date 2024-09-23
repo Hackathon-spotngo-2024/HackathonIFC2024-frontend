@@ -1,5 +1,6 @@
 <script setup>
 import { reactive, ref, computed } from 'vue'
+const props = defineProps(['modal'])
 
 const open = ref(false)
 
@@ -8,23 +9,16 @@ const user = reactive({
   senha: ''
 })
 
-const openModal = () => {
-  open.value = true
-}
-
 const closeModal = () => {
   open.value = false
 }
 
 const blurClass = computed(() => (open.value ? 'divBlur' : ''))
+
 </script>
 
 <template>
-  <div :class="['content', blurClass]">
-    <button class="Modal" @click="openModal">Abrir Modal</button>
-  </div>
-
-  <div class="modal" v-if="open">
+  <div class="modal" v-if="props.modal">
     <div class="form-container">
       <div @click="closeModal" class="fechar">
         <span class="fa fa-x"></span>
@@ -222,8 +216,9 @@ label {
 .fechar {
   padding: 25px;
   display: flex;
-  justify-content: flex-end;
+  margin-left: 85% ;
   cursor: pointer;
+  width: 0%;
 }
 
 
