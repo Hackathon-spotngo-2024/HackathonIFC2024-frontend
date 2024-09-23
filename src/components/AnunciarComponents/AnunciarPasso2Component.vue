@@ -1,5 +1,7 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue'
+import L from 'leaflet' //Importando biblioteca Leaflet (mapa)
+import 'leaflet/dist/leaflet.css' //Importa o css da biblioteca
 
 const tituloEtapa2 = ref('Onde fica sua locação?')
 const inserirManualmente = ref(false)
@@ -12,6 +14,15 @@ const dadosEndereco = ref({
   estado: '',
   cidade: '',
   cep: ''
+})
+const enderecoSearch = ref('')
+const sugestoes = ref([])
+let map
+let marker
+
+defineProps({
+  proximaEtapa: Function,
+  etapaAnterior: Function
 })
 
 onMounted(() => {
@@ -32,29 +43,18 @@ watch(
   { deep: true }
 )
 
-defineProps({
-  proximaEtapa: Function,
-  etapaAnterior: Function
-})
-
 function inserirManualmenteTrue() {
   inserirManualmente.value = !inserirManualmente.value
 }
 
 //////
-import L from 'leaflet'
-import 'leaflet/dist/leaflet.css'
 
-const enderecoSearch = ref('')
-const sugestoes = ref([])
-let map
-let marker
 
 onMounted(() => {
   // Inicializa o mapa
-  map = L.map('map').setView([51.505, -0.09], 13)
+  map = L.map('map').setView([-26.3044, -48.8455], 13) //Inicia o mapa em Joinville - SC
 
-  // Adiciona o tile layer do OpenStreetMap
+  // Adiciona "camada de azulejos" do OpenStreetMap
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
