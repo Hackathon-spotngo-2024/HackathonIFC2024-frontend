@@ -1,6 +1,6 @@
 <script setup>
 
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import AnunciarPasso1Component from '../components/AnunciarComponents/AnunciarPasso1Component.vue'
 import AnunciarPasso2Component from '../components/AnunciarComponents/AnunciarPasso2Component.vue'
 import AnunciarPasso3Component from '@/components/AnunciarComponents/AnunciarPasso3Component.vue'
@@ -18,12 +18,6 @@ function etapaAnterior() {
   etapaAtual.value--
   localStorage.setItem('etapaAtual', etapaAtual.value)
 }
-
-onMounted(() => {
-  const etapaSalva = localStorage.getItem('etapaAtual') //Inicia o componente (onMounted) na etapa salva no localStorage
-  if (etapaSalva) {
-    etapaAtual.value = parseInt(etapaSalva, 10)
-}})
 </script>
 
 <template>

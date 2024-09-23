@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref } from 'vue'
 import L from 'leaflet' //Importando biblioteca Leaflet (mapa)
 import 'leaflet/dist/leaflet.css' //Importa o css da biblioteca
 
@@ -8,7 +8,7 @@ const inserirManualmente = ref(false)
 const tituloEnderecoForm = ref('Insira seu endereço')
 const dadosEndereco = ref({
   pais: '',
-  endereco: '',
+  rua: '',
   numero: '',
   bairro: '',
   estado: '',
@@ -21,43 +21,22 @@ let map
 let marker
 
 defineProps({
-  proximaEtapa: Function,
+  proximaEtapa: Function, 
   etapaAnterior: Function
 })
-
-onMounted(() => {
-  const dadosEnderecoSalvo = JSON.parse(localStorage.getItem('dadosEndereco'))
-  if (dadosEnderecoSalvo) {
-    dadosEndereco.value = dadosEnderecoSalvo
-  }
-  const inserirManualmenteSalvo = localStorage.getItem('inserirManualmente') === 'true'
-  inserirManualmente.value = inserirManualmenteSalvo
-})
-
-watch(
-  [dadosEndereco, inserirManualmente],
-  ([newDadosEndereco, newInserirManualmente]) => {
-    localStorage.setItem('dadosEndereco', JSON.stringify(newDadosEndereco))
-    localStorage.setItem('inserirManualmente', JSON.stringify(newInserirManualmente))
-  },
-  { deep: true }
-)
 
 function inserirManualmenteTrue() {
   inserirManualmente.value = !inserirManualmente.value
 }
 
-//////
-
-
 onMounted(() => {
   // Inicializa o mapa
   map = L.map('map').setView([-26.3044, -48.8455], 13) //Inicia o mapa em Joinville - SC
-
+  
   // Adiciona "camada de azulejos" do OpenStreetMap
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map)
 })
 
@@ -66,7 +45,7 @@ const trazerSugestoes = async () => {
     sugestoes.value = []
     return
   }
-
+  
   try {
     const response = await fetch(
       `https://nominatim.openstreetmap.org/search?format=json&q=${enderecoSearch.value}&addressdetails=1&limit=5`
@@ -82,6 +61,21 @@ const selecionarSugestao = (suggestion) => {
   const lat = suggestion.lat
   const lon = suggestion.lon
 
+  // Extrai as partes do endereço
+  const { house_number, road, suburb, city, state, country, postcode } = suggestion.address
+  dadosEndereco.value = {
+    pais: country || '',
+    rua: road || '',
+    numero: house_number || '',
+    bairro: suburb || '',
+    estado: state || '',
+    cidade: city || '',
+    cep: postcode || ''
+  }
+  const enderecoFormatado = `${dadosEndereco.value.numero}, ${dadosEndereco.value.rua}, ${dadosEndereco.value.bairro}, ${dadosEndereco.value.cidade}, ${dadosEndereco.value.estado}, ${dadosEndereco.value.pais}, ${dadosEndereco.value.cep}`.replace(/(^[,\s]+)|([,\s]+$)/g, "")
+  .replace(/,+/g, ',')
+
+
   // Centraliza o mapa nas coordenadas da sugestão selecionada
   map.setView([lat, lon], 13)
 
@@ -92,11 +86,11 @@ const selecionarSugestao = (suggestion) => {
     marker = L.marker([lat, lon]).addTo(map)
   }
 
-  marker.bindPopup(`Endereço selecionado: ${suggestion.display_name}`).openPopup()
+  marker.bindPopup(enderecoFormatado).openPopup()
 
   // Limpa as sugestões e atualiza o campo de pesquisa
   sugestoes.value = []
-  enderecoSearch.value = suggestion.display_name
+  enderecoSearch.value = enderecoFormatado
 }
 </script>
 
@@ -116,7 +110,7 @@ const selecionarSugestao = (suggestion) => {
           v-model="enderecoSearch"
           @input="trazerSugestoes"
           type="text"
-          placeholder="Digite um endereço"
+          placeholder="Digite o seu endereço"
         />
         <ul v-if="sugestoes.length" class="autocomplete-list">
           <li
@@ -144,12 +138,12 @@ const selecionarSugestao = (suggestion) => {
           </div>
           <div class="endereco-info">
             <div class="info-wrapper">
-              <label for="endereco">Endereço</label>
+              <label for="rua">Rua</label>
               <input
                 type="text"
-                name="endereco"
-                id="endereco-input"
-                v-model="dadosEndereco.endereco"
+                name="rua"
+                id="rua-input"
+                v-model="dadosEndereco.rua"
               />
             </div>
             <div class="linha-divisoria"></div>
