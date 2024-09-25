@@ -1,9 +1,4 @@
 <script setup>
-const emit = defineEmits(['openModal']);
-
-function modal(){
-  emit('openModal')
-}
 
 </script>
 
@@ -17,7 +12,7 @@ function modal(){
       <input type="text" placeholder="Procure seu spot" class="search-input" />
     </div>
     <a href="AnunciarComponent.vue" id="anunciar-link" class="nav-link">Anunciar</a>
-    <button @click="modal()" class="entrar-link">Entrar</button>
+    <a @click="openModal()" class="entrar-link">Entrar</a>
   </div>
   <div class="linha-container">
     <div class="linha-divisoria"></div>
@@ -46,6 +41,7 @@ a {
   align-items: center;
   border-radius: 35px;
   font-size: 1rem;
+  cursor: pointer;
 }
 
 .nav-link {

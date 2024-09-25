@@ -1,29 +1,19 @@
 <script setup>
-import { reactive, ref, computed } from 'vue'
-const props = defineProps(['modal'])
-
-const open = ref(false)
-
+import { reactive } from 'vue'
 const user = reactive({
   name: '',
   senha: ''
 })
 
-const closeModal = () => {
-  open.value = false
-}
-
-const blurClass = computed(() => (open.value ? 'divBlur' : ''))
-
 </script>
 
 <template>
-  <div class="modal" v-if="props.modal">
+  <div class="modal">
     <div class="form-container">
       <div @click="closeModal" class="fechar">
-        <span class="fa fa-x"></span>
+        <span class="fa fa-close"></span>
       </div>
-      <div class="containerInterno">
+      <div class="container-interno">
         <div class="logoLogin">
           <img class="imgLogin" src="../assets/LogoSimples.png" alt="Logo" />
         </div>
@@ -75,16 +65,6 @@ const blurClass = computed(() => (open.value ? 'divBlur' : ''))
 </template>
 
 <style scoped>
-.divBlur {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 .modal {
   backdrop-filter: blur(5px);
@@ -108,15 +88,26 @@ const blurClass = computed(() => (open.value ? 'divBlur' : ''))
   background-color: #f2f2f2;
   margin: auto;
   font-family: 'Montserrat', sans-serif;
-  z-index: 2 !important;
 }
 
-.containerInterno {
+.container-interno {
   display: flex;
   align-items: center;
   flex-direction: column;
-  position: relative;
-  top: -2rem;
+}
+
+.fechar {
+  display: flex;
+  justify-content: end;
+  margin: 1rem 1rem 0 0;
+}
+
+.fa.fa-close {
+  cursor: pointer;
+  width: 2rem;
+  height: 2rem;
+  align-content: center;
+  text-align: center;
 }
 
 .logoLogin {
@@ -212,14 +203,4 @@ label {
   font-size: 12px;
   font-weight: 500;
 }
-
-.fechar {
-  padding: 25px;
-  display: flex;
-  margin-left: 85% ;
-  cursor: pointer;
-  width: 0%;
-}
-
-
 </style>
