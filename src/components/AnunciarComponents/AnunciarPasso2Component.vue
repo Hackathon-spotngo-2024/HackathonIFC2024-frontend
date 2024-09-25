@@ -134,6 +134,7 @@ const formatarEndereco = (endereco) => {
           v-for="(sugestao, index) in sugestoes"
           :key="index"
           @click="selecionarSugestao(sugestao)">
+          <i class="fa-solid fa-building-flag"></i>
         {{ formatarEndereco({
         numero: sugestao.address.house_number || '',
         rua: sugestao.address.road || '',
