@@ -47,10 +47,10 @@ function etapaAnterior() {
 
 <style scoped>
 .fade-enter-active, .fade-leave-active {
-  transition: 300ms ease-in-out;
+  transition: 400ms ease-in-out;
 }
 
-.fade-enter, .fade-leave-to {
-  opacity: 0;
+.fade-enter-from, .fade-leave-to {
+  opacity: 0.05;
 }
 </style>

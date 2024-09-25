@@ -4,8 +4,6 @@ import L from 'leaflet' //Importando biblioteca Leaflet (mapa)
 import 'leaflet/dist/leaflet.css' //Importa o css da biblioteca
 
 const tituloEtapa2 = ref('Onde fica sua locação?')
-const inserirManualmente = ref(false)
-const tituloEnderecoForm = ref('Insira seu endereço')
 const dadosEndereco = ref({
   pais: '',
   rua: '',
@@ -21,22 +19,18 @@ let map
 let marker
 
 defineProps({
-  proximaEtapa: Function, 
+  proximaEtapa: Function,
   etapaAnterior: Function
 })
-
-function inserirManualmenteTrue() {
-  inserirManualmente.value = !inserirManualmente.value
-}
 
 onMounted(() => {
   // Inicializa o mapa
   map = L.map('map').setView([-26.3044, -48.8455], 13) //Inicia o mapa em Joinville - SC
-  
+
   // Adiciona "camada de azulejos" do OpenStreetMap
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution:
-    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map)
 })
 
@@ -45,7 +39,7 @@ const trazerSugestoes = async () => {
     sugestoes.value = []
     return
   }
-  
+
   try {
     const response = await fetch(
       `https://nominatim.openstreetmap.org/search?format=json&q=${enderecoSearch.value}&addressdetails=1&limit=5`
@@ -72,9 +66,10 @@ const selecionarSugestao = (suggestion) => {
     cidade: city || '',
     cep: postcode || ''
   }
-  const enderecoFormatado = `${dadosEndereco.value.numero}, ${dadosEndereco.value.rua}, ${dadosEndereco.value.bairro}, ${dadosEndereco.value.cidade}, ${dadosEndereco.value.estado}, ${dadosEndereco.value.pais}, ${dadosEndereco.value.cep}`.replace(/(^[,\s]+)|([,\s]+$)/g, "")
-  .replace(/,+/g, ',')
-
+  const enderecoFormatado =
+    `${dadosEndereco.value.numero}, ${dadosEndereco.value.rua}, ${dadosEndereco.value.bairro}, ${dadosEndereco.value.cidade}, ${dadosEndereco.value.estado}, ${dadosEndereco.value.pais}, ${dadosEndereco.value.cep}`
+      .replace(/(^[,\s]+)|([,\s]+$)/g, '')
+      .replace(/,+/g, ',')
 
   // Centraliza o mapa nas coordenadas da sugestão selecionada
   map.setView([lat, lon], 13)
@@ -101,9 +96,8 @@ const selecionarSugestao = (suggestion) => {
         <h1 class="titulo-etapa-2">{{ tituloEtapa2 }}</h1>
       </div>
       <div class="subtitulo-container">
-        <p class="subtitulo">Insira o endereço pelo mapa ou manualmente.</p>
+        <p class="subtitulo">Insira o endereço pelo mapa.</p>
       </div>
-
       <div class="search-and-map-container">
         <input
           class="search-endereco"
@@ -121,77 +115,30 @@ const selecionarSugestao = (suggestion) => {
             {{ sugestao.display_name }}
           </li>
         </ul>
-        <!-- Aqui ficará o mapa da API do Google Maps -->
         <div id="map" class="maps-container"></div>
-        <!-- Aqui ficará o mapa da API do Google Maps -->
+        <!--Mapa da API LeafLet-->
       </div>
-      <button class="inserir-manualmente-btn" @click="inserirManualmenteTrue">
-        Inserir maualmente
-      </button>
-      <div class="endereco-form-container" v-if="inserirManualmente == true">
-        <h1 class="titulo-endereco-form">{{ tituloEnderecoForm }}</h1>
-        <form class="infos-endereco-container">
-          <div class="pais-wrapper">
-            <label for="pais">País</label>
-            <!--Esperar receber a key da Coutry State City API-->
-            <input type="text" name="pais" id="pais-input" v-model="dadosEndereco.pais" />
-          </div>
-          <div class="endereco-info">
-            <div class="info-wrapper">
-              <label for="rua">Rua</label>
-              <input
-                type="text"
-                name="rua"
-                id="rua-input"
-                v-model="dadosEndereco.rua"
-              />
-            </div>
-            <div class="linha-divisoria"></div>
-            <div class="info-wrapper">
-              <label for="numero">Número</label>
-              <input type="text" name="numero" id="numero-input" v-model="dadosEndereco.numero" />
-            </div>
-            <div class="linha-divisoria"></div>
-            <div class="info-wrapper">
-              <label for="bairro">Bairro</label>
-              <input type="text" name="bairro" id="bairro-input" v-model="dadosEndereco.bairro" />
-            </div>
-            <div class="linha-divisoria"></div>
-            <div class="info-wrapper">
-              <label for="estado">Estado</label>
-              <input type="text" name="estado" id="estado-input" v-model="dadosEndereco.estado" />
-            </div>
-            <div class="linha-divisoria"></div>
-            <!--Mudar para campo select-->
-            <div class="info-wrapper">
-              <label for="cidade">Cidade</label>
-              <input type="text" name="cidade" id="cidade-input" v-model="dadosEndereco.cidade" />
-            </div>
-            <div class="linha-divisoria"></div>
-            <div class="info-wrapper">
-              <label for="cep">CEP</label>
-              <input type="number" name="cep" id="cep-input" v-model="dadosEndereco.cep" />
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="avancar-btn-container">
+      <div class="botoes-wrapper">
+        <button class="voltar-btn" @click="etapaAnterior">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </button>
         <button class="avancar-btn" @click="proximaEtapa">Avançar</button>
       </div>
-      <button class="etapaAnterior" @click="etapaAnterior">Voltar</button>
     </div>
   </div>
 </template>
 
 <style scoped>
 .etapa-2-container {
+  width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
 .infos-container {
+  margin-top: 6rem;
   width: 500px;
   display: flex;
   justify-content: center;
@@ -204,7 +151,6 @@ const selecionarSugestao = (suggestion) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 100px;
 }
 
 .subtitulo {
@@ -219,7 +165,7 @@ const selecionarSugestao = (suggestion) => {
   border-radius: 20px;
 }
 
-.inserir-manualmente-btn {
+/* .inserir-manualmente-btn {
   align-self: end;
   width: 150px;
   height: 35px;
@@ -300,7 +246,7 @@ label {
 .endereco-info {
   border: 1px solid var(--cor-bordas-input);
   border-radius: 10px;
-}
+} */
 
 .linha-divisoria {
   width: 100%;
@@ -308,17 +254,41 @@ label {
   height: 1px;
 }
 
-.avancar-btn-container {
-  margin: 2rem 0 0 0;
+.botoes-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: start;
+  gap: 10px; /* Medida exata para o avancar-btn ficar centralizado (500 - 70 - 350 - 10px) */
+  flex-direction: row;
+}
+
+.voltar-btn {
+  margin-top: 2rem;
+  width: 70px;
+  height: 70px;
+  border-radius: 40px;
+  border: 0;
+  color: black;
+  background-color: var(--cor-voltar-btn);
+  font-size: 2rem;
+  font-weight: bold;
+  transition: 300ms ease;
+}
+
+.voltar-btn:hover {
+  background-color: var(--cor-voltar-btn-hover);
+  transform: scale(1.03);
+}
+
+.fa-solid.fa-arrow-right-from-bracket {
+  transform: rotate(180deg);
 }
 
 .avancar-btn {
+  margin-top: 2rem;
   width: 350px;
   height: 70px;
   background-color: var(--cor-principal);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border-radius: 40px;
   border: 0;
   color: white;
