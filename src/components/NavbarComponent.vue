@@ -101,7 +101,7 @@ a {
 }
 
 .fa.fa-search {
-  color: gray;
+  color: var(--cor-search-icon);
 }
 
 .linha-container {
