@@ -17,11 +17,14 @@ const enderecoSearch = ref('')
 const sugestoes = ref([])
 let map
 let marker
+let showForm = false
 
 defineProps({
   proximaEtapa: Function,
   etapaAnterior: Function
 })
+
+//MAPA -------------------------------------
 
 onMounted(() => {
   // Inicializa o mapa
@@ -39,12 +42,19 @@ const trazerSugestoes = async () => {
     sugestoes.value = []
     return
   }
-
+  
   try {
+    console.log('Buscando sugestoes para: ', enderecoSearch.value)
     const response = await fetch(
       `https://nominatim.openstreetmap.org/search?format=json&q=${enderecoSearch.value}&addressdetails=1&limit=5`
     )
+    if (!response.ok) {
+      throw new Error(`Erro na resposta da API: ${response.status} -  ${response.statusText}`)
+    }
+    
     const data = await response.json()
+    console.log('Sugestoes recebidas: ', data)
+    
     sugestoes.value = data
   } catch (error) {
     console.error('Erro ao buscar sugestões:', error)
@@ -54,6 +64,7 @@ const trazerSugestoes = async () => {
 const selecionarSugestao = (suggestion) => {
   const lat = suggestion.lat
   const lon = suggestion.lon
+  showForm = true
 
   // Extrai as partes do endereço
   const { house_number, road, suburb, city, state, country, postcode } = suggestion.address
@@ -66,10 +77,7 @@ const selecionarSugestao = (suggestion) => {
     cidade: city || '',
     cep: postcode || ''
   }
-  const enderecoFormatado =
-    `${dadosEndereco.value.numero}, ${dadosEndereco.value.rua}, ${dadosEndereco.value.bairro}, ${dadosEndereco.value.cidade}, ${dadosEndereco.value.estado}, ${dadosEndereco.value.pais}, ${dadosEndereco.value.cep}`
-      .replace(/(^[,\s]+)|([,\s]+$)/g, '')
-      .replace(/,+/g, ',')
+  const enderecoFormatado = formatarEndereco(dadosEndereco.value)
 
   // Centraliza o mapa nas coordenadas da sugestão selecionada
   map.setView([lat, lon], 13)
@@ -87,63 +95,120 @@ const selecionarSugestao = (suggestion) => {
   sugestoes.value = []
   enderecoSearch.value = enderecoFormatado
 }
+
+// Formata o endereco para mostrar apenas os dados a seguir (a API mostra dados a mais se nao formatada)
+const formatarEndereco = (endereco) => {
+  return [
+    endereco.numero,
+    endereco.rua,
+    endereco.bairro,
+    endereco.cidade,
+    endereco.estado,
+    endereco.pais,
+    endereco.cep
+  ].filter(parte => parte.trim() !== '').join(', ') // Caso o dado nao seja informado (geralmente o numero), ele nao aparece, evitando "virgulas fantasmas"
+}
+
 </script>
 
 <template>
   <div class="etapa-2-container">
-    <div class="infos-container">
-      <div class="titulo-principal-container">
-        <h1 class="titulo-etapa-2">{{ tituloEtapa2 }}</h1>
+    <div class="titulo-principal-container">
+      <h1 class="titulo-etapa-2">{{ tituloEtapa2 }}</h1>
+    </div>
+    <div class="subtitulo-container">
+      <p class="subtitulo">Insira o endereço pelo mapa.</p>
+    </div>
+
+    <!-- MAPA -->
+    <div class="search-and-map-container">
+      <input
+        class="search-endereco"
+        v-model="enderecoSearch"
+        @input="trazerSugestoes"
+        type="text"
+        placeholder="Digite o seu endereço"
+      />
+      <ul v-if="sugestoes.length" class="autocomplete-list">
+        <li
+          v-for="(sugestao, index) in sugestoes"
+          :key="index"
+          @click="selecionarSugestao(sugestao)">
+        {{ formatarEndereco({
+        numero: sugestao.address.house_number || '',
+        rua: sugestao.address.road || '',
+        bairro: sugestao.address.suburb || '',
+        cidade: sugestao.address.city || '',
+        estado: sugestao.address.state || '',
+        pais: sugestao.address.country || '',
+        cep: sugestao.address.postcode || ''
+      }) }}
+        </li>
+      </ul>
+      <div id="map" class="maps-container"></div>
+      <!--Mapa da API LeafLet-->
+    </div>
+
+    <!-- FORMULÁRIO COM DADOS DO ENDEREÇO -->
+    <form class="form-endereco" v-if="showForm == true">
+      <div class="pais-wrapper">
+        <label for="pais">País</label>
+        <input type="text" name="pais" id="pais-input" v-model="dadosEndereco.pais" />
       </div>
-      <div class="subtitulo-container">
-        <p class="subtitulo">Insira o endereço pelo mapa.</p>
+      <div class="endereco-info">
+        <div class="info-wrapper">
+          <label for="rua">Rua</label>
+          <input type="text" name="rua" id="rua-input" v-model="dadosEndereco.rua" />
+        </div>
+        <div class="linha-divisoria"></div>
+        <div class="info-wrapper">
+          <label for="numero">Número</label>
+          <input type="text" name="numero" id="numero-input" v-model="dadosEndereco.numero" />
+        </div>
+        <div class="linha-divisoria"></div>
+        <div class="info-wrapper">
+          <label for="bairro">Bairro</label>
+          <input type="text" name="bairro" id="bairro-input" v-model="dadosEndereco.bairro" />
+        </div>
+        <div class="linha-divisoria"></div>
+        <div class="info-wrapper">
+          <label for="estado">Estado</label>
+          <input type="text" name="estado" id="estado-input" v-model="dadosEndereco.estado" />
+        </div>
+        <div class="linha-divisoria"></div>
+        <div class="info-wrapper">
+          <label for="cidade">Cidade</label>
+          <input type="text" name="cidade" id="cidade-input" v-model="dadosEndereco.cidade" />
+        </div>
+        <div class="linha-divisoria"></div>
+        <div class="info-wrapper">
+          <label for="cep">CEP</label>
+          <input type="number" name="cep" id="cep-input" v-model="dadosEndereco.cep" />
+        </div>
       </div>
-      <div class="search-and-map-container">
-        <input
-          class="search-endereco"
-          v-model="enderecoSearch"
-          @input="trazerSugestoes"
-          type="text"
-          placeholder="Digite o seu endereço"
-        />
-        <ul v-if="sugestoes.length" class="autocomplete-list">
-          <li
-            v-for="(sugestao, index) in sugestoes"
-            :key="index"
-            @click="selecionarSugestao(sugestao)"
-          >
-            {{ sugestao.display_name }}
-          </li>
-        </ul>
-        <div id="map" class="maps-container"></div>
-        <!--Mapa da API LeafLet-->
-      </div>
-      <div class="botoes-wrapper">
-        <button class="voltar-btn" @click="etapaAnterior">
-          <i class="fa-solid fa-arrow-right-from-bracket"></i>
-        </button>
-        <button class="avancar-btn" @click="proximaEtapa">Avançar</button>
-      </div>
+    </form>
+
+    <!-- BOTÕES -->
+    <div class="botoes-wrapper">
+      <button class="voltar-btn" @click="etapaAnterior">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+      </button>
+      <button class="avancar-btn" @click="proximaEtapa">Avançar</button>
     </div>
   </div>
 </template>
 
 <style scoped>
-.etapa-2-container {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
 
-.infos-container {
-  margin-top: 6rem;
-  width: 500px;
+.etapa-2-container {
   display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-self: center;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  margin-top: 6rem;
+  width: 100%;
   gap: 1rem;
 }
 
@@ -165,42 +230,8 @@ const selecionarSugestao = (suggestion) => {
   border-radius: 20px;
 }
 
-/* .inserir-manualmente-btn {
-  align-self: end;
-  width: 150px;
-  height: 35px;
-  background-color: rgba(255, 255, 255, 0);
-  color: var(--cor-principal);
-  border: 0;
-  border-radius: 20px;
-  font-weight: bold;
-  font-size: 12px;
-  padding: 4px;
-  transition: ease-in-out 250ms;
-}
-
-.titulo-endereco-form {
-  margin-bottom: 2rem;
-}
-
-.inserir-manualmente-btn:hover {
-  background-color: rgba(230, 230, 230);
-  color: var(--cor-principal);
-}
-
-.inserir-manualmente-btn:active {
-  transform: scale(1.05);
-}
-
-.endereco-form-container {
+.form-endereco {
   margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.infos-endereco-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -246,7 +277,7 @@ label {
 .endereco-info {
   border: 1px solid var(--cor-bordas-input);
   border-radius: 10px;
-} */
+}
 
 .linha-divisoria {
   width: 100%;
@@ -256,28 +287,32 @@ label {
 
 .botoes-wrapper {
   display: flex;
-  width: 100%;
-  justify-content: start;
-  gap: 10px; /* Medida exata para o avancar-btn ficar centralizado (500 - 70 - 350 - 10px) */
   flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  width: 500px;
+  gap: 30px; /* Medida exata para o avancar-btn ficar centralizado (500 - 50 - 350 - 30px) */
+  margin-top: 2rem;
 }
 
 .voltar-btn {
-  margin-top: 2rem;
-  width: 70px;
-  height: 70px;
-  border-radius: 40px;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  border-radius: 20px;
   border: 0;
-  color: black;
+  color: var(--preto-alternativo);
   background-color: var(--cor-voltar-btn);
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 24px;
   transition: 300ms ease;
 }
 
 .voltar-btn:hover {
   background-color: var(--cor-voltar-btn-hover);
-  transform: scale(1.03);
+  transform: scale(1.01);
+  color: var(--cor-voltar-btn);
+  background-color: var(--preto-alternativo);
 }
 
 .fa-solid.fa-arrow-right-from-bracket {
@@ -285,7 +320,7 @@ label {
 }
 
 .avancar-btn {
-  margin-top: 2rem;
+  cursor: pointer;
   width: 350px;
   height: 70px;
   background-color: var(--cor-principal);
@@ -342,5 +377,11 @@ label {
 
 .autocomplete-list li:hover {
   background-color: #f0f0f0;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 </style>

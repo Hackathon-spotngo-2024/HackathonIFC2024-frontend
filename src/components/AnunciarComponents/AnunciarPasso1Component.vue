@@ -31,7 +31,7 @@ const tituloEtapa1 = ref("É muito fácil <br/> anunciar no Spot 'n Go")
           <h2 class="titulo-instrucao">2: Adicione detalhes para destaca-la</h2>
         </div>
         <div class="descricao-instrucao-container">
-          <p>Adicione fotos, além de um título e uma descrição, molezinha.</p>
+          <p>Adicione fotos, além de um título e uma descrição.</p>
         </div>
       </div>
       <div class="instrucao">
@@ -39,7 +39,7 @@ const tituloEtapa1 = ref("É muito fácil <br/> anunciar no Spot 'n Go")
           <h2 class="titulo-instrucao">3: Publique seu anúncio!</h2>
         </div>
         <div class="descricao-instrucao-container">
-          <p>Defina o preço e publique seu anúncio. Facinho, não é?</p>
+          <p>Defina o preço e publique seu anúncio. Fácil, não é?</p>
         </div>
       </div>
     </div>
@@ -97,6 +97,7 @@ const tituloEtapa1 = ref("É muito fácil <br/> anunciar no Spot 'n Go")
 }
 
 .continue-botao {
+  cursor: pointer;
   width: 580px;
   height: 80px;
   border-radius: 40px;

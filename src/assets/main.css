@@ -12,6 +12,9 @@
     --cor-bordas-input: rgb(110, 110, 110);
     --cor-voltar-btn-hover: rgb(221, 221, 221);
     --cor-voltar-btn: rgb(238, 238, 238);
+    --preto-alternativo: rgb(24, 24, 24);
+    --cor-search-icon: rgb(80, 80, 80);
+    --cor-search-icon-hover: rgb(44, 44, 44);
 }
 
 * {
