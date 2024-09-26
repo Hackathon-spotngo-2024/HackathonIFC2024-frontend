@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue'
 import L from 'leaflet' //Importando biblioteca Leaflet (mapa)
 import 'leaflet/dist/leaflet.css' //Importa o css da biblioteca
+import BotaoAvancarEVoltarComponent from '../BotaoAvancarEVoltarComponent.vue'
 
 const tituloEtapa2 = ref('Onde fica sua locação?')
 const dadosEndereco = ref({
@@ -24,7 +25,7 @@ defineProps({
   etapaAnterior: Function
 })
 
-//MAPA -------------------------------------
+//MAPA ------------------------------------------------------------------------------------------------------------
 
 onMounted(() => {
   // Inicializa o mapa
@@ -42,7 +43,7 @@ const trazerSugestoes = async () => {
     sugestoes.value = []
     return
   }
-  
+
   try {
     console.log('Buscando sugestoes para: ', enderecoSearch.value)
     const response = await fetch(
@@ -51,10 +52,10 @@ const trazerSugestoes = async () => {
     if (!response.ok) {
       throw new Error(`Erro na resposta da API: ${response.status} -  ${response.statusText}`)
     }
-    
+
     const data = await response.json()
     console.log('Sugestoes recebidas: ', data)
-    
+
     sugestoes.value = data
   } catch (error) {
     console.error('Erro ao buscar sugestões:', error)
@@ -106,9 +107,21 @@ const formatarEndereco = (endereco) => {
     endereco.estado,
     endereco.pais,
     endereco.cep
-  ].filter(parte => parte.trim() !== '').join(', ') // Caso o dado nao seja informado (geralmente o numero), ele nao aparece, evitando "virgulas fantasmas"
+  ]
+    .filter((parte) => parte.trim() !== '')
+    .join(', ') // Caso o dado nao seja informado (geralmente o numero), ele nao aparece, evitando "virgulas fantasmas"
 }
 
+//VERIFICACAO DO FORMULARIO -------------------------------------------------------------------
+let campoVazioAlert = false
+const isAlgumCampoVazio = () => {
+  Object.values(dadosEndereco.value).some((value) => value === '')
+}
+const verificarFormulario = () => {
+  if (isAlgumCampoVazio) {
+    campoVazioAlert = true
+  }
+}
 </script>
 
 <template>
@@ -133,17 +146,20 @@ const formatarEndereco = (endereco) => {
         <li
           v-for="(sugestao, index) in sugestoes"
           :key="index"
-          @click="selecionarSugestao(sugestao)">
+          @click="selecionarSugestao(sugestao)"
+        >
           <i class="fa-solid fa-building-flag"></i>
-        {{ formatarEndereco({
-        numero: sugestao.address.house_number || '',
-        rua: sugestao.address.road || '',
-        bairro: sugestao.address.suburb || '',
-        cidade: sugestao.address.city || '',
-        estado: sugestao.address.state || '',
-        pais: sugestao.address.country || '',
-        cep: sugestao.address.postcode || ''
-      }) }}
+          {{
+            formatarEndereco({
+              numero: sugestao.address.house_number || '',
+              rua: sugestao.address.road || '',
+              bairro: sugestao.address.suburb || '',
+              cidade: sugestao.address.city || '',
+              estado: sugestao.address.state || '',
+              pais: sugestao.address.country || '',
+              cep: sugestao.address.postcode || ''
+            })
+          }}
         </li>
       </ul>
       <div id="map" class="maps-container"></div>
@@ -188,24 +204,25 @@ const formatarEndereco = (endereco) => {
         </div>
       </div>
     </form>
+    <div class="campo-vazio-alert" v-if="campoVazioAlert == true">
+      <p>Preencha todos os campos para seguir para a próxima etapa.</p>
+    </div>
 
     <!-- BOTÕES -->
-    <div class="botoes-wrapper">
-      <button class="voltar-btn" @click="etapaAnterior">
-        <i class="fa-solid fa-arrow-right-from-bracket"></i>
-      </button>
-      <button class="avancar-btn" @click="proximaEtapa">Avançar</button>
-    </div>
+    <BotaoAvancarEVoltarComponent
+      :proximaEtapa="proximaEtapa"
+      :etapaAnterior="etapaAnterior"
+      :campoVazioAlert="campoVazioAlert"
+      :verificarFormulario="verificarFormulario"
+      :isAlgumCampoVazio="isAlgumCampoVazio"
+    />
   </div>
 </template>
 
 <style scoped>
-
 .etapa-2-container {
   display: flex;
   flex-direction: column;
-  align-self: center;
-  justify-self: center;
   justify-content: center;
   align-items: center;
   margin-top: 6rem;
@@ -286,58 +303,6 @@ label {
   height: 1px;
 }
 
-.botoes-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-  align-items: center;
-  width: 100%;
-  width: 500px;
-  gap: 30px; /* Medida exata para o avancar-btn ficar centralizado (500 - 50 - 350 - 30px) */
-  margin-top: 2rem;
-}
-
-.voltar-btn {
-  cursor: pointer;
-  width: 50px;
-  height: 50px;
-  border-radius: 20px;
-  border: 0;
-  color: var(--preto-alternativo);
-  background-color: var(--cor-voltar-btn);
-  font-size: 24px;
-  transition: 300ms ease;
-}
-
-.voltar-btn:hover {
-  background-color: var(--cor-voltar-btn-hover);
-  transform: scale(1.01);
-  color: var(--cor-voltar-btn);
-  background-color: var(--preto-alternativo);
-}
-
-.fa-solid.fa-arrow-right-from-bracket {
-  transform: rotate(180deg);
-}
-
-.avancar-btn {
-  cursor: pointer;
-  width: 350px;
-  height: 70px;
-  background-color: var(--cor-principal);
-  border-radius: 40px;
-  border: 0;
-  color: white;
-  font-size: 2rem;
-  font-weight: bold;
-  transition: 300ms ease;
-}
-
-.avancar-btn:hover {
-  background-color: var(--cor-principal-hover);
-  transform: scale(1.01);
-}
-
 #map {
   height: 400px;
   width: 100%;
@@ -380,9 +345,9 @@ label {
   background-color: #f0f0f0;
 }
 
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 </style>

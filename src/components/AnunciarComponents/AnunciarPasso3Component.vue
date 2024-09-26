@@ -1,14 +1,16 @@
 <script setup>
+import BotaoAvancarEVoltarComponent from '../BotaoAvancarEVoltarComponent.vue';
+
 defineProps({
     proximaEtapa: Function,
-    etapaAnterior: Function
+    etapaAnterior: Function,
 })
 
 
 </script>
 
 <template>
-<button class="etapaAnterior" @click="etapaAnterior">Voltar</button>
+<BotaoAvancarEVoltarComponent :proximaEtapa="proximaEtapa" :etapaAnterior="etapaAnterior" />
 </template>
 
 <style scoped>

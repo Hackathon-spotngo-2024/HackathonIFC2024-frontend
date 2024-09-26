@@ -6,7 +6,6 @@ import AnunciarPasso3Component from '@/components/AnunciarComponents/AnunciarPas
 import AnunciarPasso4Component from '@/components/AnunciarComponents/AnunciarPasso4Component.vue'
 
 const etapaAtual = ref(1);
-
 const componenteAtual = computed(() => {
   switch (etapaAtual.value) {
     case 1:
