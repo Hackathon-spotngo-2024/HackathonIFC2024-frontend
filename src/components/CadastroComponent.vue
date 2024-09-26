@@ -8,7 +8,7 @@ const user = reactive({
 </script>
 
 <template>
-  <div class="modal">
+  <div class="modal" v-if="isModalOpen.value == true">
     <div class="form-container">
       <div @click="closeModal" class="fechar">
         <span class="fa fa-close"></span>
