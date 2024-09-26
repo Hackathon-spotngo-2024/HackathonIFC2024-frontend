@@ -5,10 +5,16 @@ const user = reactive({
   senha: ''
 })
 
+let isModalOpen = false
+
+function openModal () {
+  isModalOpen = true
+}
 </script>
 
 <template>
-  <div class="modal" v-if="isModalOpen.value == true">
+  <button @click="openModal">Abrir modal (provisorio)</button>
+  <div class="modal" v-if="isModalOpen == true">
     <div class="form-container">
       <div @click="closeModal" class="fechar">
         <span class="fa fa-close"></span>
