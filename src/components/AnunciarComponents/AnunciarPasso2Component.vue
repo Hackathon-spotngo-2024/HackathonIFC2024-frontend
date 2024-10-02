@@ -3,17 +3,11 @@ import { onMounted, ref } from 'vue'
 import L from 'leaflet' //Importando biblioteca Leaflet (mapa)
 import 'leaflet/dist/leaflet.css' //Importa o css da biblioteca
 import BotaoAvancarEVoltarComponent from '../BotaoAvancarEVoltarComponent.vue'
+import { useEndereco } from '@/assets/stores/dadosEndereco'
+
+const enderecoStore = useEndereco()
 
 const tituloEtapa2 = ref('Onde fica sua locação?')
-const dadosEndereco = ref({
-  pais: '',
-  rua: '',
-  numero: '',
-  bairro: '',
-  estado: '',
-  cidade: '',
-  cep: ''
-})
 const enderecoSearch = ref('')
 const sugestoes = ref([])
 let map
@@ -68,17 +62,16 @@ const selecionarSugestao = (suggestion) => {
   showForm = true
 
   // Extrai as partes do endereço
-  const { house_number, road, suburb, city, state, country, postcode } = suggestion.address
-  dadosEndereco.value = {
-    pais: country || '',
-    rua: road || '',
-    numero: house_number || '',
-    bairro: suburb || '',
-    estado: state || '',
-    cidade: city || '',
-    cep: postcode || ''
-  }
-  const enderecoFormatado = formatarEndereco(dadosEndereco.value)
+  const { road, house_number, suburb, city, state, country, postcode } = suggestion.address
+    enderecoStore.dadosEndereco.pais = country || '',
+    enderecoStore.dadosEndereco.rua = road || '',
+    enderecoStore.dadosEndereco.numero = house_number || '',
+    enderecoStore.dadosEndereco.bairro = suburb || '',
+    enderecoStore.dadosEndereco.estado = state || '',
+    enderecoStore.dadosEndereco.cidade = city || '',
+    enderecoStore.dadosEndereco.cep = postcode || ''
+
+  const enderecoFormatado = formatarEndereco(enderecoStore.dadosEndereco)
 
   // Centraliza o mapa nas coordenadas da sugestão selecionada
   map.setView([lat, lon], 13)
@@ -116,7 +109,7 @@ const formatarEndereco = (endereco) => {
 let campoVazioAlert = false
 
 const verificarFormulario = () => {
-  if (Object.values(dadosEndereco.value).some((value) => value == '')) {
+  if (Object.values(enderecoStore.dadosEndereco.value).some((value) => value == '')) {
     campoVazioAlert = true
     return
   }
@@ -169,37 +162,37 @@ const verificarFormulario = () => {
     <form class="form-endereco" v-if="showForm == true">
       <div class="pais-wrapper">
         <label for="pais-input">País</label>
-        <input type="text" name="pais" id="pais-input" v-model="dadosEndereco.pais" />
+        <input type="text" name="pais" id="pais-input" v-model="enderecoStore.dadosEndereco.pais" />
       </div>
       <div class="endereco-info">
         <div class="info-wrapper">
-          <label for="rua-input">Rua</label>
-          <input type="text" name="rua" id="rua-input" v-model="dadosEndereco.rua" />
-        </div>
-        <div class="linha-divisoria"></div>
-        <div class="info-wrapper">
-          <label for="numero-input">Número</label>
-          <input type="text" name="numero" id="numero-input" v-model="dadosEndereco.numero" />
-        </div>
-        <div class="linha-divisoria"></div>
-        <div class="info-wrapper">
-          <label for="bairro-input">Bairro</label>
-          <input type="text" name="bairro" id="bairro-input" v-model="dadosEndereco.bairro" />
-        </div>
-        <div class="linha-divisoria"></div>
-        <div class="info-wrapper">
           <label for="estado-input">Estado</label>
-          <input type="text" name="estado" id="estado-input" v-model="dadosEndereco.estado" />
+          <input type="text" name="estado" id="estado-input" v-model="enderecoStore.dadosEndereco.estado" />
         </div>
         <div class="linha-divisoria"></div>
         <div class="info-wrapper">
           <label for="cidade-input">Cidade</label>
-          <input type="text" name="cidade" id="cidade-input" v-model="dadosEndereco.cidade" />
+          <input type="text" name="cidade" id="cidade-input" v-model="enderecoStore.dadosEndereco.cidade" />
+        </div>
+        <div class="linha-divisoria"></div>
+        <div class="info-wrapper">
+          <label for="bairro-input">Bairro</label>
+          <input type="text" name="bairro" id="bairro-input" v-model="enderecoStore.dadosEndereco.bairro" />
+        </div>
+        <div class="linha-divisoria"></div>
+        <div class="info-wrapper">
+          <label for="rua-input">Rua</label>
+          <input type="text" name="rua" id="rua-input" v-model="enderecoStore.dadosEndereco.rua" />
+        </div>
+        <div class="linha-divisoria"></div>
+        <div class="info-wrapper">
+          <label for="numero-input">Número</label>
+          <input type="text" name="numero" id="numero-input" v-model="enderecoStore.dadosEndereco.numero" />
         </div>
         <div class="linha-divisoria"></div>
         <div class="info-wrapper">
           <label for="cep-input">CEP</label>
-          <input type="number" name="cep" id="cep-input" v-model="dadosEndereco.cep" />
+          <input type="number" name="cep" id="cep-input" v-model="enderecoStore.dadosEndereco.cep" />
         </div>
       </div>
     </form>
