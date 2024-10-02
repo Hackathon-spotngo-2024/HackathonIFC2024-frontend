@@ -114,12 +114,11 @@ const formatarEndereco = (endereco) => {
 
 //VERIFICACAO DO FORMULARIO -------------------------------------------------------------------
 let campoVazioAlert = false
-const isAlgumCampoVazio = () => {
-  Object.values(dadosEndereco.value).some((value) => value === '')
-}
+
 const verificarFormulario = () => {
-  if (isAlgumCampoVazio) {
+  if (Object.values(dadosEndereco.value).some((value) => value == '')) {
     campoVazioAlert = true
+    return
   }
 }
 </script>
@@ -169,43 +168,43 @@ const verificarFormulario = () => {
     <!-- FORMULÁRIO COM DADOS DO ENDEREÇO -->
     <form class="form-endereco" v-if="showForm == true">
       <div class="pais-wrapper">
-        <label for="pais">País</label>
+        <label for="pais-input">País</label>
         <input type="text" name="pais" id="pais-input" v-model="dadosEndereco.pais" />
       </div>
       <div class="endereco-info">
         <div class="info-wrapper">
-          <label for="rua">Rua</label>
+          <label for="rua-input">Rua</label>
           <input type="text" name="rua" id="rua-input" v-model="dadosEndereco.rua" />
         </div>
         <div class="linha-divisoria"></div>
         <div class="info-wrapper">
-          <label for="numero">Número</label>
+          <label for="numero-input">Número</label>
           <input type="text" name="numero" id="numero-input" v-model="dadosEndereco.numero" />
         </div>
         <div class="linha-divisoria"></div>
         <div class="info-wrapper">
-          <label for="bairro">Bairro</label>
+          <label for="bairro-input">Bairro</label>
           <input type="text" name="bairro" id="bairro-input" v-model="dadosEndereco.bairro" />
         </div>
         <div class="linha-divisoria"></div>
         <div class="info-wrapper">
-          <label for="estado">Estado</label>
+          <label for="estado-input">Estado</label>
           <input type="text" name="estado" id="estado-input" v-model="dadosEndereco.estado" />
         </div>
         <div class="linha-divisoria"></div>
         <div class="info-wrapper">
-          <label for="cidade">Cidade</label>
+          <label for="cidade-input">Cidade</label>
           <input type="text" name="cidade" id="cidade-input" v-model="dadosEndereco.cidade" />
         </div>
         <div class="linha-divisoria"></div>
         <div class="info-wrapper">
-          <label for="cep">CEP</label>
+          <label for="cep-input">CEP</label>
           <input type="number" name="cep" id="cep-input" v-model="dadosEndereco.cep" />
         </div>
       </div>
     </form>
     <div class="campo-vazio-alert" v-if="campoVazioAlert == true">
-      <p>Preencha todos os campos para seguir para a próxima etapa.</p>
+      <p class="campo-vazio-text">Preencha todos os campos para prosseguir.</p>
     </div>
 
     <!-- BOTÕES -->
@@ -214,7 +213,6 @@ const verificarFormulario = () => {
       :etapaAnterior="etapaAnterior"
       :campoVazioAlert="campoVazioAlert"
       :verificarFormulario="verificarFormulario"
-      :isAlgumCampoVazio="isAlgumCampoVazio"
     />
   </div>
 </template>
@@ -349,5 +347,12 @@ input[type='number']::-webkit-outer-spin-button,
 input[type='number']::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.campo-vazio-alert {
+  width: 500px;
+  display: flex;
+  justify-content: start;
+  color: var(--cor-texto-erro);
 }
 </style>

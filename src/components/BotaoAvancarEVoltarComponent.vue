@@ -4,7 +4,6 @@ defineProps({
     etapaAnterior: Function,
     campoVazioAlert: Boolean,
     verificarFormulario: Function,
-    isAlgumCampoVazio: Function
 })
 </script>
 
@@ -13,7 +12,7 @@ defineProps({
       <button class="voltar-btn" @click="etapaAnterior">
         <i class="fa-solid fa-arrow-right-from-bracket"></i>
       </button>
-      <button class="avancar-btn" @click="verificarFormulario()">Avançar</button>
+      <button class="avancar-btn" @click="(verificarFormulario())">Avançar</button>
     </div>
 </template>
 

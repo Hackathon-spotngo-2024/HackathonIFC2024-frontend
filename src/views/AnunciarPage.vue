@@ -29,7 +29,6 @@ function etapaAnterior() {
   etapaAtual.value--
 }
 
-
 </script>
 
 <template>
