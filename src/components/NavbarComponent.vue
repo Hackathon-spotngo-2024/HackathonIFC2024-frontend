@@ -1,4 +1,10 @@
 <script setup>
+const scrollTo = (id) => {
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+};
 defineProps({
   openModal: Function,
   isModalOpen: Boolean,
@@ -8,7 +14,7 @@ defineProps({
 <template>
   <div class="nav-container">
     <router-link to="/" class="home-link"><img class="logo-img" src="../assets/logo.png" alt="" /></router-link>
-    <router-link to="/alugar" id="alugar-link" class="nav-link">Alugar</router-link>
+    <a href="#card-section-title" @click.prevent="scrollTo('card-section-title')" class="nav-link">Alugar</a>
     <a href="MinhasReservasComponent.vue" id="minhas-reservas-link" class="nav-link">Minhas reservas</a>
     <div class="search-bar">
       <i class="fa fa-search"></i>
