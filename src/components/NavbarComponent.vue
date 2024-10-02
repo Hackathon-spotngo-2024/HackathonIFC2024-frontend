@@ -5,6 +5,10 @@ const scrollTo = (id) => {
     element.scrollIntoView({ behavior: 'smooth' });
   }
 };
+defineProps({
+  openModal: Function,
+  isModalOpen: Boolean,
+})
 </script>
 
 <template>
@@ -17,7 +21,7 @@ const scrollTo = (id) => {
       <input type="text" placeholder="Procure seu spot" class="search-input" />
     </div>
     <router-link to="/anunciar" id="anunciar-link" class="nav-link">Anunciar</router-link>
-    <a href="LoginComponent.vue" class="entrar-link">Entrar</a>
+    <button class="entrar-link" @click="openModal">Entrar</button>
   </div>
   <div class="linha-container">
     <div class="linha-divisoria"></div>
@@ -30,7 +34,7 @@ const scrollTo = (id) => {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 1rem 8rem 0 8rem;
+  margin: 1rem 10rem 0 10rem;
   border-radius: 40px;
   padding: .5rem;
   box-shadow: 1px 3px 8px 3px rgba(0, 0, 0, 0.08);
@@ -46,6 +50,21 @@ a {
   align-items: center;
   border-radius: 35px;
   font-size: 1rem;
+  cursor: pointer;
+}
+
+button {
+  font-family: 'Montserrat';
+  font-weight: 500;
+  text-decoration: none;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 35px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: 0;
 }
 
 .nav-link {
@@ -106,7 +125,7 @@ a {
 }
 
 .fa.fa-search {
-  color: gray;
+  color: var(--cor-search-icon);
 }
 
 .linha-container {
@@ -119,7 +138,7 @@ a {
   margin-top: 1rem;
   width: 100%;
   height: 1px;
-  margin: 1.5rem 8rem 0 8rem;
+  margin: 1.5rem 10rem 0 10rem;
   background-color: var(--cor-linha-divisoria)
 }
 </style>
