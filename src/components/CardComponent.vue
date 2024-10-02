@@ -5,7 +5,7 @@ import imgCard1 from '../assets/card-imgs/card-img-1.jpeg'
 <template>
   <div class="card">
       <router-link to="/anuncio" class="link">
-      <div class="card-img"><img :src="imgCard1" alt="" /></div>
+        <div class="card-img"><img :src="imgCard1" alt="" /></div>
       <div class="card-infos">
         <div class="card-titulo">Exemplo titulo</div>
         <div class="card-preco">R$xx,xx por dia</div>
