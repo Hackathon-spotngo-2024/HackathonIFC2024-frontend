@@ -1,20 +1,26 @@
 <script setup>
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
+
 const user = reactive({
   name: '',
   senha: ''
 })
 
-let isModalOpen = false
+let isModalOpen = ref(false) 
 
-function openModal () {
-  isModalOpen = true
+function openModal() {
+  isModalOpen.value = true 
+}
+
+function closeModal() {
+  isModalOpen.value = false 
 }
 </script>
 
 <template>
-  <button @click="openModal">Abrir modal (provisorio)</button>
-  <div class="modal" v-if="isModalOpen == true">
+
+  <button @click="openModal">Abrir modal (provisório)</button>
+  <div class="modal" v-if="isModalOpen">
     <div class="form-container">
       <div @click="closeModal" class="fechar">
         <span class="fa fa-close"></span>
@@ -28,7 +34,7 @@ function openModal () {
         <h1 class="title">{{ title }}</h1>
 
         <div class="conteudo">
-          <div class="form-item">
+          <div class="form-item"><ChildComponent :open-modal="openModal" />
             <label for="name">Nome</label>
             <input type="text" name="name" id="name" v-model="user.name" placeholder="Nome" />
           </div>
@@ -71,7 +77,6 @@ function openModal () {
 </template>
 
 <style scoped>
-
 .modal {
   backdrop-filter: blur(5px);
   position: fixed;
