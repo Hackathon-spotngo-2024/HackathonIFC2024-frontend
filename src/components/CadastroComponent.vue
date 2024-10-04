@@ -1,7 +1,7 @@
 <script setup>
 import { reactive, ref, computed } from 'vue'
+import LoginComponent from './LoginComponent.vue';
 const props = defineProps(['modal'])
-
 
 const open = ref(false)
 
@@ -18,17 +18,14 @@ const closeModal = () => {
  emit('closeModal')
 }
 
-
-
 const blurClass = computed(() => (open.value ? 'divBlur' : ''))
-
 
 </script>
 
 
 <template>
   
-
+  <LoginComponent v-if="open"/>
         <div class="modal" v-if="props.modal">
    <div class="form-container">
      <div @click="closeModal" class="fechar">
@@ -76,7 +73,8 @@ const blurClass = computed(() => (open.value ? 'divBlur' : ''))
               <hr />
             </div>
             <p class="textoFinal">
-              Ainda não está no Spot'n Go? <a class="link" href="LoginCompenonet">Crie uma conta</a>
+              Ainda não está no Spot'n Go? 
+              <span class="cadastro" @click="open = !open">Crie uma conta</span>
             </p>
           </div>
         </div>
@@ -181,6 +179,11 @@ button {
   color: #f2f2f2;
   font-weight: bold;
   font-size: 15px;
+}
+
+.cadastro{
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .api {

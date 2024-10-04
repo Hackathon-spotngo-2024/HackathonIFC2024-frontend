@@ -1,7 +1,9 @@
 <script setup>
 import { reactive, ref } from 'vue'
-defineProps(['title'])
-const showModal = ref(false)
+const props = defineProps({
+    type: Boolean
+})
+const showModal = ref(true)
 
 const user = reactive({
     name: '',
@@ -16,17 +18,12 @@ const user = reactive({
 const closeModal = () => {
     showModal.value = false
 }
-
-const openModal = () => {
-    showModal.value = true
-}
 </script>
 
 <template>
-    <button class="Modal" @click="openModal">Abrir Modal</button>
 
     <div :class="['modal', showModal ? 'visible' : 'hidden']">
-        <div class="form-container">
+        <div class="form-container" >
             <div class="fechar">
                 <span class="fa fa-x" @click="closeModal"></span>
             </div>
@@ -85,7 +82,9 @@ const openModal = () => {
                             <a class="link" href="">Aviso na coleta de informações.</a>
                         </p>
                         <hr class="linha" />
-                        <p class="textoFinal">Já tem conta? <a class="link" href="">Entrar</a></p>
+                        <p class="textoFinal">Já tem conta? 
+                            <a class="link" href="">Entrar</a>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -104,7 +103,7 @@ const openModal = () => {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 1000 !important;
     transition: visibility 0.3s, opacity 0.3s;
 }
 

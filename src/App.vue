@@ -3,7 +3,6 @@ import { ref } from 'vue';
 import BannerComponent from './components/BannerComponent.vue';
 import CadastroComponent from './components/CadastroComponent.vue';
 import NavbarComponent from './components/NavbarComponent.vue';
-import LoginComponent from './components/LoginComponent.vue';
 
 const modal = ref(false)
 
