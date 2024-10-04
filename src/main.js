@@ -5,13 +5,20 @@ import App from './App.vue'
 import router from './router'
 import NavbarComponent from './components/NavbarComponent.vue';
 import BannerComponent from './components/BannerComponent.vue';
-import LoginComponent from './components/LoginComponent.vue';
+
+import CardSectionTitle from './components/CardSectionTitle.vue';
+import CardComponent from './components/CardComponent.vue';
+import RodapeComponent from './components/RodapeComponent.vue'
+
 
 const app = createApp(App)
 app.component('NavbarComponent', NavbarComponent)
 app.component('BannerComponent', BannerComponent)
-app.component('LoginComponent', LoginComponent)
+
+app.component('CardSectionTitle', CardSectionTitle)
+app.component('CardComponent', CardComponent)
+app.component('RodapeComponent', RodapeComponent)
+
 
 app.use(router)
-
 app.mount('#app')
