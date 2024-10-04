@@ -4,21 +4,14 @@
 <template>
   <div class="nav-container">
     <router-link to="/" class="home-link"><img class="logo-img" src="../assets/logo.png" alt="" /></router-link>
-    <a href="" id="alugar-link" class="nav-link">Alugar</a>
+    <router-link to="/alugar" id="alugar-link" class="nav-link">Alugar</router-link>
     <a href="MinhasReservasComponent.vue" id="minhas-reservas-link" class="nav-link">Minhas reservas</a>
     <div class="search-bar">
       <i class="fa fa-search"></i>
       <input type="text" placeholder="Procure seu spot" class="search-input" />
-    </div>    
-    <div class="nav-links">
-      <router-link to="/alugar" class="nav-link">Alugar</router-link>
-      <a href="MinhasReservasComponent.vue" class="nav-link">Minhas reservas</a>
-      <a href="AnunciarComponent.vue" class="nav-link">Anunciar</a>
-      <a href="LoginComponent.vue" class="entrar-link">Entrar</a>
     </div>
-
     <router-link to="/anunciar" id="anunciar-link" class="nav-link">Anunciar</router-link>
-    <a href="LoginComponent.vue" class="entrar-link">Entrar</a>
+    <button class="entrar-link" @click="openModal">Entrar</button>
   </div>
   <div class="linha-container">
     <div class="linha-divisoria"></div>
@@ -31,26 +24,14 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 1rem;
+  margin: 1rem 10rem 0 10rem;
   border-radius: 40px;
   padding: .5rem;
   box-shadow: 1px 3px 8px 3px rgba(0, 0, 0, 0.08);
-  flex-wrap: wrap;
-}
-
-.logo-img {
-  width: 200px;
-  height: auto;
-}
-
-.nav-links {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 }
 
 a {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat';
   font-weight: 500;
   text-decoration: none;
   color: black;
@@ -59,7 +40,21 @@ a {
   align-items: center;
   border-radius: 35px;
   font-size: 1rem;
-  margin: 0 0.5rem;
+  cursor: pointer;
+}
+
+button {
+  font-family: 'Montserrat';
+  font-weight: 500;
+  text-decoration: none;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 35px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: 0;
 }
 
 .nav-link {
@@ -88,27 +83,27 @@ a {
   width: 6.25rem;
   height: 3.125rem;
   transition: 100ms ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .entrar-link:hover {
   background-color: var(--cor-principal-hover);
 }
 
+.logo-img {
+  width: 200px;
+  height: 40px;
+}
+
 .search-bar {
-  width: 100%;
-  max-width: 25rem;
+  width: 25rem;
   height: 2.5rem;
   border: 1px solid var(--search-bar-border);
   border-radius: 20px;
-  padding: 0 1.5rem;
+  padding: 0rem 1.5rem;
   display: flex;
   justify-content: start;
   align-items: center;
   background-color: var(--search-bar-fill);
-  box-sizing: border-box;
 }
 
 .search-input {
@@ -116,12 +111,11 @@ a {
   outline: none;
   font-size: 1rem;
   background-color: var(--search-bar-fill);
-  margin-left: 1rem;
-  flex-grow: 1;
+  margin: 0 0 0 1rem;
 }
 
 .fa.fa-search {
-  color: var(--cor-search-icon);
+  color: gray;
 }
 
 .linha-container {
@@ -131,81 +125,10 @@ a {
 }
 
 .linha-divisoria {
+  margin-top: 1rem;
   width: 100%;
   height: 1px;
-  background-color: var(--cor-linha-divisoria);
-}
-
-@media (max-width: 992px) {
-  .nav-container {
-    margin: 1rem;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .logo-img {
-    width: 150px;
-  }
-
-  .search-bar {
-    width: 100%;
-    margin-top: 1rem;
-  }
-
-  .nav-links {
-    width: 100%;
-    margin-top: 1rem;
-    align-items: center;
-  }
-
-  a {
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .nav-links {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  a {
-    margin: 0.5rem 0;
-  }
-
-  .search-bar {
-    width: 100%;
-    align-items: center;  
-  }
-
-  .logo-img {
-    width: 120px;
-  }
-}
-
-@media (max-width: 576px) {
-  .nav-container {
-    padding: 0.5rem;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .logo-img {
-    width: 100px;
-  }
-
-  .search-bar {
-    width: 100%;
-    margin-top: 1rem;
-  }
-
-  .nav-links {
-    width: 100%;
-    flex-direction: column;
-  }
-
-  a {
-    font-size: 0.8rem;
-  }
+  margin: 1.5rem 10rem 0 10rem;
+  background-color: var(--cor-linha-divisoria)
 }
 </style>
