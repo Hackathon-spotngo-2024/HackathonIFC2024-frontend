@@ -41,6 +41,9 @@ a {
   border-radius: 35px;
   font-size: 1rem;
   cursor: pointer;
+  border-radius: 35px;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 button {
@@ -128,7 +131,79 @@ button {
   margin-top: 1rem;
   width: 100%;
   height: 1px;
-  margin: 1.5rem 10rem 0 10rem;
-  background-color: var(--cor-linha-divisoria)
+  background-color: var(--cor-linha-divisoria);
+}
+
+@media (max-width: 992px) {
+  .nav-container {
+    margin: 1rem;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo-img {
+    width: 150px;
+  }
+
+  .search-bar {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .nav-links {
+    width: 100%;
+    margin-top: 1rem;
+    align-items: center;
+  }
+
+  a {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  a {
+    margin: 0.5rem 0;
+  }
+
+  .search-bar {
+    width: 100%;
+    align-items: center;  
+  }
+
+  .logo-img {
+    width: 120px;
+  }
+}
+
+@media (max-width: 576px) {
+  .nav-container {
+    padding: 0.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logo-img {
+    width: 100px;
+  }
+
+  .search-bar {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .nav-links {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  a {
+    font-size: 0.8rem;
+  }
 }
 </style>
