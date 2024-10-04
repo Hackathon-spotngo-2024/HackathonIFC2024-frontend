@@ -3,9 +3,9 @@
 
 <template>
   <div class="nav-container">
-    <router-link to="/" class="home-link">
-      <img class="logo-img" src="../assets/logo.png" alt="Logo" />
-    </router-link>
+    <router-link to="/" class="home-link"><img class="logo-img" src="../assets/logo.png" alt="" /></router-link>
+    <a href="" id="alugar-link" class="nav-link">Alugar</a>
+    <a href="MinhasReservasComponent.vue" id="minhas-reservas-link" class="nav-link">Minhas reservas</a>
     <div class="search-bar">
       <i class="fa fa-search"></i>
       <input type="text" placeholder="Procure seu spot" class="search-input" />
@@ -16,6 +16,9 @@
       <a href="AnunciarComponent.vue" class="nav-link">Anunciar</a>
       <a href="LoginComponent.vue" class="entrar-link">Entrar</a>
     </div>
+
+    <router-link to="/anunciar" id="anunciar-link" class="nav-link">Anunciar</router-link>
+    <a href="LoginComponent.vue" class="entrar-link">Entrar</a>
   </div>
   <div class="linha-container">
     <div class="linha-divisoria"></div>
@@ -118,7 +121,7 @@ a {
 }
 
 .fa.fa-search {
-  color: gray;
+  color: var(--cor-search-icon);
 }
 
 .linha-container {
