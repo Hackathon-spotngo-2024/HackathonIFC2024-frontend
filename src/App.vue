@@ -1,20 +1,27 @@
 <script setup>
+import { ref } from 'vue';
+import BannerComponent from './components/BannerComponent.vue';
+import CadastroComponent from './components/CadastroComponent.vue';
 import NavbarComponent from './components/NavbarComponent.vue';
 import LoginComponent from './components/LoginComponent.vue';
+
+const modal = ref(false)
+
+
+function openModal() {
+ modal.value = !modal.value
+}
 </script>
 
 <template>
-  <header>
-    <NavbarComponent/>
-  </header>
-  <router-view></router-view>
-
-  <footer>
-    <RodapeComponent/>
-  </footer>
-
-</template>
-
-<style scoped>
-
-</style>
+  <NavbarComponent @openModal="openModal()"/>
+  <BannerComponent/>
+  <CadastroComponent :modal="modal" @closeModal="openModal()"/>
+ </template>
+ 
+ 
+ <style scoped>
+ 
+ 
+ </style>
+ 

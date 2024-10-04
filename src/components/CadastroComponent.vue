@@ -1,34 +1,43 @@
 <script setup>
-import { reactive, ref } from 'vue'
+import { reactive, ref, computed } from 'vue'
+const props = defineProps(['modal'])
+
+
+const open = ref(false)
+
+
+const emit = defineEmits(['closeModal']);
 
 const user = reactive({
-  name: '',
-  senha: ''
+ name: '',
+ senha: ''
 })
 
-let isModalOpen = ref(false) 
 
-function openModal() {
-  isModalOpen.value = true 
+const closeModal = () => {
+ emit('closeModal')
 }
 
-function closeModal() {
-  isModalOpen.value = false 
-}
+
+
+const blurClass = computed(() => (open.value ? 'divBlur' : ''))
+
+
 </script>
 
-<template>
 
-  <button @click="openModal">Abrir modal (provisório)</button>
-  <div class="modal" v-if="isModalOpen">
-    <div class="form-container">
-      <div @click="closeModal" class="fechar">
-        <span class="fa fa-close"></span>
-      </div>
-      <div class="container-interno">
-        <div class="logoLogin">
-          <img class="imgLogin" src="../assets/LogoSimples.png" alt="Logo" />
-        </div>
+<template>
+  
+
+        <div class="modal" v-if="props.modal">
+   <div class="form-container">
+     <div @click="closeModal" class="fechar">
+       <span class="fa fa-x"></span>
+     </div>
+     <div class="containerInterno">
+       <div class="logoLogin">
+         <img class="imgLogin" src="../assets/LogoSimples.png" alt="Logo" />
+       </div>
 
         <p class="title">Bem vindo(a) ao Spot'n Go</p>
         <h1 class="title">{{ title }}</h1>
@@ -67,7 +76,7 @@ function closeModal() {
               <hr />
             </div>
             <p class="textoFinal">
-              Ainda não está no Spot'n Go? <a class="link" href="">Crie uma conta</a>
+              Ainda não está no Spot'n Go? <a class="link" href="LoginCompenonet">Crie uma conta</a>
             </p>
           </div>
         </div>
@@ -111,10 +120,10 @@ function closeModal() {
   display: flex;
   justify-content: end;
   margin: 1rem 1rem 0 0;
+  cursor: pointer;
 }
 
 .fa.fa-close {
-  cursor: pointer;
   width: 2rem;
   height: 2rem;
   align-content: center;
