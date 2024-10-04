@@ -1,5 +1,5 @@
 <script setup>
-import { useEtapa } from '@/assets/stores/dadosEtapas'
+import { useEtapa } from '@/assets/stores/dadosEtapa'
 
 const etapaStore = useEtapa()
 

@@ -1,18 +1,17 @@
 <script setup>
-defineProps({
-    proximaEtapa: Function,
-    etapaAnterior: Function,
-    campoVazioAlert: Boolean,
-    verificarFormulario: Function,
-})
+import { useEtapa } from '@/assets/stores/dadosEtapa';
+import { useEndereco } from '@/assets/stores/dadosEndereco';
+
+const etapaStore = useEtapa()
+const enderecoStore = useEndereco()
 </script>
 
 <template>
     <div class="botoes-wrapper">
-      <button class="voltar-btn" @click="etapaAnterior">
+      <button class="voltar-btn" @click="etapaStore.etapaAnterior">
         <i class="fa-solid fa-arrow-right-from-bracket"></i>
       </button>
-      <button class="avancar-btn" @click="(verificarFormulario())">Avançar</button>
+      <button class="avancar-btn" @click="enderecoStore.verificarFormulario">Avançar</button>
     </div>
 </template>
 

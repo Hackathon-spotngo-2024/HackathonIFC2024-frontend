@@ -4,10 +4,8 @@ import L from 'leaflet' //Importando biblioteca Leaflet (mapa)
 import 'leaflet/dist/leaflet.css' //Importa o css da biblioteca
 import BotaoAvancarEVoltarComponent from '../BotaoAvancarEVoltarComponent.vue'
 import { useEndereco } from '@/assets/stores/dadosEndereco'
-import { useEtapa } from '@/assets/stores/dadosEtapas'
 
 const enderecoStore = useEndereco()
-const etapaStore = useEtapa()
 
 const tituloEtapa2 = ref('Onde fica sua locação?')
 const enderecoSearch = ref('')
@@ -15,11 +13,6 @@ const sugestoes = ref([])
 let map
 let marker
 let showForm = false
-
-defineProps({
-  proximaEtapa: Function,
-  etapaAnterior: Function
-})
 
 //MAPA ------------------------------------------------------------------------------------------------------------
 
@@ -105,19 +98,6 @@ const formatarEndereco = (endereco) => {
   ]
     .filter((parte) => parte.trim() !== '')
     .join(', ') // Caso o dado nao seja informado (geralmente o numero), ele nao aparece, evitando "virgulas fantasmas"
-}
-
-//VERIFICACAO DO FORMULARIO -------------------------------------------------------------------
-let campoVazioAlert = ref(false)
-
-function verificarFormulario() {
-  if (Object.values(enderecoStore.dadosEndereco).some((value) => value == '')) {
-    campoVazioAlert.value = true
-  }
-  else {
-    etapaStore.proximaEtapa()
-    console.log(etapaStore.etapaAtual)
-  }
 }
 </script>
 
@@ -226,17 +206,12 @@ function verificarFormulario() {
         </div>
       </div>
     </form>
-    <div class="campo-vazio-alert" v-if="campoVazioAlert == true">
+    <div class="campo-vazio-alert" v-if="enderecoStore.campoVazioAlert == true">
       <p class="campo-vazio-text">Preencha todos os campos para prosseguir.</p>
     </div>
 
     <!-- BOTÕES -->
-    <BotaoAvancarEVoltarComponent
-      :proximaEtapa="proximaEtapa"
-      :etapaAnterior="etapaAnterior"
-      :campoVazioAlert="campoVazioAlert"
-      :verificarFormulario="verificarFormulario"
-    />
+    <BotaoAvancarEVoltarComponent />
   </div>
 </template>
 
