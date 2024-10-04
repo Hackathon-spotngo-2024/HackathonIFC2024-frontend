@@ -1,10 +1,8 @@
 <script setup>
 import { ref } from 'vue'
+import { useEtapa } from '@/assets/stores/dadosEtapas';
 
-defineProps({
-  proximaEtapa: Function,
-  etapaAnterior: Function
-})
+const etapaStore = useEtapa()
 
 const tituloEtapa1 = ref("É muito fácil <br/> anunciar no Spot 'n Go")
 </script>
@@ -44,7 +42,7 @@ const tituloEtapa1 = ref("É muito fácil <br/> anunciar no Spot 'n Go")
       </div>
     </div>
     <div class="submit-botao-container">
-      <button class="continue-botao" @click="proximaEtapa">Continue</button>
+      <button class="continue-botao" @click="etapaStore.proximaEtapa">Continue</button>
     </div>
   </div>
 </template>

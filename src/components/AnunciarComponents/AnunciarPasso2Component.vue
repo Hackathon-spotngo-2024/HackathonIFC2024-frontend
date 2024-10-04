@@ -4,8 +4,10 @@ import L from 'leaflet' //Importando biblioteca Leaflet (mapa)
 import 'leaflet/dist/leaflet.css' //Importa o css da biblioteca
 import BotaoAvancarEVoltarComponent from '../BotaoAvancarEVoltarComponent.vue'
 import { useEndereco } from '@/assets/stores/dadosEndereco'
+import { useEtapa } from '@/assets/stores/dadosEtapas'
 
 const enderecoStore = useEndereco()
+const etapaStore = useEtapa()
 
 const tituloEtapa2 = ref('Onde fica sua locação?')
 const enderecoSearch = ref('')
@@ -63,13 +65,13 @@ const selecionarSugestao = (suggestion) => {
 
   // Extrai as partes do endereço
   const { road, house_number, suburb, city, state, country, postcode } = suggestion.address
-    enderecoStore.dadosEndereco.pais = country || '',
-    enderecoStore.dadosEndereco.rua = road || '',
-    enderecoStore.dadosEndereco.numero = house_number || '',
-    enderecoStore.dadosEndereco.bairro = suburb || '',
-    enderecoStore.dadosEndereco.estado = state || '',
-    enderecoStore.dadosEndereco.cidade = city || '',
-    enderecoStore.dadosEndereco.cep = postcode || ''
+  ;(enderecoStore.dadosEndereco.pais = country || ''),
+    (enderecoStore.dadosEndereco.rua = road || ''),
+    (enderecoStore.dadosEndereco.numero = house_number || ''),
+    (enderecoStore.dadosEndereco.bairro = suburb || ''),
+    (enderecoStore.dadosEndereco.estado = state || ''),
+    (enderecoStore.dadosEndereco.cidade = city || ''),
+    (enderecoStore.dadosEndereco.cep = postcode || '')
 
   const enderecoFormatado = formatarEndereco(enderecoStore.dadosEndereco)
 
@@ -106,12 +108,15 @@ const formatarEndereco = (endereco) => {
 }
 
 //VERIFICACAO DO FORMULARIO -------------------------------------------------------------------
-let campoVazioAlert = false
+let campoVazioAlert = ref(false)
 
-const verificarFormulario = () => {
-  if (Object.values(enderecoStore.dadosEndereco.value).some((value) => value == '')) {
-    campoVazioAlert = true
-    return
+function verificarFormulario() {
+  if (Object.values(enderecoStore.dadosEndereco).some((value) => value == '')) {
+    campoVazioAlert.value = true
+  }
+  else {
+    etapaStore.proximaEtapa()
+    console.log(etapaStore.etapaAtual)
   }
 }
 </script>
@@ -167,17 +172,32 @@ const verificarFormulario = () => {
       <div class="endereco-info">
         <div class="info-wrapper">
           <label for="estado-input">Estado</label>
-          <input type="text" name="estado" id="estado-input" v-model="enderecoStore.dadosEndereco.estado" />
+          <input
+            type="text"
+            name="estado"
+            id="estado-input"
+            v-model="enderecoStore.dadosEndereco.estado"
+          />
         </div>
         <div class="linha-divisoria"></div>
         <div class="info-wrapper">
           <label for="cidade-input">Cidade</label>
-          <input type="text" name="cidade" id="cidade-input" v-model="enderecoStore.dadosEndereco.cidade" />
+          <input
+            type="text"
+            name="cidade"
+            id="cidade-input"
+            v-model="enderecoStore.dadosEndereco.cidade"
+          />
         </div>
         <div class="linha-divisoria"></div>
         <div class="info-wrapper">
           <label for="bairro-input">Bairro</label>
-          <input type="text" name="bairro" id="bairro-input" v-model="enderecoStore.dadosEndereco.bairro" />
+          <input
+            type="text"
+            name="bairro"
+            id="bairro-input"
+            v-model="enderecoStore.dadosEndereco.bairro"
+          />
         </div>
         <div class="linha-divisoria"></div>
         <div class="info-wrapper">
@@ -187,12 +207,22 @@ const verificarFormulario = () => {
         <div class="linha-divisoria"></div>
         <div class="info-wrapper">
           <label for="numero-input">Número</label>
-          <input type="text" name="numero" id="numero-input" v-model="enderecoStore.dadosEndereco.numero" />
+          <input
+            type="text"
+            name="numero"
+            id="numero-input"
+            v-model="enderecoStore.dadosEndereco.numero"
+          />
         </div>
         <div class="linha-divisoria"></div>
         <div class="info-wrapper">
           <label for="cep-input">CEP</label>
-          <input type="number" name="cep" id="cep-input" v-model="enderecoStore.dadosEndereco.cep" />
+          <input
+            type="number"
+            name="cep"
+            id="cep-input"
+            v-model="enderecoStore.dadosEndereco.cep"
+          />
         </div>
       </div>
     </form>
