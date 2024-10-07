@@ -1,7 +1,8 @@
 <script setup>
 import { reactive, ref } from 'vue'
 const props = defineProps({
-    type: Boolean
+    type: Boolean,
+    title: String
 })
 const showModal = ref(true)
 

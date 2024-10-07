@@ -1,59 +1,60 @@
 <script setup>
-import { reactive, ref, computed } from 'vue'
+import { reactive, ref, computed } from 'vue';
 import LoginComponent from './LoginComponent.vue';
-const props = defineProps(['modal'])
 
-const open = ref(false)
+const props = defineProps(['modal', 'title']);
 
+const open = ref(false);
 
 const emit = defineEmits(['closeModal']);
 
 const user = reactive({
- name: '',
- senha: ''
-})
-
+  name: '',
+  senha: ''
+});
 
 const closeModal = () => {
- emit('closeModal')
+  emit('closeModal')
 }
 
-const blurClass = computed(() => (open.value ? 'divBlur' : ''))
+const blurClass = computed(() =>
+  (open.value ? 'divBlur' : ''));
 
+function openRegister() {
+  if (open.value) {
+    open.value = true
+  }
+  else {
+    open.value = true
+  }
+  closeModal()
+}
 </script>
 
-
 <template>
-  
-  <LoginComponent v-if="open"/>
-        <div class="modal" v-if="props.modal">
-   <div class="form-container">
-     <div @click="closeModal" class="fechar">
-       <span class="fa fa-x"></span>
-     </div>
-     <div class="containerInterno">
-       <div class="logoLogin">
-         <img class="imgLogin" src="../assets/LogoSimples.png" alt="Logo" />
-       </div>
+  <LoginComponent v-if="open" />
+  <div class="modal" v-if="props.modal">
+    <div class="form-container">
+      <div @click="closeModal" class="fechar">
+        <span class="fa fa-x"></span>
+      </div>
+      <div class="containerInterno">
+        <div class="logoLogin">
+          <img class="imgLogin" src="../assets/LogoSimples.png" alt="Logo" />
+        </div>
 
         <p class="title">Bem vindo(a) ao Spot'n Go</p>
         <h1 class="title">{{ title }}</h1>
 
         <div class="conteudo">
-          <div class="form-item"><ChildComponent :open-modal="openModal" />
+          <div class="form-item">
             <label for="name">Nome</label>
             <input type="text" name="name" id="name" v-model="user.name" placeholder="Nome" />
           </div>
 
           <div class="form-item">
             <label for="senha">Senha</label>
-            <input
-              type="password"
-              name="senha"
-              id="senha"
-              v-model="user.senha"
-              placeholder="Senha"
-            />
+            <input type="password" name="senha" id="senha" v-model="user.senha" placeholder="Senha" />
           </div>
 
           <button>Continuar</button>
@@ -73,8 +74,8 @@ const blurClass = computed(() => (open.value ? 'divBlur' : ''))
               <hr />
             </div>
             <p class="textoFinal">
-              Ainda não está no Spot'n Go? 
-              <span class="cadastro" @click="open = !open">Crie uma conta</span>
+              Ainda não está no Spot'n Go?
+              <span class="cadastro" @click="openRegister()">Crie uma conta</span>
             </p>
           </div>
         </div>
@@ -181,7 +182,7 @@ button {
   font-size: 15px;
 }
 
-.cadastro{
+.cadastro {
   font-weight: bold;
   cursor: pointer;
 }
