@@ -1,12 +1,16 @@
 <script setup>
-import Reservacao from '@/components/Reservacao.vue';
+import LocacaoComponent from '@/components/LocacaoComponent.vue';
 
 
 
 </script>
 
 <template>
-    <Reservacao />
+    <div>
+        <div class="locacao-component">
+<LocacaoComponent />
+</div>
+</div>
 </template>
 
 
