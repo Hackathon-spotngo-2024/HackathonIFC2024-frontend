@@ -2,7 +2,7 @@
 import { reactive, ref, computed } from 'vue';
 import LoginComponent from './LoginComponent.vue';
 
-const props = defineProps(['modal', 'title']);
+defineProps(['modal', 'title']);
 
 const open = ref(false);
 
@@ -21,19 +21,15 @@ const blurClass = computed(() =>
   (open.value ? 'divBlur' : ''));
 
 function openRegister() {
-  if (open.value) {
-    open.value = true
-  }
-  else {
-    open.value = true
-  }
-  closeModal()
+  emit('closeModal')
+  open.value = true
 }
+
 </script>
 
 <template>
   <LoginComponent v-if="open" />
-  <div class="modal" v-if="props.modal">
+  <div class="modal" v-if="modal">
     <div class="form-container">
       <div @click="closeModal" class="fechar">
         <span class="fa fa-x"></span>

@@ -8,14 +8,14 @@ const modal = ref(false)
 
 
 function openModal() {
- modal.value = !modal.value
+ modal.value = true
 }
 </script>
 
 <template>
   <NavbarComponent @openModal="openModal()"/>
   <BannerComponent/>
-  <CadastroComponent :modal="modal" @closeModal="openModal()"/>
+  <CadastroComponent :modal="modal" @closeModal="modal=false"/>
  </template>
  
  
