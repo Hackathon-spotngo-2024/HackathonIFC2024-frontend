@@ -1,22 +1,26 @@
 <script setup>
+import { useEtapa } from '@/assets/stores/dadosEtapa'
 
-import { ref } from 'vue'
-import AnunciarPasso1Component from '../components/AnunciarPasso1Component.vue'
-import AnunciarPasso2Component from '../components/AnunciarPasso2Component.vue'
-const etapaAtual = ref(1)
+const etapaStore = useEtapa()
 
-function proximaEtapa() {
-  etapaAtual.value++
-}
 </script>
 
 <template>
-<AnunciarPasso1Component :proximaEtapa="proximaEtapa" v-if="etapaAtual === 1"/>
-<AnunciarPasso2Component :proximaEtapa="proximaEtapa" v-if="etapaAtual === 2"/>
+  <transition name="fade" mode="out-in">
+    <component
+      v-if="etapaStore.componenteAtual"
+      :is="etapaStore.componenteAtual"
+      :key="etapaStore.etapaAtual"
+    />
+  </transition>
 </template>
 
 <style scoped>
-.titulo-etapa-1 {
-    font-family: var(--fonte-principal);
+.fade-enter-active, .fade-leave-active {
+  transition: 400ms ease-in-out;
+}
+
+.fade-enter-from, .fade-leave-to {
+  opacity: 0.05;
 }
 </style>

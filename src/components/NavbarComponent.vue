@@ -10,7 +10,6 @@ const emit = defineEmits(['openModal']);
 function modal(){
  emit('openModal')
 }
-
 </script>
 
 <template>
