@@ -10,7 +10,9 @@ export const useEndereco = defineStore('endereco', () => {
     bairro: '',
     estado: '',
     cidade: '',
-    cep: ''
+    cep: '',
+    LimiteHospedes: 0,
+    preco: ''
   })
 
   const etapaStore = useEtapa()
@@ -19,11 +21,11 @@ export const useEndereco = defineStore('endereco', () => {
   let campoVazioAlert = ref(false)
 
   function verificarFormulario() {
-    if (Object.values(dadosEndereco.value).some((value) => value == '')) {
+    if (dadosEndereco.value.pais == '' || dadosEndereco.value.rua == '' || dadosEndereco.value.numero == '' || dadosEndereco.value.bairro == '' || dadosEndereco.value.estado == '' || dadosEndereco.value.cidade == '' || dadosEndereco.value.cep == '') {
       campoVazioAlert.value = true
+      console.log(dadosEndereco.value)
     } else {
       etapaStore.proximaEtapa()
-      console.log(etapaStore.etapaAtual)
     }
   }
   return {

@@ -221,7 +221,7 @@ const formatarEndereco = (endereco) => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 6rem;
+  padding-top: 6rem;
   width: 100%;
   gap: 1rem;
 }
