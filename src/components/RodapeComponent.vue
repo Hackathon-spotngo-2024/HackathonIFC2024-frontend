@@ -32,13 +32,15 @@
   flex-direction: column;
   background-color: var(--search-bar-fill);
   width: 100%;
-  height: 21rem;
+  height: 22rem;
   margin-top: 6rem;
+  margin-bottom: 0;
 }
 
 .links {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
 }
 
 .info {

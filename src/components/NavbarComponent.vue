@@ -1,9 +1,20 @@
 <script setup>
+defineProps({
+  openModal: Function,
+  isModalOpen: Boolean,
+})
+
+const emit = defineEmits(['openModal']);
+
+
+function modal(){
+ emit('openModal')
+}
 </script>
 
 <template>
   <div class="nav-container">
-    <router-link to="/" class="home-link"><img class="logo-img" src="../assets/logo.png" alt="" /></router-link>
+    <router-link to="/alugar" class="home-link"><img class="logo-img" src="../assets/logo.png" alt="" /></router-link>
     <router-link to="/alugar" id="alugar-link" class="nav-link">Alugar</router-link>
     <a href="MinhasReservasComponent.vue" id="minhas-reservas-link" class="nav-link">Minhas reservas</a>
     <div class="search-bar">
@@ -11,7 +22,7 @@
       <input type="text" placeholder="Procure seu spot" class="search-input" />
     </div>
     <router-link to="/anunciar" id="anunciar-link" class="nav-link">Anunciar</router-link>
-    <button class="entrar-link" @click="openModal">Entrar</button>
+    <button class="entrar-link" @click="modal">Entrar</button>
   </div>
   <div class="linha-container">
     <div class="linha-divisoria"></div>
