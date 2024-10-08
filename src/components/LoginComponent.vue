@@ -16,13 +16,12 @@ const modalStore = useModal()
           <span class="fa fa-close"></span>
         </div>
       </div>
-      <div class="containerInterno">
         <div class="logoLogin">
           <img class="imgLogin" src="../assets/LogoSimples.png" alt="Logo" />
         </div>
+      <div class="containerInterno">
 
-        <p class="title">Bem vindo(a) ao Spot'n Go</p>
-        <h1 class="title">{{ title }}</h1>
+        <h1 class="title">Bem-vindo ao Spot'n Go</h1>
 
         <div class="conteudo">
           <div class="form-item">
@@ -76,7 +75,6 @@ const modalStore = useModal()
 
 <style scoped>
 .modal {
-  backdrop-filter: blur(5px);
   position: fixed;
   top: 0;
   left: 0;
@@ -93,9 +91,10 @@ const modalStore = useModal()
 }
 
 .form-container {
-  width: 460px;
-  height: 570px;
-  border-radius: 25px;
+  padding: 1rem;
+  width: 420px;
+  height: 550px;
+  border-radius: 35px;
   background-color: #f2f2f2;
   margin: auto;
   font-family: 'Montserrat', sans-serif;
@@ -116,12 +115,12 @@ const modalStore = useModal()
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: .8rem .8rem 0 0;
   cursor: pointer;
   width: 35px;
   height: 35px;
   border-radius: 20px;
   transition: 150ms ease-in-out;
+  position: absolute;
 }
 
 .fechar:hover {
@@ -146,11 +145,12 @@ const modalStore = useModal()
 }
 
 .title {
+  font-size: 1.5rem;
   text-align: center;
-  font-size: 23px;
   font-family: 'Montserrat', sans-serif;
-  font-weight: bold;
-  margin-top: 10px;
+  margin: 1rem 0 1rem 0;
+  font-weight: 500;
+  color: var(--preto-alternativo);
 }
 
 .conteudo {
@@ -212,7 +212,6 @@ button {
 .textoFinal {
   margin-top: 20px;
   font-size: 12px;
-  margin-bottom: 5px;
 }
 
 .linha {
