@@ -11,7 +11,7 @@ export const useEndereco = defineStore('endereco', () => {
     estado: '',
     cidade: '',
     cep: '',
-    LimiteHospedes: 0,
+    LimiteVisitantes: 0,
     preco: ''
   })
 

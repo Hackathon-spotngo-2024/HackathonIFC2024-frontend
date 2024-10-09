@@ -1,14 +1,11 @@
 <script setup>
-defineProps({
-    proximaEtapa: Function,
-    etapaAnterior: Function
-})
-
+import { useEtapa } from '@/assets/stores/dadosEtapa';
+const etapaStore = useEtapa()
 
 </script>
 
 <template>
-<button class="etapaAnterior" @click="etapaAnterior">Voltar</button>
+<button class="etapaAnterior" @click="etapaStore.etapaAnterior">Voltar</button>
 </template>
 
 <style scoped>

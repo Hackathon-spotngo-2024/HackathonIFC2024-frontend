@@ -14,8 +14,7 @@ function openModal() {
 
 <template>
   <NavbarComponent @openModal="openModal()"/>
-  <BannerComponent/>
-  <CadastroComponent :modal="modal" @closeModal="modal=false"/>
+  <router-view></router-view>
  </template>
  
  
