@@ -6,10 +6,12 @@ const modalStore = useModal()
 
 // const blurClass = computed(() =>
 //   (open.value ? 'divBlur' : ''));
+
+
 </script>
 
 <template>
-  <div class="modal">
+  <div class="modal" style="position:;">
     <div class="form-container">
       <div class="header-modal">
         <div class="fechar" @click="modalStore.closeLoginModal">
@@ -84,10 +86,11 @@ const modalStore = useModal()
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 0;
+  z-index: 1000;
   transition:
     visibility 0.3s,
     opacity 0.3s;
+    
 }
 
 .form-container {
@@ -129,8 +132,6 @@ const modalStore = useModal()
 
 .fa.fa-close {
   font-size: 1.5rem;
-  width: 2rem;
-  height: 2rem;
   align-content: center;
   text-align: center;
 }

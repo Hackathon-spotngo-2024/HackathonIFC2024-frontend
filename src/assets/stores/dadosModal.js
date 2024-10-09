@@ -16,7 +16,6 @@ export const useModal = defineStore('modal', () => {
   
   function openLoginModal() {
     showLoginModal.value = true
-    console.log(showLoginModal.value)
   }
 
   function openRegisterModal() {
