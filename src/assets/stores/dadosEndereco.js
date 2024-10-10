@@ -23,14 +23,18 @@ export const useEndereco = defineStore('endereco', () => {
   function verificarFormulario() {
     if (dadosEndereco.value.pais == '' || dadosEndereco.value.rua == '' || dadosEndereco.value.numero == '' || dadosEndereco.value.bairro == '' || dadosEndereco.value.estado == '' || dadosEndereco.value.cidade == '' || dadosEndereco.value.cep == '') {
       campoVazioAlert.value = true
-      console.log(dadosEndereco.value)
     } else {
       etapaStore.proximaEtapa()
     }
   }
+
+  function atualizarDados(novosDados) {
+    this.dadosEndereco = { ...this.dadosEndereco, ...novosDados }
+  }
   return {
     dadosEndereco,
     verificarFormulario,
-    campoVazioAlert
+    campoVazioAlert,
+    atualizarDados
   }
 })

@@ -1,76 +1,193 @@
 <script setup>
 import BotaoAvancarEVoltarComponent from '../BotaoAvancarEVoltarComponent.vue'
-import { ref } from 'vue'
-import { useEndereco } from '@/assets/stores/dadosEndereco';
+import { watch, onMounted, ref } from 'vue'
+import { useEndereco } from '@/assets/stores/dadosEndereco'
 
+const isBotaoPequeno = ref(true)
 const enderecoStore = useEndereco()
+const tituloEtapa3 = ref('Mais algumas informações<br>sobre sua acomodação')
+const precoInput = ref(null) //Referencia o input do preço
 
-const tituloEtapa3 = ref('Mais algumas informações sobre a acomodação')
-function adicionarHospede() {
-  enderecoStore.dadosEndereco.LimiteHospedes++
+function adicionarVisitante() {
+  enderecoStore.dadosEndereco.LimiteVisitantes++
 }
 
-function reduzirHospede() {
-  enderecoStore.dadosEndereco.LimiteHospedes--
-  if (enderecoStore.dadosEndereco.LimiteHospedes < 0) enderecoStore.dadosEndereco.LimiteHospedes = 0
+function reduzirVisitante() {
+  enderecoStore.dadosEndereco.LimiteVisitantes--
+  if (enderecoStore.dadosEndereco.LimiteVisitantes < 0)
+    enderecoStore.dadosEndereco.LimiteVisitantes = 0
 }
+
+function ajustarTamanhoInput() {
+  const inputElement = precoInput.value //InputElement vai ser o valor que o usuario inserir no input
+  const placeholderText = inputElement.placeholder //Referencia o placeholder do input
+
+  const textLength = inputElement.value.length || placeholderText.length //textLength será o tamanho do número que o usuário inseriu, ou do placeholder (5 por padrao (00,00))
+
+  inputElement.style.width = `${textLength}ch` //Aqui ele finaliza ajustando o css do input, colocando o tamanho do texto como a quantidade de caracteres (ch)
+}
+
+watch(() => enderecoStore.dadosEndereco.preco, ajustarTamanhoInput)
+onMounted(ajustarTamanhoInput)
 </script>
 
 <template>
-  <section class="etapa-2-container">
+  <section class="etapa-3-container">
     <div class="titulo-principal-container">
-      <h1 class="titulo-principal">{{ tituloEtapa3 }}</h1>
+      <h1 v-html="tituloEtapa3" class="titulo-principal"></h1>
     </div>
 
-    <div class="limite-visitantes-wrapper">
-      <label for="botao-visitantes" class="limite-visitantes-titulo">Limite de visitantes</label>
-      <div class="botoes-visitantes">
-      <input type="button" class="botao-visitantes" value="-" @click="reduzirHospede">
-      <p class="numero-visitantes">{{ enderecoStore.dadosEndereco.LimiteVisitantes }}</p>
-      <input type="button" class="botao-visitantes" value="+" @click="adicionarHospede">
-    </div>
-  </div>
+    <section class="infos-e-imagem">
+      <div class="etapa-3-infos">
+        <div class="limite-visitantes-wrapper">
+          <label for="botao-visitantes" class="limite-visitantes-titulo"
+            >Limite de visitantes</label
+          >
+          <div class="botoes-visitantes">
+            <input type="button" class="botao-visitantes" value="-" @click="reduzirVisitante" />
+            <p class="numero-visitantes">{{ enderecoStore.dadosEndereco.LimiteVisitantes }}</p>
+            <input type="button" class="botao-visitantes" value="+" @click="adicionarVisitante" />
+          </div>
+        </div>
+        <div class="preco-wrapper">
+          <label for="preco-input" class="preco-titulo">Preço p/ dia</label>
+          <div class="preco-input-wrapper">
+            <span class="cifrao">R$</span>
+            <input
+              ref="precoInput"
+              type="number"
+              id="preco-input"
+              placeholder="00,00"
+              v-model="enderecoStore.dadosEndereco.preco"
+            />
+            <span v-if="enderecoStore.dadosEndereco.preco != 0" class="centavos">,00</span>
+          </div>
+        </div>
+        <BotaoAvancarEVoltarComponent
+          :is-botao-pequeno="isBotaoPequeno"
+          class="avancar-e-voltar-botoes"
+        />
+      </div>
 
-    <div class="preco-wrapper">
-      <label for="preco-input" class="preco-titulo">Preço:</label>
-      <input type="text" id="preco-input"v-model="enderecoStore.dadosEndereco.preco">
-    </div>
-
-    <BotaoAvancarEVoltarComponent />
+      <div class="imagem-casa">
+        <img src="/src/assets/imagem-etapa-3.png" />
+      </div>
+    </section>
   </section>
 </template>
 
 <style scoped>
-.etapa-2-container {
+.etapa-3-container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
+
 .titulo-principal-container {
-  font-size: 2em;
+  text-align: center;
+  font-size: 2rem;
   margin-top: 100px;
 }
+
+.infos-e-imagem {
+  display: flex;
+  flex-direction: row;
+  margin-top: 100px;
+}
+
+.etapa-3-infos {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.limite-visitantes-wrapper > label,
+.preco-wrapper > label {
+  font-size: 2rem;
+  font-weight: 600;
+  cursor: text;
+}
+
 .limite-visitantes-wrapper {
   display: flex;
   flex-direction: column;
+  width: 400px;
 }
+
 .botoes-visitantes {
+  margin-top: 10px;
   display: flex;
   flex-direction: row;
+  gap: 10px;
 }
-.limite-visitantes-titulo {
-  font-size: 20px;
-  font-weight: 600;
-}
-.botao-visitantes {
+
+.numero-visitantes {
   display: flex;
-  text-align: center;
-  height: 25px;
-  width: 25px;
-  outline: none;
+  justify-content: center;
+  align-items: center;
+  width: 10px;
+}
+
+.botao-visitantes {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
   border: 1px solid var(--cor-bordas-input);
-  border-radius: 30px;
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--cor-bordas-input);
   background-color: rgba(0, 0, 0, 0);
+}
+
+.botao-visitantes:hover {
+  border: 1px solid var(--cor-bordas-hover);
+}
+
+.botao-visitantes:active {
+  transform: scale(1.03);
+}
+
+.preco-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 400px;
+}
+
+.preco-input-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.preco-input-wrapper > span {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--cor-principal);
+}
+
+.preco-input-wrapper > input {
+  font-size: 1.5rem;
+  height: 35px;
+  border: 0;
+  outline: none;
+  font-weight: 600;
+  color: var(--cor-principal);
+}
+
+input[type='number']::-webkit-inner-spin-button {
+  appearance: none;
+}
+::-webkit-input-placeholder {
+  color: var(--cor-placeholder);
+}
+
+.avancar-e-voltar-botoes {
+  margin-top: 20%;
 }
 </style>

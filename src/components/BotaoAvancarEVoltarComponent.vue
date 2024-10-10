@@ -1,6 +1,14 @@
 <script setup>
 import { useEtapa } from '@/assets/stores/dadosEtapa';
 import { useEndereco } from '@/assets/stores/dadosEndereco';
+import { defineProps } from 'vue';
+
+defineProps({
+  isBotaoPequeno: {
+    type: Boolean,
+    default: false
+  }
+})
 
 const etapaStore = useEtapa()
 const enderecoStore = useEndereco()
@@ -11,11 +19,14 @@ const enderecoStore = useEndereco()
       <button class="voltar-btn" @click="etapaStore.etapaAnterior">
         <i class="fa-solid fa-arrow-right-from-bracket"></i>
       </button>
-      <button class="avancar-btn" @click="enderecoStore.verificarFormulario">Avançar</button>
+      <button :class="['avancar-btn', { 'botao-pequeno':isBotaoPequeno }]" @click="enderecoStore.verificarFormulario">Avançar</button>
     </div>
 </template>
 
 <style scoped>
+.botao-pequeno {
+  width: 250px !important;
+}
 .botoes-wrapper {
   display: flex;
   flex-direction: row;
