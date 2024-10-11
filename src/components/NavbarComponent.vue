@@ -131,6 +131,26 @@ button {
   background-color: variables(--cor-linha-divisoria);
 }
 
+@media (max-width: 1400px) {
+  .nav-container {
+    margin: 1rem;
+    flex-direction: column;
+    align-items: center;
+  }
+  .logo-img {
+    width: auto;
+    max-width: 150px;
+  }
+  .search-bar {
+    width: auto;
+    margin-top: 0.5rem;
+  }
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
 @media (max-width: 1200px) {
   .nav-container {
     margin: 1rem;
