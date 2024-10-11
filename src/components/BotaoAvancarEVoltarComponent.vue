@@ -1,7 +1,6 @@
 <script setup>
 import { useEtapa } from '@/assets/stores/dadosEtapa';
 import { useEndereco } from '@/assets/stores/dadosEndereco';
-import { defineProps } from 'vue';
 
 defineProps({
   isBotaoPequeno: {
