@@ -1,5 +1,6 @@
 <script setup>
 import { useModal } from '@/assets/stores/dadosModal';
+import CadastroComponent from '@/components/CadastroComponent.vue';
 import LoginComponent from '@/components/LoginComponent.vue';
 
 const modalStore = useModal()
@@ -7,6 +8,7 @@ const modalStore = useModal()
 
 <template>
   <LoginComponent v-if="modalStore.showLoginModal"/>
+  <CadastroComponent v-if="modalStore.showRegisterModal"/>
   <BannerComponent />
   <CardSectionTitle />
   <div class="card-container">

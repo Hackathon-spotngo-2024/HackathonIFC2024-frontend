@@ -11,7 +11,7 @@ const modalStore = useModal()
 </script>
 
 <template>
-  <div class="modal" style="position:;">
+  <div class="modal" style="position:">
     <div class="form-container">
       <div class="header-modal">
         <div class="fechar" @click="modalStore.closeLoginModal">
@@ -66,7 +66,7 @@ const modalStore = useModal()
             </div>
             <p class="textoFinal">
               Ainda não está no Spot'n Go?
-              <span class="cadastro">Crie uma conta</span>
+              <span @click="modalStore.botaoCadastro" class="cadastro">Crie uma conta</span>
             </p>
           </div>
         </div>

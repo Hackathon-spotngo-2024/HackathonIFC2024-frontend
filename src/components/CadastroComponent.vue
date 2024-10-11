@@ -1,12 +1,16 @@
 <script setup>
+import { useModal } from '@/assets/stores/dadosModal';
+
+const modalStore = useModal()
+
 </script>
 
 <template>
 
-    <div :class="['modal', showModal ? 'visible' : 'hidden']">
+    <div class="modal">
         <div class="form-container" >
-            <div class="fechar">
-                <span class="fa fa-x" @click="closeModal"></span>
+            <div class="fechar" @click="modalStore.closeRegisterModal">
+                <span class="fa fa-x"></span>
             </div>
             <div class="containerInterno">
                 <div class="logoLogin">
@@ -20,38 +24,38 @@
                 <div class="conteudo">
                     <div class="form-item">
                         <label for="name">Nome</label>
-                        <input type="text" name="name" id="name" v-model="user.name" placeholder="Nome" />
+                        <input type="text" name="name" id="name" v-model="modalStore.dadosUser.name" placeholder="Nome" />
                     </div>
 
                     <div class="form-item" id="email-area">
                         <label for="email">Email</label>
-                        <input type="email" name="email" id="email" v-model="user.email" placeholder="Email" />
+                        <input type="email" name="email" id="email" v-model="modalStore.dadosUser.email" placeholder="Email" />
                     </div>
 
                     <div class="form-item">
                         <label for="senha">Senha</label>
-                        <input type="password" name="senha" id="senha" v-model="user.senha" placeholder="Senha" />
+                        <input type="password" name="senha" id="senha" v-model="modalStore.dadosUser.senha" placeholder="Senha" />
                     </div>
 
                     <div class="form-item" id="confirmarSenha">
                         <label for="confirmar-senha">Confirme sua senha</label>
-                        <input type="password" name="confirmarSenha" id="confirmaSenha" v-model="user.confirmarSenha"
+                        <input type="password" name="confirmarSenha" id="confirmaSenha" v-model="modalStore.dadosUser.confirmarSenha"
                             placeholder="Confirme sua senha" />
                     </div>
 
                     <div class="form-item">
                         <label for="telefone">Telefone</label>
-                        <input type="text" name="telefone" id="telefone" v-model="user.telefone" placeholder="Telefone" />
+                        <input type="text" name="telefone" id="telefone" v-model="modalStore.dadosUser.telefone" placeholder="Telefone" />
                     </div>
 
                     <div class="form-item" id="dataDeNascimento">
                         <label for="dataNascimento">Data de Nascimento</label>
-                        <input type="date" name="dataDeNascimento" id="dataDeNascimento" v-model="user.dataDeNascimento" />
+                        <input type="date" name="dataDeNascimento" id="dataDeNascimento" v-model="modalStore.dadosUser.dataDeNascimento" />
                     </div>
 
                     <div class="form-item" id="cpf">
                         <label for="cpf">CPF</label>
-                        <input type="number" name="cpf" id="cpf" v-model="user.cpf" placeholder="CPF" />
+                        <input type="number" name="cpf" id="cpf" v-model="modalStore.dadosUser.cpf" placeholder="CPF" />
                     </div>
 
                     <button>Continuar</button>
@@ -88,11 +92,6 @@
     transition: visibility 0.3s, opacity 0.3s;
 }
 
-.hidden {
-    visibility: hidden;
-    opacity: 0;
-}
-
 .visible {
     visibility: visible;
     opacity: 1;
@@ -100,11 +99,11 @@
 
 .form-container {
     width: 460px;
-    height: 850px;
+    height: 760px;
     border-radius: 25px;
     background-color: #f2f2f2;
     margin: auto;
-    margin-bottom: 50px;
+    
     font-family: 'Montserrat';
     position: relative;
     z-index: 1001;
@@ -115,7 +114,7 @@
     align-items: center;
     flex-direction: column;
     position: relative;
-    top: -2rem;
+    top: -2.5rem;
 }
 
 .logoLogin {
@@ -185,7 +184,7 @@ button {
 }
 
 .linha {
-    margin-top: 40px;
+    margin-top: 10px;
 }
 
 .link {

@@ -20,6 +20,7 @@ export const useModal = defineStore('modal', () => {
 
   function openRegisterModal() {
     showRegisterModal.value = true
+    console.log(showRegisterModal.value)
   }
 
   const closeLoginModal = () => {
@@ -29,5 +30,10 @@ export const useModal = defineStore('modal', () => {
   const closeRegisterModal = () => {
     showRegisterModal.value = false
   }
-  return { dadosUser, showRegisterModal, showLoginModal, openRegisterModal, openLoginModal, closeRegisterModal, closeLoginModal }
+
+  function botaoCadastro (){ 
+   closeLoginModal();
+   openRegisterModal()
+  }
+  return { dadosUser, showRegisterModal, showLoginModal, openRegisterModal, openLoginModal, closeRegisterModal, closeLoginModal, botaoCadastro }
 })
