@@ -71,27 +71,27 @@ const tituloEtapa1 = ref("É muito fácil <br/> anunciar no Spot 'n Go")
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  margin: 100px 0 100px 0;
+  margin: 100px 0;
 }
 
 .instrucao {
   width: 270px;
-  height: 50px;
+  height: auto;
   display: flex;
   text-align: center;
   flex-direction: column;
-  margin: 0 35px 0 35px;
+  margin: 0 35px;
 }
 
 .titulo-instrucao {
-  margin: 0 0 32px 0;
+  margin: 0 0 32px;
 }
 
 .submit-botao-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 120px 0 0 0;
+  margin-top: 120px;
 }
 
 .continue-botao {
@@ -110,5 +110,49 @@ const tituloEtapa1 = ref("É muito fácil <br/> anunciar no Spot 'n Go")
 .continue-botao:hover {
   background-color: var(--cor-principal-hover);
   transform: scale(1.01);
+}
+
+@media (max-width:1200px) {
+   .container-titulo {
+       margin-top:50px; 
+   }
+
+   .instrucoes {
+       flex-direction: column; 
+       margin:50px 0; 
+   }
+
+   .instrucao {
+       width:auto; 
+       margin-bottom:30px; 
+   }
+
+   .continue-botao {
+       width:auto; 
+       padding-left:20px; 
+       padding-right:20px; 
+   }
+}
+
+@media (max-width:768px) {
+   .titulo-etapa-1 {
+       font-size:1.5rem; 
+   }
+
+   .continue-botao {
+       width:auto; 
+       height:auto; 
+       font-size:1.5rem; 
+   }
+}
+
+@media (max-width:576px) {
+   .titulo-etapa-1 {
+       font-size:1.2rem; 
+   }
+
+   .continue-botao {
+       font-size:1.2rem; 
+   }
 }
 </style>

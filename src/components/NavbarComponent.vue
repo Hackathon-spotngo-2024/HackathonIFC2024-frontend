@@ -1,15 +1,18 @@
-<script setup>
-</script>
+<script setup></script>
 
 <template>
   <div class="nav-container">
-    <router-link to="/" class="home-link"><img class="logo-img" src="../assets/logo.png" alt="" /></router-link>
+    <router-link to="/" class="home-link"
+      ><img class="logo-img" src="../assets/logo.png" alt=""
+    /></router-link>
     <div class="search-bar">
       <i class="fa fa-search"></i>
       <input type="text" placeholder="Procure seu spot" class="search-input" />
     </div>
     <router-link to="/alugar" id="alugar-link" class="nav-link">Alugar</router-link>
-    <a href="MinhasReservasComponent.vue" id="minhas-reservas-link" class="nav-link">Minhas reservas</a>
+    <a href="MinhasReservasComponent.vue" id="minhas-reservas-link" class="nav-link"
+      >Minhas reservas</a
+    >
     <router-link to="/anunciar" id="anunciar-link" class="nav-link">Anunciar</router-link>
     <button class="entrar-link" @click="openModal">Entrar</button>
   </div>
@@ -26,8 +29,8 @@
   align-items: center;
   margin: 1rem 10rem 0 10rem;
   border-radius: 40px;
-  padding: .5rem;
-  box-shadow: 1px 3px 8px 3px rgba(0, 0, 0, 0.08);
+  padding: 0.5rem;
+  box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.08);
 }
 
 a {
@@ -38,12 +41,6 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 35px;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 35px;
-  font-size: 1rem;
-  cursor: pointer;
 }
 
 button {
@@ -54,10 +51,10 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 35px;
+  border-radius: 20px;
   font-size: 1rem;
   cursor: pointer;
-  border: 0;
+  border: none;
 }
 
 .nav-link {
@@ -65,15 +62,13 @@ button {
 }
 
 .nav-link::after {
-  content: "";
   position: absolute;
   bottom: -5px;
   height: 2px;
   width: 100%;
   left: 0;
   background-color: black;
-  transition: 200ms ease-in-out;
-  transform: scaleX(0);
+  transition: 0.2s ease-in-out;
 }
 
 .nav-link:hover::after {
@@ -83,9 +78,11 @@ button {
 .entrar-link {
   color: white;
   background-color: var(--cor-principal);
-  width: 6.25rem;
+  width: auto;
   height: 3.125rem;
-  transition: 100ms ease;
+  transition: 0.1s ease;
+  padding-left: 1rem;
+  padding-right: 1rem; 
 }
 
 .entrar-link:hover {
@@ -94,7 +91,7 @@ button {
 
 .logo-img {
   width: 200px;
-  height: 40px;
+  height: auto;
 }
 
 .search-bar {
@@ -102,7 +99,7 @@ button {
   height: 2.5rem;
   border: 1px solid var(--search-bar-border);
   border-radius: 20px;
-  padding: 0rem 1.5rem;
+  padding: 0.5rem;
   display: flex;
   justify-content: start;
   align-items: center;
@@ -114,7 +111,7 @@ button {
   outline: none;
   font-size: 1rem;
   background-color: var(--search-bar-fill);
-  margin: 0 0 0 1rem;
+  margin-left: 0.5rem;
 }
 
 .fa.fa-search {
@@ -128,82 +125,66 @@ button {
 }
 
 .linha-divisoria {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   width: 100%;
-  height: 1px;
-  background-color: var(--cor-linha-divisoria);
+  height: 0.5px;
+  background-color: variables(--cor-linha-divisoria);
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1200px) {
   .nav-container {
     margin: 1rem;
     flex-direction: column;
     align-items: center;
   }
-
   .logo-img {
-    width: 150px;
+    width: auto;
+    max-width: 150px;
   }
-
   .search-bar {
-    width: 100%;
-    margin-top: 1rem;
+    width: auto;
+    margin-top: 0.5rem;
   }
-
   .nav-links {
-    width: 100%;
-    margin-top: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 992px) {
+  .nav-container {
+    padding: 0.5rem;
+    flex-direction: column;
     align-items: center;
   }
-
-  a {
-    font-size: 0.9rem;
+  .search-bar {
+    width: auto;
+    margin-top: 0.5rem;
   }
 }
 
 @media (max-width: 768px) {
-  .nav-links {
+  .nav-container {
     flex-direction: column;
-    width: 100%;
+    align-items: center;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
   }
 
-  a {
-    margin: 0.5rem 0;
+  .nav-link {
+    margin: 0.5rem auto;
+    font-size: 0.9rem;
   }
 
-  .search-bar {
-    width: 100%;
-    align-items: center;  
-  }
-
-  .logo-img {
-    width: 120px;
+  .entrar-link {
+    width: auto;
+    padding: 0.5rem;
   }
 }
 
 @media (max-width: 576px) {
-  .nav-container {
-    padding: 0.5rem;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   .logo-img {
-    width: 100px;
-  }
-
-  .search-bar {
-    width: 100%;
-    margin-top: 1rem;
-  }
-
-  .nav-links {
-    width: 100%;
-    flex-direction: column;
-  }
-
-  a {
-    font-size: 0.8rem;
+    max-width: 120px;
   }
 }
 </style>
