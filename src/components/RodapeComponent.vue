@@ -32,15 +32,9 @@
   flex-direction: column;
   background-color: var(--search-bar-fill);
   width: 100%;
-  height: 22rem;
+  height: auto;
   margin-top: 6rem;
   margin-bottom: 0;
-}
-
-.links {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
 }
 
 .info {
@@ -48,6 +42,11 @@
   display: flex;
   gap: 6rem;
   font-family: 'Montserrat';
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
 }
 
 h3 {
@@ -71,5 +70,58 @@ a:hover {
 .copyright {
   font-family: var(--fonte-principal);
   margin: 2rem 0 2rem 6rem;
+}
+
+@media (max-width:1200px) {
+   .info {
+       margin-left: auto;
+       margin-right: auto;
+       flex-direction: column;
+       align-items: center;
+       gap: 2rem; 
+   }
+
+   .linha {
+       margin-top: 4rem;
+   }
+
+   .copyright {
+       margin-left: auto;
+       margin-right: auto;
+   }
+}
+
+@media (max-width:768px) {
+   .info {
+       margin-left:1rem;
+       margin-right:1rem;
+   }
+
+   .linha {
+       margin-top:3rem;
+   }
+
+   .copyright {
+       margin-left:auto;
+       margin-right:auto;
+   }
+}
+
+@media (max-width:576px) {
+   .info {
+       gap:1.5rem;
+       padding-left:1rem;
+       padding-right:1rem;
+   }
+
+   .linha {
+       margin-top:2rem; 
+   }
+
+   .copyright {
+       font-size:.8rem; 
+       margin-left:auto; 
+       margin-right:auto; 
+   }
 }
 </style>

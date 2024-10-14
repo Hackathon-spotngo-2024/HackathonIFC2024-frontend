@@ -296,8 +296,6 @@ const formatarEndereco = (endereco) => {
   padding-left: 16px;
   padding-top: 0;
   box-sizing: border-box;
-  margin-bottom: 8px;
-  font-size: 16px;
 }
 
 label {
@@ -314,54 +312,126 @@ label {
 .linha-divisoria {
   width: 100%;
   background-color: var(--cor-bordas-input);
-  height: 1px;
 }
 
 #map {
-  height: 400px;
-  width: 100%;
-  margin-top: 1rem;
+  height: auto; 
 }
 
 .search-endereco {
   width: calc(500px - 16px);
   height: 40px;
   border: 1px solid var(--cor-bordas-input);
-  border-radius: 20px 20px 20px 20px;
-  padding: 0 8px 0 8px;
-  outline: 0;
-  transition: 50ms ease-in-out;
+  border-radius:20px; 
 }
 
 .search-endereco:not(:placeholder-shown) {
-  border-radius: 20px 20px 0 0;
-  transition: 700ms ease-in-out;
+   border-radius:20px; 
+   transition:.7s ease-in-out; 
 }
 
 .autocomplete-list {
-  width: 500px;
-  list-style-type: none;
-  padding: 0;
-  border: 1px solid var(--cor-bordas-input);
-  border-top: 0;
-  max-height: 200px;
-  overflow-y: auto;
-  background-color: white;
-  border-radius: 0 0 20px 20px;
+   width: calc(500px -16px);
+   list-style-type:none; 
+   padding:0; 
+   border-top:none; 
+   max-height:200px; 
+   overflow-y:auto; 
+   background-color:white; 
+   border-radius:.5rem; 
 }
 
 .autocomplete-list li {
-  padding: 10px;
-  cursor: pointer;
+   padding:.5rem; 
+   cursor:pointer; 
 }
 
 .autocomplete-list li:hover {
-  background-color: #f0f0f0;
+   background-color:#f0f0f0; 
 }
 
 input[type='number']::-webkit-outer-spin-button,
 input[type='number']::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+   -webkit-appearance:none; 
+   margin:0; 
+}
+
+.campo-vazio-alert {
+   width:auto; 
+   display:flex; 
+   justify-content:start; 
+   color:variables(--cor-texto-erro); 
+}
+
+@media (max-width:1200px) {
+   .maps-container {
+       width:auto; 
+       height:auto; 
+       max-height:none; 
+       margin-bottom:.5rem; 
+   }
+
+   .search-endereco,
+   .autocomplete-list {
+       width:auto; 
+       max-width:none; 
+   }
+
+   .pais-wrapper,
+   .info-wrapper {
+       width:auto; 
+       max-width:none; 
+       margin-bottom:.5rem; 
+   }
+}
+
+@media (max-width:768px) {
+   .titulo-etapa-2 {
+       font-size:.9rem; 
+   }
+
+   .maps-container {
+       height:auto; 
+       max-height:none; 
+       margin-bottom:.5rem; 
+   }
+
+   .search-endereco,
+   .autocomplete-list {
+       width:auto;  
+       max-width:none;  
+   }
+
+   .pais-wrapper,
+   .info-wrapper {
+       width:auto;  
+       max-width:none;  
+       margin-bottom:.5rem;  
+   }
+}
+
+@media (max-width:576px) {
+   .titulo-etapa-2 {
+       font-size:.8rem;  
+   }
+
+   .maps-container {
+       height:auto;  
+       max-height:none;  
+       margin-bottom:.5rem;  
+   }
+
+   .search-endereco,
+   .autocomplete-list {
+       width:auto;  
+       max-width:none;  
+   }
+
+   .pais-wrapper,
+   .info-wrapper {
+       width:auto;  
+       max-width:none;  
+       margin-bottom:.5rem;  
+   }
 }
 </style>
