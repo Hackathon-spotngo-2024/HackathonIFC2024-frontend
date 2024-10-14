@@ -11,6 +11,7 @@ const modalStore = useModal()
 </script>
 
 <template>
+  <div class="blur">
   <div class="modal" style="position:">
     <div class="form-container">
       <div class="header-modal">
@@ -18,13 +19,13 @@ const modalStore = useModal()
           <span class="fa fa-close"></span>
         </div>
       </div>
-        <div class="logoLogin">
+      <div class="logoLogin">
           <img class="imgLogin" src="../assets/LogoSimples.png" alt="Logo" />
         </div>
       <div class="containerInterno">
 
         <h1 class="title">Bem-vindo ao Spot'n Go</h1>
-
+        
         <div class="conteudo">
           <div class="form-item">
             <label for="name">Nome</label>
@@ -34,7 +35,7 @@ const modalStore = useModal()
               id="name"
               v-model="modalStore.dadosUser.name"
               placeholder="Nome"
-            />
+              />
           </div>
 
           <div class="form-item">
@@ -50,22 +51,15 @@ const modalStore = useModal()
 
           <button>Continuar</button>
 
-          <p class="opcao">ou</p>
-
-          <button class="api">Google API</button>
-
           <div class="termo">
-            <p>
-              Ao continuar, você concorda com os <br />
-              <a class="link" href="">termo de serviço</a> do Spot'n Go e confirma que <br />
-              leu nossa <a class="link" href="">Politica de Privacidade.</a> <br />
-              <a class="link" href="">Aviso na coleta de informações.</a>
-            </p>
             <div class="linha">
               <hr />
             </div>
+            
             <p class="textoFinal">
               Ainda não está no Spot'n Go?
+            </p>
+            <p>
               <span @click="modalStore.botaoCadastro" class="cadastro">Crie uma conta</span>
             </p>
           </div>
@@ -73,9 +67,11 @@ const modalStore = useModal()
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <style scoped>
+
 .modal {
   position: fixed;
   top: 0;
@@ -87,16 +83,12 @@ const modalStore = useModal()
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  transition:
-    visibility 0.3s,
-    opacity 0.3s;
-    
 }
 
 .form-container {
   padding: 1rem;
-  width: 420px;
-  height: 550px;
+  width: 370px;
+  height: 450px;
   border-radius: 35px;
   background-color: #f2f2f2;
   margin: auto;
@@ -138,6 +130,7 @@ const modalStore = useModal()
 
 .logoLogin {
   text-align: center;
+  margin-top: 10px
 }
 
 .imgLogin {
@@ -182,7 +175,7 @@ button {
   padding: 13px 100px;
   border-radius: 25px;
   background-color: var(--cor-principal);
-  margin-top: 15px;
+  margin-top: 20px;
   border: none;
   color: #f2f2f2;
   font-weight: bold;
@@ -192,10 +185,7 @@ button {
 .cadastro {
   font-weight: bold;
   cursor: pointer;
-}
-
-.api {
-  background-color: #bebebe;
+  font-size: 14px;  
 }
 
 .opcao {
@@ -211,20 +201,18 @@ button {
 }
 
 .textoFinal {
-  margin-top: 20px;
-  font-size: 12px;
+  margin-top: 30px;
+  font-size: 14px;
 }
 
 .linha {
-  margin-top: 25px;
-  margin-left: 60px;
-  margin-right: 60px;
+  margin-top: 20px;
 }
 
 .link {
   text-decoration: none;
   color: black;
-  font-weight: bold;
+  font-weight: bold;  
 }
 
 label {
