@@ -1,6 +1,5 @@
 <script setup>
 import { useEtapa } from '@/assets/stores/dadosEtapa';
-import { useEndereco } from '@/assets/stores/dadosEndereco';
 
 defineProps({
   isBotaoPequeno: {
@@ -9,8 +8,13 @@ defineProps({
   }
 })
 
+const emit = defineEmits(['avancar'])
+
+const handleClickAvancar = () => {
+  emit('avancar') //Evento (como o @click) personalizado para que o botao escolha qual funcao disparar dependendo do pai
+}
+
 const etapaStore = useEtapa()
-const enderecoStore = useEndereco()
 </script>
 
 <template>
@@ -18,7 +22,7 @@ const enderecoStore = useEndereco()
       <button class="voltar-btn" @click="etapaStore.etapaAnterior">
         <i class="fa-solid fa-arrow-right-from-bracket"></i>
       </button>
-      <button :class="['avancar-btn', { 'botao-pequeno':isBotaoPequeno }]" @click="enderecoStore.verificarFormulario">Avançar</button>
+      <button :class="['avancar-btn', { 'botao-pequeno':isBotaoPequeno }]" @click="handleClickAvancar">Avançar</button>
     </div>
 </template>
 

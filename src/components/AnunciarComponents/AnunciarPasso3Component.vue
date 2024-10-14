@@ -2,9 +2,11 @@
 import BotaoAvancarEVoltarComponent from '../BotaoAvancarEVoltarComponent.vue'
 import { watch, onMounted, ref } from 'vue'
 import { useEndereco } from '@/assets/stores/dadosEndereco'
+import { useEtapa } from '@/assets/stores/dadosEtapa';
 
 const isBotaoPequeno = ref(true)
 const enderecoStore = useEndereco()
+const etapaStore = useEtapa()
 const tituloEtapa3 = ref('Mais algumas informações<br>sobre sua acomodação')
 const precoInput = ref(null) //Referencia o input do preço
 
@@ -26,6 +28,19 @@ function ajustarTamanhoInput() {
 
   inputElement.style.width = `${textLength}ch` //Aqui ele finaliza ajustando o css do input, colocando o tamanho do texto como a quantidade de caracteres (ch)
 }
+
+const verificarEtapa3 = (() => {
+  console.log(enderecoStore.campoVazioAlert, enderecoStore.dadosEndereco.LimiteVisitantes, enderecoStore.dadosEndereco.preco)
+  if (enderecoStore.dadosEndereco.LimiteVisitantes == 0 || enderecoStore.dadosEndereco.preco == '') {
+    enderecoStore.campoVazioAlert = true
+    return
+  }
+  else {
+    console.log('falseeee')
+    enderecoStore.campoVazioAlert = false
+    etapaStore.proximaEtapa()
+  }
+})
 
 watch(() => enderecoStore.dadosEndereco.preco, ajustarTamanhoInput)
 onMounted(ajustarTamanhoInput)
@@ -66,7 +81,11 @@ onMounted(ajustarTamanhoInput)
         <BotaoAvancarEVoltarComponent
           :is-botao-pequeno="isBotaoPequeno"
           class="avancar-e-voltar-botoes"
+          @avancar="verificarEtapa3"
         />
+        <div class="campo-vazio-alert" v-if="enderecoStore.campoVazioAlert == true">
+      <p class="campo-vazio-text">Preencha todos os campos para prosseguir.</p>
+    </div>
       </div>
 
       <div class="imagem-casa">

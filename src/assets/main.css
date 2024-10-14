@@ -29,3 +29,10 @@
 h1 {
     font-size: 2rem;
 }
+
+.campo-vazio-alert {
+    width: 500px;
+    display: flex;
+    justify-content: start;
+    color: var(--cor-texto-erro);
+  }

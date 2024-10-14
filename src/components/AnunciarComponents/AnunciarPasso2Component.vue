@@ -72,7 +72,6 @@ const selecionarSugestao = (suggestion) => {
   const lat = suggestion.lat
   const lon = suggestion.lon
   showForm.value = true
-  console.log(showForm.value)
 
   // Extrai as partes do endereço
   const { road, house_number, suburb, city, state, country, postcode } = suggestion.address
@@ -229,7 +228,7 @@ const formatarEndereco = (endereco) => {
     </div>
 
     <!-- BOTÕES -->
-    <BotaoAvancarEVoltarComponent />
+    <BotaoAvancarEVoltarComponent @avancar="enderecoStore.verificarFormulario" />
   </section>
 </template>
 
@@ -242,6 +241,7 @@ const formatarEndereco = (endereco) => {
   padding-top: 6rem;
   width: 100%;
   gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .titulo-principal-container {
@@ -363,12 +363,5 @@ input[type='number']::-webkit-outer-spin-button,
 input[type='number']::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
-
-.campo-vazio-alert {
-  width: 500px;
-  display: flex;
-  justify-content: start;
-  color: var(--cor-texto-erro);
 }
 </style>

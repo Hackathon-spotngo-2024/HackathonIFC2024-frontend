@@ -24,6 +24,7 @@ export const useEndereco = defineStore('endereco', () => {
     if (dadosEndereco.value.pais == '' || dadosEndereco.value.rua == '' || dadosEndereco.value.numero == '' || dadosEndereco.value.bairro == '' || dadosEndereco.value.estado == '' || dadosEndereco.value.cidade == '' || dadosEndereco.value.cep == '') {
       campoVazioAlert.value = true
     } else {
+      campoVazioAlert.value = false
       etapaStore.proximaEtapa()
     }
   }
