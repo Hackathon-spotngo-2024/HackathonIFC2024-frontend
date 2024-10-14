@@ -1,5 +1,5 @@
 <script setup>
-import { useEtapa } from '@/assets/stores/dadosEtapa';
+import { useEtapa } from '@/stores/dadosEtapa';
 
 defineProps({
   isBotaoPequeno: {
