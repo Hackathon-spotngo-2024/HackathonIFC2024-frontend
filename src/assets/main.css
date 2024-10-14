@@ -10,12 +10,14 @@
     --cor-fonte-loc: rgb(71, 71, 71);
     --fonte-principal: 'Montserrat';
     --cor-bordas-input: rgb(110, 110, 110);
+    --cor-bordas-hover: rgb(34, 34, 34);
     --cor-voltar-btn-hover: rgb(221, 221, 221);
     --cor-voltar-btn: rgb(238, 238, 238);
     --preto-alternativo: rgb(24, 24, 24);
     --cor-search-icon: rgb(80, 80, 80);
     --cor-search-icon-hover: rgb(44, 44, 44);
-    --cor-texto-erro: rgb(255, 69, 69)
+    --cor-texto-erro: rgb(255, 69, 69);
+    --cor-placeholder: rgb(180, 180, 180);
 }
 
 * {
@@ -23,3 +25,14 @@
     padding: 0;
     font-family: var(--fonte-principal);
 }
+
+h1 {
+    font-size: 2rem;
+}
+
+.campo-vazio-alert {
+    width: 500px;
+    display: flex;
+    justify-content: start;
+    color: var(--cor-texto-erro);
+  }

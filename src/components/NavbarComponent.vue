@@ -1,4 +1,16 @@
-<script setup></script>
+<script setup>
+defineProps({
+  openModal: Function,
+  isModalOpen: Boolean,
+})
+
+const emit = defineEmits(['openModal']);
+
+
+function modal(){
+ emit('openModal')
+}
+</script>
 
 <template>
   <div class="nav-container">
@@ -14,7 +26,7 @@
       >Minhas reservas</a
     >
     <router-link to="/anunciar" id="anunciar-link" class="nav-link">Anunciar</router-link>
-    <button class="entrar-link" @click="openModal">Entrar</button>
+    <button class="entrar-link" @click="modal">Entrar</button>
   </div>
   <div class="linha-container">
     <div class="linha-divisoria"></div>

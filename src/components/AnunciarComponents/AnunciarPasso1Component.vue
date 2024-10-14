@@ -1,10 +1,10 @@
 <script setup>
 import { ref } from 'vue'
-import { useEtapa } from '@/assets/stores/dadosEtapa';
+import { useEtapa } from '@/stores/dadosEtapa';
 
 const etapaStore = useEtapa()
 
-const tituloEtapa1 = ref("É muito fácil <br/> anunciar no Spot 'n Go")
+const tituloEtapa1 = ref("É muito fácil<br>anunciar no Spot 'n Go")
 </script>
 
 <template>
