@@ -97,7 +97,7 @@ const modalStore = useModal()
               placeholder="CPF"
             />
           </div>
-          <button @click="modalStore.loginUser(); modalStore.closeRegisterModal()">Continuar</button>
+          <button @click="modalStore.logarUser(); modalStore.closeRegisterModal()">Continuar</button>
 
           <div class="criar-conta">
               <div class="linha">

@@ -25,28 +25,19 @@ const modalStore = useModal()
 
           <div class="conteudo">
             <div class="form-item">
-              <label for="name">Nome</label>
-              <input
-                type="text"
-                name="name"
-                id="name"
-                v-model="modalStore.dadosUser.name"
-                placeholder="Nome"
-              />
+              <label for="email">E-mail</label>
+              <input type="text" name="name" id="email" v-model="modalStore.dadosUser.email" placeholder="E-mail" />
             </div>
 
             <div class="form-item">
               <label for="senha">Senha</label>
-              <input
-                type="password"
-                name="senha"
-                id="senha"
-                v-model="modalStore.dadosUser.senha"
-                placeholder="Senha"
-              />
+              <input type="password" name="senha" id="senha" v-model="modalStore.dadosUser.senha" placeholder="Senha" />
             </div>
 
-            <button @click="modalStore.loginUser(); modalStore.closeLoginModal()">Continuar</button>
+            <button @click="modalStore.logar()">Continuar</button>
+            <div class="campo-vazio-alert" v-if="modalStore.campoLoginVazio == true">
+              <p class="campo-vazio-text">Preencha todos os campos para prosseguir.</p>
+            </div>
 
             <div class="criar-conta">
               <div class="linha">
@@ -55,7 +46,8 @@ const modalStore = useModal()
               <div class="criar-conta-wrapper">
                 <p class="textoFinal">Ainda não está no Spot'n Go?</p>
                 <p>
-                  <span @click="modalStore.closeLoginModal(); modalStore.openRegisterModal()" class="cadastro">Crie uma conta</span>
+                  <span @click="modalStore.closeLoginModal(); modalStore.openRegisterModal()" class="cadastro">Crie uma
+                    conta</span>
                 </p>
               </div>
             </div>
@@ -191,6 +183,18 @@ button:hover {
 
 button:active {
   transform: scale(0.98);
+}
+
+.campo-vazio-alert {
+  margin-top: 10px;
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  color: var(--cor-texto-erro);
+}
+
+.campo-vazio-alert > p {
+  font-size: 14px;
 }
 
 .cadastro {

@@ -14,7 +14,8 @@ export const useModal = defineStore('modal', () => {
   const showRegisterModal = ref(false)
   const showLoginModal = ref(false)
   const isUserLogado = ref(false)
-  
+  const campoLoginVazio = ref(false)
+
   function openLoginModal() {
     showLoginModal.value = true
   }
@@ -31,16 +32,34 @@ export const useModal = defineStore('modal', () => {
     showRegisterModal.value = false
   }
 
-
-
   function atualizarLocalStorage() {
-   window.localStorage.setItem('UserLogado', String(isUserLogado.value));
- }
+    window.localStorage.setItem('UserLogado', String(isUserLogado.value));
+  }
 
- function loginUser() {
-  isUserLogado.value = true
-  atualizarLocalStorage()
- }
+  function logarUser() {
+    isUserLogado.value = true
+    atualizarLocalStorage()
+  }
 
-  return { dadosUser, showRegisterModal, showLoginModal, isUserLogado, openRegisterModal, openLoginModal, closeRegisterModal, closeLoginModal, loginUser }
+  function verificarLogin() {
+    if (dadosUser.email == '' || dadosUser.senha == '') {
+      campoLoginVazio.value = true
+    }
+    else {
+      campoLoginVazio.value = false
+
+    }
+  }
+
+  function logar() {
+    verificarLogin()
+    console.log(campoLoginVazio.value)
+    if (campoLoginVazio.value == true) return
+    else {
+      logarUser()
+      closeLoginModal()
+    }
+  }
+
+  return { dadosUser, showRegisterModal, showLoginModal, isUserLogado, campoLoginVazio, openRegisterModal, openLoginModal, closeRegisterModal, closeLoginModal, logarUser, logar }
 })
