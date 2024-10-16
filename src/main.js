@@ -8,7 +8,7 @@ import BannerComponent from './components/BannerComponent.vue';
 import CardSectionTitle from './components/CardSectionTitle.vue';
 import CardComponent from './components/CardComponent.vue';
 import RodapeComponent from './components/RodapeComponent.vue';
-import LocacaoComponent from './components/LocacaoComponent.vue'
+import LocacaoComponent from './components/ReservaComponent.vue'
 
 const app = createApp(App)
 app.component('NavbarComponent', NavbarComponent)
