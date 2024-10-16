@@ -33,7 +33,7 @@ const enderecoStore = useEndereco()
                 <p>Adicionar fotos</p>
             </div>
             <div class="img-add-foto">
-                <img src="" alt="">
+                <img class="imagem" src="/src/assets/add-image.png" href="" />
             </div>
             <button class="publicar">Publicar</button>
         </div>
@@ -46,6 +46,14 @@ const enderecoStore = useEndereco()
 
 <style scoped>
 
+.imagem{
+    width: 100px;
+    height: 100px;
+    align-items: center;
+    color: rgb(196, 196, 196);
+
+}
+
 .publicar{
     height: 50px;
     width: 250px;
@@ -56,12 +64,14 @@ const enderecoStore = useEndereco()
     font-weight: bold;
     color: white;
     font-size: 22px;
+    margin-top: 70px;
 }
 
 .texto-imagens{
     font-weight: bold;
     font-family: var(--fonte-principal);
     font-size: 20px;
+    margin-bottom: 70px;
 }
 
 .etapa-4-container{
@@ -74,8 +84,8 @@ const enderecoStore = useEndereco()
     display: flex;
     flex-direction: row ;
     align-items: center;
-    justify-content: center;
-    gap: 50rem;
+    justify-content: center;    
+    gap: 40rem;
 }
 .mensagem {
     margin-top: 100px;
@@ -84,7 +94,10 @@ const enderecoStore = useEndereco()
     font-size: 30px;
     font-family: var(--fonte-principal);
 }
-
+p{
+    font-family: var(--fonte-principal);
+    font-weight: bold;
+}
 .titulo-e-descricao {
     display: flex;
     place-items: center;
@@ -142,6 +155,6 @@ label {
 .adicionar-fotos{
     display: flex;
     flex-direction: column;
-
+    place-items: center;
 }
 </style>

@@ -36,7 +36,7 @@ const etapaStore = useEtapa()
   justify-content: start;
   align-items: center;
   width: 100%;
-  max-width: 500px;
+  width: 500px;
   gap: 30px; /* Medida exata para o avancar-btn ficar centralizado (500 - 50 - 350 - 30px) */
   margin-top: 2rem;
 }
@@ -79,44 +79,5 @@ const etapaStore = useEtapa()
 
 .avancar-btn:hover {
   background-color: var(--cor-principal-hover);
-}
-
-
-@media (max-width:1200px) {
-   .botoes-wrapper {
-       flex-direction: column;
-       align-items: center;
-       max-width: none;
-   }
-
-   .avancar-btn {
-       width: auto;
-       padding-left:1rem;
-       padding-right:1rem;
-   }
-}
-
-@media (max-width:768px) {
-   .voltar-btn {
-       width:40px;
-       height:40px;
-       font-size:20px;
-   }
-
-   .avancar-btn {
-       width:auto;
-       height:auto;
-       font-size:1.5rem;
-   }
-}
-
-@media (max-width:576px) {
-   .botoes-wrapper {
-       gap:15px;
-   }
-
-   .avancar-btn {
-       font-size:1.2rem;
-   }
 }
 </style>
