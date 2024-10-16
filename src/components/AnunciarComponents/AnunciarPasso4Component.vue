@@ -10,33 +10,35 @@ const enderecoStore = useEndereco()
     <section class="etapa-4-container">
 
         <div class="mensagem">
-            <p>Agora, a cara do seu anúncio</p>
+            <p>Agora, a cara do seu anúncio!</p>
         </div>
 
         <div class="conteudo">
-        <div class="titulo-e-descricao">
-            <div class="titulo">
-                <label for="titulo-input">Título</label>
-                <input type="text" id="titulo-input" v-model="enderecoStore.dadosEndereco.titulo" placeholder="Título">
+            <div class="titulo-e-descricao">
+                <div class="titulo">
+                    <label for="titulo-input">Título</label>
+                    <input type="text" id="titulo-input" v-model="enderecoStore.dadosEndereco.titulo"
+                        placeholder="Título">
+                </div>
+
+                <div class="descricao">
+                    <label for="descricao-input">Descrição</label>
+                    <textarea id="descricao-input" rows="10" v-model="enderecoStore.dadosEndereco.descricao"
+                        placeholder="Descrição da Locação">
+                </textarea>
+                </div>
             </div>
 
-            <div class="descricao">
-                <label for="descricao-input">Descrição</label>
-                <input type="text" id="descricao-input" v-model="enderecoStore.dadosEndereco.descricao"
-                    placeholder="Descrição da Locação">
-            </div>
-        </div>
 
-
-        <div class="adicionar-fotos">
-            <div class="texto-imagens">
-                <p>Adicionar fotos</p>
+            <div class="adicionar-fotos">
+                <div class="texto-imagens">
+                    <p>Adicionar fotos</p>
+                </div>
+                <div class="img-add-foto">
+                    <img class="imagem" src="/src/assets/add-image.png" href="" />
+                </div>
+                <button class="publicar">Publicar</button>
             </div>
-            <div class="img-add-foto">
-                <img class="imagem" src="/src/assets/add-image.png" href="" />
-            </div>
-            <button class="publicar">Publicar</button>
-        </div>
         </div>
     </section>
 
@@ -45,48 +47,13 @@ const enderecoStore = useEndereco()
 </template>
 
 <style scoped>
-
-.imagem{
-    width: 100px;
-    height: 100px;
-    align-items: center;
-    color: rgb(196, 196, 196);
-
-}
-
-.publicar{
-    height: 50px;
-    width: 250px;
-    border-radius: 15px;
-    border: none;
-    border: solid 1px rgb(196, 196, 196);
-    background-color: var(--cor-principal);
-    font-weight: bold;
-    color: white;
-    font-size: 22px;
-    margin-top: 70px;
-}
-
-.texto-imagens{
-    font-weight: bold;
-    font-family: var(--fonte-principal);
-    font-size: 20px;
-    margin-bottom: 70px;
-}
-
-.etapa-4-container{
+.etapa-4-container {
     display: flex;
-    flex-direction: column  ;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-.conteudo{
-    display: flex;
-    flex-direction: row ;
-    align-items: center;
-    justify-content: center;    
-    gap: 40rem;
-}
+
 .mensagem {
     margin-top: 100px;
     margin-bottom: 90px;
@@ -94,67 +61,92 @@ const enderecoStore = useEndereco()
     font-size: 30px;
     font-family: var(--fonte-principal);
 }
-p{
-    font-family: var(--fonte-principal);
-    font-weight: bold;
+
+.conteudo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20rem;
 }
+
 .titulo-e-descricao {
     display: flex;
-    place-items: center;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 .titulo {
-    display: grid;
-    grid-auto-columns: auto;
-    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0 1rem 0;
     font-weight: bold;
 }
 
 #titulo-input {
     border-radius: 8px;
-    margin-top: 30px;
-    width: 250px;
-    height: 35px;
-    border: none;
+    width: 270px;
+    height: 45px;
     border: solid 1px rgb(196, 196, 196);
-    padding-left: 20px;
+    padding-left: 10px;
+    outline: none;
 }
 
+#descricao-input::placeholder,
 #titulo-input::placeholder {
-    font-size: 15px;
+    font-size: 14px;
 }
 
 label {
+    margin-left: 1rem;
+    margin-bottom: .5rem;
     font-weight: bold;
 }
 
 .descricao {
-    display: grid;
-    grid-auto-columns: auto;
+    display: flex;
+    flex-direction: column;
+
 }
 
 #descricao-input {
     border-radius: 10px;
-    margin-top: 30px;
-    width: 270px;
-    height: 150px;
-    border: none;
     border: solid 1px rgb(196, 196, 196);
+    outline: none;
+    padding: 10px 0 0 10px;
 }
 
-#descricao-input::placeholder {
-    position: absolute;
-    top: 10px;
-    left: 20px;
-    font-size: 15px;
-}
-
-.adicionar-fotos{
+.adicionar-fotos {
     display: flex;
     flex-direction: column;
     place-items: center;
+}
+
+.texto-imagens {
+    font-weight: bold;
+    font-family: var(--fonte-principal);
+    font-size: 20px;
+    margin-bottom: 70px;
+}
+
+.publicar {
+    height: 50px;
+    width: 250px;
+    border-radius: 25px;
+    border: none;
+    background-color: var(--cor-principal);
+    font-weight: bold;
+    color: white;
+    font-size: 22px;
+    margin-top: 70px;
+}
+
+.imagem {
+    width: 100px;
+    height: 100px;
+    align-items: center;
+}
+
+p {
+    font-family: var(--fonte-principal);
+    font-weight: bold;
 }
 </style>
