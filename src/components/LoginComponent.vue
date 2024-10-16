@@ -1,84 +1,79 @@
 <script setup>
 // import { computed } from 'vue';
-import { useModal } from '@/assets/stores/dadosModal'
+import { useModal } from '@/stores/dadosModal'
 
 const modalStore = useModal()
 
 // const blurClass = computed(() =>
 //   (open.value ? 'divBlur' : ''));
-
-
 </script>
 
 <template>
   <div class="blur">
-  <div class="modal" style="position:">
-    <div class="form-container">
-      <div class="header-modal">
-        <div class="fechar" @click="modalStore.closeLoginModal">
-          <span class="fa fa-close"></span>
+    <div class="modal" style="position:">
+      <div class="form-container">
+        <div class="header-modal">
+          <div class="fechar" @click="modalStore.closeLoginModal">
+            <span class="fa fa-close"></span>
+          </div>
         </div>
-      </div>
-      <div class="logoLogin">
+        <div class="logoLogin">
           <img class="imgLogin" src="../assets/LogoSimples.png" alt="Logo" />
         </div>
-      <div class="containerInterno">
+        <div class="containerInterno">
+          <h1 class="title">Bem-vindo ao Spot'n Go</h1>
 
-        <h1 class="title">Bem-vindo ao Spot'n Go</h1>
-        
-        <div class="conteudo">
-          <div class="form-item">
-            <label for="name">Nome</label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              v-model="modalStore.dadosUser.name"
-              placeholder="Nome"
+          <div class="conteudo">
+            <div class="form-item">
+              <label for="name">Nome</label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                v-model="modalStore.dadosUser.name"
+                placeholder="Nome"
               />
-          </div>
-
-          <div class="form-item">
-            <label for="senha">Senha</label>
-            <input
-              type="password"
-              name="senha"
-              id="senha"
-              v-model="modalStore.dadosUser.senha"
-              placeholder="Senha"
-            />
-          </div>
-
-          <button>Continuar</button>
-
-          <div class="termo">
-            <div class="linha">
-              <hr />
             </div>
-            
-            <p class="textoFinal">
-              Ainda não está no Spot'n Go?
-            </p>
-            <p>
-              <span @click="modalStore.botaoCadastro" class="cadastro">Crie uma conta</span>
-            </p>
+
+            <div class="form-item">
+              <label for="senha">Senha</label>
+              <input
+                type="password"
+                name="senha"
+                id="senha"
+                v-model="modalStore.dadosUser.senha"
+                placeholder="Senha"
+              />
+            </div>
+
+            <button @click="modalStore.loginUser(); modalStore.closeLoginModal()">Continuar</button>
+
+            <div class="criar-conta">
+              <div class="linha">
+                <hr />
+              </div>
+              <div class="criar-conta-wrapper">
+                <p class="textoFinal">Ainda não está no Spot'n Go?</p>
+                <p>
+                  <span @click="modalStore.closeLoginModal(); modalStore.openRegisterModal()" class="cadastro">Crie uma conta</span>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <style scoped>
-
 .modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,12 +82,13 @@ const modalStore = useModal()
 
 .form-container {
   padding: 1rem;
-  width: 370px;
-  height: 450px;
+  width: 360px;
+  height: 440px;
   border-radius: 35px;
   background-color: #f2f2f2;
   margin: auto;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--fonte-principal);
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.5);
 }
 
 .container-interno {
@@ -122,6 +118,11 @@ const modalStore = useModal()
   background-color: var(--cor-voltar-btn-hover);
 }
 
+.fechar:active {
+  transition: 100ms;
+  transform: scale(0.8);
+}
+
 .fa.fa-close {
   font-size: 1.5rem;
   align-content: center;
@@ -130,7 +131,7 @@ const modalStore = useModal()
 
 .logoLogin {
   text-align: center;
-  margin-top: 10px
+  margin-top: 10px;
 }
 
 .imgLogin {
@@ -164,14 +165,15 @@ input {
   width: 250px;
   height: 35px;
   border-radius: 15px;
-  border: solid 1px rgba(79, 79, 79, 1);
+  border: solid 2px var(--cor-bordas-input);
   background-color: #f2f2f2;
-  margin-bottom: 5px;
   padding: 0 10px;
   outline: none;
 }
 
 button {
+  width: 270px;
+  cursor: pointer;
   padding: 13px 100px;
   border-radius: 25px;
   background-color: var(--cor-principal);
@@ -179,46 +181,42 @@ button {
   border: none;
   color: #f2f2f2;
   font-weight: bold;
-  font-size: 15px;
+  font-size: 1rem;
+  transition: 80ms ease-out;
+}
+
+button:hover {
+  background-color: var(--cor-principal-hover);
+}
+
+button:active {
+  transform: scale(0.98);
 }
 
 .cadastro {
   font-weight: bold;
   cursor: pointer;
-  font-size: 14px;  
-}
-
-.opcao {
-  margin-top: 15px;
-  font-weight: bold;
-}
-
-.termo {
-  padding: 13px;
-  text-align: center;
-  font-size: 10px;
-  font-family: 'Montserrat', sans-serif;
-}
-
-.textoFinal {
-  margin-top: 30px;
   font-size: 14px;
 }
 
-.linha {
-  margin-top: 20px;
+.criar-conta {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 10px;
+  font-family: 'Montserrat', sans-serif;
+  margin-top: 1.5rem;
+  gap: 1.5rem;
 }
 
-.link {
-  text-decoration: none;
-  color: black;
-  font-weight: bold;  
+.textoFinal {
+  font-size: 14px;
 }
 
 label {
-  margin-left: 10px;
-  color: black;
-  font-size: 12px;
+  margin: 0 0 3px 10px;
+  color: var(--preto-alternativo);
+  font-size: 14px;
   font-weight: 500;
 }
 </style>

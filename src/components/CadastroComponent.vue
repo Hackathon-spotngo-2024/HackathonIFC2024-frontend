@@ -1,7 +1,8 @@
 <script setup>
-import { useModal } from '@/assets/stores/dadosModal'
+import { useModal } from '@/stores/dadosModal'
 
 const modalStore = useModal()
+
 </script>
 
 <template>
@@ -18,8 +19,7 @@ const modalStore = useModal()
         </div>
 
         <p class="title">Bem vindo(a) ao Spot'n Go</p>
-        <p class="sub-title">Ache novos imóveis para alugar</p>
-        <h1 class="title" id="dynamic-title">{{ title }}</h1>
+        <p class="sub-title">Ache novos espaços para alugar</p>
 
         <div class="conteudo">
           <div class="form-item">
@@ -97,19 +97,19 @@ const modalStore = useModal()
               placeholder="CPF"
             />
           </div>
+          <button @click="modalStore.loginUser(); modalStore.closeRegisterModal()">Continuar</button>
 
-          <button @click="modalStore.closeRegisterModal">Continuar</button>
-          <div class="termo">
-            <p>
-              Ao continuar, você concorda com os <br />
-              <a class="link" href="">termo de serviço</a> do Spot'n Go e confirma que <br />
-              leu nossa <a class="link" href="">Politica de Privacidade.</a> <br />
-              <a class="link" href="">Aviso na coleta de informações.</a>
-            </p>
-            <div class="linha">
-                <hr>
+          <div class="criar-conta">
+              <div class="linha">
+                <hr />
+              </div>
+              <div class="criar-conta-wrapper">
+                <p class="textoFinal">Ja possui uma conta?</p>
+                <p>
+                  <span @click="modalStore.closeRegisterModal(); modalStore.openLoginModal()" class="cadastro">Fazer login</span>
+                </p>
+              </div>
             </div>
-          </div>
         </div>
       </div>
     </div>
@@ -120,27 +120,25 @@ const modalStore = useModal()
 .modal {
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000 !important;
+  z-index: 1000;
   transition: visibility 0.3s, opacity 0.3s;
 }
 
 .form-container {
   width: 420px;
-  height: 710px;
+  height: 780px;
   border-radius: 25px;
   background-color: #f2f2f2;
   margin: auto;
   padding: 1rem;
-  font-family: 'Montserrat';
-  position: relative;
-  z-index: 1001;
+  z-index: 1000;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.5);
 }
 
 .header-modal {
@@ -157,11 +155,16 @@ const modalStore = useModal()
   height: 35px;
   border-radius: 20px;
   transition: 150ms ease-in-out;
-  z-index: 1000;
+  z-index: 999;
 }
 
 .fechar:hover {
   background-color: var(--cor-voltar-btn-hover);
+}
+
+.fechar:active {
+  transition: 100ms;
+  transform: scale(0.8);
 }
 
 .fa.fa-close {
@@ -193,38 +196,34 @@ const modalStore = useModal()
 }
 .sub-title {
   text-align: center;
-  margin-top: 10px;
+  margin: .25rem 0 .5rem 0;
   font-family: 'Montserrat';
   font-size: 18px;
 }
+
+.conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .form-item {
   display: grid;
   grid-auto-columns: auto;
-  margin-top: 5px;
-}
-.termo {
-  padding: 13px;
-  text-align: center;
-  font-size: 10px;
-  font-family: 'Montserrat';
-}
-
-.linha {
-  margin-top: 10px;
 }
 
 input {
   width: 250px;
   height: 35px;
   border-radius: 15px;
-  border: solid 1px rgba(79, 79, 79, 1);
+  border: solid 2px var(--cor-bordas-input);
   background-color: #f2f2f2;
-  margin-bottom: 5px;
   padding: 0 10px;
   outline: none;
 }
 
 button {
+  cursor: pointer;
   padding: 13px 100px;
   border-radius: 25px;
   background-color: var(--cor-principal);
@@ -233,18 +232,41 @@ button {
   color: #f2f2f2;
   font-weight: bold;
   font-size: 15px;
+  transition: 80ms ease-out;
 }
 
-.link {
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
+button:hover {
+  background-color: var(--cor-principal-hover);
+}
+
+button:active {
+  transform: scale(0.98);
 }
 
 label {
-  margin-left: 10px;
-  color: black;
-  font-size: 12px;
+  margin: 0 0 3px 10px;
+  color: var(--preto-alternativo);
+  font-size: 14px;
   font-weight: 500;
+}
+
+.criar-conta {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 10px;
+  font-family: 'Montserrat', sans-serif;
+  margin-top: 1.5rem;
+  gap: 1.5rem;
+}
+
+.textoFinal {
+  font-size: 14px;
+}
+
+.cadastro {
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
 }
 </style>

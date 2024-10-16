@@ -13,6 +13,7 @@ export const useModal = defineStore('modal', () => {
   })
   const showRegisterModal = ref(false)
   const showLoginModal = ref(false)
+  const isUserLogado = ref(false)
   
   function openLoginModal() {
     showLoginModal.value = true
@@ -20,7 +21,6 @@ export const useModal = defineStore('modal', () => {
 
   function openRegisterModal() {
     showRegisterModal.value = true
-    console.log(showRegisterModal.value)
   }
 
   const closeLoginModal = () => {
@@ -31,9 +31,16 @@ export const useModal = defineStore('modal', () => {
     showRegisterModal.value = false
   }
 
-  function botaoCadastro (){ 
-   closeLoginModal();
-   openRegisterModal()
-  }
-  return { dadosUser, showRegisterModal, showLoginModal, openRegisterModal, openLoginModal, closeRegisterModal, closeLoginModal, botaoCadastro }
+
+
+  function atualizarLocalStorage() {
+   window.localStorage.setItem('UserLogado', String(isUserLogado.value));
+ }
+
+ function loginUser() {
+  isUserLogado.value = true
+  atualizarLocalStorage()
+ }
+
+  return { dadosUser, showRegisterModal, showLoginModal, isUserLogado, openRegisterModal, openLoginModal, closeRegisterModal, closeLoginModal, loginUser }
 })

@@ -9,7 +9,7 @@
     --cor-linha-divisoria: rgba(203, 203, 203, 1);
     --cor-fonte-loc: rgb(71, 71, 71);
     --fonte-principal: 'Montserrat';
-    --cor-bordas-input: rgb(110, 110, 110);
+    --cor-bordas-input: rgba(110, 110, 110, 0.6);
     --cor-voltar-btn-hover: rgb(221, 221, 221);
     --cor-voltar-btn: rgb(238, 238, 238);
     --preto-alternativo: rgb(24, 24, 24);
