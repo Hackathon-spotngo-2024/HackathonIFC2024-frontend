@@ -19,8 +19,6 @@ const modalStore = useModal()
         </div>
 
         <p class="title">Bem vindo(a) ao Spot'n Go</p>
-        <p class="sub-title">Ache novos espaços para alugar</p>
-
         <div class="conteudo">
           <div class="form-item">
             <label for="name">Nome</label>
@@ -131,8 +129,8 @@ const modalStore = useModal()
 }
 
 .form-container {
-  width: 420px;
-  height: 780px;
+  width: 400px;
+  height: 710px;
   border-radius: 25px;
   background-color: #f2f2f2;
   margin: auto;
@@ -192,13 +190,7 @@ const modalStore = useModal()
   font-size: 23px;
   font-family: 'Montserrat';
   font-weight: bold;
-  margin-top: 10px;
-}
-.sub-title {
-  text-align: center;
-  margin: .25rem 0 .5rem 0;
-  font-family: 'Montserrat';
-  font-size: 18px;
+  margin: 10px 0 10px 0;
 }
 
 .conteudo {
@@ -227,7 +219,7 @@ button {
   padding: 13px 100px;
   border-radius: 25px;
   background-color: var(--cor-principal);
-  margin-top: 15px;
+  margin-top: 10px;
   border: none;
   color: #f2f2f2;
   font-weight: bold;
@@ -256,8 +248,8 @@ label {
   text-align: center;
   font-size: 10px;
   font-family: 'Montserrat', sans-serif;
-  margin-top: 1.5rem;
-  gap: 1.5rem;
+  margin-top: 1rem;
+  gap: 1rem;
 }
 
 .textoFinal {

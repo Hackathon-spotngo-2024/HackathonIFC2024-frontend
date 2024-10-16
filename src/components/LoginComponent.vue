@@ -1,11 +1,7 @@
 <script setup>
-// import { computed } from 'vue';
 import { useModal } from '@/stores/dadosModal'
 
 const modalStore = useModal()
-
-// const blurClass = computed(() =>
-//   (open.value ? 'divBlur' : ''));
 </script>
 
 <template>
@@ -187,9 +183,6 @@ button:active {
 
 .campo-vazio-alert {
   margin-top: 10px;
-  width: 500px;
-  display: flex;
-  justify-content: center;
   color: var(--cor-texto-erro);
 }
 
