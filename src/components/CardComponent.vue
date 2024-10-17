@@ -10,7 +10,6 @@ import imgCard1 from '../assets/card-imgs/card-img-1.jpeg'
       <div class="card-preco">R$xx,xx por dia</div>
       <div class="card-loc">Exemplo localização</div>
     </div>
-  </div>
 </template>
 
 <style scoped>
@@ -80,5 +79,9 @@ import imgCard1 from '../assets/card-imgs/card-img-1.jpeg'
   .card-img > img {
     border-radius: 10px;
   }
+}
+.link {
+  text-decoration: none;
+  color: black;
 }
 </style>

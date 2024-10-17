@@ -33,6 +33,16 @@ onMounted(() => {
     showForm.value = true //se algum esta preenchido, o formulario aparece
   }
 
+let showForm = false
+
+defineProps({
+  proximaEtapa: Function,
+  etapaAnterior: Function
+})
+
+//MAPA -------------------------------------
+
+onMounted(() => {
   // Inicializa o mapa
   map = L.map('map').setView([-26.3044, -48.8455], 13) //Inicia o mapa em Joinville - SC
 
@@ -49,7 +59,6 @@ const trazerSugestoes = async () => {
     sugestoes.value = []
     return
   }
-
   try {
     console.log('Buscando sugestoes para: ', enderecoSearch.value)
     const response = await fetch(
