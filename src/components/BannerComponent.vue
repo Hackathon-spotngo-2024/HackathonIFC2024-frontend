@@ -4,7 +4,7 @@ import banner from '../assets/banner.jpg'
 
 <template>
   <div class="banner">
-    <img class="img-banner" :src="banner" alt="">
+    <img class="img-banner" :src="banner" alt="Banner">
   </div>
 </template>
 
@@ -16,8 +16,34 @@ import banner from '../assets/banner.jpg'
 }
 
 .img-banner {
-    width: 1100px;
-    height: 500px;
+    width: 100%;
+    max-width: 1100px;
+    height: auto;
     border-radius: 25px;
+}
+
+@media (max-width: 1200px) {
+    .img-banner {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 992px) {
+    .img-banner {
+        max-width: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    .img-banner {
+        max-width: 100%;
+        border-radius: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .img-banner {
+        border-radius: 10px;
+    }
 }
 </style>
