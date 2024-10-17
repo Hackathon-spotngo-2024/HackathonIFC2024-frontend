@@ -31,9 +31,7 @@ onMounted(() => {
   }
   else if (algumCampoPreenchido) {
     showForm.value = true //se algum esta preenchido, o formulario aparece
-  }
-
-let showForm = false
+  }})
 
 defineProps({
   proximaEtapa: Function,
