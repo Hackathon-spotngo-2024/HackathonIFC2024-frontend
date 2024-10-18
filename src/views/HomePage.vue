@@ -1,5 +1,5 @@
 <script setup>
-import { useModal } from '@/stores/dadosModal';
+import { useModal } from '../../stores/dadosModal';
 import CadastroComponent from '@/components/CadastroComponent.vue';
 import LoginComponent from '@/components/LoginComponent.vue';
 

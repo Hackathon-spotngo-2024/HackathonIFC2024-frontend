@@ -1,5 +1,5 @@
 <script setup>
-import { useModal } from '@/stores/dadosModal';
+import { useModal } from '../../stores/dadosModal';
 
 const modalStore = useModal()
 </script>
@@ -14,7 +14,9 @@ const modalStore = useModal()
       <input type="text" placeholder="Procure seu spot" class="search-input" />
     </div>
     <router-link to="/anunciar" id="anunciar-link" class="nav-link">Anunciar</router-link>
-    <button class="entrar-link" @click="modalStore.openLoginModal">Entrar</button>
+    <div>
+      <button class="entrar-link" @click="modalStore.openLoginModal" v-if="modalStore.isUserLogado == false" >Entrar</button>
+    </div>
   </div>
   <div class="linha-container">
     <div class="linha-divisoria"></div>

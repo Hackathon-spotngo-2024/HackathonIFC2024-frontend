@@ -15,6 +15,7 @@ export const useModal = defineStore('modal', () => {
   const showLoginModal = ref(false)
   const isUserLogado = ref(false)
   const campoLoginVazio = ref(false)
+  const campoCadastroVazio = ref(false)
 
   function openLoginModal() {
     showLoginModal.value = true
@@ -41,6 +42,7 @@ export const useModal = defineStore('modal', () => {
     atualizarLocalStorage()
   }
 
+
   function verificarLogin() {
     if (dadosUser.email == '' || dadosUser.senha == '') {
       campoLoginVazio.value = true
@@ -53,7 +55,6 @@ export const useModal = defineStore('modal', () => {
 
   function logar() {
     verificarLogin()
-    console.log(campoLoginVazio.value)
     if (campoLoginVazio.value == true) return
     else {
       logarUser()
@@ -61,5 +62,27 @@ export const useModal = defineStore('modal', () => {
     }
   }
 
-  return { dadosUser, showRegisterModal, showLoginModal, isUserLogado, campoLoginVazio, openRegisterModal, openLoginModal, closeRegisterModal, closeLoginModal, logarUser, logar }
+  
+  function verificarCadastro() {
+    if (dadosUser.nome == '' || dadosUser.email == '' || dadosUser.senha == '' || dadosUser.confirmarSenha == '' ||dadosUser.telefone == '' || dadosUser.dataDeNascimento == '' || dadosUser.cpf == '' ) {
+      campoCadastroVazio.value = true
+    }
+    else {
+      campoCadastroVazio.value = false
+    }
+  }
+
+
+
+  function cadastrar() {
+    verificarCadastro()
+    if (campoCadastroVazio.value == true) return
+    else {
+      logarUser()
+      closeRegisterModal()
+    }
+  } 
+
+
+  return { dadosUser, showRegisterModal, showLoginModal, isUserLogado, campoLoginVazio, campoCadastroVazio, openRegisterModal, openLoginModal, closeRegisterModal, closeLoginModal, logarUser, logar, cadastrar }
 })

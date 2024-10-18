@@ -1,6 +1,6 @@
 <script setup>
-import { useEtapa } from '@/stores/dadosEtapa';
-import { useEndereco } from '@/stores/dadosEndereco';
+import { useEtapa } from '../../stores/dadosEtapa';
+import { useEndereco } from '../../stores/dadosEndereco';
 
 const etapaStore = useEtapa()
 const enderecoStore = useEndereco()

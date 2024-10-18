@@ -1,5 +1,5 @@
 <script setup>
-import { useModal } from '@/stores/dadosModal'
+import { useModal } from '../../stores/dadosModal'
 
 const modalStore = useModal()
 </script>

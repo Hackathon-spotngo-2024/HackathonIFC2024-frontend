@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { useEtapa } from '@/stores/dadosEtapa';
+import { useEtapa } from '../../../stores/dadosEtapa';
 
 const etapaStore = useEtapa()
 

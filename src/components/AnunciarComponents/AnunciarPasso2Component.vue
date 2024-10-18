@@ -3,7 +3,7 @@ import { onMounted, ref } from 'vue'
 import L from 'leaflet' //Importando biblioteca Leaflet (mapa)
 import 'leaflet/dist/leaflet.css' //Importa o css da biblioteca
 import BotaoAvancarEVoltarComponent from '../BotaoAvancarEVoltarComponent.vue'
-import { useEndereco } from '@/stores/dadosEndereco'
+import { useEndereco } from '../../../stores/dadosEndereco'
 
 const enderecoStore = useEndereco()
 

@@ -1,5 +1,5 @@
 <script setup>
-import { useModal } from '@/stores/dadosModal'
+import { useModal } from '../../stores/dadosModal'
 
 const modalStore = useModal()
 
@@ -95,11 +95,16 @@ const modalStore = useModal()
               placeholder="CPF"
             />
           </div>
-          <button @click="modalStore.logarUser(); modalStore.closeRegisterModal()">Continuar</button>
+
+          <button @click="modalStore.cadastrar()">Continuar</button>
+          <div class="campo-vazio-alert" v-if="modalStore.campoCadastroVazio == true">
+            <p class="campo-vazio-text">Preencha todos os campos para prosseguir.</p>
+          </div>
+
 
           <div class="criar-conta">
               <div class="linha">
-                <hr />
+                <hr/>
               </div>
               <div class="criar-conta-wrapper">
                 <p class="textoFinal">Ja possui uma conta?</p>
@@ -115,6 +120,7 @@ const modalStore = useModal()
 </template>
 
 <style scoped>
+
 .modal {
   position: fixed;
   top: 0;
@@ -130,7 +136,7 @@ const modalStore = useModal()
 
 .form-container {
   width: 400px;
-  height: 710px;
+  height: 740px;
   border-radius: 25px;
   background-color: #f2f2f2;
   margin: auto;
@@ -197,11 +203,21 @@ const modalStore = useModal()
   display: flex;
   flex-direction: column;
   gap: 8px;
+  align-items: center;
 }
 
 .form-item {
   display: grid;
   grid-auto-columns: auto;
+}
+
+.campo-vazio-alert {
+  margin-top: 10px;
+  color: var(--cor-texto-erro);
+}
+
+.campo-vazio-alert > p {
+  font-size: 14px;
 }
 
 input {
@@ -254,6 +270,7 @@ label {
 
 .textoFinal {
   font-size: 14px;
+
 }
 
 .cadastro {
@@ -261,4 +278,5 @@ label {
   cursor: pointer;
   font-size: 14px;
 }
+
 </style>
