@@ -1,8 +1,8 @@
 <script setup>
 import BotaoAvancarEVoltarComponent from '../BotaoAvancarEVoltarComponent.vue'
 import { watch, onMounted, ref } from 'vue'
-import { useEndereco } from '@/stores/dadosEndereco'
-import { useEtapa } from '@/stores/dadosEtapa';
+import { useEndereco } from '../../../stores/dadosEndereco'
+import { useEtapa } from '../../../stores/dadosEtapa';
 
 const isBotaoPequeno = ref(true)
 const enderecoStore = useEndereco()

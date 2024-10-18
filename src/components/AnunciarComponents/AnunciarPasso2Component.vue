@@ -3,7 +3,7 @@ import { onMounted, ref, watch } from 'vue'
 import L from 'leaflet' //Importando biblioteca Leaflet (mapa)
 import 'leaflet/dist/leaflet.css' //Importa o css da biblioteca
 import BotaoAvancarEVoltarComponent from '../BotaoAvancarEVoltarComponent.vue'
-import { useEndereco } from '@/stores/dadosEndereco'
+import { useEndereco } from '../../../stores/dadosEndereco'
 
 const enderecoStore = useEndereco()
 
@@ -31,9 +31,7 @@ onMounted(() => {
   }
   else if (algumCampoPreenchido) {
     showForm.value = true //se algum esta preenchido, o formulario aparece
-  }
-
-let showForm = false
+  }})
 
 defineProps({
   proximaEtapa: Function,

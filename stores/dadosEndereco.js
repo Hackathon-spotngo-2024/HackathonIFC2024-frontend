@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { useEtapa } from './dadosEtapa'
 
 export const useEndereco = defineStore('endereco', () => {
-  const dadosEndereco = ref({
+  const dadosEndereco = reactive ({
     pais: '',
     rua: '',
     numero: '',
@@ -14,7 +14,8 @@ export const useEndereco = defineStore('endereco', () => {
     LimiteVisitantes: 0,
     preco: '',
     titulo: '',
-    descricao: ''
+    descricao: '',
+    imgs: []
   })
 
   const etapaStore = useEtapa()
@@ -34,10 +35,32 @@ export const useEndereco = defineStore('endereco', () => {
   function atualizarDados(novosDados) {
     this.dadosEndereco = { ...this.dadosEndereco, ...novosDados }
   }
+
+  function handleFileUpload(e) {
+    const target = e.target;
+    if (target && target.files) {
+      const files = Array.from(target.files)
+
+      dadosEndereco.imgs.forEach(img => URL.revokeObjectURL(img))
+
+      files.forEach(file => {
+        if (file.type.startsWith('image/')) {
+          const imgURL = URL.createObjectURL(file)
+          dadosEndereco.imgs.push(imgURL)
+          console.log(imgURL)
+        }
+        else {
+          alert('Por favor, selecione apenas arquivos de imagem.')
+        }
+      })
+    }
+  }
+
   return {
     dadosEndereco,
     verificarFormulario,
     campoVazioAlert,
-    atualizarDados
+    atualizarDados,
+    handleFileUpload
   }
 })

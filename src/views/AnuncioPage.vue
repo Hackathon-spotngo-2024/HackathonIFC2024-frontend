@@ -2,8 +2,7 @@
 import DescricaoComponent from '@/components/DescricaoComponent.vue';
 import ImagensComponent from '@/components/ImagensComponent.vue';
 import LocalizaçãoComponent from '@/components/LocalizaçãoComponent.vue';
-import ReservaComponent from '@/components/ReservaComponent.vue';
-import 
+import ReservaComponent from '@/components/ReservaComponent.vue'; 
 
 
 </script>
