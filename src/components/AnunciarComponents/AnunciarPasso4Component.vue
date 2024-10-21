@@ -1,6 +1,7 @@
 <script setup>
 import { useEtapa } from '../../../stores/dadosEtapa'
 import { useEndereco } from '../../../stores/dadosEndereco'
+import UploadImagemComponent from '../UploadImagemComponent.vue';
 const etapaStore = useEtapa()
 const enderecoStore = useEndereco()
 </script>
@@ -40,20 +41,7 @@ const enderecoStore = useEndereco()
           <p>Adicionar fotos</p>
         </div>
         <div class="add-foto-container">
-          <input
-            type="file"
-            name="imagem-input"
-            id="imagem-input"
-            @change="enderecoStore.handleFileUpload($event)"
-          />
-          <div v-if="enderecoStore.dadosEndereco.imgs.length">
-            <img
-              v-for="(img, index) in enderecoStore.dadosEndereco.imgs"
-              :key="index"
-              :src="enderecoStore.dadosEndereco.imgs"
-              multiple
-            />
-          </div>
+          <UploadImagemComponent />
         </div>
         <div class="botoes-wrapper">
           <button class="voltar-btn" @click="etapaStore.etapaAnterior">
@@ -137,13 +125,14 @@ label {
   display: flex;
   flex-direction: column;
   place-items: center;
+  height: 305px;
+  justify-content: space-between;
 }
 
 .texto-imagens {
   font-weight: bold;
   font-family: var(--fonte-principal);
   font-size: 20px;
-  margin-bottom: 70px;
 }
 
 .publicar {
@@ -177,7 +166,6 @@ p {
   width: 100%;
   width: 500px;
   gap: 30px; /* Medida exata para o avancar-btn ficar centralizado (500 - 50 - 350 - 30px) */
-  margin-top: 2rem;
 }
 
 .voltar-btn {

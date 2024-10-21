@@ -46,7 +46,6 @@ const tituloEtapa1 = ref("É muito fácil<br>anunciar no Spot 'n Go")
       <button class="continue-botao" @click="etapaStore.proximaEtapa">Continue</button>
     </div>
   </div>
-    <ArrastarImagemComponent />
 </template>
 
 <style scoped>
