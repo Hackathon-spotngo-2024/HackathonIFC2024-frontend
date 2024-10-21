@@ -30,13 +30,11 @@ function ajustarTamanhoInput() {
 }
 
 const verificarEtapa3 = (() => {
-  console.log(enderecoStore.campoVazioAlert, enderecoStore.dadosEndereco.LimiteVisitantes, enderecoStore.dadosEndereco.preco)
   if (enderecoStore.dadosEndereco.LimiteVisitantes == 0 || enderecoStore.dadosEndereco.preco == '') {
     enderecoStore.campoVazioAlert = true
     return
   }
   else {
-    console.log('falseeee')
     enderecoStore.campoVazioAlert = false
     etapaStore.proximaEtapa()
   }

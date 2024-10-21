@@ -36,31 +36,10 @@ export const useEndereco = defineStore('endereco', () => {
     this.dadosEndereco = { ...this.dadosEndereco, ...novosDados }
   }
 
-  function handleFileUpload(e) {
-    const target = e.target;
-    if (target && target.files) {
-      const files = Array.from(target.files)
-
-      dadosEndereco.imgs.forEach(img => URL.revokeObjectURL(img))
-
-      files.forEach(file => {
-        if (file.type.startsWith('image/')) {
-          const imgURL = URL.createObjectURL(file)
-          dadosEndereco.imgs.push(imgURL)
-          console.log(imgURL)
-        }
-        else {
-          alert('Por favor, selecione apenas arquivos de imagem.')
-        }
-      })
-    }
-  }
-
   return {
     dadosEndereco,
     verificarFormulario,
     campoVazioAlert,
-    atualizarDados,
-    handleFileUpload
+    atualizarDados
   }
 })

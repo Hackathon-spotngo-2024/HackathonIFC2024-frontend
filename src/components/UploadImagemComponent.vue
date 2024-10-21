@@ -1,20 +1,26 @@
 <script setup>
-import { ref } from 'vue';
-import { useEndereco } from '../../stores/dadosEndereco';
+import { ref } from 'vue'
+import { useEndereco } from '../../stores/dadosEndereco'
 
 const enderecoStore = useEndereco()
-
 const fileInput = ref(null)
+const numImagens = 5
+
 const onFileChange = (event) => {
   const files = event.target.files
-  enderecoStore.dadosEndereco.imgs = []
+  // enderecoStore.dadosEndereco.imgs = []
+  const selectedFiles = Array.from(files)
 
-  enderecoStore.dadosEndereco.imgs = Array.from(files)
-
-  for (let i = 0; i < files.length; i++) {
-    const file = files[i];
-    const imageUrl = URL.createObjectURL(file)
-    enderecoStore.dadosEndereco.imgs.push(imageUrl)
+  if (selectedFiles.length != numImagens) {
+    console.log(selectedFiles.length)
+    alert('Você deve adicionar 5 imagens ao seu anúncio.')
+    return
+  } else {
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i]
+      const imageUrl = URL.createObjectURL(file)
+      enderecoStore.dadosEndereco.imgs.push(imageUrl)
+    }
   }
 }
 
@@ -25,11 +31,14 @@ const selectFile = () => {
 
 <template>
   <div class="container">
-    <input type="file" @change="onFileChange" multiple accept="image/*" ref="fileInput">
-    <div class="escolher-arquivos" @click="selectFile"><img src="../assets/add-image.png" alt=""></div>
-    <div class="container-imagens">
+    <input type="file" @change="onFileChange" multiple accept="image/*" ref="fileInput" />
+    <div class="escolher-arquivos" @click="selectFile">
+      <img src="../assets/add-image.png" alt="" />
+    </div>
+
+    <div class="container-imagens" v-if="enderecoStore.dadosEndereco.imgs.length">
       <div class="imagem" v-for="(img, index) in enderecoStore.dadosEndereco.imgs" :key="index">
-        <img v-if="img" :src="img">
+        <img v-if="img" :src="img" />
       </div>
     </div>
   </div>
@@ -52,8 +61,20 @@ input {
 }
 
 .escolher-arquivos img {
-  width: 15%;
+  width: 50px;
   cursor: pointer;
+}
+
+.container-imagens {
+  margin: 0.5rem 0 0.5rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.5rem;
+  border: 3px dashed var(--cor-principal);
+  border-radius: 15px;
+  padding: 10px;
 }
 
 .imagem img {

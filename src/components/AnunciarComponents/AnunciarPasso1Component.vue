@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue'
 import { useEtapa } from '../../../stores/dadosEtapa';
-import ArrastarImagemComponent from '../UploadImagemComponent.vue';
 
 const etapaStore = useEtapa()
 

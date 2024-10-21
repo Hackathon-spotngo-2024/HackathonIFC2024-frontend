@@ -9,7 +9,7 @@ const enderecoStore = useEndereco()
 <template>
   <section class="etapa-4-container">
     <div class="mensagem">
-      <p>Agora, a cara do seu anúncio!</p>
+      <h1>Agora, a cara do seu anúncio!</h1>
     </div>
 
     <div class="conteudo">
@@ -38,7 +38,8 @@ const enderecoStore = useEndereco()
 
       <div class="adicionar-fotos">
         <div class="texto-imagens">
-          <p>Adicionar fotos</p>
+          <h2>Adicionar fotos</h2>
+          <p>Adicione 5 fotos ao seu anúncio</p>
         </div>
         <div class="add-foto-container">
           <UploadImagemComponent />
@@ -90,6 +91,7 @@ const enderecoStore = useEndereco()
 }
 
 #titulo-input {
+  font-size: 1rem;
   border-radius: 8px;
   width: 270px;
   height: 45px;
@@ -115,6 +117,7 @@ label {
 }
 
 #descricao-input {
+  font-size: 1rem;
   border-radius: 10px;
   border: solid 1px rgb(196, 196, 196);
   outline: none;
@@ -125,14 +128,23 @@ label {
   display: flex;
   flex-direction: column;
   place-items: center;
-  height: 305px;
+  height: 335px;
   justify-content: space-between;
 }
 
 .texto-imagens {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   font-weight: bold;
   font-family: var(--fonte-principal);
   font-size: 20px;
+}
+
+p {
+  font-weight: 400;
+  font-size: 1rem;
 }
 
 .publicar {
@@ -151,11 +163,6 @@ label {
   width: 100px;
   height: 100px;
   align-items: center;
-}
-
-p {
-  font-family: var(--fonte-principal);
-  font-weight: bold;
 }
 
 .botoes-wrapper {
