@@ -6,12 +6,6 @@ export const useImg = defineStore('img', () => {
   const isDragging = ref(false)
   const fileInputRef = ref(null)
 
-  const selectFiles = () => {
-    if (fileInputRef.value) {
-      fileInputRef.value.click()
-    }
-  }
-
   const onFileSelect = (event) => {
     const files = event.target.files
     processFiles(files)
@@ -44,7 +38,6 @@ export const useImg = defineStore('img', () => {
   return {
     isDragging,
     images,
-    selectFiles,
     fileInputRef,
     onFileSelect,
     onDragOver,
