@@ -21,7 +21,7 @@ const enderecoStore = useEndereco()
                     <ReservaComponent />
                 </div>
             </div>
-            <h1 class="titulo-lugar">{{ enderecoStore.dadosEndereco.numero }}</h1>
+            <h1 class="titulo-lugar">Salão de festa em Joinville, Brasil</h1>
             <p class="titulo-visitantes">Até 400 visitantes </p>
             <section class="descricao-e-loc">
                 <div>
