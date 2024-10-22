@@ -1,5 +1,6 @@
 <script setup>
 import { useModal } from '../../stores/dadosModal';
+
 const scrollTo = (id) => {
   const element = document.getElementById(id);
   if (element) {
