@@ -1,4 +1,5 @@
 <script setup>
+import { useModal } from '../../stores/dadosModal';
 const scrollTo = (id) => {
   const element = document.getElementById(id);
   if (element) {
@@ -10,12 +11,7 @@ defineProps({
   isModalOpen: Boolean,
 })
 
-const emit = defineEmits(['openModal']);
-
-
-function modal(){
- emit('openModal')
-}
+const modalStore = useModal()
 </script>
 
 <template>
@@ -23,13 +19,15 @@ function modal(){
     <router-link to="/" class="home-link"><img class="logo-img" src="../assets/logo.png" alt="" /></router-link>
     <a href="#card-section-title" @click.prevent="scrollTo('card-section-title')" class="nav-link">Alugar</a>
     <router-link to="/Reservas" id="Reservas-link" class="nav-link">Minhas reservas</router-link>
-
     <div class="search-bar">
       <i class="fa fa-search"></i>
       <input type="text" placeholder="Procure seu spot" class="search-input" />
     </div>
     <router-link to="/anunciar" id="anunciar-link" class="nav-link">Anunciar</router-link>
-    <button class="entrar-link" @click="modal">Entrar</button>
+    <div>
+      <button class="entrar-link" @click="modalStore.openLoginModal" v-if="modalStore.isUserLogado == false" >Entrar</button>
+      <img v-if="modalStore.isUserLogado" src="/src/assets/logo.png" alt="">
+    </div>
   </div>
   <div class="linha-container">
     <div class="linha-divisoria"></div>

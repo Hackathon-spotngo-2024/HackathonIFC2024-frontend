@@ -11,6 +11,8 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@vueuse/components": "^11.1.0",
+    "@vueuse/core": "^11.1.0",
     "leaflet": "^1.9.4",
     "pinia": "^2.2.4",
     "vue": "^3.4.29",

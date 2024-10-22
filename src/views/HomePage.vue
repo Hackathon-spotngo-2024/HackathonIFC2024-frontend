@@ -1,15 +1,14 @@
 <script setup>
+import { useModal } from '../../stores/dadosModal';
 import CadastroComponent from '@/components/CadastroComponent.vue';
-import { ref } from 'vue'
-const isModalOpen = ref(false)
-function openModal () {
-  isModalOpen.value = true
-}
+import LoginComponent from '@/components/LoginComponent.vue';
 
+const modalStore = useModal()
 </script>
 
 <template>
-  <CadastroComponent :openModal="openModal" />
+  <LoginComponent v-if="modalStore.showLoginModal"/>
+  <CadastroComponent v-if="modalStore.showRegisterModal"/>
   <BannerComponent />
   <CardSectionTitle />
   <div class="card-container">
