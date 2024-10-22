@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import L from 'leaflet' //Importando biblioteca Leaflet (mapa)
 import 'leaflet/dist/leaflet.css' //Importa o css da biblioteca
 import BotaoAvancarEVoltarComponent from '../BotaoAvancarEVoltarComponent.vue'
@@ -12,9 +12,33 @@ const enderecoSearch = ref('')
 const sugestoes = ref([])
 let map
 let marker
-let showForm = false
+const showForm = ref(false)
+const todosCamposVazios = Object.values(enderecoStore.dadosEndereco).every((campo) => campo === '') //Verifica se TODOS os campos do formulario estao vazios (retorna false 1 ou mais estiverem preenchidos)
+const algumCampoPreenchido = Object.values(enderecoStore.dadosEndereco).some((campo) => campo != '') //Verifica se qualquer campo esta preenchido
 
-//MAPA ------------------------------------------------------------------------------------------------------------
+watch(
+  () => showForm,
+  enderecoStore.dadosEndereco,
+  (newValue) => {
+    console.log(newValue)
+  },
+  { deep: true }
+)
+
+onMounted(() => {
+  if (todosCamposVazios) {
+    showForm.value = false //se todos estao vazios, o formulario nao aparece
+  }
+  else if (algumCampoPreenchido) {
+    showForm.value = true //se algum esta preenchido, o formulario aparece
+  }})
+
+defineProps({
+  proximaEtapa: Function,
+  etapaAnterior: Function
+})
+
+//MAPA -------------------------------------
 
 onMounted(() => {
   // Inicializa o mapa
@@ -27,12 +51,12 @@ onMounted(() => {
   }).addTo(map)
 })
 
+//MAPA ------------------------------------------------------------------------------------------------------------
 const trazerSugestoes = async () => {
   if (enderecoSearch.value.length < 3) {
     sugestoes.value = []
     return
   }
-
   try {
     console.log('Buscando sugestoes para: ', enderecoSearch.value)
     const response = await fetch(
@@ -54,7 +78,7 @@ const trazerSugestoes = async () => {
 const selecionarSugestao = (suggestion) => {
   const lat = suggestion.lat
   const lon = suggestion.lon
-  showForm = true
+  showForm.value = true
 
   // Extrai as partes do endereço
   const { road, house_number, suburb, city, state, country, postcode } = suggestion.address
@@ -102,9 +126,9 @@ const formatarEndereco = (endereco) => {
 </script>
 
 <template>
-  <div class="etapa-2-container">
+  <section class="etapa-2-container">
     <div class="titulo-principal-container">
-      <h1 class="titulo-etapa-2">{{ tituloEtapa2 }}</h1>
+      <h1 v-html="tituloEtapa2" class="titulo-etapa-2"></h1>
     </div>
     <div class="subtitulo-container">
       <p class="subtitulo">Insira o endereço pelo mapa.</p>
@@ -211,8 +235,8 @@ const formatarEndereco = (endereco) => {
     </div>
 
     <!-- BOTÕES -->
-    <BotaoAvancarEVoltarComponent />
-  </div>
+    <BotaoAvancarEVoltarComponent @avancar="enderecoStore.verificarFormulario" />
+  </section>
 </template>
 
 <style scoped>
@@ -224,6 +248,7 @@ const formatarEndereco = (endereco) => {
   padding-top: 6rem;
   width: 100%;
   gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .titulo-principal-container {
@@ -345,12 +370,5 @@ input[type='number']::-webkit-outer-spin-button,
 input[type='number']::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
-
-.campo-vazio-alert {
-  width: 500px;
-  display: flex;
-  justify-content: start;
-  color: var(--cor-texto-erro);
 }
 </style>

@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { useEtapa } from './dadosEtapa'
 
 export const useEndereco = defineStore('endereco', () => {
-  const dadosEndereco = ref({
+  const dadosEndereco = reactive ({
     pais: '',
     rua: '',
     numero: '',
@@ -11,8 +11,11 @@ export const useEndereco = defineStore('endereco', () => {
     estado: '',
     cidade: '',
     cep: '',
-    LimiteHospedes: 0,
-    preco: ''
+    LimiteVisitantes: 0,
+    preco: '',
+    titulo: '',
+    descricao: '',
+    imgs: []
   })
 
   const etapaStore = useEtapa()
@@ -21,16 +24,22 @@ export const useEndereco = defineStore('endereco', () => {
   let campoVazioAlert = ref(false)
 
   function verificarFormulario() {
-    if (dadosEndereco.value.pais == '' || dadosEndereco.value.rua == '' || dadosEndereco.value.numero == '' || dadosEndereco.value.bairro == '' || dadosEndereco.value.estado == '' || dadosEndereco.value.cidade == '' || dadosEndereco.value.cep == '') {
-      campoVazioAlert.value = true
-      console.log(dadosEndereco.value)
-    } else {
+  //   if (dadosEndereco.value.pais == '' || dadosEndereco.value.rua == '' || dadosEndereco.value.numero == '' || dadosEndereco.value.bairro == '' || dadosEndereco.value.estado == '' || dadosEndereco.value.cidade == '' || dadosEndereco.value.cep == '') {
+  //     campoVazioAlert.value = true
+  //   } else {
+  //     campoVazioAlert.value = false
       etapaStore.proximaEtapa()
-    }
+  //   }
   }
+
+  function atualizarDados(novosDados) {
+    this.dadosEndereco = { ...this.dadosEndereco, ...novosDados }
+  }
+
   return {
     dadosEndereco,
     verificarFormulario,
-    campoVazioAlert
+    campoVazioAlert,
+    atualizarDados
   }
 })
