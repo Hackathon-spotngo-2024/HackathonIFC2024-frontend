@@ -1,46 +1,16 @@
 <script setup>
-import { ref, computed } from 'vue'
-import AnunciarPasso1Component from '../components/AnunciarComponents/AnunciarPasso1Component.vue'
-import AnunciarPasso2Component from '../components/AnunciarComponents/AnunciarPasso2Component.vue'
-import AnunciarPasso3Component from '@/components/AnunciarComponents/AnunciarPasso3Component.vue'
-import AnunciarPasso4Component from '@/components/AnunciarComponents/AnunciarPasso4Component.vue'
+import { useEtapa } from '../../stores/dadosEtapa'
 
-const etapaAtual = ref(1);
-
-const componenteAtual = computed(() => {
-  switch (etapaAtual.value) {
-    case 1:
-      return AnunciarPasso1Component;
-    case 2:
-      return AnunciarPasso2Component;
-    case 3:
-      return AnunciarPasso3Component;
-    case 4:
-      return AnunciarPasso4Component;
-    default:
-      return AnunciarPasso1Component;
-  }
-})
-
-function proximaEtapa() {
-  etapaAtual.value++
-}
-
-function etapaAnterior() {
-  etapaAtual.value--
-}
-
+const etapaStore = useEtapa()
 
 </script>
 
 <template>
   <transition name="fade" mode="out-in">
     <component
-      v-if="componenteAtual"
-      :is="componenteAtual"
-      :etapaAnterior="etapaAnterior"
-      :proximaEtapa="proximaEtapa"
-      :key="etapaAtual"
+      v-if="etapaStore.componenteAtual"
+      :is="etapaStore.componenteAtual"
+      :key="etapaStore.etapaAtual"
     />
   </transition>
 </template>

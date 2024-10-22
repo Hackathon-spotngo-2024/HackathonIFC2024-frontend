@@ -1,23 +1,37 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import L from 'leaflet' //Importando biblioteca Leaflet (mapa)
 import 'leaflet/dist/leaflet.css' //Importa o css da biblioteca
+import BotaoAvancarEVoltarComponent from '../BotaoAvancarEVoltarComponent.vue'
+import { useEndereco } from '../../../stores/dadosEndereco'
+
+const enderecoStore = useEndereco()
 
 const tituloEtapa2 = ref('Onde fica sua locação?')
-const dadosEndereco = ref({
-  pais: '',
-  rua: '',
-  numero: '',
-  bairro: '',
-  estado: '',
-  cidade: '',
-  cep: ''
-})
 const enderecoSearch = ref('')
 const sugestoes = ref([])
 let map
 let marker
-let showForm = false
+const showForm = ref(false)
+const todosCamposVazios = Object.values(enderecoStore.dadosEndereco).every((campo) => campo === '') //Verifica se TODOS os campos do formulario estao vazios (retorna false 1 ou mais estiverem preenchidos)
+const algumCampoPreenchido = Object.values(enderecoStore.dadosEndereco).some((campo) => campo != '') //Verifica se qualquer campo esta preenchido
+
+watch(
+  () => showForm,
+  enderecoStore.dadosEndereco,
+  (newValue) => {
+    console.log(newValue)
+  },
+  { deep: true }
+)
+
+onMounted(() => {
+  if (todosCamposVazios) {
+    showForm.value = false //se todos estao vazios, o formulario nao aparece
+  }
+  else if (algumCampoPreenchido) {
+    showForm.value = true //se algum esta preenchido, o formulario aparece
+  }})
 
 defineProps({
   proximaEtapa: Function,
@@ -37,12 +51,12 @@ onMounted(() => {
   }).addTo(map)
 })
 
+//MAPA ------------------------------------------------------------------------------------------------------------
 const trazerSugestoes = async () => {
   if (enderecoSearch.value.length < 3) {
     sugestoes.value = []
     return
   }
-  
   try {
     console.log('Buscando sugestoes para: ', enderecoSearch.value)
     const response = await fetch(
@@ -51,10 +65,10 @@ const trazerSugestoes = async () => {
     if (!response.ok) {
       throw new Error(`Erro na resposta da API: ${response.status} -  ${response.statusText}`)
     }
-    
+
     const data = await response.json()
     console.log('Sugestoes recebidas: ', data)
-    
+
     sugestoes.value = data
   } catch (error) {
     console.error('Erro ao buscar sugestões:', error)
@@ -64,20 +78,19 @@ const trazerSugestoes = async () => {
 const selecionarSugestao = (suggestion) => {
   const lat = suggestion.lat
   const lon = suggestion.lon
-  showForm = true
+  showForm.value = true
 
   // Extrai as partes do endereço
-  const { house_number, road, suburb, city, state, country, postcode } = suggestion.address
-  dadosEndereco.value = {
-    pais: country || '',
-    rua: road || '',
-    numero: house_number || '',
-    bairro: suburb || '',
-    estado: state || '',
-    cidade: city || '',
-    cep: postcode || ''
-  }
-  const enderecoFormatado = formatarEndereco(dadosEndereco.value)
+  const { road, house_number, suburb, city, state, country, postcode } = suggestion.address
+  ;(enderecoStore.dadosEndereco.pais = country || ''),
+    (enderecoStore.dadosEndereco.rua = road || ''),
+    (enderecoStore.dadosEndereco.numero = house_number || ''),
+    (enderecoStore.dadosEndereco.bairro = suburb || ''),
+    (enderecoStore.dadosEndereco.estado = state || ''),
+    (enderecoStore.dadosEndereco.cidade = city || ''),
+    (enderecoStore.dadosEndereco.cep = postcode || '')
+
+  const enderecoFormatado = formatarEndereco(enderecoStore.dadosEndereco)
 
   // Centraliza o mapa nas coordenadas da sugestão selecionada
   map.setView([lat, lon], 13)
@@ -106,15 +119,16 @@ const formatarEndereco = (endereco) => {
     endereco.estado,
     endereco.pais,
     endereco.cep
-  ].filter(parte => parte.trim() !== '').join(', ') // Caso o dado nao seja informado (geralmente o numero), ele nao aparece, evitando "virgulas fantasmas"
+  ]
+    .filter((parte) => parte.trim() !== '')
+    .join(', ') // Caso o dado nao seja informado (geralmente o numero), ele nao aparece, evitando "virgulas fantasmas"
 }
-
 </script>
 
 <template>
-  <div class="etapa-2-container">
+  <section class="etapa-2-container">
     <div class="titulo-principal-container">
-      <h1 class="titulo-etapa-2">{{ tituloEtapa2 }}</h1>
+      <h1 v-html="tituloEtapa2" class="titulo-etapa-2"></h1>
     </div>
     <div class="subtitulo-container">
       <p class="subtitulo">Insira o endereço pelo mapa.</p>
@@ -133,17 +147,20 @@ const formatarEndereco = (endereco) => {
         <li
           v-for="(sugestao, index) in sugestoes"
           :key="index"
-          @click="selecionarSugestao(sugestao)">
+          @click="selecionarSugestao(sugestao)"
+        >
           <i class="fa-solid fa-building-flag"></i>
-        {{ formatarEndereco({
-        numero: sugestao.address.house_number || '',
-        rua: sugestao.address.road || '',
-        bairro: sugestao.address.suburb || '',
-        cidade: sugestao.address.city || '',
-        estado: sugestao.address.state || '',
-        pais: sugestao.address.country || '',
-        cep: sugestao.address.postcode || ''
-      }) }}
+          {{
+            formatarEndereco({
+              numero: sugestao.address.house_number || '',
+              rua: sugestao.address.road || '',
+              bairro: sugestao.address.suburb || '',
+              cidade: sugestao.address.city || '',
+              estado: sugestao.address.state || '',
+              pais: sugestao.address.country || '',
+              cep: sugestao.address.postcode || ''
+            })
+          }}
         </li>
       </ul>
       <div id="map" class="maps-container"></div>
@@ -153,64 +170,85 @@ const formatarEndereco = (endereco) => {
     <!-- FORMULÁRIO COM DADOS DO ENDEREÇO -->
     <form class="form-endereco" v-if="showForm == true">
       <div class="pais-wrapper">
-        <label for="pais">País</label>
-        <input type="text" name="pais" id="pais-input" v-model="dadosEndereco.pais" />
+        <label for="pais-input">País</label>
+        <input type="text" name="pais" id="pais-input" v-model="enderecoStore.dadosEndereco.pais" />
       </div>
       <div class="endereco-info">
         <div class="info-wrapper">
-          <label for="rua">Rua</label>
-          <input type="text" name="rua" id="rua-input" v-model="dadosEndereco.rua" />
+          <label for="estado-input">Estado</label>
+          <input
+            type="text"
+            name="estado"
+            id="estado-input"
+            v-model="enderecoStore.dadosEndereco.estado"
+          />
         </div>
         <div class="linha-divisoria"></div>
         <div class="info-wrapper">
-          <label for="numero">Número</label>
-          <input type="text" name="numero" id="numero-input" v-model="dadosEndereco.numero" />
+          <label for="cidade-input">Cidade</label>
+          <input
+            type="text"
+            name="cidade"
+            id="cidade-input"
+            v-model="enderecoStore.dadosEndereco.cidade"
+          />
         </div>
         <div class="linha-divisoria"></div>
         <div class="info-wrapper">
-          <label for="bairro">Bairro</label>
-          <input type="text" name="bairro" id="bairro-input" v-model="dadosEndereco.bairro" />
+          <label for="bairro-input">Bairro</label>
+          <input
+            type="text"
+            name="bairro"
+            id="bairro-input"
+            v-model="enderecoStore.dadosEndereco.bairro"
+          />
         </div>
         <div class="linha-divisoria"></div>
         <div class="info-wrapper">
-          <label for="estado">Estado</label>
-          <input type="text" name="estado" id="estado-input" v-model="dadosEndereco.estado" />
+          <label for="rua-input">Rua</label>
+          <input type="text" name="rua" id="rua-input" v-model="enderecoStore.dadosEndereco.rua" />
         </div>
         <div class="linha-divisoria"></div>
         <div class="info-wrapper">
-          <label for="cidade">Cidade</label>
-          <input type="text" name="cidade" id="cidade-input" v-model="dadosEndereco.cidade" />
+          <label for="numero-input">Número</label>
+          <input
+            type="text"
+            name="numero"
+            id="numero-input"
+            v-model="enderecoStore.dadosEndereco.numero"
+          />
         </div>
         <div class="linha-divisoria"></div>
         <div class="info-wrapper">
-          <label for="cep">CEP</label>
-          <input type="number" name="cep" id="cep-input" v-model="dadosEndereco.cep" />
+          <label for="cep-input">CEP</label>
+          <input
+            type="number"
+            name="cep"
+            id="cep-input"
+            v-model="enderecoStore.dadosEndereco.cep"
+          />
         </div>
       </div>
     </form>
+    <div class="campo-vazio-alert" v-if="enderecoStore.campoVazioAlert == true">
+      <p class="campo-vazio-text">Preencha todos os campos para prosseguir.</p>
+    </div>
 
     <!-- BOTÕES -->
-    <div class="botoes-wrapper">
-      <button class="voltar-btn" @click="etapaAnterior">
-        <i class="fa-solid fa-arrow-right-from-bracket"></i>
-      </button>
-      <button class="avancar-btn" @click="proximaEtapa">Avançar</button>
-    </div>
-  </div>
+    <BotaoAvancarEVoltarComponent @avancar="enderecoStore.verificarFormulario" />
+  </section>
 </template>
 
 <style scoped>
-
 .etapa-2-container {
   display: flex;
   flex-direction: column;
-  align-self: center;
-  justify-self: center;
   justify-content: center;
   align-items: center;
-  margin-top: 6rem;
+  padding-top: 6rem;
   width: 100%;
   gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .titulo-principal-container {
@@ -286,58 +324,6 @@ label {
   height: 1px;
 }
 
-.botoes-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-  align-items: center;
-  width: 100%;
-  width: 500px;
-  gap: 30px; /* Medida exata para o avancar-btn ficar centralizado (500 - 50 - 350 - 30px) */
-  margin-top: 2rem;
-}
-
-.voltar-btn {
-  cursor: pointer;
-  width: 50px;
-  height: 50px;
-  border-radius: 20px;
-  border: 0;
-  color: var(--preto-alternativo);
-  background-color: var(--cor-voltar-btn);
-  font-size: 24px;
-  transition: 300ms ease;
-}
-
-.voltar-btn:hover {
-  background-color: var(--cor-voltar-btn-hover);
-  transform: scale(1.01);
-  color: var(--cor-voltar-btn);
-  background-color: var(--preto-alternativo);
-}
-
-.fa-solid.fa-arrow-right-from-bracket {
-  transform: rotate(180deg);
-}
-
-.avancar-btn {
-  cursor: pointer;
-  width: 350px;
-  height: 70px;
-  background-color: var(--cor-principal);
-  border-radius: 40px;
-  border: 0;
-  color: white;
-  font-size: 2rem;
-  font-weight: bold;
-  transition: 300ms ease;
-}
-
-.avancar-btn:hover {
-  background-color: var(--cor-principal-hover);
-  transform: scale(1.01);
-}
-
 #map {
   height: 400px;
   width: 100%;
@@ -380,9 +366,9 @@ label {
   background-color: #f0f0f0;
 }
 
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 </style>

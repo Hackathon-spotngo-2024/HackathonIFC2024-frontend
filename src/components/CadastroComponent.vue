@@ -1,25 +1,40 @@
 <script setup>
-import { reactive } from 'vue'
+import { reactive, ref, computed } from 'vue';
+import LoginComponent from './LoginComponent.vue';
+
+defineProps(['modal', 'title']);
+
+const open = ref(false);
+
+const emit = defineEmits(['closeModal']);
+
 const user = reactive({
   name: '',
   senha: ''
-})
+});
 
-let isModalOpen = false
-
-function openModal () {
-  isModalOpen = true
+const closeModal = () => {
+  emit('closeModal')
 }
+
+const blurClass = computed(() =>
+  (open.value ? 'divBlur' : ''));
+
+function openRegister() {
+  emit('closeModal')
+  open.value = true
+}
+
 </script>
 
 <template>
-  <button @click="openModal">Abrir modal (provisorio)</button>
-  <div class="modal" v-if="isModalOpen == true">
+  <LoginComponent v-if="open" />
+  <div class="modal" v-if="modal">
     <div class="form-container">
       <div @click="closeModal" class="fechar">
-        <span class="fa fa-close"></span>
+        <span class="fa fa-x"></span>
       </div>
-      <div class="container-interno">
+      <div class="containerInterno">
         <div class="logoLogin">
           <img class="imgLogin" src="../assets/LogoSimples.png" alt="Logo" />
         </div>
@@ -35,13 +50,7 @@ function openModal () {
 
           <div class="form-item">
             <label for="senha">Senha</label>
-            <input
-              type="password"
-              name="senha"
-              id="senha"
-              v-model="user.senha"
-              placeholder="Senha"
-            />
+            <input type="password" name="senha" id="senha" v-model="user.senha" placeholder="Senha" />
           </div>
 
           <button>Continuar</button>
@@ -61,7 +70,8 @@ function openModal () {
               <hr />
             </div>
             <p class="textoFinal">
-              Ainda não está no Spot'n Go? <a class="link" href="">Crie uma conta</a>
+              Ainda não está no Spot'n Go?
+              <span class="cadastro" @click="openRegister()">Crie uma conta</span>
             </p>
           </div>
         </div>
@@ -71,7 +81,6 @@ function openModal () {
 </template>
 
 <style scoped>
-
 .modal {
   backdrop-filter: blur(5px);
   position: fixed;
@@ -106,10 +115,10 @@ function openModal () {
   display: flex;
   justify-content: end;
   margin: 1rem 1rem 0 0;
+  cursor: pointer;
 }
 
 .fa.fa-close {
-  cursor: pointer;
   width: 2rem;
   height: 2rem;
   align-content: center;
@@ -167,6 +176,11 @@ button {
   color: #f2f2f2;
   font-weight: bold;
   font-size: 15px;
+}
+
+.cadastro {
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .api {
