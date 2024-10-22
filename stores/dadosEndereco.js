@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { useEtapa } from './dadosEtapa'
 
 export const useEndereco = defineStore('endereco', () => {
-  const dadosEndereco = ref({
+  const dadosEndereco = reactive ({
     pais: '',
     rua: '',
     numero: '',
@@ -14,7 +14,8 @@ export const useEndereco = defineStore('endereco', () => {
     LimiteVisitantes: 0,
     preco: '',
     titulo: '',
-    descricao: ''
+    descricao: '',
+    imgs: []
   })
 
   const etapaStore = useEtapa()
@@ -34,6 +35,7 @@ export const useEndereco = defineStore('endereco', () => {
   function atualizarDados(novosDados) {
     this.dadosEndereco = { ...this.dadosEndereco, ...novosDados }
   }
+
   return {
     dadosEndereco,
     verificarFormulario,

@@ -18,8 +18,7 @@ function openModal() {
   <router-view></router-view>
   <RodapeComponent />
  </template>
- 
- 
+
  <style scoped>
  
  
