@@ -22,12 +22,24 @@ const modalStore = useModal()
           <div class="conteudo">
             <div class="form-item">
               <label for="email">E-mail</label>
-              <input type="text" name="name" id="email" v-model="modalStore.dadosUser.email" placeholder="E-mail" />
+              <input
+                type="text"
+                name="name"
+                id="email"
+                v-model="modalStore.dadosUser.email"
+                placeholder="E-mail"
+              />
             </div>
 
             <div class="form-item">
               <label for="senha">Senha</label>
-              <input type="password" name="senha" id="senha" v-model="modalStore.dadosUser.senha" placeholder="Senha" />
+              <input
+                type="password"
+                name="senha"
+                id="senha"
+                v-model="modalStore.dadosUser.senha"
+                placeholder="Senha"
+              />
             </div>
 
             <button @click="modalStore.logar()">Continuar</button>
@@ -42,8 +54,14 @@ const modalStore = useModal()
               <div class="criar-conta-wrapper">
                 <p class="textoFinal">Ainda não está no Spot'n Go?</p>
                 <p>
-                  <span @click="modalStore.closeLoginModal(); modalStore.openRegisterModal()" class="cadastro">Crie uma
-                    conta</span>
+                  <span
+                    @click="
+                      modalStore.closeLoginModal(),
+                      modalStore.openRegisterModal()
+                    "
+                    class="cadastro"
+                    >Crie uma conta</span
+                  >
                 </p>
               </div>
             </div>
@@ -182,6 +200,8 @@ button:active {
 }
 
 .campo-vazio-alert {
+  display: flex;
+  justify-content: center;
   margin-top: 10px;
   color: var(--cor-texto-erro);
 }

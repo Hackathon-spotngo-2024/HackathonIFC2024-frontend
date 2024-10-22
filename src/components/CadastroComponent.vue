@@ -212,6 +212,8 @@ const modalStore = useModal()
 }
 
 .campo-vazio-alert {
+  display: flex;
+justify-content: center;
   margin-top: 10px;
   color: var(--cor-texto-erro);
 }
