@@ -19,14 +19,20 @@ export const useEndereco = defineStore('endereco', () => {
     imgs: []
   })
 
-  function publicarAnuncio() {
+  const anunciosCriados = ref([])
+
+  function addAnuncio() {
     if (dadosEndereco.titulo == '' || dadosEndereco.preco == '' || dadosEndereco.imgs == []) {
       campoVazioAlert.value = true
       return
     }
+    else {
+      anunciosCriados.value.push(dadosEndereco)
+      dadosEndereco.id = anunciosCriados.value.length
+      console.log(anunciosCriados.value)
+    }
   }
 
-  const anunciosCriados = ref([])
 
   const etapaStore = useEtapa()
 
@@ -51,6 +57,6 @@ export const useEndereco = defineStore('endereco', () => {
     verificarFormulario,
     campoVazioAlert,
     atualizarDados,
-    publicarAnuncio
+    addAnuncio
   }
 })
