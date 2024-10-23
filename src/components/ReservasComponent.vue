@@ -5,21 +5,21 @@ const reservas = [
          dataInicio: '20/09/23',
          dataFim: '25/09/23',
          localizacao: 'Vila Nova - Jlle',
-         imagem: 'src/assets/card-imgs/card-img-1.jpeg'
+         imagem: '../src/assets/card-imgs/card-img-1.jpeg'
         },
         {
          titulo: 'Salão para casamento',
          dataInicio: '20/09/23',
          dataFim: '25/09/23',
          localizacao: 'Vila Nova - Jlle',
-         imagem: 'src/assets/card-imgs/card-img-1.jpeg'
+         imagem: '../src/assets/card-imgs/card-img-1.jpeg'
         },
         {
          titulo: 'Salão para casamento',
          dataInicio: '20/09/23',
          dataFim: '25/09/23',
          localizacao: 'Vila Nova - Jlle',
-         imagem: 'src/assets/card-imgs/card-img-1.jpeg'
+         imagem: '../src/assets/card-imgs/card-img-1.jpeg'
         }
 ];
 </script>
