@@ -29,7 +29,7 @@ export const useEndereco = defineStore('endereco', () => {
     else {
       anunciosCriados.value.push(dadosEndereco)
       dadosEndereco.id = anunciosCriados.value.length
-      console.log(anunciosCriados.value)
+      console.log(dadosEndereco.imgs[1])
     }
   }
 

@@ -14,14 +14,6 @@ function openModal () {
   <CardSectionTitle />
   <div class="card-container">
     <CardComponent />
-    <CardComponent />
-    <CardComponent />
-    <CardComponent />
-    <CardComponent />
-    <CardComponent />
-    <CardComponent />
-    <CardComponent />
-    <CardComponent />
   </div>
 </template>
 
