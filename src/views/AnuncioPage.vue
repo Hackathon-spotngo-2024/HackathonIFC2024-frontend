@@ -2,8 +2,10 @@
 import DescricaoComponent from '@/components/DescricaoComponent.vue';
 import ImagensComponent from '@/components/ImagensComponent.vue';
 import LocalizaçãoComponent from '@/components/LocalizaçãoComponent.vue';
-import ReservaComponent from '@/components/ReservaComponent.vue'; 
+import ReservaComponent from '@/components/ReservaComponent.vue';
+import { useEndereco } from '../../stores/dadosEndereco';
 
+const enderecoStore = useEndereco()
 
 </script>
 

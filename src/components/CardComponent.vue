@@ -4,12 +4,14 @@ import imgCard1 from '../assets/card-imgs/card-img-1.jpeg'
 
 <template>
   <div class="card">
-    <div class="card-img"><img :src="imgCard1" alt="Imagem do Card" /></div>
-    <div class="card-infos">
-      <div class="card-titulo">Exemplo titulo</div>
-      <div class="card-preco">R$xx,xx por dia</div>
-      <div class="card-loc">Exemplo localização</div>
-    </div>
+    <router-link to="/anuncio" class="link">
+      <div class="card-img"><img :src="imgCard1" alt="" /></div>
+      <div class="card-infos">
+        <div class="card-titulo">Exemplo titulo</div>
+        <div class="card-preco">R$xx,xx por dia</div>
+        <div class="card-loc">Exemplo localização</div>
+      </div>
+    </router-link>
   </div>
 </template>
 
@@ -29,7 +31,7 @@ import imgCard1 from '../assets/card-imgs/card-img-1.jpeg'
   padding: 1rem;
 }
 
-.card-img > img {
+.card-img>img {
   width: 100%;
   height: auto;
   border-radius: 15px;
@@ -71,16 +73,18 @@ import imgCard1 from '../assets/card-imgs/card-img-1.jpeg'
 }
 
 @media (max-width: 576px) {
+
   .card-titulo,
   .card-preco,
   .card-loc {
     font-size: 0.8rem;
   }
 
-  .card-img > img {
+  .card-img>img {
     border-radius: 10px;
   }
 }
+
 .link {
   text-decoration: none;
   color: black;
