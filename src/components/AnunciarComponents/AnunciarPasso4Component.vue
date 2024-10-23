@@ -1,7 +1,8 @@
 <script setup>
 import { useEtapa } from '../../../stores/dadosEtapa'
 import { useEndereco } from '../../../stores/dadosEndereco'
-import UploadImagemComponent from '../UploadImagemComponent.vue';
+import UploadImagemComponent from '../UploadImagemComponent.vue'
+import CampoVazioAlertComponent from '../CampoVazioAlertComponent.vue'
 const etapaStore = useEtapa()
 const enderecoStore = useEndereco()
 </script>
@@ -48,9 +49,12 @@ const enderecoStore = useEndereco()
           <button class="voltar-btn" @click="etapaStore.etapaAnterior">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
           </button>
-          <button class="avancar-btn" @click="handleClickAvancar">Publicar</button>
+          <button class="avancar-btn" @click="enderecoStore.publicarAnuncio">Publicar</button>
         </div>
       </div>
+    </div>
+    <div class="campo-vazio-container">
+      <CampoVazioAlertComponent v-if="enderecoStore.campoVazioAlert" />
     </div>
   </section>
 </template>
@@ -213,5 +217,14 @@ p {
 
 .avancar-btn:hover {
   background-color: var(--cor-principal-hover);
+}
+
+.campo-vazio-container {
+  width: 960px;
+  height: 2rem;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: end;
+  align-items: center;
 }
 </style>

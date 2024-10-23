@@ -2,7 +2,8 @@
 import BotaoAvancarEVoltarComponent from '../BotaoAvancarEVoltarComponent.vue'
 import { watch, onMounted, ref } from 'vue'
 import { useEndereco } from '../../../stores/dadosEndereco'
-import { useEtapa } from '../../../stores/dadosEtapa';
+import { useEtapa } from '../../../stores/dadosEtapa'
+import CampoVazioAlertComponent from '../CampoVazioAlertComponent.vue'
 
 const isBotaoPequeno = ref(true)
 const enderecoStore = useEndereco()
@@ -29,16 +30,18 @@ function ajustarTamanhoInput() {
   inputElement.style.width = `${textLength}ch` //Aqui ele finaliza ajustando o css do input, colocando o tamanho do texto como a quantidade de caracteres (ch)
 }
 
-const verificarEtapa3 = (() => {
-  if (enderecoStore.dadosEndereco.LimiteVisitantes == 0 || enderecoStore.dadosEndereco.preco == '') {
+const verificarEtapa3 = () => {
+  if (
+    enderecoStore.dadosEndereco.LimiteVisitantes == 0 ||
+    enderecoStore.dadosEndereco.preco == ''
+  ) {
     enderecoStore.campoVazioAlert = true
     return
-  }
-  else {
+  } else {
     enderecoStore.campoVazioAlert = false
     etapaStore.proximaEtapa()
   }
-})
+}
 
 watch(() => enderecoStore.dadosEndereco.preco, ajustarTamanhoInput)
 onMounted(ajustarTamanhoInput)
@@ -81,9 +84,7 @@ onMounted(ajustarTamanhoInput)
           class="avancar-e-voltar-botoes"
           @avancar="verificarEtapa3"
         />
-        <div class="campo-vazio-alert" v-if="enderecoStore.campoVazioAlert == true">
-      <p class="campo-vazio-text">Preencha todos os campos para prosseguir.</p>
-    </div>
+        <CampoVazioAlertComponent v-if="enderecoStore.campoVazioAlert"/>
       </div>
 
       <div class="imagem-casa">
@@ -201,10 +202,9 @@ input[type='number']::-webkit-inner-spin-button {
   appearance: none;
 }
 
-input[type=number] { 
-   -moz-appearance: textfield;
-   appearance: textfield;
-
+input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 ::-webkit-input-placeholder {

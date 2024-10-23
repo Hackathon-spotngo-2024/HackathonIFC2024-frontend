@@ -3,6 +3,7 @@ import { onMounted, ref, watch } from 'vue'
 import L from 'leaflet' //Importando biblioteca Leaflet (mapa)
 import 'leaflet/dist/leaflet.css' //Importa o css da biblioteca
 import BotaoAvancarEVoltarComponent from '../BotaoAvancarEVoltarComponent.vue'
+import CampoVazioAlertComponent from '../CampoVazioAlertComponent.vue'
 import { useEndereco } from '../../../stores/dadosEndereco'
 
 const enderecoStore = useEndereco()
@@ -230,9 +231,7 @@ const formatarEndereco = (endereco) => {
         </div>
       </div>
     </form>
-    <div class="campo-vazio-alert" v-if="enderecoStore.campoVazioAlert == true">
-      <p class="campo-vazio-text">Preencha todos os campos para prosseguir.</p>
-    </div>
+    <CampoVazioAlertComponent v-if="enderecoStore.campoVazioAlert"/>
 
     <!-- BOTÕES -->
     <BotaoAvancarEVoltarComponent @avancar="enderecoStore.verificarFormulario" />

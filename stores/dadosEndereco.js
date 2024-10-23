@@ -4,6 +4,7 @@ import { useEtapa } from './dadosEtapa'
 
 export const useEndereco = defineStore('endereco', () => {
   const dadosEndereco = reactive ({
+    id: 0,
     pais: '',
     rua: '',
     numero: '',
@@ -18,18 +19,27 @@ export const useEndereco = defineStore('endereco', () => {
     imgs: []
   })
 
+  function publicarAnuncio() {
+    if (dadosEndereco.titulo == '' || dadosEndereco.preco == '' || dadosEndereco.imgs == []) {
+      campoVazioAlert.value = true
+      return
+    }
+  }
+
+  const anunciosCriados = ref([])
+
   const etapaStore = useEtapa()
 
   //VERIFICACAO DO FORMULARIO -------------------------------------------------------------------
   let campoVazioAlert = ref(false)
 
   function verificarFormulario() {
-  //   if (dadosEndereco.value.pais == '' || dadosEndereco.value.rua == '' || dadosEndereco.value.numero == '' || dadosEndereco.value.bairro == '' || dadosEndereco.value.estado == '' || dadosEndereco.value.cidade == '' || dadosEndereco.value.cep == '') {
-  //     campoVazioAlert.value = true
-  //   } else {
-  //     campoVazioAlert.value = false
+    // if (dadosEndereco.pais == '' || dadosEndereco.rua == '' || dadosEndereco.numero == '' || dadosEndereco.bairro == '' || dadosEndereco.estado == '' || dadosEndereco.cidade == '' || dadosEndereco.cep == '') {
+    //   campoVazioAlert.value = true
+    // } else {
+      // campoVazioAlert.value = false
       etapaStore.proximaEtapa()
-  //   }
+    // }
   }
 
   function atualizarDados(novosDados) {
@@ -40,6 +50,7 @@ export const useEndereco = defineStore('endereco', () => {
     dadosEndereco,
     verificarFormulario,
     campoVazioAlert,
-    atualizarDados
+    atualizarDados,
+    publicarAnuncio
   }
 })
