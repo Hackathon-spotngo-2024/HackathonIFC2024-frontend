@@ -34,7 +34,6 @@
 <style scoped>
 .reservation-card {
   max-width: 315px; /* Ajuste de largura para ficar próximo ao da imagem */
-  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   margin: 0 auto;
 }
@@ -69,7 +68,6 @@
 .date-range {
   display: flex;
   justify-content: space-between;
-  font-family: 'Inter', sans-serif;
   font-weight: 400;
   white-space: nowrap;
   width: 100%;
