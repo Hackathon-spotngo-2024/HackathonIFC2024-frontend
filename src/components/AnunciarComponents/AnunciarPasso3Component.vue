@@ -44,7 +44,10 @@ const verificarEtapa3 = () => {
 }
 
 watch(() => enderecoStore.dadosEndereco.preco, ajustarTamanhoInput)
-onMounted(ajustarTamanhoInput)
+onMounted(() => {
+  enderecoStore.setarDadosLocalStorage()
+  ajustarTamanhoInput
+})
 </script>
 
 <template>
