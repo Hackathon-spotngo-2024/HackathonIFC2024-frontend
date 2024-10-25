@@ -1,13 +1,16 @@
 <script setup>
+import { useEndereco } from '../../stores/dadosEndereco';
+
+const enderecoStore = useEndereco()
 </script>
 
 <template>
   <div class="container">
-    <div class="imagem-grande" id="left-radius"><img src="/public/salaocasamento.jpg" alt=""></div>
-    <div class="imagem-pequena"><img src="/public/salaocasamento1.jpeg" alt=""></div>
-    <div class="imagem-pequena" id="top-right-radius"><img id="top-right-radius" src="/public/salaocasamento2.jpg" alt=""></div>
-    <div class="imagem-pequena"><img src="/public/salaocasamento3.jpg" alt=""></div>
-    <div class="imagem-pequena" id="bottom-right-radius"><img id="bottom-right-radius" src="/public/salaocasamento4.jpeg" alt=""></div>
+    <div class="imagem-grande" id="left-radius"><img :src="enderecoStore.dadosAnuncio.imgs[0]" alt=""></div>
+    <div class="imagem-pequena"><img :src="enderecoStore.dadosAnuncio.imgs[1]" alt=""></div>
+    <div class="imagem-pequena" id="top-right-radius"><img id="top-right-radius" :src="enderecoStore.dadosAnuncio.imgs[2]" alt=""></div>
+    <div class="imagem-pequena"><img :src="enderecoStore.dadosAnuncio.imgs[3]" alt=""></div>
+    <div class="imagem-pequena" id="bottom-right-radius"><img id="bottom-right-radius" :src="enderecoStore.dadosAnuncio.imgs[4]" alt=""></div>
   </div>
 </template>
 

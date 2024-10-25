@@ -12,7 +12,7 @@ export const useEndereco = defineStore('endereco', () => {
     estado: '',
     cidade: '',
     cep: '',
-    LimiteVisitantes: 0,
+    limiteVisitantes: 0,
     preco: '',
     titulo: '',
     descricao: '',
@@ -23,6 +23,7 @@ export const useEndereco = defineStore('endereco', () => {
   const etapaStore = useEtapa()
 
   const anunciosCriados = ref([])
+  const dadosAnuncio = ref(null)
 
   function setarDadosLocalStorage() {
     window.localStorage.setItem('DadosEndereco', JSON.stringify(dadosEndereco)) // Apresenta os dados preenchidos no local Storage
@@ -34,15 +35,15 @@ export const useEndereco = defineStore('endereco', () => {
       return
     } else {
       const stringDados = window.localStorage.getItem('DadosEndereco') // Pega os dados que estao atualmente no storage
-      const dadosAnuncio = JSON.parse(stringDados) // Os dados vem em string, JSON.parse() os transforma em objeto
+      dadosAnuncio.value = JSON.parse(stringDados) // Os dados vem em string, JSON.parse() os transforma em objeto
       console.log('StringDados: ' + stringDados)
       
-      anunciosCriados.value.push(dadosAnuncio) // Pusha o objeto dos dados para o array de anuncios
-      dadosAnuncio.id = anunciosCriados.value.length // Determina o id para o numero de anuncios que tem (ex: se tem 2 anuncios, o id do primeiro ja passou por aqui e é 1, o segundo passou de novo e é 2)
+      anunciosCriados.value.push(dadosAnuncio.value) // Pusha o objeto dos dados para o array de anuncios
+      dadosAnuncio.value.id = anunciosCriados.value.length // Determina o id para o numero de anuncios que tem (ex: se tem 2 anuncios, o id do primeiro ja passou por aqui e é 1, o segundo passou de novo e é 2)
       console.log(anunciosCriados)
 
       setarDadosLocalStorage() // Coloca os dados no localStorage
-      window.localStorage.setItem('DadosAnuncio', JSON.stringify(dadosAnuncio))
+      window.localStorage.setItem('DadosAnuncio', JSON.stringify(dadosAnuncio.value))
     }
   }
 
@@ -60,6 +61,8 @@ export const useEndereco = defineStore('endereco', () => {
     verificarFormulario,
     campoVazioAlert,
     addAnuncio,
-    setarDadosLocalStorage
+    setarDadosLocalStorage,
+    anunciosCriados,
+    dadosAnuncio
   }
 })

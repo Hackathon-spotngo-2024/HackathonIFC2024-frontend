@@ -12,7 +12,7 @@ const enderecoStore = useEndereco()
 <template>
     <div class="pagina">
         <section class="container-geral">
-            <h1 class="titulo">Salão de Casamento</h1>
+            <h1 class="titulo">{{ enderecoStore.dadosAnuncio.titulo }}</h1>
             <div class="container-reserva">
                 <div class="imagens-component">
                     <ImagensComponent />
@@ -21,8 +21,8 @@ const enderecoStore = useEndereco()
                     <ReservaComponent />
                 </div>
             </div>
-            <h1 class="titulo-lugar">Salão de festa em Joinville, Brasil</h1>
-            <p class="titulo-visitantes">Até 400 visitantes </p>
+            <h1 class="titulo-lugar">{{ enderecoStore.dadosAnuncio.cidade }}, {{ enderecoStore.dadosAnuncio.estao }}</h1>
+            <p class="titulo-visitantes">Até {{ enderecoStore.dadosAnuncio.limiteVisitantes }} visitantes </p>
             <section class="descricao-e-loc">
                 <div>
                     <DescricaoComponent />

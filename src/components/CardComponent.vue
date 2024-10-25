@@ -7,7 +7,7 @@ const enderecoStore = useEndereco()
 <template>
   <div class="card">
     <router-link to="/anuncio" class="link">
-      <div class="card-img"><img :src="enderecoStore.dadosEndereco.imgs[1]" alt="" /></div>
+      <div class="card-img"><img :src="enderecoStore.dadosEndereco.imgs[0]" alt="" /></div>
       <div class="card-infos">
         <div class="card-titulo">Exemplo titulo</div>
         <div class="card-preco">R$xx,xx por dia</div>

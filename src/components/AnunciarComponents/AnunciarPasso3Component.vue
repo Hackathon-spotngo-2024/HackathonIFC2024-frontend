@@ -12,13 +12,13 @@ const tituloEtapa3 = ref('Mais algumas informações<br>sobre sua acomodação')
 const precoInput = ref(null) //Referencia o input do preço
 
 function adicionarVisitante() {
-  enderecoStore.dadosEndereco.LimiteVisitantes++
+  enderecoStore.dadosEndereco.limiteVisitantes++
 }
 
 function reduzirVisitante() {
-  enderecoStore.dadosEndereco.LimiteVisitantes--
-  if (enderecoStore.dadosEndereco.LimiteVisitantes < 0)
-    enderecoStore.dadosEndereco.LimiteVisitantes = 0
+  enderecoStore.dadosEndereco.limiteVisitantes--
+  if (enderecoStore.dadosEndereco.limiteVisitantes < 0)
+    enderecoStore.dadosEndereco.limiteVisitantes = 0
 }
 
 function ajustarTamanhoInput() {
@@ -32,7 +32,7 @@ function ajustarTamanhoInput() {
 
 const verificarEtapa3 = () => {
   if (
-    enderecoStore.dadosEndereco.LimiteVisitantes == 0 ||
+    enderecoStore.dadosEndereco.limiteVisitantes == 0 ||
     enderecoStore.dadosEndereco.preco == ''
   ) {
     enderecoStore.campoVazioAlert = true
@@ -64,7 +64,7 @@ onMounted(() => {
           >
           <div class="botoes-visitantes">
             <input type="button" class="botao-visitantes" value="-" @click="reduzirVisitante" />
-            <p class="numero-visitantes">{{ enderecoStore.dadosEndereco.LimiteVisitantes }}</p>
+            <p class="numero-visitantes">{{ enderecoStore.dadosEndereco.limiteVisitantes }}</p>
             <input type="button" class="botao-visitantes" value="+" @click="adicionarVisitante" />
           </div>
         </div>

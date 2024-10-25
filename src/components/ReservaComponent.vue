@@ -1,13 +1,15 @@
 <script setup>
+import { useEndereco } from '../../stores/dadosEndereco';
+
+const enderecoStore = useEndereco()
 </script>
 
 <template>
   <section class="reservation-card">
     <div class="card-content">
       <h2 class="price">
-        R$2000 <span class="price-period">por dia</span>
+        R${{ enderecoStore.dadosAnuncio.preco }} <span class="price-period">por dia</span>
       </h2>
-      <p class="frequency">Semanal</p>
       <div class="date-range">
         <div class="date-input start-date">
           <div class="date-wrapper">
