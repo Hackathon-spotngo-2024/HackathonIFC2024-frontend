@@ -26,7 +26,11 @@ const modalStore = useModal()
     <router-link to="/anunciar" id="anunciar-link" class="nav-link">Anunciar</router-link>
     <div>
       <button class="entrar-link" @click="modalStore.openLoginModal" v-if="modalStore.isUserLogado == false" >Entrar</button>
-      <img v-if="modalStore.isUserLogado" src="/src/assets/logo.png" alt="">
+      <div class="imgUsuario" v-if="modalStore.isUserLogado" >
+      <router-link to="/Reservas" id="Reservas-link">
+        <img class="imgUsuario"  src="/src/assets/usuario.png" alt="">
+      </router-link>
+    </div>
     </div>
   </div>
   <div class="linha-container">
@@ -35,12 +39,18 @@ const modalStore = useModal()
 </template>
 
 <style scoped>
+
+.imgUsuario{
+  height: 40px;
+  width: 40px;
+}
+
 .nav-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 1rem 10rem 0 10rem;
+  margin: 1rem 1rem ;
   border-radius: 40px;
   padding: .5rem;
   box-shadow: 1px 3px 8px 3px rgba(0, 0, 0, 0.08);
@@ -105,10 +115,14 @@ button {
   background-color: var(--cor-principal-hover);
 }
 
+
+
 .logo-img {
   width: 200px;
   height: 40px;
 }
+
+
 
 .search-bar {
   width: 25rem;
