@@ -1,25 +1,18 @@
 <script setup>
-import { useEndereco } from '../../stores/dadosEndereco';
-
-const enderecoStore = useEndereco()
 </script>
 
 <template>
-<div class="cards-container">
-  <div 
-    class="card"
-  >
-    <router-link :to="{ name: 'AnuncioPage', params: { id: enderecoStore.anunciosCriados.id } }" class="link">
-      <div class="card-img">
-        <img :src="enderecoStore.anunciosCriados.imgs[0]" alt="" />
-      </div>
-      <div class="card-infos">
-        <div class="card-titulo">{{ enderecoStore.anunciosCriados.titulo }}</div>
-        <div class="card-preco">{{ 'R$' + enderecoStore.anunciosCriados.preco + ',00' }}</div>
-        <div class="card-loc">{{ enderecoStore.anunciosCriados.cidade + ', ' +enderecoStore.anunciosCriados.estado }}</div>
-      </div>
-    </router-link>
-  </div>
+<div class="card">
+  <router-link to="/anuncio" class="link">
+    <div class="card-img">
+      <img src="/public/salaocasamento1.jpeg" />
+    </div>
+    <div class="card-infos">
+      <div class="card-titulo">Salão de festas</div>
+      <div class="card-preco">R$129,00</div>
+      <div class="card-loc">Joinville, Santa Catarina</div>
+    </div>
+  </router-link>
 </div>
 </template>
 

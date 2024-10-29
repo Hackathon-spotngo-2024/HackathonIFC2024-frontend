@@ -36,14 +36,29 @@ export const useEndereco = defineStore('endereco', () => {
     } else {
       const stringDados = window.localStorage.getItem('DadosEndereco') // Pega os dados que estao atualmente no storage
       dadosAnuncio.value = JSON.parse(stringDados) // Os dados vem em string, JSON.parse() os transforma em objeto
-      console.log('StringDados: ' + stringDados)
       
-      anunciosCriados.value.push(dadosAnuncio.value) // Pusha o objeto dos dados para o array de anuncios
-      dadosAnuncio.value.id = anunciosCriados.value.length // Determina o id para o numero de anuncios que tem (ex: se tem 2 anuncios, o id do primeiro ja passou por aqui e é 1, o segundo passou de novo e é 2)
+      dadosAnuncio.value.id = anunciosCriados.value.length + 1 // Determina o id para o numero de anuncios que tem (ex: se tem 2 anuncios, o id do primeiro ja passou por aqui e é 1, o segundo passou de novo e é 2)
+      anunciosCriados.value.push({ ...dadosAnuncio.value }) // Pusha o objeto dos dados para o array de anuncios
       console.log(anunciosCriados)
 
-      setarDadosLocalStorage() // Coloca os dados no localStorage
-      window.localStorage.setItem('DadosAnuncio', JSON.stringify(dadosAnuncio.value))
+      // setarDadosLocalStorage() // Coloca os dados no localStorage
+      window.localStorage.setItem('DadosAnuncio', JSON.stringify(anunciosCriados.value))
+      dadosEndereco.value = {
+        id: 0,
+        pais: '',
+        rua: '',
+        numero: '',
+        bairro: '',
+        estado: '',
+        cidade: '',
+        cep: '',
+        limiteVisitantes: 0,
+        preco: '',
+        titulo: '',
+        descricao: '',
+        imgs: []
+      }
+      console.log(dadosEndereco.value)
     }
   }
 
@@ -63,6 +78,6 @@ export const useEndereco = defineStore('endereco', () => {
     addAnuncio,
     setarDadosLocalStorage,
     anunciosCriados,
-    dadosAnuncio
+    dadosAnuncio,
   }
 })
