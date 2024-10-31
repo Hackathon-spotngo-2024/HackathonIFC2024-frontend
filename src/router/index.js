@@ -25,7 +25,7 @@ const router = createRouter({
       component: AnuncioPage,
     },
     {
-     path: "/Reservas",
+     path: "/minhas-reservas",
      name: "ReservasPage",
      component: ReservasPage,
     },

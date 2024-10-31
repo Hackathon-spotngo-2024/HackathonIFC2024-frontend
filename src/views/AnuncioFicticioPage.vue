@@ -26,7 +26,7 @@ import LocalizaçãoComponent from '@/components/LocalizaçãoComponent.vue'
         <section class="reserva-component-e-descricao">
           <section class="descricao-container">
             <div class="titulos">
-              <h1 class="titulo-lugar">Salão de festas em Joinville, Santa Catarina</h1>
+              <h1 class="titulo-lugar">Joinville, Santa Catarina</h1>
               <p class="titulo-visitantes">Até 350 visitantes</p>
             </div>
             <div class="descricao-wrapper">
@@ -70,9 +70,6 @@ import LocalizaçãoComponent from '@/components/LocalizaçãoComponent.vue'
                       <label for="start-date" class="date-label">De:</label>
                       <input type="text" id="start-date" class="date-value" placeholder="dd/mm/aa" />
                     </div>
-                    <img
-                      src="https://cdn.builder.io/api/v1/image/assets/TEMP/07cedd3ab815fcc7a4589c069de63d76c3a95e07a1c4f57c335d65a9c062d947?placeholderIfAbsent=true&apiKey=229514d5330a4793a24a9af5d8cdc0f5"
-                      alt="ícone de calendário" class="calendar-icon" />
                   </div>
                   <div class="date-separator"></div>
                   <div class="date-input end-date">
@@ -80,9 +77,6 @@ import LocalizaçãoComponent from '@/components/LocalizaçãoComponent.vue'
                       <label for="end-date" class="date-label">Até:</label>
                       <input type="text" id="end-date" class="date-value" placeholder="dd/mm/aa" />
                     </div>
-                    <img
-                      src="https://cdn.builder.io/api/v1/image/assets/TEMP/07cedd3ab815fcc7a4589c069de63d76c3a95e07a1c4f57c335d65a9c062d947?placeholderIfAbsent=true&apiKey=229514d5330a4793a24a9af5d8cdc0f5"
-                      alt="ícone de calendário" class="calendar-icon" />
                   </div>
                 </div>
                 <button class="reserve-button">Reservar</button>
@@ -218,7 +212,7 @@ import LocalizaçãoComponent from '@/components/LocalizaçãoComponent.vue'
   border-radius: 15px;
   background-color: #fff;
   padding: 24px 29px;
-  border: 1px solid #000;
+  border: 1px solid var(--preto-alternativo);
 }
 
 .price {
@@ -240,7 +234,6 @@ import LocalizaçãoComponent from '@/components/LocalizaçãoComponent.vue'
   font-weight: 400;
   margin-top: -5px;
   margin-bottom: 15px;
-  /* Ajuste de espaçamento entre "Semanal" e os campos de data */
   text-align: center;
 }
 
@@ -302,15 +295,20 @@ import LocalizaçãoComponent from '@/components/LocalizaçãoComponent.vue'
 
 .reserve-button {
   border-radius: 40px;
-  background-color: #4d735d;
+  background-color: var(--cor-principal);
+  border: none;
   margin-top: 20px;
   font-size: 20px;
-  color: #fff;
+  color: #ffffff;
   text-align: center;
   padding: 16px 0;
-  border: 1px solid #9d9d9d;
   cursor: pointer;
   width: 100%;
+  transition: 200ms ease;
+}
+
+.reserve-button:hover {
+  background-color: var(--cor-principal-hover);
 }
 
 .descricao {

@@ -4,7 +4,7 @@ import ReservasComponent from '@/components/ReservasComponent.vue'
 
 <template>
   <div>
-    <div class="Reservas-component">
+    <div class="reservas-component">
       <ReservasComponent />
     </div>
   </div>

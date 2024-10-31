@@ -16,24 +16,28 @@ const enderecoStore = useEndereco()
         <div class="imagens-component">
           <ImagensComponent />
         </div>
-        <div class="reserva-component">
-          <ReservaComponent />
+
+        <div class="reserva-e-descricao">
+          <div class="titulo-e-descricao">
+            <h1 class="titulo-lugar">
+              {{ enderecoStore.dadosEndereco.cidade }}, {{ enderecoStore.dadosEndereco.estado }}
+            </h1>
+            <p class="titulo-visitantes">
+              Até {{ enderecoStore.dadosEndereco.limiteVisitantes }} visitantes
+            </p>
+            <section class="descricao">
+              <div>
+                <DescricaoComponent />
+              </div>
+            </section>
+          </div>
+          <div class="reserva-component">
+            <ReservaComponent />
+          </div>
         </div>
+
+
       </div>
-      <h1 class="titulo-lugar">
-        {{ enderecoStore.dadosEndereco.cidade }}, {{ enderecoStore.dadosEndereco.estao }}
-      </h1>
-      <p class="titulo-visitantes">
-        Até {{ enderecoStore.dadosEndereco.limiteVisitantes }} visitantes
-      </p>
-      <section class="descricao-e-loc">
-        <div>
-          <DescricaoComponent />
-        </div>
-        <div>
-          <LocalizaçãoComponent />
-        </div>
-      </section>
     </section>
   </div>
 </template>
@@ -53,14 +57,14 @@ const enderecoStore = useEndereco()
 }
 
 .titulo {
+  margin: 1rem 0 1rem 0;
   font-size: 32px;
-  margin-bottom: 35px;
-  margin-top: 35px;
+  font-weight: 600;
 }
 
 .container-reserva {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
 }
 
@@ -70,19 +74,32 @@ const enderecoStore = useEndereco()
   margin-bottom: 35px;
 }
 
+.reserva-e-descricao {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.titulo-e-descricao {
+  display: flex;
+  flex-direction: column;
+}
+
 .reserva-component {
   margin-left: 25px;
 }
 
 .titulo-lugar {
   font-size: 24px;
+  font-weight: 600;
 }
 
 .titulo-visitantes {
   font-size: 16px;
 }
 
-.descricao-e-loc {
+.descricao {
+  margin-top: 4rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
