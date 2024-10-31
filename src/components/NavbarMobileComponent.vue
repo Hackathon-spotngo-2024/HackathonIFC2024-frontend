@@ -92,4 +92,18 @@
     border: none;
   }
 }
+
+@media (max-width: 500px){
+  .search-bar,
+  .imgTopo{
+    scale: 0.8;
+  }
+}
+
+@media (max-width: 370px){
+  .search-bar,
+  .imgTopo{
+    scale: 0.7;
+  }
+}
 </style>

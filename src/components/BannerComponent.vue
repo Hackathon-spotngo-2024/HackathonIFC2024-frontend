@@ -38,6 +38,7 @@ import banner from '../assets/banner.jpg'
   .img-banner {
     max-width: 100%;
     border-radius: 15px;
+    scale: 0.9;
   }
 }
 

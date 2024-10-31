@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 import NavbarComponent from './components/NavbarComponent.vue'
 import NavbarMobileComponent from './components/NavbarMobileComponent.vue'
 import { useNavbar } from '@/stores/dadosNavbar'
+import RodapeComponent from './components/RodapeComponent.vue'
 
 const navbarStore = useNavbar()
 const modal = ref(false)
@@ -21,6 +22,7 @@ onMounted(() => {
   <!-- Alterna entre Navbar normal e mobile conforme o tamanho da tela -->
   <component :is="navbarStore.isTelaPequena ? NavbarMobileComponent : NavbarComponent" @openModal="openModal"/>
   <router-view></router-view>
+ <RodapeComponent/>
 </template>
 
 <style scoped>
