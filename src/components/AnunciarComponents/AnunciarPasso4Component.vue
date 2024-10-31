@@ -3,7 +3,7 @@ import { useEtapa } from '../../../stores/dadosEtapa'
 import { useEndereco } from '../../../stores/dadosEndereco'
 import UploadImagemComponent from '../UploadImagemComponent.vue'
 import CampoVazioAlertComponent from '../CampoVazioAlertComponent.vue'
-import { onMounted } from 'vue';
+import { onMounted } from 'vue'
 const etapaStore = useEtapa()
 const enderecoStore = useEndereco()
 
@@ -54,7 +54,17 @@ onMounted(() => {
           <button class="voltar-btn" @click="etapaStore.etapaAnterior">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
           </button>
-          <button class="avancar-btn" @click="enderecoStore.setarDadosLocalStorage(); enderecoStore.addAnuncio()">Publicar</button>
+          <router-link to="/anuncio-publicado"
+            ><button
+              class="avancar-btn"
+              @click="
+                enderecoStore.setarDadosLocalStorage();
+                enderecoStore.addAnuncio()
+              "
+            >
+              Publicar
+            </button>
+          </router-link>
         </div>
       </div>
     </div>

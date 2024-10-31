@@ -4,6 +4,7 @@ import HomePage from '../views/HomePage.vue'
 import AnuncioPage from "../views/AnuncioPage.vue"
 import ReservasPage from "../views/ReservasPage.vue"
 import AnuncioFicticioPage from '@/views/AnuncioFicticioPage.vue'
+import AnuncioPublicadoPage from '@/views/AnuncioPublicadoPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,11 @@ const router = createRouter({
       path: "/anuncio-ficticio",
       name: "AnuncioFicticio",
       component: AnuncioFicticioPage,
+    },
+    {
+      path: "/anuncio-publicado",
+      name: "AnuncioPublicado",
+      component: AnuncioPublicadoPage,
     }
   ],
   scrollBehavior(to, from, savedPosition) {
