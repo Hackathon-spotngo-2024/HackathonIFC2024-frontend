@@ -41,24 +41,8 @@ export const useEndereco = defineStore('endereco', () => {
       anunciosCriados.value.push({ ...dadosAnuncio.value }) // Pusha o objeto dos dados para o array de anuncios
       console.log(anunciosCriados)
 
-      // setarDadosLocalStorage() // Coloca os dados no localStorage
+      setarDadosLocalStorage() // Coloca os dados no localStorage
       window.localStorage.setItem('DadosAnuncio', JSON.stringify(anunciosCriados.value))
-      dadosEndereco.value = {
-        id: 0,
-        pais: '',
-        rua: '',
-        numero: '',
-        bairro: '',
-        estado: '',
-        cidade: '',
-        cep: '',
-        limiteVisitantes: 0,
-        preco: '',
-        titulo: '',
-        descricao: '',
-        imgs: []
-      }
-      console.log(dadosEndereco.value)
     }
   }
 

@@ -3,7 +3,7 @@
 
 <template>
 <div class="card">
-  <router-link to="/anuncio" class="link">
+  <router-link to="/anuncio-ficticio" class="link">
     <div class="card-img">
       <img src="/public/salaocasamento1.jpeg" />
     </div>
@@ -19,23 +19,38 @@
 <style scoped>
 .card {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   margin: 1rem auto;
-  width: 90%;
+  width: fit-content;
   max-width: 400px;
   border: 0;
+  border-radius: 15px;
 }
 
 .card-infos {
   display: flex;
   flex-direction: column;
   padding: 1rem;
+  align-items: flex-start;
+  transform: translateX(0);
+  transition: all 400ms ease-in-out;
+}
+
+.card-infos:hover {
+  transform: translateX(10px);
 }
 
 .card-img>img {
-  width: 100%;
-  height: auto;
+  width: 350px;
+  height: 300px;
   border-radius: 15px;
+  transition: 300ms ease-in-out;
+}
+
+.card-img>img:hover {
+  transform: scale(1.01);
 }
 
 .card-titulo {
@@ -57,20 +72,6 @@
   font-weight: 500;
   color: var(--cor-fonte-loc);
   font-size: 1rem;
-}
-
-@media (max-width: 768px) {
-  .card {
-    width: 100%;
-    max-width: none;
-    margin: 1rem;
-  }
-
-  .card-titulo,
-  .card-preco,
-  .card-loc {
-    font-size: 0.9rem;
-  }
 }
 
 @media (max-width: 576px) {

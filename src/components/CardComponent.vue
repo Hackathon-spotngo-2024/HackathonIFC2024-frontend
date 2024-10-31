@@ -1,26 +1,24 @@
 <script setup>
-import { useEndereco } from '../../stores/dadosEndereco';
+import { useEndereco } from '../../stores/dadosEndereco'
 
 const enderecoStore = useEndereco()
 </script>
 
 <template>
-<div class="cards-container">
-  <div 
-    class="card"
-  >
-    <router-link :to="{ name: 'AnuncioPage', params: { id: enderecoStore.anunciosCriados.id } }" class="link">
+  <div class="card">
+    <router-link to="anuncio" class="link">
       <div class="card-img">
-        <img :src="enderecoStore.anunciosCriados.imgs[0]" alt="" />
+        <img :src="enderecoStore.dadosAnuncio.imgs[0]" alt="" />
       </div>
       <div class="card-infos">
-        <div class="card-titulo">{{ enderecoStore.anunciosCriados.titulo }}</div>
-        <div class="card-preco">{{ 'R$' + enderecoStore.anunciosCriados.preco + ',00' }}</div>
-        <div class="card-loc">{{ enderecoStore.anunciosCriados.cidade + ', ' +enderecoStore.anunciosCriados.estado }}</div>
+        <div class="card-titulo">{{ enderecoStore.dadosAnuncio.titulo }}</div>
+        <div class="card-preco">{{ 'R$' + enderecoStore.dadosAnuncio.preco + ',00' }}</div>
+        <div class="card-loc">
+          {{ enderecoStore.dadosAnuncio.cidade + ', ' + enderecoStore.dadosAnuncio.estado }}
+        </div>
       </div>
     </router-link>
   </div>
-</div>
 </template>
 
 <style scoped>
@@ -37,12 +35,24 @@ const enderecoStore = useEndereco()
   display: flex;
   flex-direction: column;
   padding: 1rem;
+  align-items: flex-start;
+  transform: translateX(0);
+  transition: all 400ms ease-in-out;
+}
+
+.card-infos:hover {
+  transform: translateX(10px);
 }
 
 .card-img>img {
-  width: 100%;
-  height: auto;
+  width: 350px;
+  height: 300px;
   border-radius: 15px;
+  transition: 300ms ease-in-out;
+}
+
+.card-img>img:hover {
+  transform: scale(1.01);
 }
 
 .card-titulo {
@@ -66,29 +76,14 @@ const enderecoStore = useEndereco()
   font-size: 1rem;
 }
 
-@media (max-width: 768px) {
-  .card {
-    width: 100%;
-    max-width: none;
-    margin: 1rem;
-  }
-
-  .card-titulo,
-  .card-preco,
-  .card-loc {
-    font-size: 0.9rem;
-  }
-}
-
 @media (max-width: 576px) {
-
   .card-titulo,
   .card-preco,
   .card-loc {
     font-size: 0.8rem;
   }
 
-  .card-img>img {
+  .card-img > img {
     border-radius: 10px;
   }
 }

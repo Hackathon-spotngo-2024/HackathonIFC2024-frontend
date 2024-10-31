@@ -6,13 +6,13 @@ const etapaStore = useEtapa()
 </script>
 
 <template>
-  <!-- <transition name="fade" mode="out-in"> -->
+  <transition name="fade" mode="out-in">
     <component
       v-if="etapaStore.componenteAtual"
       :is="etapaStore.componenteAtual"
       :key="etapaStore.etapaAtual"
     />
-  <!-- </transition> -->
+  </transition>
 </template>
 
 <style scoped>

@@ -5,7 +5,7 @@ const enderecoStore = useEndereco()
 </script>
 
 <template>
-  <div class="container">
+  <div class="imagens-container">
     <div class="imagem-grande" id="left-radius"><img :src="enderecoStore.dadosAnuncio.imgs[0]" alt=""></div>
     <div class="imagem-pequena"><img :src="enderecoStore.dadosAnuncio.imgs[1]" alt=""></div>
     <div class="imagem-pequena" id="top-right-radius"><img id="top-right-radius" :src="enderecoStore.dadosAnuncio.imgs[2]" alt=""></div>
@@ -15,7 +15,7 @@ const enderecoStore = useEndereco()
 </template>
 
 <style scoped>
-.container {
+.imagens-container {
   display: grid;
   grid-template-areas: 
     "imagem-grande imagem-pequena imagem-pequena"
