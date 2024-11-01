@@ -113,6 +113,7 @@ onMounted(ajustarTamanhoInput)
   display: flex;
   flex-direction: row;
   margin-top: 100px;
+  flex-wrap: wrap;
 }
 
 .etapa-3-infos {
@@ -206,7 +207,6 @@ input[type='number']::-webkit-inner-spin-button {
 input[type=number] { 
    -moz-appearance: textfield;
    appearance: textfield;
-
 }
 
 ::-webkit-input-placeholder {
@@ -215,5 +215,67 @@ input[type=number] {
 
 .avancar-e-voltar-botoes {
   margin-top: 20%;
+}
+
+@media (max-width: 1200px) {
+  .titulo-principal-container {
+    font-size: 1.8rem;
+  }
+
+  .limite-visitantes-wrapper, .preco-wrapper {
+    width: 80%;
+  }
+}
+
+@media (max-width: 992px) {
+  .titulo-principal-container {
+    font-size: 1.5rem;
+  }
+
+  .infos-e-imagem {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .limite-visitantes-wrapper, .preco-wrapper {
+    width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .titulo-principal-container {
+    font-size: 1.2rem;
+  }
+
+  .botoes-visitantes {
+    gap: 5px;
+  }
+
+  .preco-input-wrapper > input {
+    width: 100%;
+  }
+
+  .avancar-e-voltar-botoes {
+    margin-top: 15%;
+  }
+}
+
+@media (max-width: 576px) {
+  .titulo-principal-container {
+    font-size: 1rem;
+  }
+
+  .limite-visitantes-wrapper, .preco-wrapper {
+    width: 100%;
+  }
+
+  .preco-input-wrapper > span {
+    font-size: 1.2rem;
+  }
+
+  .botao-visitantes {
+    height: 25px;
+    width: 25px;
+  }
 }
 </style>

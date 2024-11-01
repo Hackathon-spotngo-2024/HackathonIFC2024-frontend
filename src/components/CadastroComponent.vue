@@ -105,7 +105,7 @@ function openRegister() {
   font-family: 'Montserrat', sans-serif;
 }
 
-.container-interno {
+.containerInterno {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -222,5 +222,59 @@ label {
   color: black;
   font-size: 12px;
   font-weight: 500;
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 1200px) {
+  .form-container {
+    width: 80%;
+  }
+}
+
+@media (max-width: 992px) {
+  .form-container {
+    width: 70%;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-container {
+    width: 90%;
+    height: auto;
+    padding: 20px;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  button {
+    padding: 10px;
+    width: 100%;
+  }
+
+  .linha {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .title {
+    font-size: 20px;
+  }
+
+  .termo {
+    font-size: 8px;
+  }
+
+  .textoFinal {
+    font-size: 10px;
+  }
+
+  .linha {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 }
 </style>
