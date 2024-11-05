@@ -8,7 +8,7 @@ const enderecoStore = useEndereco()
   <section class="reservation-card">
     <div class="card-content">
       <h2 class="price">
-        R${{ enderecoStore.dadosAnuncio.preco }} <span class="price-period">por dia</span>
+        R${{ enderecoStore.dadosAnuncio.preco }} <span class="price-period"> dia</span>
       </h2>
       <div class="date-range">
         <div class="date-input start-date">
@@ -16,7 +16,6 @@ const enderecoStore = useEndereco()
             <label for="start-date" class="date-label">De:</label>
             <input type="text" id="start-date" class="date-value" placeholder="dd/mm/aa" />
           </div>
-          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/07cedd3ab815fcc7a4589c069de63d76c3a95e07a1c4f57c335d65a9c062d947?placeholderIfAbsent=true&apiKey=229514d5330a4793a24a9af5d8cdc0f5" alt="ícone de calendário" class="calendar-icon" />
         </div>
         <!-- Separador -->
         <div class="date-separator"></div>
@@ -25,7 +24,6 @@ const enderecoStore = useEndereco()
             <label for="end-date" class="date-label">Até:</label>
             <input type="text" id="end-date" class="date-value" placeholder="dd/mm/aa" />
           </div>
-          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/07cedd3ab815fcc7a4589c069de63d76c3a95e07a1c4f57c335d65a9c062d947?placeholderIfAbsent=true&apiKey=229514d5330a4793a24a9af5d8cdc0f5" alt="ícone de calendário" class="calendar-icon" />
         </div>
       </div>
       <button class="reserve-button">Reservar</button>
@@ -36,7 +34,7 @@ const enderecoStore = useEndereco()
 <style scoped>
 .reservation-card {
   max-width: 315px; /* Ajuste de largura para ficar próximo ao da imagem */
-  font-weight: 700;
+  font-weight: 600;
   margin: 0 auto;
 }
 
@@ -52,6 +50,7 @@ const enderecoStore = useEndereco()
   font-size: 30px;
   text-align: center;
   margin-bottom: 8px; /* Menor margem inferior para corresponder à imagem */
+  font-weight: 600;
 }
 
 .price-period {

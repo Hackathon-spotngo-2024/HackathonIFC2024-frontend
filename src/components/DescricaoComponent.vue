@@ -6,31 +6,46 @@ const enderecoStore = useEndereco()
 
 <template>
   <h2 class="titulo-descricao">Descrição</h2>
+  <div class="linha-container">
+    <div class="linha-divisoria"></div>
+  </div>
   <div class="descricao">
     <p>{{ enderecoStore.dadosAnuncio.descricao }}</p>
+  </div>
+  <div class="linha-container">
+    <div class="linha-divisoria"></div>
   </div>
 </template>
 
 <style scoped>
 .descricao {
-  padding: 15px;
-  border: 1px solid var(--cor-bordas-input);
-  border-radius: 10px;
   width: 550px;
   height: fit-content;
-  margin: 0 auto;
-  font-family: Arial, sans-serif;
 }
 
 .titulo-descricao {
-  text-align: center;
+  text-align: start;
+  font-weight: 600;
   font-size: 24px;
-  margin-bottom: 20px;
 }
 
 .descricao p {
-  line-height: 1.6;
+  width: 550px;
   font-size: 18px;
-  margin: 10px 0;
+  word-break: break-word;
+}
+
+.linha-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.linha-divisoria {
+  margin-top: 1rem;
+  width: 100%;
+  height: 1px;
+  margin: 1.5rem 0rem 1.5rem 0;
+  background-color: var(--cor-linha-divisoria);
 }
 </style>

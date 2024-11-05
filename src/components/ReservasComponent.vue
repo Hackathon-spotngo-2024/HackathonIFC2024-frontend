@@ -1,39 +1,18 @@
 <script setup>
-const reservas = [
-        {
-         titulo: 'Salão para casamento',
-         dataInicio: '20/09/23',
-         dataFim: '25/09/23',
-         localizacao: 'Vila Nova - Jlle',
-         imagem: '../src/assets/card-imgs/card-img-1.jpeg'
-        },
-        {
-         titulo: 'Salão para casamento',
-         dataInicio: '20/09/23',
-         dataFim: '25/09/23',
-         localizacao: 'Vila Nova - Jlle',
-         imagem: '../src/assets/card-imgs/card-img-1.jpeg'
-        },
-        {
-         titulo: 'Salão para casamento',
-         dataInicio: '20/09/23',
-         dataFim: '25/09/23',
-         localizacao: 'Vila Nova - Jlle',
-         imagem: '../src/assets/card-imgs/card-img-1.jpeg'
-        }
-];
+import { useReserva } from '../../stores/reservaStore';
+
+const reservaStore = useReserva()
 </script>
 
 <template>
   <div class="container-reservas">
     <h1>Minhas Reservas</h1>
-    <div class="cartao-reserva" v-for="(reserva, index) in reservas" :key="index">
+    <div class="cartao-reserva" v-for="(reserva, index) in reservaStore.userReservas" :key="index">
       <img :src="reserva.imagem" alt="Salão de casamento" class="imagem-reserva"/>
       <div class="detalhes-reserva">
         <h2>{{ reserva.titulo }}</h2>
         <p>De {{ reserva.dataInicio }} a {{ reserva.dataFim }}</p>
         <p><i class="fas fa-map-marker-alt"></i> {{ reserva.localizacao }}</p>
-        <button class="botao-detalhes">Ver mais detalhes</button>
       </div>
     </div>
   </div>
@@ -52,6 +31,7 @@ h1 {
 
 .cartao-reserva {
   display: flex;
+  align-items: center;
   margin-bottom: 20px;
   border: 1px solid #ddd;
   padding: 10px;
@@ -67,6 +47,11 @@ h1 {
 
 .detalhes-reserva {
   margin-left: 20px;
+  transition: all 300ms ease-in-out;
+}
+
+.detalhes-reserva:hover {
+  transform: translateX(10px);
 }
 
 h2 {
@@ -76,23 +61,5 @@ h2 {
 
 p {
   margin: 5px 0;
-}
-
-.botao-detalhes {
-  background-color: #000000;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin-top: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.botao-detalhes:hover {
-  background-color: #0000FF ;
 }
 </style>

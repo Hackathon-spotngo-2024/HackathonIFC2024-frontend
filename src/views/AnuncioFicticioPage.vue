@@ -23,67 +23,68 @@ import LocalizaçãoComponent from '@/components/LocalizaçãoComponent.vue'
           </div>
         </div>
 
-        <div class="reserva-component">
-          <section class="reservation-card">
-            <div class="card-content">
-              <h2 class="price">R$129,00 <span class="price-period">por dia</span></h2>
-              <div class="date-range">
-                <div class="date-input start-date">
-                  <div class="date-wrapper">
-                    <label for="start-date" class="date-label">De:</label>
-                    <input type="text" id="start-date" class="date-value" placeholder="dd/mm/aa" />
-                  </div>
-                  <img
-                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/07cedd3ab815fcc7a4589c069de63d76c3a95e07a1c4f57c335d65a9c062d947?placeholderIfAbsent=true&apiKey=229514d5330a4793a24a9af5d8cdc0f5"
-                    alt="ícone de calendário"
-                    class="calendar-icon"
-                  />
-                </div>
-                <!-- Separador -->
-                <div class="date-separator"></div>
-                <div class="date-input end-date">
-                  <div class="date-wrapper">
-                    <label for="end-date" class="date-label">Até:</label>
-                    <input type="text" id="end-date" class="date-value" placeholder="dd/mm/aa" />
-                  </div>
-                  <img
-                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/07cedd3ab815fcc7a4589c069de63d76c3a95e07a1c4f57c335d65a9c062d947?placeholderIfAbsent=true&apiKey=229514d5330a4793a24a9af5d8cdc0f5"
-                    alt="ícone de calendário"
-                    class="calendar-icon"
-                  />
-                </div>
+        <section class="reserva-component-e-descricao">
+          <section class="descricao-container">
+            <div class="titulos">
+              <h1 class="titulo-lugar">Joinville, Santa Catarina</h1>
+              <p class="titulo-visitantes">Até 350 visitantes</p>
+            </div>
+            <div class="descricao-wrapper">
+              <h2 class="titulo-descricao">Descrição</h2>
+              <div class="linha-container">
+                <div class="linha-divisoria"></div>
               </div>
-              <button class="reserve-button">Reservar</button>
+              <div class="descricao">
+                <p>
+                  Este salão de festas é um espaço versátil e acolhedor, ideal para eventos sociais e
+                  comemorações. Ele possui uma área ampla, bem iluminada, com capacidade para acomodar
+                  confortavelmente um grande número de convidados. O ambiente conta com janelas grandes
+                  que permitem a entrada de luz natural durante o dia e uma iluminação agradável e
+                  ajustável para a noite, criando uma atmosfera perfeita para qualquer tipo de evento. O
+                  salão é equipado com mesas e cadeiras que podem ser dispostas conforme a necessidade
+                  do evento, seja uma festa de aniversário, reunião familiar, ou um evento corporativo.
+                  Há um balcão de apoio para organização de alimentos e bebidas, além de um espaço
+                  reservado para uma pequena pista de dança ou área de apresentações, se desejado. Para
+                  o conforto dos convidados, o salão possui sistema de ventilação, climatização,
+                  banheiros próximos e acesso fácil para pessoas com mobilidade reduzida.
+                </p>
+              </div>
+              <div class="linha-container">
+                <div class="linha-divisoria"></div>
+              </div>
             </div>
           </section>
-        </div>
-      </div>
 
-      <h1 class="titulo-lugar">Salão de festas</h1>
-      <p class="titulo-visitantes">Até 350 visitantes</p>
-      <section class="descricao-e-loc">
-        <div>
-          <h2 class="titulo-descricao">Descrição</h2>
-          <div class="descricao">
-            <p>
-              Este salão de festas é um espaço versátil e acolhedor, ideal para eventos sociais e
-              comemorações. Ele possui uma área ampla, bem iluminada, com capacidade para acomodar
-              confortavelmente um grande número de convidados. O ambiente conta com janelas grandes
-              que permitem a entrada de luz natural durante o dia e uma iluminação agradável e
-              ajustável para a noite, criando uma atmosfera perfeita para qualquer tipo de evento. O
-              salão é equipado com mesas e cadeiras que podem ser dispostas conforme a necessidade
-              do evento, seja uma festa de aniversário, reunião familiar, ou um evento corporativo.
-              Há um balcão de apoio para organização de alimentos e bebidas, além de um espaço
-              reservado para uma pequena pista de dança ou área de apresentações, se desejado. Para
-              o conforto dos convidados, o salão possui sistema de ventilação, climatização,
-              banheiros próximos e acesso fácil para pessoas com mobilidade reduzida.
-            </p>
+
+
+          <div class="reserva-component">
+            <section class="reservation-card">
+              <div class="card-content">
+                <div class="price">
+                  <p class="valor-preco">R$129,00</p>
+                  <p class="price-period">dia</p>
+                </div>
+                <div class="date-range">
+                  <div class="date-input start-date">
+                    <div class="date-wrapper">
+                      <label for="start-date" class="date-label">De:</label>
+                      <input type="text" id="start-date" class="date-value" placeholder="dd/mm/aa" />
+                    </div>
+                  </div>
+                  <div class="date-separator"></div>
+                  <div class="date-input end-date">
+                    <div class="date-wrapper">
+                      <label for="end-date" class="date-label">Até:</label>
+                      <input type="text" id="end-date" class="date-value" placeholder="dd/mm/aa" />
+                    </div>
+                  </div>
+                </div>
+                <button class="reserve-button">Reservar</button>
+              </div>
+            </section>
           </div>
-        </div>
-        <div>
-          <LocalizaçãoComponent />
-        </div>
-      </section>
+        </section>
+      </div>
     </section>
   </div>
 </template>
@@ -99,18 +100,19 @@ import LocalizaçãoComponent from '@/components/LocalizaçãoComponent.vue'
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: fit-content;
+  width: 1000px;
 }
 
 .titulo {
   font-size: 32px;
-  margin-bottom: 35px;
-  margin-top: 35px;
+  margin: 1rem 0 1rem 0;
+  font-weight: 600;
+  color: var(--preto-alternativo);
 }
 
 .container-reserva {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
 }
 
@@ -120,22 +122,43 @@ import LocalizaçãoComponent from '@/components/LocalizaçãoComponent.vue'
   margin-bottom: 35px;
 }
 
+.reserva-component-e-descricao {
+  display: flex;
+  justify-content: space-between;
+}
+
 .reserva-component {
-  margin-left: 25px;
+  display: flex;
+  width: fit-content;
+  justify-content: end;
+}
+
+.valor-preco {
+  font-weight: 600;
+}
+
+.titulos {
+  width: fit-content;
 }
 
 .titulo-lugar {
   font-size: 24px;
+  font-weight: 600;
 }
 
 .titulo-visitantes {
   font-size: 16px;
 }
 
-.descricao-e-loc {
+.descricao-container {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: start;
+  width: 700px;
+}
+
+.descricao-wrapper {
+  margin-top: 4rem;
 }
 
 .imagens-container {
@@ -185,24 +208,20 @@ import LocalizaçãoComponent from '@/components/LocalizaçãoComponent.vue'
   border-radius: 0 0 20px 0;
 }
 
-.reservation-card {
-  max-width: 315px; /* Ajuste de largura para ficar próximo ao da imagem */
-  font-weight: 700;
-  margin: 0 auto;
-}
-
 .card-content {
   border-radius: 15px;
   background-color: #fff;
   padding: 24px 29px;
-  border: 1px solid #000;
+  border: 1px solid var(--preto-alternativo);
 }
 
 .price {
-  color: #000;
+  display: flex;
+  gap: 8px;
+  color: var(--preto-alternativo);
   font-size: 30px;
   text-align: center;
-  margin-bottom: 8px; /* Menor margem inferior para corresponder à imagem */
+  margin-bottom: 8px;
 }
 
 .price-period {
@@ -214,7 +233,7 @@ import LocalizaçãoComponent from '@/components/LocalizaçãoComponent.vue'
   font-size: 16px;
   font-weight: 400;
   margin-top: -5px;
-  margin-bottom: 15px; /* Ajuste de espaçamento entre "Semanal" e os campos de data */
+  margin-bottom: 15px;
   text-align: center;
 }
 
@@ -227,7 +246,8 @@ import LocalizaçãoComponent from '@/components/LocalizaçãoComponent.vue'
   border: 1px solid #000;
   border-radius: 5px;
   overflow: hidden;
-  margin-bottom: 20px; /* Margem inferior maior para o botão */
+  margin-bottom: 20px;
+  /* Margem inferior maior para o botão */
 }
 
 .date-input {
@@ -258,54 +278,66 @@ import LocalizaçãoComponent from '@/components/LocalizaçãoComponent.vue'
   background: transparent;
   padding: 0;
   width: 60px;
-  text-align: left; /* Alinha o texto à esquerda dentro do input */
+  text-align: left;
 }
 
 .calendar-icon {
   width: 12px;
   position: absolute;
-  right: 10px; /* Posiciona o ícone à direita */
+  right: 10px;
 }
 
-/* Estilo para o separador */
 .date-separator {
   width: 1px;
   background-color: #000;
-  margin: 0 5px; /* Margem menor entre os dois campos */
+  margin: 0 5px;
 }
 
 .reserve-button {
   border-radius: 40px;
-  background-color: #4d735d;
-  margin-top: 20px; /* Margem superior ajustada */
+  background-color: var(--cor-principal);
+  border: none;
+  margin-top: 20px;
   font-size: 20px;
-  color: #fff;
+  color: #ffffff;
   text-align: center;
   padding: 16px 0;
-  border: 1px solid #9d9d9d;
   cursor: pointer;
   width: 100%;
+  transition: 200ms ease;
+}
+
+.reserve-button:hover {
+  background-color: var(--cor-principal-hover);
 }
 
 .descricao {
-  padding: 15px;
-  border: 1px solid var(--cor-bordas-input);
   border-radius: 10px;
   width: 550px;
   height: fit-content;
-  margin: 0 auto;
-  font-family: Arial, sans-serif;
 }
 
 .titulo-descricao {
-  text-align: center;
   font-size: 24px;
-  margin-bottom: 20px;
+  font-weight: 600;
 }
 
 .descricao p {
   line-height: 1.6;
   font-size: 18px;
-  margin: 10px 0;
+}
+
+.linha-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.linha-divisoria {
+  margin-top: 1rem;
+  width: 100%;
+  height: 1px;
+  margin: 1.5rem 0rem 1.5rem 0;
+  background-color: var(--cor-linha-divisoria);
 }
 </style>
