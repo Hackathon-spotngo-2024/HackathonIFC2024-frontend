@@ -217,4 +217,28 @@ input[type='number'] {
 .avancar-e-voltar-botoes {
   margin-top: 20%;
 }
+
+@media (max-width: 1360px) {
+  .imagem-casa img  {
+    width: 600px;
+  }
+  .etapa-3-infos {
+    width: 400px;
+  }
+  h1, .limite-visitantes-wrapper > label, .preco-wrapper > label {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .imagem-casa {
+    display: none;
+  }
+  .limite-visitantes-wrapper, .preco-wrapper, .preco-input-wrapper {
+    align-items: center;
+  }
+  #preco-input {
+    width: 100px;
+  }
+}
 </style>

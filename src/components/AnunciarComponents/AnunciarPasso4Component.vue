@@ -242,4 +242,25 @@ p {
   justify-content: end;
   align-items: center;
 }
+
+@media (max-width: 1160px) {
+  h1, h2 {
+    font-size: 24px;
+  }
+  .mensagem {
+    margin-bottom: 2rem;
+  }
+  .conteudo {
+    flex-direction: column;
+    gap: 5rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .botoes-wrapper {
+    margin-top: 2rem;
+  }
+  .texto-imagens {
+    align-items: center;
+  }
+}
 </style>

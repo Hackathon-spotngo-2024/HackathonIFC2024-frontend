@@ -64,6 +64,33 @@ const linkToHome = ref('Voltar à página inicial')
 }
 
 .imagem-publicado img {
-  scale: 0.7;
+  width: 700px;
+}
+
+@media (max-width: 1000px) {
+  h1 {
+    font-size: 24px;
+  }
+  .mensagem-spotngo, .link-home {
+    font-size: 20px;
+  }
+  .imagem-publicado {
+    width: 760px;
+    display: flex;
+    justify-content: center;
+  }
+  .imagem-publicado img {
+    width: 650px;
+  }
+}
+
+@media (max-width: 760px) {
+  .imagem-publicado {
+    width: 500px;
+    height: 450px;
+  }
+  .imagem-publicado img {
+    width: 500px;
+  }
 }
 </style>
