@@ -16,7 +16,8 @@ function openModal() {
 </script>
 
 <template>
-  <CadastroComponent :openModal="openModal" />
+  <LoginComponent v-if="modalStore.showLoginModal"/>
+  <CadastroComponent v-if="modalStore.showRegisterModal"/>
   <BannerComponent />
   <CardSectionTitle />
   <div class="card-container">

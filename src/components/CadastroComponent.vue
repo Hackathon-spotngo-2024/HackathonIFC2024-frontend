@@ -1,38 +1,17 @@
 <script setup>
-import { reactive, ref, computed } from 'vue';
-import LoginComponent from './LoginComponent.vue';
+import { useModal } from '../../stores/dadosModal'
 
-defineProps(['modal', 'title']);
-
-const open = ref(false);
-
-const emit = defineEmits(['closeModal']);
-
-const user = reactive({
-  name: '',
-  senha: ''
-});
-
-const closeModal = () => {
-  emit('closeModal')
-}
-
-const blurClass = computed(() =>
-  (open.value ? 'divBlur' : ''));
-
-function openRegister() {
-  emit('closeModal')
-  open.value = true
-}
+const modalStore = useModal()
 
 </script>
 
 <template>
-  <LoginComponent v-if="open" />
-  <div class="modal" v-if="modal">
+  <div class="modal">
     <div class="form-container">
-      <div @click="closeModal" class="fechar">
-        <span class="fa fa-x"></span>
+      <div class="header-modal">
+        <div class="fechar" @click="modalStore.closeRegisterModal">
+          <span class="fa fa-close"></span>
+        </div>
       </div>
       <div class="containerInterno">
         <div class="logoLogin">
@@ -40,40 +19,100 @@ function openRegister() {
         </div>
 
         <p class="title">Bem vindo(a) ao Spot'n Go</p>
-        <h1 class="title">{{ title }}</h1>
-
         <div class="conteudo">
           <div class="form-item">
             <label for="name">Nome</label>
-            <input type="text" name="name" id="name" v-model="user.name" placeholder="Nome" />
+            <input
+              type="text"
+              name="name"
+              id="name"
+              v-model="modalStore.dadosUser.name"
+              placeholder="Nome"
+            />
+          </div>
+
+          <div class="form-item" id="email-area">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              v-model="modalStore.dadosUser.email"
+              placeholder="Email"
+            />
           </div>
 
           <div class="form-item">
             <label for="senha">Senha</label>
-            <input type="password" name="senha" id="senha" v-model="user.senha" placeholder="Senha" />
+            <input
+              type="password"
+              name="senha"
+              id="senha"
+              v-model="modalStore.dadosUser.senha"
+              placeholder="Senha"
+            />
           </div>
 
-          <button>Continuar</button>
+          <div class="form-item" id="confirmarSenha">
+            <label for="confirmar-senha">Confirme sua senha</label>
+            <input
+              type="password"
+              name="confirmarSenha"
+              id="confirmaSenha"
+              v-model="modalStore.dadosUser.confirmarSenha"
+              placeholder="Confirme sua senha"
+            />
+          </div>
 
-          <p class="opcao">ou</p>
+          <div class="form-item">
+            <label for="telefone">Telefone</label>
+            <input
+              type="text"
+              name="telefone"
+              id="telefone"
+              v-model="modalStore.dadosUser.telefone"
+              placeholder="Telefone"
+            />
+          </div>
 
-          <button class="api">Google API</button>
+          <div class="form-item" id="dataDeNascimento">
+            <label for="dataNascimento">Data de Nascimento</label>
+            <input
+              type="date"
+              name="dataDeNascimento"
+              id="dataDeNascimento"
+              v-model="modalStore.dadosUser.dataDeNascimento"
+            />
+          </div>
 
-          <div class="termo">
-            <p>
-              Ao continuar, você concorda com os <br />
-              <a class="link" href="">termo de serviço</a> do Spot'n Go e confirma que <br />
-              leu nossa <a class="link" href="">Politica de Privacidade.</a> <br />
-              <a class="link" href="">Aviso na coleta de informações.</a>
-            </p>
-            <div class="linha">
-              <hr />
+          <div class="form-item" id="cpf">
+            <label for="cpf">CPF</label>
+            <input
+              type="number"
+              name="cpf"
+              id="cpf"
+              v-model="modalStore.dadosUser.cpf"
+              placeholder="CPF"
+            />
+          </div>
+
+          <button @click="modalStore.cadastrar()">Continuar</button>
+          <div class="campo-vazio-alert" v-if="modalStore.campoCadastroVazio == true">
+            <p class="campo-vazio-text">Preencha todos os campos para prosseguir.</p>
+          </div>
+
+
+          <div class="criar-conta">
+              <div class="linha">
+                <hr/>
+              </div>
+              <div class="criar-conta-wrapper">
+                <p class="textoFinal">Ja possui uma conta?</p>
+                <p>
+                  <span @click="modalStore.closeRegisterModal(); modalStore.openLoginModal()" class="cadastro">Fazer login</span>
+                </p>
+              </div>
             </div>
-            <p class="textoFinal">
-              Ainda não está no Spot'n Go?
-              <span class="cadastro" @click="openRegister()">Crie uma conta</span>
-            </p>
-          </div>
         </div>
       </div>
     </div>
@@ -81,146 +120,165 @@ function openRegister() {
 </template>
 
 <style scoped>
+
 .modal {
-  backdrop-filter: blur(5px);
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 0;
+  z-index: 1000;
   transition: visibility 0.3s, opacity 0.3s;
 }
 
 .form-container {
-  width: 460px;
-  height: 570px;
+  width: 400px;
+  height: 740px;
   border-radius: 25px;
   background-color: #f2f2f2;
   margin: auto;
-  font-family: 'Montserrat', sans-serif;
+  padding: 1rem;
+  z-index: 1000;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.5);
 }
 
-.container-interno {
+.header-modal {
   display: flex;
-  align-items: center;
-  flex-direction: column;
+  justify-content: end;
 }
 
 .fechar {
   display: flex;
-  justify-content: end;
-  margin: 1rem 1rem 0 0;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
+  width: 35px;
+  height: 35px;
+  border-radius: 20px;
+  transition: 150ms ease-in-out;
+  z-index: 999;
+}
+
+.fechar:hover {
+  background-color: var(--cor-voltar-btn-hover);
+}
+
+.fechar:active {
+  transition: 100ms;
+  transform: scale(0.8);
 }
 
 .fa.fa-close {
-  width: 2rem;
-  height: 2rem;
+  font-size: 1.5rem;
   align-content: center;
   text-align: center;
 }
-
+.containerInterno {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  top: -2.5rem;
+}
 .logoLogin {
   text-align: center;
-  margin-top: 10px;
 }
 
 .imgLogin {
   width: 55px;
   height: 55px;
 }
-
 .title {
   text-align: center;
   font-size: 23px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat';
   font-weight: bold;
-  margin-top: 10px;
+  margin: 10px 0 10px 0;
 }
 
 .conteudo {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  gap: 8px;
+  align-items: center;
 }
 
 .form-item {
   display: grid;
   grid-auto-columns: auto;
-  margin-top: 5px;
+}
+
+.campo-vazio-alert {
+  display: flex;
+justify-content: center;
+  margin-top: 10px;
+  color: var(--cor-texto-erro);
+}
+
+.campo-vazio-alert > p {
+  font-size: 14px;
 }
 
 input {
   width: 250px;
   height: 35px;
   border-radius: 15px;
-  border: solid 1px rgba(79, 79, 79, 1);
+  border: solid 2px var(--cor-bordas-input);
   background-color: #f2f2f2;
-  margin-bottom: 5px;
   padding: 0 10px;
   outline: none;
 }
 
 button {
+  cursor: pointer;
   padding: 13px 100px;
   border-radius: 25px;
   background-color: var(--cor-principal);
-  margin-top: 15px;
+  margin-top: 10px;
   border: none;
   color: #f2f2f2;
   font-weight: bold;
   font-size: 15px;
+  transition: 80ms ease-out;
+}
+
+button:hover {
+  background-color: var(--cor-principal-hover);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+label {
+  margin: 0 0 3px 10px;
+  color: var(--preto-alternativo);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.criar-conta {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 10px;
+  font-family: 'Montserrat', sans-serif;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+.textoFinal {
+  font-size: 14px;
+
 }
 
 .cadastro {
   font-weight: bold;
   cursor: pointer;
+  font-size: 14px;
 }
 
-.api {
-  background-color: #bebebe;
-}
-
-.opcao {
-  margin-top: 15px;
-  font-weight: bold;
-}
-
-.termo {
-  padding: 13px;
-  text-align: center;
-  font-size: 10px;
-  font-family: 'Montserrat', sans-serif;
-}
-
-.textoFinal {
-  margin-top: 20px;
-  font-size: 12px;
-  margin-bottom: 5px;
-}
-
-.linha {
-  margin-top: 25px;
-  margin-left: 60px;
-  margin-right: 60px;
-}
-
-.link {
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
-}
-
-label {
-  margin-left: 10px;
-  color: black;
-  font-size: 12px;
-  font-weight: 500;
-}
 </style>
