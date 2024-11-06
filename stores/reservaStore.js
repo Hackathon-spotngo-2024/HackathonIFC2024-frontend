@@ -1,17 +1,8 @@
-import { useEndereco } from "./dadosEndereco"
-import { defineStore } from "pinia"
-import { ref, reactive } from "vue"
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
 export const useReserva = defineStore('etapa', () => {
-    const enderecoStore = useEndereco()
-
-    const datasReserva = reactive({
-        dataInicio: '',
-        dataTermino: ''
-    })
-
-    const dataVaziaAlert = ref(false)
-    const userReservas = ref([])
+  const userReservas = ref([])
 
   /*  function reservarAnuncio() {
         if (datasReserva.dataInicio == '' || datasReserva.dataTermino == '') {
@@ -21,7 +12,8 @@ export const useReserva = defineStore('etapa', () => {
             userReservas.push(reserva)
         }
     } */
-    return {
-        datasReserva, dataVaziaAlert, userReservas
-    }
+  return {
+    dataVaziaAlert,
+    userReservas
+  }
 })

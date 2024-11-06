@@ -1,9 +1,30 @@
 <script setup>
 import { useEndereco } from '../../stores/dadosEndereco';
 import { useReserva } from '../../stores/reservaStore';
+import { reactive, ref } from 'vue';
 
 const enderecoStore = useEndereco()
 const reservaStore = useReserva()
+const dataVaziaAlert = ref(false)
+const datasReserva = reactive({
+  dataInicio: '',
+  dataTermino: ''
+})
+
+function isDataVazia() {
+  if (datasReserva.dataInicio == '' || datasReserva.dataTermino == '') {
+    return true
+  }
+  return false
+}
+
+function reservar() {
+  if (isDataVazia()) {
+    dataVaziaAlert.value = true
+    return
+  }
+  console.log('sucesso')
+}
 </script>
 
 <template>
@@ -16,14 +37,16 @@ const reservaStore = useReserva()
         <div class="date-input start-date">
           <div class="date-wrapper">
             <label for="start-date" class="date-label">De:</label>
-            <input type="text" id="start-date" class="date-value" placeholder="dd/mm/aa" v-model="reservaStore.datasReserva.dataInicio"/>
+            <input type="text" id="start-date" class="date-value" placeholder="dd/mm/aa"
+              v-model="datasReserva.dataInicio" />
           </div>
         </div>
         <div class="date-separator"></div>
         <div class="date-input end-date">
           <div class="date-wrapper">
             <label for="end-date" class="date-label">Até:</label>
-            <input type="date" id="end-date" class="date-value" placeholder="dd/mm/aa" v-model="reservaStore.datasReserva.dataTermino"/>
+            <input type="date" id="end-date" class="date-value" placeholder="dd/mm/aa"
+              v-model="datasReserva.dataTermino" />
           </div>
         </div>
       </div>
@@ -34,7 +57,8 @@ const reservaStore = useReserva()
 
 <style scoped>
 .reservation-card {
-  max-width: 315px; /* Ajuste de largura para ficar próximo ao da imagem */
+  max-width: 315px;
+  /* Ajuste de largura para ficar próximo ao da imagem */
   font-weight: 600;
   margin: 0 auto;
 }
@@ -50,7 +74,8 @@ const reservaStore = useReserva()
   color: #000;
   font-size: 30px;
   text-align: center;
-  margin-bottom: 8px; /* Menor margem inferior para corresponder à imagem */
+  margin-bottom: 8px;
+  /* Menor margem inferior para corresponder à imagem */
   font-weight: 600;
 }
 
@@ -63,7 +88,8 @@ const reservaStore = useReserva()
   font-size: 16px;
   font-weight: 400;
   margin-top: -5px;
-  margin-bottom: 15px; /* Ajuste de espaçamento entre "Semanal" e os campos de data */
+  margin-bottom: 15px;
+  /* Ajuste de espaçamento entre "Semanal" e os campos de data */
   text-align: center;
 }
 
@@ -76,7 +102,8 @@ const reservaStore = useReserva()
   border: 1px solid #000;
   border-radius: 5px;
   overflow: hidden;
-  margin-bottom: 20px; /* Margem inferior maior para o botão */
+  margin-bottom: 20px;
+  /* Margem inferior maior para o botão */
 }
 
 .date-input {
@@ -107,26 +134,30 @@ const reservaStore = useReserva()
   background: transparent;
   padding: 0;
   width: 60px;
-  text-align: left; /* Alinha o texto à esquerda dentro do input */
+  text-align: left;
+  /* Alinha o texto à esquerda dentro do input */
 }
 
 .calendar-icon {
   width: 12px;
   position: absolute;
-  right: 10px; /* Posiciona o ícone à direita */
+  right: 10px;
+  /* Posiciona o ícone à direita */
 }
 
 /* Estilo para o separador */
 .date-separator {
   width: 1px;
   background-color: #000;
-  margin: 0 5px; /* Margem menor entre os dois campos */
+  margin: 0 5px;
+  /* Margem menor entre os dois campos */
 }
 
 .reserve-button {
   border-radius: 40px;
   background-color: #4d735d;
-  margin-top: 20px; /* Margem superior ajustada */
+  margin-top: 20px;
+  /* Margem superior ajustada */
   font-size: 20px;
   color: #fff;
   text-align: center;
