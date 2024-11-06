@@ -7,13 +7,16 @@ const reservaStore = useReserva()
 <template>
   <div class="container-reservas">
     <h1>Minhas Reservas</h1>
-    <div class="cartao-reserva" v-for="(reserva, index) in reservaStore.userReservas" :key="index">
-      <img :src="reserva.imagem" alt="Salão de casamento" class="imagem-reserva"/>
-      <div class="detalhes-reserva">
-        <h2>{{ reserva.titulo }}</h2>
-        <p>De {{ reserva.dataInicio }} a {{ reserva.dataFim }}</p>
-        <p><i class="fas fa-map-marker-alt"></i> {{ reserva.localizacao }}</p>
+    <div class="cartao-reserva" v-for="(reserva, index) in reservas" :key="index">
+      <div class="detalhes-container">
+        <img :src="reserva.imagem" alt="Salão de casamento" class="imagem-reserva"/>
+        <div class="detalhes-reserva">
+          <h2>{{ reserva.titulo }}</h2>
+          <p>De {{ reserva.dataInicio }} a {{ reserva.dataFim }}</p>
+          <p><i class="fas fa-map-marker-alt"></i> {{ reserva.localizacao }}</p>
+        </div>
       </div>
+      <button class="botao-detalhes">Ver mais detalhes</button>
     </div>
   </div>
 </template>
@@ -31,11 +34,16 @@ h1 {
 
 .cartao-reserva {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  padding: 10px;
-  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc; 
+}
+
+.detalhes-container {
+  display: flex;
+  align-items: center;
 }
 
 .imagem-reserva {
@@ -43,6 +51,7 @@ h1 {
   height: 150px;
   object-fit: cover;
   border-radius: 8px;
+  margin-right: 20px;
 }
 
 .detalhes-reserva {
@@ -59,7 +68,34 @@ h2 {
   font-size: 1.5em;
 }
 
-p {
+.detalhes-reserva p {
   margin: 5px 0;
+  font-size: 14px;
+}
+.botao-detalhes {
+  background-color: white;
+  color: black;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.botao-detalhes:hover {
+  background-color: #f0f0f0;
+}
+
+@media (max-width: 768px) {
+  .cartao-reserva {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .botao-detalhes {
+    align-self: flex-end;
+    margin-top: 10px;
+  }
 }
 </style>
