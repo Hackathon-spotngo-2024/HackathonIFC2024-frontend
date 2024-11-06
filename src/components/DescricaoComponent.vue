@@ -1,55 +1,51 @@
 <script setup>
+import { useEndereco } from '../../stores/dadosEndereco'
+
+const enderecoStore = useEndereco()
 </script>
 
 <template>
-            <h2>Descrição</h2>
-    <div class="descricao">
-        <p>Se vocês sonham com um casamento moderno e divertido,
-o novo espaço do Indaiá Eventos é a melhor opção em Joinville.
-Uma casa de festas única, completa, com todos os serviços
-necessários para que o seu grande dia seja maior ainda e que 
-todos os seus sonhos se realizem com a elegância e sofisticação 
-que a situação requere.
-
-Espaços e capacidade
-
-O espaço é uma casa completa,
-com amplo espaço para realizar eventos de até 800 convidados.
-A casa possui sistema de som completo, iluminação especial e 
-cozinha completa para uso do buffet.Também 
-conta com uma confortável pista de dança com mezanino,
-assim todos poderão desfrutar ao seu ritmo, 
-sem perder nenhum detalhe.
-</p>
-    </div>
+  <h2 class="titulo-descricao">Descrição</h2>
+  <div class="linha-container">
+    <div class="linha-divisoria"></div>
+  </div>
+  <div class="descricao">
+    <p>{{ enderecoStore.dadosAnuncio.descricao }}</p>
+  </div>
+  <div class="linha-container">
+    <div class="linha-divisoria"></div>
+  </div>
 </template>
 
 <style scoped>
 .descricao {
-    padding: 15px;
-    border: 1px solid var(--cor-bordas-input);
-  border-radius: 10px;
   width: 550px;
   height: fit-content;
-  margin: 0 auto;
-  font-family: Arial, sans-serif;
 }
 
-h2 {
-  text-align: center;
+.titulo-descricao {
+  text-align: start;
+  font-weight: 600;
   font-size: 24px;
-  margin-bottom: 20px;
 }
 
-p {
-  line-height: 1.6;
+.descricao p {
+  width: 550px;
   font-size: 18px;
-  margin: 10px 0;
+  word-break: break-word;
 }
 
-strong {
-  font-size: 20px;
-  display: block;
-  margin-top: 20px;
+.linha-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.linha-divisoria {
+  margin-top: 1rem;
+  width: 100%;
+  height: 1px;
+  margin: 1.5rem 0rem 1.5rem 0;
+  background-color: var(--cor-linha-divisoria);
 }
 </style>

@@ -1,27 +1,7 @@
 <script setup>
-const reservas = [
-        {
-         titulo: 'Salão para casamento',
-         dataInicio: '20/09/23',
-         dataFim: '25/09/23',
-         localizacao: 'Vila Nova - Jlle',
-         imagem: '../src/assets/card-imgs/card-img-1.jpeg'
-        },
-        {
-         titulo: 'Salão para casamento',
-         dataInicio: '20/09/23',
-         dataFim: '25/09/23',
-         localizacao: 'Vila Nova - Jlle',
-         imagem: '../src/assets/card-imgs/card-img-1.jpeg'
-        },
-        {
-         titulo: 'Salão para casamento',
-         dataInicio: '20/09/23',
-         dataFim: '25/09/23',
-         localizacao: 'Vila Nova - Jlle',
-         imagem: '../src/assets/card-imgs/card-img-1.jpeg'
-        }
-];
+import { useReserva } from '../../stores/dadosReserva';
+
+const reservaStore = useReserva()
 </script>
 
 <template>
@@ -74,7 +54,16 @@ h1 {
   margin-right: 20px;
 }
 
-.detalhes-reserva h2 {
+.detalhes-reserva {
+  margin-left: 20px;
+  transition: all 300ms ease-in-out;
+}
+
+.detalhes-reserva:hover {
+  transform: translateX(10px);
+}
+
+h2 {
   margin: 0;
   font-size: 1.5em;
 }

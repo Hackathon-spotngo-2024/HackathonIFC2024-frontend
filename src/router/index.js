@@ -6,6 +6,8 @@ import ReservasPage from "../views/ReservasPage.vue"
 import AjudaPage from "../router/AjudaPage.vue"
 import SobrePage from "../router/SobrePage.vue"
 import TermosPage from "../router/TermosPage.vue"
+import AnuncioFicticioPage from '@/views/AnuncioFicticioPage.vue'
+import AnuncioPublicadoPage from '@/views/AnuncioPublicadoPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,12 +23,12 @@ const router = createRouter({
       component: AnunciarPage,
     },
     {
-      path: "/anuncio",
+      path: "/anuncio/",
       name: "AnuncioPage",
       component: AnuncioPage,
     },
     {
-     path: "/Reservas",
+     path: "/minhas-reservas",
      name: "ReservasPage",
      component: ReservasPage,
     },
@@ -46,6 +48,19 @@ const router = createRouter({
       component: TermosPage,
     },
   ]
+      path: "/anuncio-ficticio",
+      name: "AnuncioFicticio",
+      component: AnuncioFicticioPage,
+    },
+    {
+      path: "/anuncio-publicado",
+      name: "AnuncioPublicado",
+      component: AnuncioPublicadoPage,
+    }
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    return { top: 0 };
+  }
 })
 
 export default router

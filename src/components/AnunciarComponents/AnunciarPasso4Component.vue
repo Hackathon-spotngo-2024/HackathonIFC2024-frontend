@@ -1,9 +1,15 @@
 <script setup>
 import { useEtapa } from '../../../stores/dadosEtapa'
 import { useEndereco } from '../../../stores/dadosEndereco'
-import UploadImagemComponent from '../UploadImagemComponent.vue';
+import UploadImagemComponent from '../UploadImagemComponent.vue'
+import CampoVazioAlertComponent from '../CampoVazioAlertComponent.vue'
+import { onMounted } from 'vue'
 const etapaStore = useEtapa()
 const enderecoStore = useEndereco()
+
+onMounted(() => {
+  enderecoStore.setarDadosLocalStorage()
+})
 </script>
 
 <template>
@@ -20,7 +26,7 @@ const enderecoStore = useEndereco()
             type="text"
             id="titulo-input"
             v-model="enderecoStore.dadosEndereco.titulo"
-            placeholder="Título"
+            placeholder="Ex: Salão de casamento"
           />
         </div>
 
@@ -48,9 +54,22 @@ const enderecoStore = useEndereco()
           <button class="voltar-btn" @click="etapaStore.etapaAnterior">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
           </button>
-          <button class="avancar-btn" @click="handleClickAvancar">Publicar</button>
+          <router-link to="/anuncio-publicado"
+            ><button
+              class="avancar-btn"
+              @click="
+                enderecoStore.setarDadosLocalStorage();
+                enderecoStore.addAnuncio()
+              "
+            >
+              Publicar
+            </button>
+          </router-link>
         </div>
       </div>
+    </div>
+    <div class="campo-vazio-container">
+      <CampoVazioAlertComponent v-if="enderecoStore.campoVazioAlert" />
     </div>
   </section>
 </template>
@@ -136,6 +155,7 @@ label {
   margin-bottom: 1rem;
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
   font-weight: bold;
   font-family: var(--fonte-principal);
@@ -213,5 +233,35 @@ p {
 
 .avancar-btn:hover {
   background-color: var(--cor-principal-hover);
+}
+
+.campo-vazio-container {
+  width: 960px;
+  height: 2rem;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+@media (max-width: 1160px) {
+  h1, h2 {
+    font-size: 24px;
+  }
+  .mensagem {
+    margin-bottom: 2rem;
+  }
+  .conteudo {
+    flex-direction: column;
+    gap: 5rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .botoes-wrapper {
+    margin-top: 2rem;
+  }
+  .texto-imagens {
+    align-items: center;
+  }
 }
 </style>

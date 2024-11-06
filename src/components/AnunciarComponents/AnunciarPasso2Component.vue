@@ -3,18 +3,21 @@ import { onMounted, ref, watch } from 'vue'
 import L from 'leaflet' //Importando biblioteca Leaflet (mapa)
 import 'leaflet/dist/leaflet.css' //Importa o css da biblioteca
 import BotaoAvancarEVoltarComponent from '../BotaoAvancarEVoltarComponent.vue'
+import CampoVazioAlertComponent from '../CampoVazioAlertComponent.vue'
 import { useEndereco } from '../../../stores/dadosEndereco'
 
 const enderecoStore = useEndereco()
 
 const tituloEtapa2 = ref('Onde fica sua locação?')
 const enderecoSearch = ref('')
+
 const sugestoes = ref([])
 let map
 let marker
+
 const showForm = ref(false)
-const todosCamposVazios = Object.values(enderecoStore.dadosEndereco).every((campo) => campo === '') //Verifica se TODOS os campos do formulario estao vazios (retorna false 1 ou mais estiverem preenchidos)
-const algumCampoPreenchido = Object.values(enderecoStore.dadosEndereco).some((campo) => campo != '') //Verifica se qualquer campo esta preenchido
+const todosCamposVazios = Object.values(enderecoStore.dadosEndereco).every((campo) => campo === '')
+const algumCampoPreenchido = Object.values(enderecoStore.dadosEndereco).some((campo) => campo != '')
 
 watch(
   () => showForm,
@@ -26,17 +29,13 @@ watch(
 )
 
 onMounted(() => {
+  enderecoStore.setarDadosLocalStorage()
   if (todosCamposVazios) {
     showForm.value = false //se todos estao vazios, o formulario nao aparece
   }
   else if (algumCampoPreenchido) {
     showForm.value = true //se algum esta preenchido, o formulario aparece
   }})
-
-defineProps({
-  proximaEtapa: Function,
-  etapaAnterior: Function
-})
 
 //MAPA -------------------------------------
 
@@ -230,9 +229,7 @@ const formatarEndereco = (endereco) => {
         </div>
       </div>
     </form>
-    <div class="campo-vazio-alert" v-if="enderecoStore.campoVazioAlert == true">
-      <p class="campo-vazio-text">Preencha todos os campos para prosseguir.</p>
-    </div>
+    <CampoVazioAlertComponent v-if="enderecoStore.campoVazioAlert"/>
 
     <!-- BOTÕES -->
     <BotaoAvancarEVoltarComponent @avancar="enderecoStore.verificarFormulario" />
