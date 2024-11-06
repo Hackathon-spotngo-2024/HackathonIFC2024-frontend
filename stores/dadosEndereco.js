@@ -30,10 +30,10 @@ export const useEndereco = defineStore('endereco', () => {
   }
 
   function addAnuncio() {
-/*    if (dadosEndereco.titulo == '' || dadosEndereco.preco == '' || dadosEndereco.imgs == []) {
+   if (dadosEndereco.titulo == '' || dadosEndereco.preco == '' || dadosEndereco.imgs == []) {
       campoVazioAlert.value = true
       return
-    } else { */
+    } else {
       const stringDados = window.localStorage.getItem('DadosEndereco') // Pega os dados que estao atualmente no storage
       dadosAnuncio.value = JSON.parse(stringDados) // Os dados vem em string, JSON.parse() os transforma em objeto
       
@@ -52,16 +52,16 @@ export const useEndereco = defineStore('endereco', () => {
         else dadosEndereco[key] = []
       }
       console.log(dadosEndereco)
-  // }
+  }
   }
 
   function verificarFormulario() {
-    // if (dadosEndereco.pais == '' || dadosEndereco.rua == '' || dadosEndereco.numero == '' || dadosEndereco.bairro == '' || dadosEndereco.estado == '' || dadosEndereco.cidade == '' || dadosEndereco.cep == '') {
-    //   campoVazioAlert.value = true
-    // } else {
-    // campoVazioAlert.value = false
+    if (dadosEndereco.pais == '' || dadosEndereco.rua == '' || dadosEndereco.numero == '' || dadosEndereco.bairro == '' || dadosEndereco.estado == '' || dadosEndereco.cidade == '' || dadosEndereco.cep == '') {
+      campoVazioAlert.value = true
+    } else {
+    campoVazioAlert.value = false
     etapaStore.proximaEtapa()
-    // }
+    }
   }
 
   return {

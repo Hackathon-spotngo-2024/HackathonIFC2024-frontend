@@ -1,15 +1,14 @@
 <script setup>
 import { useEndereco } from '../../stores/dadosEndereco';
-import { useReserva } from '../../stores/reservaStore';
 import { reactive, ref } from 'vue';
 
 const enderecoStore = useEndereco()
-const reservaStore = useReserva()
 const dataVaziaAlert = ref(false)
 const datasReserva = reactive({
-  dataInicio: '',
-  dataTermino: ''
+  dataInicio: '0000-00-00',
+  dataTermino: '0000-00-00'
 })
+
 
 function isDataVazia() {
   if (datasReserva.dataInicio == '' || datasReserva.dataTermino == '') {
@@ -18,9 +17,15 @@ function isDataVazia() {
   return false
 }
 
+function verificarDatas() {
+  if (datasReserva.dataInicio < datasReserva.dataTermino && !isDataVazia()) return false
+  return true
+}
+
 function reservar() {
-  if (isDataVazia()) {
+  if (verificarDatas()) {
     dataVaziaAlert.value = true
+    console.log('campo vazio sla oq')
     return
   }
   console.log('sucesso')
@@ -37,7 +42,7 @@ function reservar() {
         <div class="date-input start-date">
           <div class="date-wrapper">
             <label for="start-date" class="date-label">De:</label>
-            <input type="text" id="start-date" class="date-value" placeholder="dd/mm/aa"
+            <input type="date" id="start-date" class="date-value" placeholder="dd/mm/aa"
               v-model="datasReserva.dataInicio" />
           </div>
         </div>
@@ -50,7 +55,7 @@ function reservar() {
           </div>
         </div>
       </div>
-      <button class="reserve-button">Reservar</button>
+      <button class="reserve-button" @click="reservar">Reservar</button>
     </div>
   </section>
 </template>
@@ -58,7 +63,6 @@ function reservar() {
 <style scoped>
 .reservation-card {
   max-width: 315px;
-  /* Ajuste de largura para ficar próximo ao da imagem */
   font-weight: 600;
   margin: 0 auto;
 }
@@ -66,7 +70,7 @@ function reservar() {
 .card-content {
   border-radius: 15px;
   background-color: #fff;
-  padding: 24px 29px;
+  padding: 24px 10px;
   border: 1px solid #000;
 }
 
@@ -75,7 +79,6 @@ function reservar() {
   font-size: 30px;
   text-align: center;
   margin-bottom: 8px;
-  /* Menor margem inferior para corresponder à imagem */
   font-weight: 600;
 }
 
@@ -89,7 +92,6 @@ function reservar() {
   font-weight: 400;
   margin-top: -5px;
   margin-bottom: 15px;
-  /* Ajuste de espaçamento entre "Semanal" e os campos de data */
   text-align: center;
 }
 
@@ -97,26 +99,25 @@ function reservar() {
   display: flex;
   justify-content: space-between;
   font-weight: 400;
-  white-space: nowrap;
-  width: 100%;
+  width: 220px;
+  height: 50px;
   border: 1px solid #000;
   border-radius: 5px;
   overflow: hidden;
   margin-bottom: 20px;
-  /* Margem inferior maior para o botão */
 }
 
 .date-input {
+  width: 100px;
   display: flex;
   align-items: center;
-  padding: 6px 10px;
   background-color: #fff;
-  flex: 1;
+  flex: 0.5;
   justify-content: center;
-  position: relative;
 }
 
 .date-wrapper {
+  width: 100px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -124,7 +125,8 @@ function reservar() {
 
 .date-label {
   color: #000;
-  font-size: 10px;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .date-value {
@@ -133,31 +135,27 @@ function reservar() {
   border: none;
   background: transparent;
   padding: 0;
-  width: 60px;
-  text-align: left;
-  /* Alinha o texto à esquerda dentro do input */
+  width: 100px;
+  outline: 0;
+  text-align: center;
 }
 
 .calendar-icon {
   width: 12px;
   position: absolute;
   right: 10px;
-  /* Posiciona o ícone à direita */
 }
 
-/* Estilo para o separador */
 .date-separator {
   width: 1px;
   background-color: #000;
   margin: 0 5px;
-  /* Margem menor entre os dois campos */
 }
 
 .reserve-button {
   border-radius: 40px;
   background-color: #4d735d;
   margin-top: 20px;
-  /* Margem superior ajustada */
   font-size: 20px;
   color: #fff;
   text-align: center;

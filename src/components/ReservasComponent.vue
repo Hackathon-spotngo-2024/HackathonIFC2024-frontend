@@ -1,5 +1,5 @@
 <script setup>
-import { useReserva } from '../../stores/reservaStore';
+import { useReserva } from '../../stores/dadosReserva';
 
 const reservaStore = useReserva()
 </script>

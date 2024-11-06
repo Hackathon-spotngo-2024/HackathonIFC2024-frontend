@@ -12,8 +12,8 @@ export const useReserva = defineStore('etapa', () => {
             userReservas.push(reserva)
         }
     } */
+
   return {
-    dataVaziaAlert,
     userReservas
   }
 })

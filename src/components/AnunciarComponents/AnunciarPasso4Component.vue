@@ -155,6 +155,7 @@ label {
   margin-bottom: 1rem;
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
   font-weight: bold;
   font-family: var(--fonte-principal);
