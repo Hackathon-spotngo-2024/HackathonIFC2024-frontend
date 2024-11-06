@@ -1,7 +1,9 @@
 <script setup>
 import { useEndereco } from '../../stores/dadosEndereco';
+import { useReserva } from '../../stores/reservaStore';
 
 const enderecoStore = useEndereco()
+const reservaStore = useReserva()
 </script>
 
 <template>
@@ -14,15 +16,14 @@ const enderecoStore = useEndereco()
         <div class="date-input start-date">
           <div class="date-wrapper">
             <label for="start-date" class="date-label">De:</label>
-            <input type="text" id="start-date" class="date-value" placeholder="dd/mm/aa" />
+            <input type="text" id="start-date" class="date-value" placeholder="dd/mm/aa" v-model="reservaStore.datasReserva.dataInicio"/>
           </div>
         </div>
-        <!-- Separador -->
         <div class="date-separator"></div>
         <div class="date-input end-date">
           <div class="date-wrapper">
             <label for="end-date" class="date-label">Até:</label>
-            <input type="text" id="end-date" class="date-value" placeholder="dd/mm/aa" />
+            <input type="date" id="end-date" class="date-value" placeholder="dd/mm/aa" v-model="reservaStore.datasReserva.dataTermino"/>
           </div>
         </div>
       </div>

@@ -30,10 +30,10 @@ export const useEndereco = defineStore('endereco', () => {
   }
 
   function addAnuncio() {
-    if (dadosEndereco.titulo == '' || dadosEndereco.preco == '' || dadosEndereco.imgs == []) {
+/*    if (dadosEndereco.titulo == '' || dadosEndereco.preco == '' || dadosEndereco.imgs == []) {
       campoVazioAlert.value = true
       return
-    } else {
+    } else { */
       const stringDados = window.localStorage.getItem('DadosEndereco') // Pega os dados que estao atualmente no storage
       dadosAnuncio.value = JSON.parse(stringDados) // Os dados vem em string, JSON.parse() os transforma em objeto
       
@@ -43,7 +43,16 @@ export const useEndereco = defineStore('endereco', () => {
 
       setarDadosLocalStorage() // Coloca os dados no localStorage
       window.localStorage.setItem('DadosAnuncio', JSON.stringify(anunciosCriados.value))
-    }
+      
+      etapaStore.etapaAtual = 0
+      
+      for (const key in dadosEndereco) {
+        if (typeof dadosEndereco[key] == 'string') dadosEndereco[key] = ''
+        else if (typeof dadosEndereco[key] == 'number') dadosEndereco[key] = 0
+        else dadosEndereco[key] = []
+      }
+      console.log(dadosEndereco)
+  // }
   }
 
   function verificarFormulario() {

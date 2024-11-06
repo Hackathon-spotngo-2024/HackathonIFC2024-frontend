@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "leaflet": "^1.9.4",
-    "pinia": "^2.2.4",
+    "pinia": "^2.2.6",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
   },
