@@ -47,11 +47,12 @@ const router = createRouter({
       name: "TermosPage",
       component: TermosPage,
     },
-  ]
+    {
       path: "/anuncio-ficticio",
       name: "AnuncioFicticio",
       component: AnuncioFicticioPage,
     },
+
     {
       path: "/anuncio-publicado",
       name: "AnuncioPublicado",
