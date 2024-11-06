@@ -1,47 +1,76 @@
 <script setup>
+import { useEndereco } from '../../stores/dadosEndereco';
+import { reactive, ref } from 'vue';
+
+const enderecoStore = useEndereco()
+const dataVaziaAlert = ref(false)
+const datasReserva = reactive({
+  dataInicio: '0000-00-00',
+  dataTermino: '0000-00-00'
+})
+
+
+function isDataVazia() {
+  if (datasReserva.dataInicio == '' || datasReserva.dataTermino == '') {
+    return true
+  }
+  return false
+}
+
+function verificarDatas() {
+  if (datasReserva.dataInicio < datasReserva.dataTermino && !isDataVazia()) return false
+  return true
+}
+
+function reservar() {
+  if (verificarDatas()) {
+    dataVaziaAlert.value = true
+    console.log('campo vazio sla oq')
+    return
+  }
+  console.log('sucesso')
+}
 </script>
 
 <template>
   <section class="reservation-card">
     <div class="card-content">
       <h2 class="price">
-        R$2000 <span class="price-period">por dia</span>
+        R${{ enderecoStore.dadosAnuncio.preco }} <span class="price-period"> dia</span>
       </h2>
-      <p class="frequency">Semanal</p>
       <div class="date-range">
         <div class="date-input start-date">
           <div class="date-wrapper">
             <label for="start-date" class="date-label">De:</label>
-            <input type="text" id="start-date" class="date-value" placeholder="dd/mm/aa" />
+            <input type="date" id="start-date" class="date-value" placeholder="dd/mm/aa"
+              v-model="datasReserva.dataInicio" />
           </div>
-          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/07cedd3ab815fcc7a4589c069de63d76c3a95e07a1c4f57c335d65a9c062d947?placeholderIfAbsent=true&apiKey=229514d5330a4793a24a9af5d8cdc0f5" alt="ícone de calendário" class="calendar-icon" />
         </div>
-        <!-- Separador -->
         <div class="date-separator"></div>
         <div class="date-input end-date">
           <div class="date-wrapper">
             <label for="end-date" class="date-label">Até:</label>
-            <input type="text" id="end-date" class="date-value" placeholder="dd/mm/aa" />
+            <input type="date" id="end-date" class="date-value" placeholder="dd/mm/aa"
+              v-model="datasReserva.dataTermino" />
           </div>
-          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/07cedd3ab815fcc7a4589c069de63d76c3a95e07a1c4f57c335d65a9c062d947?placeholderIfAbsent=true&apiKey=229514d5330a4793a24a9af5d8cdc0f5" alt="ícone de calendário" class="calendar-icon" />
         </div>
       </div>
-      <button class="reserve-button">Reservar</button>
+      <button class="reserve-button" @click="reservar">Reservar</button>
     </div>
   </section>
 </template>
 
 <style scoped>
 .reservation-card {
-  max-width: 315px; /* Ajuste de largura para ficar próximo ao da imagem */
-  font-weight: 700;
+  max-width: 315px;
+  font-weight: 600;
   margin: 0 auto;
 }
 
 .card-content {
   border-radius: 15px;
   background-color: #fff;
-  padding: 24px 29px;
+  padding: 24px 10px;
   border: 1px solid #000;
 }
 
@@ -49,7 +78,8 @@
   color: #000;
   font-size: 30px;
   text-align: center;
-  margin-bottom: 8px; /* Menor margem inferior para corresponder à imagem */
+  margin-bottom: 8px;
+  font-weight: 600;
 }
 
 .price-period {
@@ -61,7 +91,7 @@
   font-size: 16px;
   font-weight: 400;
   margin-top: -5px;
-  margin-bottom: 15px; /* Ajuste de espaçamento entre "Semanal" e os campos de data */
+  margin-bottom: 15px;
   text-align: center;
 }
 
@@ -69,25 +99,25 @@
   display: flex;
   justify-content: space-between;
   font-weight: 400;
-  white-space: nowrap;
-  width: 100%;
+  width: 220px;
+  height: 50px;
   border: 1px solid #000;
   border-radius: 5px;
   overflow: hidden;
-  margin-bottom: 20px; /* Margem inferior maior para o botão */
+  margin-bottom: 20px;
 }
 
 .date-input {
+  width: 100px;
   display: flex;
   align-items: center;
-  padding: 6px 10px;
   background-color: #fff;
-  flex: 1;
+  flex: 0.5;
   justify-content: center;
-  position: relative;
 }
 
 .date-wrapper {
+  width: 100px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -95,7 +125,8 @@
 
 .date-label {
   color: #000;
-  font-size: 10px;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .date-value {
@@ -104,27 +135,27 @@
   border: none;
   background: transparent;
   padding: 0;
-  width: 60px;
-  text-align: left; /* Alinha o texto à esquerda dentro do input */
+  width: 100px;
+  outline: 0;
+  text-align: center;
 }
 
 .calendar-icon {
   width: 12px;
   position: absolute;
-  right: 10px; /* Posiciona o ícone à direita */
+  right: 10px;
 }
 
-/* Estilo para o separador */
 .date-separator {
   width: 1px;
   background-color: #000;
-  margin: 0 5px; /* Margem menor entre os dois campos */
+  margin: 0 5px;
 }
 
 .reserve-button {
   border-radius: 40px;
   background-color: #4d735d;
-  margin-top: 20px; /* Margem superior ajustada */
+  margin-top: 20px;
   font-size: 20px;
   color: #fff;
   text-align: center;

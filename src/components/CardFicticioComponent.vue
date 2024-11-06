@@ -1,34 +1,32 @@
 <script setup>
-import { useEndereco } from '../../stores/dadosEndereco'
-
-const enderecoStore = useEndereco()
 </script>
 
 <template>
-  <div class="card">
-    <router-link to="anuncio" class="link">
-      <div class="card-img">
-        <img :src="enderecoStore.dadosAnuncio.imgs[0]" alt="" />
-      </div>
-      <div class="card-infos">
-        <div class="card-titulo">{{ enderecoStore.dadosAnuncio.titulo }}</div>
-        <div class="card-preco">{{ 'R$' + enderecoStore.dadosAnuncio.preco + ',00' }}</div>
-        <div class="card-loc">
-          {{ enderecoStore.dadosAnuncio.cidade + ', ' + enderecoStore.dadosAnuncio.estado }}
-        </div>
-      </div>
-    </router-link>
-  </div>
+<div class="card">
+  <router-link to="/anuncio-ficticio" class="link">
+    <div class="card-img">
+      <img src="/public/salaocasamento1.jpeg" />
+    </div>
+    <div class="card-infos">
+      <div class="card-titulo">Salão de festas</div>
+      <div class="card-preco">R$129,00</div>
+      <div class="card-loc">Joinville, Santa Catarina</div>
+    </div>
+  </router-link>
+</div>
 </template>
 
 <style scoped>
 .card {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   margin: 1rem auto;
-  width: 90%;
+  width: fit-content;
   max-width: 400px;
   border: 0;
+  border-radius: 15px;
 }
 
 .card-infos {
@@ -77,13 +75,14 @@ const enderecoStore = useEndereco()
 }
 
 @media (max-width: 576px) {
+
   .card-titulo,
   .card-preco,
   .card-loc {
     font-size: 0.8rem;
   }
 
-  .card-img > img {
+  .card-img>img {
     border-radius: 10px;
   }
 }

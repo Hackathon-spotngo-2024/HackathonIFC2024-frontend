@@ -1,6 +1,11 @@
 <script setup>
-import NavbarComponent from './components/NavbarComponent.vue';
-import RodapeComponent from './components/RodapeComponent.vue';
+import { ref } from 'vue';
+
+const modal = ref(false)
+
+function openModal() {
+ modal.value = true
+}
 </script>
 
 <template>

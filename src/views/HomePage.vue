@@ -1,9 +1,18 @@
 <script setup>
-import { useModal } from '../../stores/dadosModal';
-import CadastroComponent from '@/components/CadastroComponent.vue';
-import LoginComponent from '@/components/LoginComponent.vue';
+import { ref } from 'vue'
+import { useEndereco } from '../../stores/dadosEndereco'
+import CadastroComponent from '@/components/CadastroComponent.vue'
+import CardFicticioComponent from '@/components/CardFicticioComponent.vue'
+import BannerComponent from '@/components/BannerComponent.vue'
+import CardSectionTitle from '@/components/CardSectionTitle.vue'
+import CardComponent from '@/components/CardComponent.vue'
 
-const modalStore = useModal()
+const enderecoStore = useEndereco()
+
+const isModalOpen = ref(false)
+function openModal() {
+  isModalOpen.value = true
+}
 </script>
 
 <template>
@@ -12,15 +21,10 @@ const modalStore = useModal()
   <BannerComponent />
   <CardSectionTitle />
   <div class="card-container">
-    <CardComponent />
-    <CardComponent />
-    <CardComponent />
-    <CardComponent />
-    <CardComponent />
-    <CardComponent />
-    <CardComponent />
-    <CardComponent />
-    <CardComponent />
+    <CardFicticioComponent />
+    <CardFicticioComponent />
+    <CardFicticioComponent />
+    <CardComponent v-for="anuncio in enderecoStore.anunciosCriados" :key="anuncio.id" />
   </div>
 </template>
 

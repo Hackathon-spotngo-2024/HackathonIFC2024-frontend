@@ -19,7 +19,7 @@ const modalStore = useModal()
   <div class="nav-container">
     <router-link to="/" class="home-link"><img class="logo-img" src="../assets/logo.png" alt="" /></router-link>
     <a href="#card-section-title" @click.prevent="scrollTo('card-section-title')" class="nav-link">Alugar</a>
-    <router-link to="/Reservas" id="Reservas-link" class="nav-link">Minhas reservas</router-link>
+    <router-link to="/minhas-reservas" id="Reservas-link" class="nav-link">Minhas reservas</router-link>
     <div class="search-bar">
       <i class="fa fa-search"></i>
       <input type="text" placeholder="Procure seu spot" class="search-input" />
@@ -41,7 +41,7 @@ const modalStore = useModal()
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 1rem 10rem 0 10rem;
+  margin: 2rem 10rem 0 10rem;
   border-radius: 40px;
   padding: .5rem;
   box-shadow: 1px 3px 8px 3px rgba(0, 0, 0, 0.08);
@@ -145,7 +145,7 @@ button {
   margin-top: 1rem;
   width: 100%;
   height: 1px;
-  margin: 1.5rem 10rem 0 10rem;
-  background-color: var(--cor-linha-divisoria)
+  margin: 1.5rem 0rem 0 0;
+  background-color: var(--cor-linha-divisoria);
 }
 </style>
