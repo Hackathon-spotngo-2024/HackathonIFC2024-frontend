@@ -1,10 +1,7 @@
 <script setup>
 import { ref } from 'vue';
-import NavbarComponent from './components/NavbarComponent.vue';
-import RodapeComponent from './components/RodapeComponent.vue';
 
 const modal = ref(false)
-
 
 function openModal() {
  modal.value = true
@@ -18,7 +15,6 @@ function openModal() {
  </template>
 
  <style scoped>
- 
  
  </style>
  

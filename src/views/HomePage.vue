@@ -1,8 +1,11 @@
 <script setup>
-import CadastroComponent from '@/components/CadastroComponent.vue'
 import { ref } from 'vue'
 import { useEndereco } from '../../stores/dadosEndereco'
+import CadastroComponent from '@/components/CadastroComponent.vue'
 import CardFicticioComponent from '@/components/CardFicticioComponent.vue'
+import BannerComponent from '@/components/BannerComponent.vue'
+import CardSectionTitle from '@/components/CardSectionTitle.vue'
+import CardComponent from '@/components/CardComponent.vue'
 
 const enderecoStore = useEndereco()
 
