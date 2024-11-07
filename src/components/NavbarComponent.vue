@@ -159,6 +159,95 @@ button {
   background-color: var(--cor-linha-divisoria);
 }
 
+@media (max-width: 1400px) {
+  .nav-container {
+    align-items: center;
+    font-size: 14px;
+  }
+  .logo-img {
+    width: auto;
+    max-width: 180px;
+  }
+  .search-bar {
+    width: auto;
+    scale: 1;
+  }
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 1130px){
+  .nav-container{
+    font-size: 12px;
+    margin: 16px 140px 16px;
+  }
+  .search-bar{
+    scale: 0.9;
+  }
+  .entrar-link{
+    scale: 0.9;
+  }
+}
+
+@media (max-width: 1100px){
+  .search-bar{
+    width: 160px;
+  }
+  .search-input{
+    width: 120px;
+    font-size: 14px;
+  }
+}
+
+/**/
+
+@media (max-width: 1000px) {
+  .nav-container {
+    margin: 16px 130px 16px;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+  .logo-img{
+    scale: 0.8;
+  }
+}
+
+@media (max-width: 952px){
+  .nav-container{
+    text-align: center;
+    padding: 8px;
+    
+  }
+}
+
+@media (max-width: 910px){
+  .nav-container{
+    scale: 0.9;
+    gap: 0;
+    margin: 10px 80px;
+  }
+}
+
+@media (max-width: 875px){
+  .logo-img{
+    scale: 0.7;
+  }
+  .entrar-link{
+    scale: 0.9;
+  }
+  .nav-container{
+    margin: 10px 90px 10px;
+    font-size: 14px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .search-bar{
+    scale: 0.8;
+  }
+  
 .profile-container {
   display: flex;
   justify-content: center;
@@ -168,4 +257,6 @@ button {
   width: 35px;
   margin-right: 1rem;
 }
+
+
 </style>

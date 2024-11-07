@@ -208,6 +208,7 @@ button:active {
 .campo-vazio-alert > p {
   font-size: 14px;
 }
+
 .cadastro {
   font-weight: bold;
   cursor: pointer;
@@ -233,5 +234,62 @@ label {
   color: var(--preto-alternativo);
   font-size: 14px;
   font-weight: 500;
+}
+
+@media (max-width: 1200px) {
+    .form-container {
+        width: 80%;
+    }
+}
+
+@media (max-width: 992px) {
+    .form-container {
+        width: 70%;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        width: 90%;
+        height: auto;
+        padding: 20px;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    button {
+        padding: 10px;
+        width: 100%;
+    }
+
+    .linha {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .title {
+        font-size: 20px;
+    }
+
+    .sub-title {
+        font-size: 16px;
+    }
+
+    .termo {
+        font-size: 8px;
+    }
+
+    .textoFinal {
+        font-size: 16px;
+    }
+
+    .linha {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
 }
 </style>

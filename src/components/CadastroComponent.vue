@@ -278,5 +278,4 @@ label {
   cursor: pointer;
   font-size: 14px;
 }
-
 </style>

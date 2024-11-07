@@ -116,6 +116,7 @@ onMounted(() => {
   display: flex;
   flex-direction: row;
   margin-top: 100px;
+  flex-wrap: wrap;
 }
 
 .etapa-3-infos {
