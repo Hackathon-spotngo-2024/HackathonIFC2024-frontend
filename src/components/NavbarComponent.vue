@@ -1,32 +1,34 @@
 <script setup>
+import { useModal } from '../../stores/dadosModal';
+
+const scrollTo = (id) => {
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+};
 defineProps({
   openModal: Function,
   isModalOpen: Boolean,
 })
 
-const emit = defineEmits(['openModal']);
-
-
-function modal(){
- emit('openModal')
-}
+const modalStore = useModal()
 </script>
 
 <template>
   <div class="nav-container">
-    <router-link to="/" class="home-link"
-      ><img class="logo-img" src="../assets/logo.png" alt=""
-    /></router-link>
+    <router-link to="/" class="home-link"><img class="logo-img" src="../assets/logo.png" alt="" /></router-link>
+    <a href="#card-section-title" @click.prevent="scrollTo('card-section-title')" class="nav-link">Alugar</a>
+    <router-link to="/minhas-reservas" id="Reservas-link" class="nav-link">Minhas reservas</router-link>
     <div class="search-bar">
       <i class="fa fa-search"></i>
       <input type="text" placeholder="Procure seu spot" class="search-input" />
     </div>
-    <router-link to="/alugar" id="alugar-link" class="nav-link">Alugar</router-link>
-    <a href="MinhasReservasComponent.vue" id="minhas-reservas-link" class="nav-link"
-      >Minhas reservas</a
-    >
     <router-link to="/anunciar" id="anunciar-link" class="nav-link">Anunciar</router-link>
-    <button class="entrar-link" @click="modal">Entrar</button>
+    <div class="profile-container">
+      <button class="entrar-link" @click="modalStore.openLoginModal" v-if="modalStore.isUserLogado == false" >Entrar</button>
+      <img class="profile" v-if="modalStore.isUserLogado" src="/src/assets/profileimg.png" alt="">
+    </div>
   </div>
   <div class="linha-container">
     <div class="linha-divisoria"></div>
@@ -34,14 +36,21 @@ function modal(){
 </template>
 
 <style scoped>
+
+.imgUsuario{
+  height: 40px;
+  width: 40px;
+}
+
 .nav-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 1rem 10rem 0 10rem;
+  align-items: center;
+  margin: 2rem 10rem 0 10rem;
   border-radius: 40px;
-  padding: 0.5rem;
-  box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.08);
+  padding: .5rem;
+  box-shadow: 1px 3px 8px 3px rgba(0, 0, 0, 0.08);
 }
 
 a {
@@ -52,6 +61,9 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 35px;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 button {
@@ -62,10 +74,10 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 20px;
+  border-radius: 35px;
   font-size: 1rem;
   cursor: pointer;
-  border: none;
+  border: 0;
 }
 
 .nav-link {
@@ -73,13 +85,15 @@ button {
 }
 
 .nav-link::after {
+  content: "";
   position: absolute;
   bottom: -5px;
   height: 2px;
   width: 100%;
   left: 0;
   background-color: black;
-  transition: 0.2s ease-in-out;
+  transition: 200ms ease-in-out;
+  transform: scaleX(0);
 }
 
 .nav-link:hover::after {
@@ -89,29 +103,30 @@ button {
 .entrar-link {
   color: white;
   background-color: var(--cor-principal);
-  width: auto;
+  width: 6.25rem;
   height: 3.125rem;
-  transition: 0.1s ease;
-  padding-left: 1rem;
-  padding-right: 1rem; 
-  border-radius: 30px;
+  transition: 100ms ease;
 }
 
 .entrar-link:hover {
   background-color: var(--cor-principal-hover);
 }
 
+
+
 .logo-img {
   width: 200px;
-  height: auto;
+  height: 40px;
 }
+
+
 
 .search-bar {
   width: 25rem;
   height: 2.5rem;
   border: 1px solid var(--search-bar-border);
-  border-radius: 30px;
-  padding: 0.5rem;
+  border-radius: 20px;
+  padding: 0rem 1.5rem;
   display: flex;
   justify-content: start;
   align-items: center;
@@ -123,11 +138,11 @@ button {
   outline: none;
   font-size: 1rem;
   background-color: var(--search-bar-fill);
-  margin-left: 0.5rem;
+  margin: 0 0 0 1rem;
 }
 
 .fa.fa-search {
-  color: gray;
+  color: var(--cor-search-icon);
 }
 
 .linha-container {
@@ -137,10 +152,11 @@ button {
 }
 
 .linha-divisoria {
-  margin-top: 0.5rem;
+  margin-top: 1rem;
   width: 100%;
-  height: 0.5px;
-  background-color: variables(--cor-linha-divisoria);
+  height: 1px;
+  margin: 1.5rem 0rem 0 0;
+  background-color: var(--cor-linha-divisoria);
 }
 
 @media (max-width: 1400px) {
@@ -231,6 +247,15 @@ button {
   .search-bar{
     scale: 0.8;
   }
+  
+.profile-container {
+  display: flex;
+  justify-content: center;
+}
+
+.profile {
+  width: 35px;
+  margin-right: 1rem;
 }
 
 

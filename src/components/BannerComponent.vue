@@ -10,28 +10,28 @@ import banner from '../assets/banner.jpg'
 
 <style scoped>
 .banner {
-  display: flex;
-  justify-content: center;
-  margin: 6rem 0 4.6rem;
+    display: flex;
+    justify-content: center;
+    margin: 6rem 0 4.6rem 0;
 }
 
 .img-banner {
-  width: 100%;
-  max-width: 1100px;
-  height: auto;
-  border-radius: 25px;
+    width: 100%;
+    max-width: 1100px;
+    height: auto;
+    border-radius: 25px;
 }
 
 @media (max-width: 1200px) {
-  .img-banner {
-    max-width: 90%;
-  }
+    .img-banner {
+        max-width: 90%;
+    }
 }
 
 @media (max-width: 992px) {
-  .img-banner {
-    max-width: 85%;
-  }
+    .img-banner {
+        max-width: 80%;
+    }
 }
 
 @media (max-width: 768px) {
@@ -43,8 +43,8 @@ import banner from '../assets/banner.jpg'
 }
 
 @media (max-width: 576px) {
-  .img-banner {
-    border-radius: 10px;
-  }
+    .img-banner {
+        border-radius: 10px;
+    }
 }
 </style>

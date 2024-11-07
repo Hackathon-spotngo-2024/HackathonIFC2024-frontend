@@ -3,18 +3,21 @@ import { onMounted, ref, watch } from 'vue'
 import L from 'leaflet' //Importando biblioteca Leaflet (mapa)
 import 'leaflet/dist/leaflet.css' //Importa o css da biblioteca
 import BotaoAvancarEVoltarComponent from '../BotaoAvancarEVoltarComponent.vue'
-import { useEndereco } from '@/stores/dadosEndereco'
+import CampoVazioAlertComponent from '../CampoVazioAlertComponent.vue'
+import { useEndereco } from '../../../stores/dadosEndereco'
 
 const enderecoStore = useEndereco()
 
 const tituloEtapa2 = ref('Onde fica sua locação?')
 const enderecoSearch = ref('')
+
 const sugestoes = ref([])
 let map
 let marker
+
 const showForm = ref(false)
-const todosCamposVazios = Object.values(enderecoStore.dadosEndereco).every((campo) => campo === '') //Verifica se TODOS os campos do formulario estao vazios (retorna false 1 ou mais estiverem preenchidos)
-const algumCampoPreenchido = Object.values(enderecoStore.dadosEndereco).some((campo) => campo != '') //Verifica se qualquer campo esta preenchido
+const todosCamposVazios = Object.values(enderecoStore.dadosEndereco).every((campo) => campo === '')
+const algumCampoPreenchido = Object.values(enderecoStore.dadosEndereco).some((campo) => campo != '')
 
 watch(
   () => showForm,
@@ -26,13 +29,18 @@ watch(
 )
 
 onMounted(() => {
+  window.scrollTo(0, 0)
+  enderecoStore.setarDadosLocalStorage()
   if (todosCamposVazios) {
     showForm.value = false //se todos estao vazios, o formulario nao aparece
   }
   else if (algumCampoPreenchido) {
     showForm.value = true //se algum esta preenchido, o formulario aparece
-  }
+  }})
 
+//MAPA -------------------------------------
+
+onMounted(() => {
   // Inicializa o mapa
   map = L.map('map').setView([-26.3044, -48.8455], 13) //Inicia o mapa em Joinville - SC
 
@@ -49,7 +57,6 @@ const trazerSugestoes = async () => {
     sugestoes.value = []
     return
   }
-
   try {
     console.log('Buscando sugestoes para: ', enderecoSearch.value)
     const response = await fetch(
@@ -223,9 +230,7 @@ const formatarEndereco = (endereco) => {
         </div>
       </div>
     </form>
-    <div class="campo-vazio-alert" v-if="enderecoStore.campoVazioAlert == true">
-      <p class="campo-vazio-text">Preencha todos os campos para prosseguir.</p>
-    </div>
+    <CampoVazioAlertComponent v-if="enderecoStore.campoVazioAlert"/>
 
     <!-- BOTÕES -->
     <BotaoAvancarEVoltarComponent @avancar="enderecoStore.verificarFormulario" />
@@ -296,6 +301,8 @@ const formatarEndereco = (endereco) => {
   padding-left: 16px;
   padding-top: 0;
   box-sizing: border-box;
+  margin-bottom: 8px;
+  font-size: 16px;
 }
 
 label {
@@ -312,126 +319,54 @@ label {
 .linha-divisoria {
   width: 100%;
   background-color: var(--cor-bordas-input);
+  height: 1px;
 }
 
 #map {
-  height: auto; 
+  height: 400px;
+  width: 100%;
+  margin-top: 1rem;
 }
 
 .search-endereco {
   width: calc(500px - 16px);
   height: 40px;
   border: 1px solid var(--cor-bordas-input);
-  border-radius:20px; 
+  border-radius: 20px 20px 20px 20px;
+  padding: 0 8px 0 8px;
+  outline: 0;
+  transition: 50ms ease-in-out;
 }
 
 .search-endereco:not(:placeholder-shown) {
-   border-radius:20px; 
-   transition:.7s ease-in-out; 
+  border-radius: 20px 20px 0 0;
+  transition: 700ms ease-in-out;
 }
 
 .autocomplete-list {
-   width: calc(500px -16px);
-   list-style-type:none; 
-   padding:0; 
-   border-top:none; 
-   max-height:200px; 
-   overflow-y:auto; 
-   background-color:white; 
-   border-radius:.5rem; 
+  width: 500px;
+  list-style-type: none;
+  padding: 0;
+  border: 1px solid var(--cor-bordas-input);
+  border-top: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: white;
+  border-radius: 0 0 20px 20px;
 }
 
 .autocomplete-list li {
-   padding:.5rem; 
-   cursor:pointer; 
+  padding: 10px;
+  cursor: pointer;
 }
 
 .autocomplete-list li:hover {
-   background-color:#f0f0f0; 
+  background-color: #f0f0f0;
 }
 
 input[type='number']::-webkit-outer-spin-button,
 input[type='number']::-webkit-inner-spin-button {
-   -webkit-appearance:none; 
-   margin:0; 
-}
-
-.campo-vazio-alert {
-   width:auto; 
-   display:flex; 
-   justify-content:start; 
-   color:variables(--cor-texto-erro); 
-}
-
-@media (max-width:1200px) {
-   .maps-container {
-       width:auto; 
-       height:auto; 
-       max-height:none; 
-       margin-bottom:.5rem; 
-   }
-
-   .search-endereco,
-   .autocomplete-list {
-       width:auto; 
-       max-width:none; 
-   }
-
-   .pais-wrapper,
-   .info-wrapper {
-       width:auto; 
-       max-width:none; 
-       margin-bottom:.5rem; 
-   }
-}
-
-@media (max-width:768px) {
-   .titulo-etapa-2 {
-       font-size:.9rem; 
-   }
-
-   .maps-container {
-       height:auto; 
-       max-height:none; 
-       margin-bottom:.5rem; 
-   }
-
-   .search-endereco,
-   .autocomplete-list {
-       width:auto;  
-       max-width:none;  
-   }
-
-   .pais-wrapper,
-   .info-wrapper {
-       width:auto;  
-       max-width:none;  
-       margin-bottom:.5rem;  
-   }
-}
-
-@media (max-width:576px) {
-   .titulo-etapa-2 {
-       font-size:.8rem;  
-   }
-
-   .maps-container {
-       height:auto;  
-       max-height:none;  
-       margin-bottom:.5rem;  
-   }
-
-   .search-endereco,
-   .autocomplete-list {
-       width:auto;  
-       max-width:none;  
-   }
-
-   .pais-wrapper,
-   .info-wrapper {
-       width:auto;  
-       max-width:none;  
-       margin-bottom:.5rem;  
-   }
+  -webkit-appearance: none;
+  margin: 0;
 }
 </style>

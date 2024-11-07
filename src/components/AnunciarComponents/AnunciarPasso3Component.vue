@@ -1,8 +1,9 @@
 <script setup>
 import BotaoAvancarEVoltarComponent from '../BotaoAvancarEVoltarComponent.vue'
 import { watch, onMounted, ref } from 'vue'
-import { useEndereco } from '@/stores/dadosEndereco'
-import { useEtapa } from '@/stores/dadosEtapa';
+import { useEndereco } from '../../../stores/dadosEndereco'
+import { useEtapa } from '../../../stores/dadosEtapa'
+import CampoVazioAlertComponent from '../CampoVazioAlertComponent.vue'
 
 const isBotaoPequeno = ref(true)
 const enderecoStore = useEndereco()
@@ -11,13 +12,13 @@ const tituloEtapa3 = ref('Mais algumas informações<br>sobre sua acomodação')
 const precoInput = ref(null) //Referencia o input do preço
 
 function adicionarVisitante() {
-  enderecoStore.dadosEndereco.LimiteVisitantes++
+  enderecoStore.dadosEndereco.limiteVisitantes++
 }
 
 function reduzirVisitante() {
-  enderecoStore.dadosEndereco.LimiteVisitantes--
-  if (enderecoStore.dadosEndereco.LimiteVisitantes < 0)
-    enderecoStore.dadosEndereco.LimiteVisitantes = 0
+  enderecoStore.dadosEndereco.limiteVisitantes--
+  if (enderecoStore.dadosEndereco.limiteVisitantes < 0)
+    enderecoStore.dadosEndereco.limiteVisitantes = 0
 }
 
 function ajustarTamanhoInput() {
@@ -29,21 +30,25 @@ function ajustarTamanhoInput() {
   inputElement.style.width = `${textLength}ch` //Aqui ele finaliza ajustando o css do input, colocando o tamanho do texto como a quantidade de caracteres (ch)
 }
 
-const verificarEtapa3 = (() => {
-  console.log(enderecoStore.campoVazioAlert, enderecoStore.dadosEndereco.LimiteVisitantes, enderecoStore.dadosEndereco.preco)
-  if (enderecoStore.dadosEndereco.LimiteVisitantes == 0 || enderecoStore.dadosEndereco.preco == '') {
+const verificarEtapa3 = () => {
+  if (
+    enderecoStore.dadosEndereco.limiteVisitantes == 0 ||
+    enderecoStore.dadosEndereco.preco == ''
+  ) {
     enderecoStore.campoVazioAlert = true
     return
-  }
-  else {
-    console.log('falseeee')
+  } else {
     enderecoStore.campoVazioAlert = false
     etapaStore.proximaEtapa()
   }
-})
+}
 
 watch(() => enderecoStore.dadosEndereco.preco, ajustarTamanhoInput)
-onMounted(ajustarTamanhoInput)
+onMounted(() => {
+  window.scrollTo(0, 0)
+  enderecoStore.setarDadosLocalStorage()
+  ajustarTamanhoInput
+})
 </script>
 
 <template>
@@ -60,7 +65,7 @@ onMounted(ajustarTamanhoInput)
           >
           <div class="botoes-visitantes">
             <input type="button" class="botao-visitantes" value="-" @click="reduzirVisitante" />
-            <p class="numero-visitantes">{{ enderecoStore.dadosEndereco.LimiteVisitantes }}</p>
+            <p class="numero-visitantes">{{ enderecoStore.dadosEndereco.limiteVisitantes }}</p>
             <input type="button" class="botao-visitantes" value="+" @click="adicionarVisitante" />
           </div>
         </div>
@@ -83,9 +88,7 @@ onMounted(ajustarTamanhoInput)
           class="avancar-e-voltar-botoes"
           @avancar="verificarEtapa3"
         />
-        <div class="campo-vazio-alert" v-if="enderecoStore.campoVazioAlert == true">
-      <p class="campo-vazio-text">Preencha todos os campos para prosseguir.</p>
-    </div>
+        <CampoVazioAlertComponent v-if="enderecoStore.campoVazioAlert"/>
       </div>
 
       <div class="imagem-casa">
@@ -204,9 +207,9 @@ input[type='number']::-webkit-inner-spin-button {
   appearance: none;
 }
 
-input[type=number] { 
-   -moz-appearance: textfield;
-   appearance: textfield;
+input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 ::-webkit-input-placeholder {
@@ -217,65 +220,27 @@ input[type=number] {
   margin-top: 20%;
 }
 
-@media (max-width: 1200px) {
-  .titulo-principal-container {
-    font-size: 1.8rem;
+@media (max-width: 1360px) {
+  .imagem-casa img  {
+    width: 600px;
   }
-
-  .limite-visitantes-wrapper, .preco-wrapper {
-    width: 80%;
+  .etapa-3-infos {
+    width: 400px;
+  }
+  h1, .limite-visitantes-wrapper > label, .preco-wrapper > label {
+    font-size: 24px;
   }
 }
 
-@media (max-width: 992px) {
-  .titulo-principal-container {
-    font-size: 1.5rem;
+@media (max-width: 1100px) {
+  .imagem-casa {
+    display: none;
   }
-
-  .infos-e-imagem {
-    flex-direction: column;
+  .limite-visitantes-wrapper, .preco-wrapper, .preco-input-wrapper {
     align-items: center;
   }
-
-  .limite-visitantes-wrapper, .preco-wrapper {
-    width: 90%;
-  }
-}
-
-@media (max-width: 768px) {
-  .titulo-principal-container {
-    font-size: 1.2rem;
-  }
-
-  .botoes-visitantes {
-    gap: 5px;
-  }
-
-  .preco-input-wrapper > input {
-    width: 100%;
-  }
-
-  .avancar-e-voltar-botoes {
-    margin-top: 15%;
-  }
-}
-
-@media (max-width: 576px) {
-  .titulo-principal-container {
-    font-size: 1rem;
-  }
-
-  .limite-visitantes-wrapper, .preco-wrapper {
-    width: 100%;
-  }
-
-  .preco-input-wrapper > span {
-    font-size: 1.2rem;
-  }
-
-  .botao-visitantes {
-    height: 25px;
-    width: 25px;
+  #preco-input {
+    width: 100px;
   }
 }
 </style>
