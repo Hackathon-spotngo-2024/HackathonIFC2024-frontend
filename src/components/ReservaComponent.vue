@@ -1,6 +1,6 @@
 <script setup>
-import { useEndereco } from '../../stores/dadosEndereco'
-import { useReserva } from '../../stores/dadosReserva'
+import { useEndereco } from '../stores/dadosEndereco'
+import { useReserva } from '../stores/dadosReserva'
 
 const enderecoStore = useEndereco()
 const reservaStore = useReserva()

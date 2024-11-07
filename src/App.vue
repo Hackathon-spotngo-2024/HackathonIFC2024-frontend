@@ -2,7 +2,7 @@
 import { onMounted } from 'vue'
 import NavbarComponent from './components/NavbarComponent.vue'
 import NavbarMobileComponent from './components/NavbarMobileComponent.vue'
-import { useNavbar } from '@/stores/dadosNavbar'
+import { useNavbar } from './stores/dadosNavbar'
 import RodapeComponent from './components/RodapeComponent.vue'
 
 const navbarStore = useNavbar()

@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { reactive, ref } from 'vue'
 import { useEtapa } from './dadosEtapa'
+import { useRouter } from 'vue-router'
 
 export const useEndereco = defineStore('endereco', () => {
   const dadosEndereco = reactive({
@@ -21,6 +22,7 @@ export const useEndereco = defineStore('endereco', () => {
 
   let campoVazioAlert = ref(false)
   const etapaStore = useEtapa()
+  const router = useRouter()
 
   const anunciosCriados = ref([])
   const dadosAnuncio = ref(null)
@@ -50,6 +52,7 @@ export const useEndereco = defineStore('endereco', () => {
         else if (typeof dadosEndereco[key] == 'number') dadosEndereco[key] = 0
         else dadosEndereco[key] = []
       }
+      router.push({ name: "AnuncioPublicado" })
   }
   }
 

@@ -1,6 +1,6 @@
 <script setup>
-import { useEndereco } from '../../stores/dadosEndereco'
-import { useModal } from '../../stores/dadosModal'
+import { useEndereco } from '../stores/dadosEndereco'
+import { useModal } from '../stores/dadosModal'
 import LoginComponent from '@/components/LoginComponent.vue'
 import CadastroComponent from '@/components/CadastroComponent.vue'
 import CardFicticioComponent from '@/components/CardFicticioComponent.vue'

@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { useEndereco } from '../../stores/dadosEndereco'
+import { useEndereco } from '../stores/dadosEndereco'
 
 const enderecoStore = useEndereco()
 const fileInput = ref(null)

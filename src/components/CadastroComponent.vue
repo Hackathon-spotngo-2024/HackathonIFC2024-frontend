@@ -1,5 +1,5 @@
 <script setup>
-import { useModal } from '../../stores/dadosModal'
+import { useModal } from '../stores/dadosModal'
 import CampoVazioAlertComponent from './CampoVazioAlertComponent.vue';
 
 const modalStore = useModal()

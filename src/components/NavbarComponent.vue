@@ -1,5 +1,5 @@
 <script setup>
-import { useModal } from '../../stores/dadosModal'
+import { useModal } from '../stores/dadosModal'
 
 const scrollTo = (id) => {
   const element = document.getElementById(id)
@@ -39,7 +39,14 @@ const modalStore = useModal()
       >
         Entrar
       </button>
-      <img class="profile" v-if="modalStore.isUserLogado" src="/src/assets/profileimg.png" alt="" />
+      <div class="profile-container">
+        <img
+          class="profile"
+          v-if="modalStore.isUserLogado"
+          src="/src/assets/profileimg.png"
+          alt=""
+        />
+      </div>
     </div>
   </div>
   <div class="linha-container">
@@ -164,6 +171,16 @@ button {
   height: 1px;
   margin: 1.5rem 0rem 0 0;
   background-color: var(--cor-linha-divisoria);
+}
+
+.profile-container {
+  display: flex;
+  justify-content: center;
+}
+
+.profile {
+  margin-right: 10px;
+  width: 40px;
 }
 
 @media (max-width: 1500px) {
