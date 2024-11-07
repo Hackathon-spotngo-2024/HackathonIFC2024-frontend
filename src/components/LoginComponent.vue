@@ -148,7 +148,7 @@ const modalStore = useModal()
 .title {
   font-size: 1.5rem;
   text-align: center;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat';
   margin: 1rem 0 1rem 0;
   font-weight: 500;
   color: var(--preto-alternativo);
@@ -221,7 +221,7 @@ button:active {
   flex-direction: column;
   text-align: center;
   font-size: 10px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat';
   margin-top: 1.5rem;
   gap: 1.5rem;
 }

@@ -9,7 +9,7 @@ const cardSectionTitle = "Os favoritos para você"
 <style scoped>
 #card-section-title {
     display: flex;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat';
     font-size: 2rem;
     font-weight: bold;
     margin: 0 6rem 6rem;

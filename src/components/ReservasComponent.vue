@@ -30,7 +30,6 @@ h1 {
 
 .cartao-reserva {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 20px;
   margin-bottom: 10px;

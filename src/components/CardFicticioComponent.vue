@@ -54,21 +54,21 @@
 }
 
 .card-titulo {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat';
   margin: 0.5rem 0;
   font-size: 1rem;
   font-weight: bold;
 }
 
 .card-preco {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat';
   font-weight: 500;
   margin: 0.5rem 0;
   font-size: 1rem;
 }
 
 .card-loc {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat';
   font-weight: 500;
   color: var(--cor-fonte-loc);
   font-size: 1rem;

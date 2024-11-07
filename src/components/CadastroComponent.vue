@@ -265,7 +265,7 @@ label {
   flex-direction: column;
   text-align: center;
   font-size: 10px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat';
   margin-top: 1rem;
   gap: 1rem;
 }
