@@ -10,6 +10,7 @@ const tituloEtapa1 = ref("É muito fácil<br>anunciar no Spot 'n Go")
 
 onMounted(() => {
   enderecoStore.setarDadosLocalStorage
+  window.scrollTo(0, 0)
 })
 </script>
 

@@ -26,7 +26,7 @@ export const useEndereco = defineStore('endereco', () => {
   const dadosAnuncio = ref(null)
 
   function setarDadosLocalStorage() {
-    window.localStorage.setItem('DadosEndereco', JSON.stringify(dadosEndereco)) // Apresenta os dados preenchidos no local Storage
+    window.localStorage.setItem('DadosEndereco', JSON.stringify(dadosEndereco))
   }
 
   function addAnuncio() {
@@ -34,14 +34,13 @@ export const useEndereco = defineStore('endereco', () => {
       campoVazioAlert.value = true
       return
     } else {
-      const stringDados = window.localStorage.getItem('DadosEndereco') // Pega os dados que estao atualmente no storage
-      dadosAnuncio.value = JSON.parse(stringDados) // Os dados vem em string, JSON.parse() os transforma em objeto
+      const stringDados = window.localStorage.getItem('DadosEndereco')
+      dadosAnuncio.value = JSON.parse(stringDados)
       
-      dadosAnuncio.value.id = anunciosCriados.value.length + 1 // Determina o id para o numero de anuncios que tem (ex: se tem 2 anuncios, o id do primeiro ja passou por aqui e é 1, o segundo passou de novo e é 2)
-      anunciosCriados.value.push({ ...dadosAnuncio.value }) // Pusha o objeto dos dados para o array de anuncios
-      console.log(anunciosCriados)
+      dadosAnuncio.value.id = anunciosCriados.value.length + 1
+      anunciosCriados.value.push({ ...dadosAnuncio.value })
 
-      setarDadosLocalStorage() // Coloca os dados no localStorage
+      setarDadosLocalStorage()
       window.localStorage.setItem('DadosAnuncio', JSON.stringify(anunciosCriados.value))
       
       etapaStore.etapaAtual = 0
@@ -51,7 +50,6 @@ export const useEndereco = defineStore('endereco', () => {
         else if (typeof dadosEndereco[key] == 'number') dadosEndereco[key] = 0
         else dadosEndereco[key] = []
       }
-      console.log(dadosEndereco)
   }
   }
 
