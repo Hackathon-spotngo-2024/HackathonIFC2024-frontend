@@ -1,32 +1,32 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import NavbarComponent from './components/NavbarComponent.vue'
 import NavbarMobileComponent from './components/NavbarMobileComponent.vue'
 import { useNavbar } from '@/stores/dadosNavbar'
 import RodapeComponent from './components/RodapeComponent.vue'
 
 const navbarStore = useNavbar()
-const modal = ref(false)
 
-function openModal() {
-    modal.value = true
-}
-
-// Chama trocarNavbar 
 onMounted(() => {
-    navbarStore.trocarNavbar() // Verifica o tamanho inicial da tela
+  navbarStore.trocarNavbar()
 })
 </script>
 
 <template>
-  <!-- Alterna entre Navbar normal e mobile conforme o tamanho da tela -->
-  <component :is="navbarStore.isTelaPequena ? NavbarMobileComponent : NavbarComponent" @openModal="openModal"/>
-  <router-view></router-view>
- <RodapeComponent/>
+  <header>
+    <component
+      :is="navbarStore.isTelaPequena ? NavbarMobileComponent : NavbarComponent"
+      @openModal="openModal"
+    />
+  </header>
+
+  <main>
+    <router-view></router-view>
+  </main>
+
+  <footer>
+    <RodapeComponent />
+  </footer>
 </template>
 
-<style scoped>
-
-</style>
-
- 
+<style scoped></style>
