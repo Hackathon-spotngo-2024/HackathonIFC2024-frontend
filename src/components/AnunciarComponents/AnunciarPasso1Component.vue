@@ -52,7 +52,6 @@ const tituloEtapa1 = ref("É muito fácil<br>anunciar no Spot 'n Go")
   display: flex;
   flex-direction: column;
 }
-
 .titulo-etapa-1 {
   display: flex;
   font-size: 2rem;
