@@ -25,9 +25,9 @@ const modalStore = useModal()
       <input type="text" placeholder="Procure seu spot" class="search-input" />
     </div>
     <router-link to="/anunciar" id="anunciar-link" class="nav-link">Anunciar</router-link>
-    <div>
+    <div class="profile-container">
       <button class="entrar-link" @click="modalStore.openLoginModal" v-if="modalStore.isUserLogado == false" >Entrar</button>
-      <img v-if="modalStore.isUserLogado" src="/src/assets/logo.png" alt="">
+      <img class="profile" v-if="modalStore.isUserLogado" src="/src/assets/profileimg.png" alt="">
     </div>
   </div>
   <div class="linha-container">
@@ -157,5 +157,15 @@ button {
   height: 1px;
   margin: 1.5rem 0rem 0 0;
   background-color: var(--cor-linha-divisoria);
+}
+
+.profile-container {
+  display: flex;
+  justify-content: center;
+}
+
+.profile {
+  width: 35px;
+  margin-right: 1rem;
 }
 </style>
