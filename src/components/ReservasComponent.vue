@@ -7,16 +7,13 @@ const reservaStore = useReserva()
 <template>
   <div class="container-reservas">
     <h1>Minhas Reservas</h1>
-    <div class="cartao-reserva" v-for="(reserva, index) in reservas" :key="index">
-      <div class="detalhes-container">
-        <img :src="reserva.imagem" alt="Salão de casamento" class="imagem-reserva"/>
-        <div class="detalhes-reserva">
-          <h2>{{ reserva.titulo }}</h2>
-          <p>De {{ reserva.dataInicio }} a {{ reserva.dataFim }}</p>
-          <p><i class="fas fa-map-marker-alt"></i> {{ reserva.localizacao }}</p>
-        </div>
+    <div class="cartao-reserva" v-for="(reserva, index) in reservaStore.userReservas" :key="index">
+      <img :src="reserva.imagem" alt="Salão de casamento" class="imagem-reserva"/>
+      <div class="detalhes-reserva">
+        <h2>{{ reserva.titulo }}</h2>
+        <p>De {{ reserva.dataInicio }} a {{ reserva.dataFim }}</p>
+        <p><i class="fas fa-map-marker-alt"></i> {{ reserva.localizacao }}</p>
       </div>
-      <button class="botao-detalhes">Ver mais detalhes</button>
     </div>
   </div>
 </template>
