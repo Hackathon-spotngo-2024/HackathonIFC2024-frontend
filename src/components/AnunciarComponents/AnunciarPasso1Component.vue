@@ -59,7 +59,6 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
 }
-
 .titulo-etapa-1 {
   display: flex;
   font-size: 2rem;
