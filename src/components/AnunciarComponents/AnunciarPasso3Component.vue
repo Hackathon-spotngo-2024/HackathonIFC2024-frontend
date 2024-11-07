@@ -45,6 +45,7 @@ const verificarEtapa3 = () => {
 
 watch(() => enderecoStore.dadosEndereco.preco, ajustarTamanhoInput)
 onMounted(() => {
+  window.scrollTo(0, 0)
   enderecoStore.setarDadosLocalStorage()
   ajustarTamanhoInput
 })

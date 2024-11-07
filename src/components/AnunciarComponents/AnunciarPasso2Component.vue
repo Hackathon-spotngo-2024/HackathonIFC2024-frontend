@@ -29,6 +29,7 @@ watch(
 )
 
 onMounted(() => {
+  window.scrollTo(0, 0)
   enderecoStore.setarDadosLocalStorage()
   if (todosCamposVazios) {
     showForm.value = false //se todos estao vazios, o formulario nao aparece

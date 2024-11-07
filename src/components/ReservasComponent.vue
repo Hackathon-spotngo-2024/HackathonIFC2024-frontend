@@ -1,18 +1,17 @@
 <script setup>
-import { useReserva } from '../../stores/dadosReserva';
+import { useReserva } from '../../stores/dadosReserva'
 
 const reservaStore = useReserva()
 </script>
 
 <template>
   <div class="container-reservas">
-    <h1>Minhas Reservas</h1>
     <div class="cartao-reserva" v-for="(reserva, index) in reservaStore.userReservas" :key="index">
-      <img :src="reserva.imagem" alt="Salão de casamento" class="imagem-reserva"/>
+      <img :src="reserva.imgs[0]" alt="Salão de casamento" class="imagem-reserva" />
       <div class="detalhes-reserva">
         <h2>{{ reserva.titulo }}</h2>
-        <p>De {{ reserva.dataInicio }} a {{ reserva.dataFim }}</p>
-        <p><i class="fas fa-map-marker-alt"></i> {{ reserva.localizacao }}</p>
+        <p>De {{ reservaStore.datasReserva.dataInicio }} à {{ reservaStore.datasReserva.dataTermino }}</p>
+        <p><i class="fas fa-map-marker-alt"></i> {{ reserva.cidade + ", " + reserva.estado }}</p>
       </div>
     </div>
   </div>

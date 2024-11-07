@@ -8,6 +8,7 @@ const etapaStore = useEtapa()
 const enderecoStore = useEndereco()
 
 onMounted(() => {
+  window.scrollTo(0, 0)
   enderecoStore.setarDadosLocalStorage()
 })
 </script>

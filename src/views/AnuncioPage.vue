@@ -34,8 +34,6 @@ const enderecoStore = useEndereco()
             <ReservaComponent />
           </div>
         </div>
-
-
       </div>
     </section>
   </div>

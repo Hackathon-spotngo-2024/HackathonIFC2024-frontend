@@ -5,17 +5,19 @@ import ReservasComponent from '@/components/ReservasComponent.vue'
 <template>
   <div>
     <div class="reservas-component">
+      <div class="titulo">
+        <h1>Minhas Reservas</h1>
+      </div>
       <ReservasComponent />
     </div>
   </div>
 </template>
 
 <style scoped>
-.card-section-title {
+.titulo {
   display: flex;
-  font-family: 'Montserrat';
-  font-size: 2rem;
-  font-weight: bold;
-  margin: 0 0 6rem 6rem;
+  justify-content: center;
+  align-items: center;
+  margin: 50px 0 50px 0;
 }
 </style>

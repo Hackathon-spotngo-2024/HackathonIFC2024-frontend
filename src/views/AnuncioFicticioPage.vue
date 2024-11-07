@@ -1,5 +1,6 @@
 <script setup>
-import LocalizaçãoComponent from '@/components/LocalizaçãoComponent.vue'
+import { useReserva } from '../../stores/dadosReserva';
+const reservaStore = useReserva()
 </script>
 
 <template>
@@ -79,7 +80,7 @@ import LocalizaçãoComponent from '@/components/LocalizaçãoComponent.vue'
                     </div>
                   </div>
                 </div>
-                <button class="reserve-button">Reservar</button>
+                <button class="reserve-button" @click="reservaStore.adicionarReserva">Reservar</button>
               </div>
             </section>
           </div>
