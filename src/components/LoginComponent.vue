@@ -1,5 +1,6 @@
 <script setup>
 import { useModal } from '../../stores/dadosModal'
+import CampoVazioAlertComponent from './CampoVazioAlertComponent.vue';
 
 const modalStore = useModal()
 </script>
@@ -43,9 +44,7 @@ const modalStore = useModal()
             </div>
 
             <button @click="modalStore.logar()">Continuar</button>
-            <div class="campo-vazio-alert" v-if="modalStore.campoLoginVazio == true">
-              <p class="campo-vazio-text">Preencha todos os campos para prosseguir.</p>
-            </div>
+            <CampoVazioAlertComponent v-if="modalStore.campoLoginVazio"/>
 
             <div class="criar-conta">
               <div class="linha">
@@ -209,7 +208,6 @@ button:active {
 .campo-vazio-alert > p {
   font-size: 14px;
 }
-
 .cadastro {
   font-weight: bold;
   cursor: pointer;
