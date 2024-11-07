@@ -1,6 +1,7 @@
 <script setup>
 import NavbarComponent from './components/NavbarComponent.vue'
 import RodapeComponent from './components/RodapeComponent.vue'
+
 </script>
 
 <template>

@@ -6,14 +6,14 @@
       <div class="empresa">
         <h3>Empresa</h3>
         <div class="links" id="links-empresa">
-          <a class="sobre">Sobre</a>
-          <a class="termos">Termos</a>
+          <RouterLink to="/sobre" class="link">Sobre</RouterLink>
+          <RouterLink to="/termos" class="link">Termos</RouterLink>
         </div>
       </div>
       <div class="contato" id="links-contato">
         <h3>Contato</h3>
         <div class="links">
-          <a class="contato">Ajuda/FAQ</a>
+          <RouterLink to="/ajuda" class="link">Ajuda/FAQ</RouterLink>
         </div>
       </div>
     </div>
@@ -71,5 +71,9 @@ a:hover {
 .copyright {
   font-family: var(--fonte-principal);
   margin: 2rem 0 2rem 6rem;
+}
+.link {
+  text-decoration: none;
+  color: black;
 }
 </style>

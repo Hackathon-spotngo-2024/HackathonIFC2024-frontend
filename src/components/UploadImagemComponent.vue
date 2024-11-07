@@ -41,6 +41,9 @@ const selectFile = () => {
         <img v-if="img" :src="img" />
       </div>
     </div>
+    <div class="aviso-resolucao-container">
+      <p class="aviso-resolucao">Resolução recomendada: 500x500</p>
+    </div>
   </div>
 </template>
 
@@ -75,6 +78,16 @@ input {
   border: 3px dashed var(--cor-principal);
   border-radius: 15px;
   padding: 10px;
+}
+
+.aviso-resolucao-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.aviso-resolucao {
+  margin: 10px 0 10px 0;
 }
 
 .imagem img {

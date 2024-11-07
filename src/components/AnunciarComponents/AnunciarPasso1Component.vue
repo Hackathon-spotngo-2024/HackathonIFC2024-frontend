@@ -1,10 +1,17 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useEtapa } from '../../../stores/dadosEtapa';
+import { useEndereco } from '../../../stores/dadosEndereco';
 
 const etapaStore = useEtapa()
+const enderecoStore = useEndereco()
 
 const tituloEtapa1 = ref("É muito fácil<br>anunciar no Spot 'n Go")
+
+onMounted(() => {
+  enderecoStore.setarDadosLocalStorage
+  window.scrollTo(0, 0)
+})
 </script>
 
 <template>

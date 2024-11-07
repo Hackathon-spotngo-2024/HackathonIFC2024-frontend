@@ -210,6 +210,16 @@ const modalStore = useModal()
   grid-auto-columns: auto;
 }
 
+.campo-vazio-alert {
+  display: flex;
+justify-content: center;
+  margin-top: 10px;
+  color: var(--cor-texto-erro);
+}
+
+.campo-vazio-alert > p {
+  font-size: 14px;
+}
 input {
   width: 250px;
   height: 35px;
