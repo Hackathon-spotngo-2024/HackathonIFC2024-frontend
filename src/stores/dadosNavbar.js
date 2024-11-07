@@ -7,7 +7,7 @@ export const useNavbar = defineStore('navbar', () => {
 
     // Função que muda a nav dependendo do tamanho da tela
     function trocarNavbar() {
-        isTelaPequena.value = window.innerWidth <= 650
+        isTelaPequena.value = window.innerWidth <= 1100
     }
 
     onMounted(() => {

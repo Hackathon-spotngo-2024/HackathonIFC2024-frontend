@@ -1,6 +1,5 @@
 <script setup>
 import { useEtapa } from '../../stores/dadosEtapa';
-import { useEndereco } from '../../stores/dadosEndereco';
 
 defineProps({
   isBotaoPequeno: {
@@ -80,5 +79,19 @@ const etapaStore = useEtapa()
 
 .avancar-btn:hover {
   background-color: var(--cor-principal-hover);
+}
+
+@media (max-width: 580px) {
+  button {
+    scale: 0.8;
+  }
+  .avancar-btn {
+    width: 200px;
+    font-size: 24px;
+  }
+  .botoes-wrapper {
+    gap: 10px;
+    width: fit-content;
+  }
 }
 </style>

@@ -369,4 +369,16 @@ input[type='number']::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+@media (max-width: 580px) {
+  .search-and-map-container, .form-endereco, .pais-wrapper, .endereco-info {
+    width: 360px;
+  }
+  #pais-input {
+    width: 370px !important;
+  }
+  .search-endereco {
+    width: 340px;
+  }
+}
 </style>

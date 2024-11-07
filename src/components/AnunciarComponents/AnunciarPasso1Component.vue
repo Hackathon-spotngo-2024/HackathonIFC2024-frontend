@@ -117,4 +117,24 @@ onMounted(() => {
   background-color: var(--cor-principal-hover);
   transform: scale(1.01);
 }
+@media (max-width: 800px) {
+  .container-titulo {
+    margin-top: 50px;
+  }
+  .submit-botao-container {
+    margin-top: 200px;
+  }
+}
+
+@media (max-width: 645px) {
+  h2 {
+    font-size: 20px;
+  }
+  p {
+    font-size: 14px;
+  }
+  .titulo-instrucao {
+    margin-bottom: 10px;
+  }
+}
 </style>

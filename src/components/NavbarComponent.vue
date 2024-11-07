@@ -1,15 +1,15 @@
 <script setup>
-import { useModal } from '../../stores/dadosModal';
+import { useModal } from '../../stores/dadosModal'
 
 const scrollTo = (id) => {
-  const element = document.getElementById(id);
+  const element = document.getElementById(id)
   if (element) {
-    element.scrollIntoView({ behavior: 'smooth' });
+    element.scrollIntoView({ behavior: 'smooth' })
   }
-};
+}
 defineProps({
   openModal: Function,
-  isModalOpen: Boolean,
+  isModalOpen: Boolean
 })
 
 const modalStore = useModal()
@@ -17,17 +17,29 @@ const modalStore = useModal()
 
 <template>
   <div class="nav-container">
-    <router-link to="/" class="home-link"><img class="logo-img" src="../assets/logo.png" alt="" /></router-link>
-    <a href="#card-section-title" @click.prevent="scrollTo('card-section-title')" class="nav-link">Alugar</a>
-    <router-link to="/minhas-reservas" id="Reservas-link" class="nav-link">Minhas reservas</router-link>
+    <router-link to="/" class="home-link"
+      ><img class="logo-img" src="../assets/logo.png" alt=""
+    /></router-link>
+    <a href="#card-section-title" @click.prevent="scrollTo('card-section-title')" class="nav-link"
+      >Alugar</a
+    >
+    <router-link to="/minhas-reservas" id="Reservas-link" class="nav-link"
+      >Minhas reservas</router-link
+    >
     <div class="search-bar">
       <i class="fa fa-search"></i>
       <input type="text" placeholder="Procure seu spot" class="search-input" />
     </div>
     <router-link to="/anunciar" id="anunciar-link" class="nav-link">Anunciar</router-link>
     <div class="profile-container">
-      <button class="entrar-link" @click="modalStore.openLoginModal" v-if="modalStore.isUserLogado == false" >Entrar</button>
-      <img class="profile" v-if="modalStore.isUserLogado" src="/src/assets/profileimg.png" alt="">
+      <button
+        class="entrar-link"
+        @click="modalStore.openLoginModal"
+        v-if="modalStore.isUserLogado == false"
+      >
+        Entrar
+      </button>
+      <img class="profile" v-if="modalStore.isUserLogado" src="/src/assets/profileimg.png" alt="" />
     </div>
   </div>
   <div class="linha-container">
@@ -36,8 +48,7 @@ const modalStore = useModal()
 </template>
 
 <style scoped>
-
-.imgUsuario{
+.imgUsuario {
   height: 40px;
   width: 40px;
 }
@@ -49,7 +60,7 @@ const modalStore = useModal()
   align-items: center;
   margin: 2rem 10rem 0 10rem;
   border-radius: 40px;
-  padding: .5rem;
+  padding: 0.5rem;
   box-shadow: 1px 3px 8px 3px rgba(0, 0, 0, 0.08);
 }
 
@@ -85,7 +96,7 @@ button {
 }
 
 .nav-link::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: -5px;
   height: 2px;
@@ -112,14 +123,10 @@ button {
   background-color: var(--cor-principal-hover);
 }
 
-
-
 .logo-img {
   width: 200px;
   height: 40px;
 }
-
-
 
 .search-bar {
   width: 25rem;
@@ -159,10 +166,9 @@ button {
   background-color: var(--cor-linha-divisoria);
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1500px) {
   .nav-container {
     align-items: center;
-    font-size: 14px;
   }
   .logo-img {
     width: auto;
@@ -178,85 +184,45 @@ button {
   }
 }
 
-@media (max-width: 1130px){
-  .nav-container{
-    font-size: 12px;
+@media (max-width: 1250px) {
+  .nav-container {
     margin: 16px 140px 16px;
   }
-  .search-bar{
-    scale: 0.9;
-  }
-  .entrar-link{
-    scale: 0.9;
-  }
-}
-
-@media (max-width: 1100px){
-  .search-bar{
-    width: 160px;
-  }
-  .search-input{
-    width: 120px;
+  a {
     font-size: 14px;
   }
+  .search-bar {
+    scale: 0.9;
+  }
+  .entrar-link {
+    scale: 0.9;
+  }
 }
 
-/**/
-
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
   .nav-container {
     margin: 16px 130px 16px;
     align-items: center;
     text-align: center;
     gap: 10px;
   }
-  .logo-img{
+  .logo-img {
     scale: 0.8;
   }
 }
 
-@media (max-width: 952px){
-  .nav-container{
-    text-align: center;
-    padding: 8px;
-    
+@media (max-width: 1090px) {
+  .nav-container {
+    margin: 16px 130px 16px;
   }
-}
-
-@media (max-width: 910px){
-  .nav-container{
-    scale: 0.9;
-    gap: 0;
-    margin: 10px 80px;
-  }
-}
-
-@media (max-width: 875px){
-  .logo-img{
-    scale: 0.7;
-  }
-  .entrar-link{
-    scale: 0.9;
-  }
-  .nav-container{
-    margin: 10px 90px 10px;
+  a {
     font-size: 14px;
-    margin-left: 5px;
-    margin-right: 5px;
   }
-  .search-bar{
+  .home-link {
+    width: 160px;
+  }
+  .logo-img {
     scale: 0.8;
   }
-  
-.profile-container {
-  display: flex;
-  justify-content: center;
 }
-
-.profile {
-  width: 35px;
-  margin-right: 1rem;
-}
-
-
 </style>

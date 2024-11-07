@@ -5,9 +5,8 @@
     <div class="imgTopo">
       <img class="img" src="../assets/logo.png" alt="" />
     </div>
-    <div class="search-bar">
-      <i class="fa fa-search"></i>
-      <input type="text" placeholder="Procure seu spot" class="search-input" />
+    <div class="linha-container">
+      <div class="linha-divisoria"></div>
     </div>
   </div>
   <div class="nav-container">
@@ -25,6 +24,18 @@
 </template>
 
 <style scoped>
+.linha-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.linha-divisoria {
+  width: 500px;
+  height: 1px;
+  margin: 1.5rem 0rem 0 0;
+  background-color: var(--cor-linha-divisoria);
+}
 .topo {
   display: flex;
   flex-direction: column;
@@ -71,6 +82,8 @@
   bottom: 0;
   background-color: white;
   box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.5); /* Sombra */
+  z-index: 999;
+
 }
 .nav-container img {
   width: 40px;
@@ -93,16 +106,16 @@
   }
 }
 
-@media (max-width: 500px){
+@media (max-width: 500px) {
   .search-bar,
-  .imgTopo{
+  .imgTopo {
     scale: 0.8;
   }
 }
 
-@media (max-width: 370px){
+@media (max-width: 370px) {
   .search-bar,
-  .imgTopo{
+  .imgTopo {
     scale: 0.7;
   }
 }
