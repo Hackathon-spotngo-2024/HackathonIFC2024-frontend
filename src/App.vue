@@ -9,12 +9,18 @@ function openModal() {
 </script>
 
 <template>
-  <NavbarComponent @openModal="openModal()"/>
-  <router-view></router-view>
-  <RodapeComponent />
- </template>
+  <header>
+    <NavbarComponent @openModal="openModal()"/>
+  </header>
+
+  <main>
+    <router-view></router-view>
+  </main>
+
+  <footer>
+    <RodapeComponent />
+  </footer>
+</template>
 
  <style scoped>
- 
  </style>
- 
