@@ -27,11 +27,7 @@ const modalStore = useModal()
     <router-link to="/anunciar" id="anunciar-link" class="nav-link">Anunciar</router-link>
     <div>
       <button class="entrar-link" @click="modalStore.openLoginModal" v-if="modalStore.isUserLogado == false" >Entrar</button>
-      <div class="imgUsuario" v-if="modalStore.isUserLogado" >
-      <router-link to="/Reservas" id="Reservas-link">
-        <img class="imgUsuario"  src="/src/assets/usuario.png" alt="">
-      </router-link>
-    </div>
+      <img v-if="modalStore.isUserLogado" src="/src/assets/logo.png" alt="">
     </div>
   </div>
   <div class="linha-container">
