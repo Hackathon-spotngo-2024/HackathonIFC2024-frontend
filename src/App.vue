@@ -1,16 +1,23 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted } from 'vue'
+import NavbarComponent from './components/NavbarComponent.vue'
+import NavbarMobileComponent from './components/NavbarMobileComponent.vue'
+import { useNavbar } from './stores/dadosNavbar'
+import RodapeComponent from './components/RodapeComponent.vue'
 
-const modal = ref(false)
+const navbarStore = useNavbar()
 
-function openModal() {
- modal.value = true
-}
+onMounted(() => {
+  navbarStore.trocarNavbar()
+})
 </script>
 
 <template>
   <header>
-    <NavbarComponent @openModal="openModal()"/>
+    <component
+      :is="navbarStore.isTelaPequena ? NavbarMobileComponent : NavbarComponent"
+      @openModal="openModal"
+    />
   </header>
 
   <main>
@@ -22,5 +29,4 @@ function openModal() {
   </footer>
 </template>
 
- <style scoped>
- </style>
+<style scoped></style>

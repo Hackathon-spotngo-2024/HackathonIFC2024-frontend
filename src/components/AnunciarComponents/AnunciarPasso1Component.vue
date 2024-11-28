@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-import { useEtapa } from '../../../stores/dadosEtapa';
-import { useEndereco } from '../../../stores/dadosEndereco';
+import { useEtapa } from '../../stores/dadosEtapa';
+import { useEndereco } from '../../stores/dadosEndereco';
 
 const etapaStore = useEtapa()
 const enderecoStore = useEndereco()
@@ -59,7 +59,6 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
 }
-
 .titulo-etapa-1 {
   display: flex;
   font-size: 2rem;
@@ -117,5 +116,25 @@ onMounted(() => {
 .continue-botao:hover {
   background-color: var(--cor-principal-hover);
   transform: scale(1.01);
+}
+@media (max-width: 800px) {
+  .container-titulo {
+    margin-top: 50px;
+  }
+  .submit-botao-container {
+    margin-top: 200px;
+  }
+}
+
+@media (max-width: 645px) {
+  h2 {
+    font-size: 20px;
+  }
+  p {
+    font-size: 14px;
+  }
+  .titulo-instrucao {
+    margin-bottom: 10px;
+  }
 }
 </style>

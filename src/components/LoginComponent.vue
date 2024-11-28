@@ -1,5 +1,6 @@
 <script setup>
-import { useModal } from '../../stores/dadosModal'
+import { useModal } from '../stores/dadosModal'
+import CampoVazioAlertComponent from './CampoVazioAlertComponent.vue';
 
 const modalStore = useModal()
 </script>
@@ -43,9 +44,7 @@ const modalStore = useModal()
             </div>
 
             <button @click="modalStore.logar()">Continuar</button>
-            <div class="campo-vazio-alert" v-if="modalStore.campoLoginVazio == true">
-              <p class="campo-vazio-text">Preencha todos os campos para prosseguir.</p>
-            </div>
+            <CampoVazioAlertComponent v-if="modalStore.campoLoginVazio"/>
 
             <div class="criar-conta">
               <div class="linha">
@@ -148,7 +147,7 @@ const modalStore = useModal()
 .title {
   font-size: 1.5rem;
   text-align: center;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat';
   margin: 1rem 0 1rem 0;
   font-weight: 500;
   color: var(--preto-alternativo);
@@ -221,7 +220,7 @@ button:active {
   flex-direction: column;
   text-align: center;
   font-size: 10px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat';
   margin-top: 1.5rem;
   gap: 1.5rem;
 }
@@ -235,5 +234,62 @@ label {
   color: var(--preto-alternativo);
   font-size: 14px;
   font-weight: 500;
+}
+
+@media (max-width: 1200px) {
+    .form-container {
+        width: 80%;
+    }
+}
+
+@media (max-width: 992px) {
+    .form-container {
+        width: 70%;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        width: 90%;
+        height: auto;
+        padding: 20px;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    button {
+        padding: 10px;
+        width: 100%;
+    }
+
+    .linha {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .title {
+        font-size: 20px;
+    }
+
+    .sub-title {
+        font-size: 16px;
+    }
+
+    .termo {
+        font-size: 8px;
+    }
+
+    .textoFinal {
+        font-size: 16px;
+    }
+
+    .linha {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
 }
 </style>

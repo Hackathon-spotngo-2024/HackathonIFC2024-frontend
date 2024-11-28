@@ -1,5 +1,5 @@
 <script setup>
-import { useEndereco } from '../../stores/dadosEndereco';
+import { useEndereco } from '../stores/dadosEndereco';
 
 const enderecoStore = useEndereco()
 </script>

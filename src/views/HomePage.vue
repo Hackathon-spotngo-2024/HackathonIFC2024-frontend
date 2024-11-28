@@ -1,6 +1,7 @@
 <script setup>
-import { ref } from 'vue'
-import { useEndereco } from '../../stores/dadosEndereco'
+import { useEndereco } from '../stores/dadosEndereco'
+import { useModal } from '../stores/dadosModal'
+import LoginComponent from '@/components/LoginComponent.vue'
 import CadastroComponent from '@/components/CadastroComponent.vue'
 import CardFicticioComponent from '@/components/CardFicticioComponent.vue'
 import BannerComponent from '@/components/BannerComponent.vue'
@@ -8,11 +9,7 @@ import CardSectionTitle from '@/components/CardSectionTitle.vue'
 import CardComponent from '@/components/CardComponent.vue'
 
 const enderecoStore = useEndereco()
-
-const isModalOpen = ref(false)
-function openModal() {
-  isModalOpen.value = true
-}
+const modalStore = useModal()
 </script>
 
 <template>

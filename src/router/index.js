@@ -3,6 +3,9 @@ import AnunciarPage from '../views/AnunciarPage.vue'
 import HomePage from '../views/HomePage.vue'
 import AnuncioPage from "../views/AnuncioPage.vue"
 import ReservasPage from "../views/ReservasPage.vue"
+import AjudaPage from "../router/AjudaPage.vue"
+import SobrePage from "../router/SobrePage.vue"
+import TermosPage from "../router/TermosPage.vue"
 import AnuncioFicticioPage from '@/views/AnuncioFicticioPage.vue'
 import AnuncioPublicadoPage from '@/views/AnuncioPublicadoPage.vue'
 import AnuncioReservadoPage from '@/views/AnuncioReservadoPage.vue'
@@ -31,10 +34,26 @@ const router = createRouter({
      component: ReservasPage,
     },
     {
+     path: "/ajuda",
+     name: "AjudaPage",
+     component: AjudaPage
+    },
+    {
+      path: "/sobre",
+      name: "SobrePage",
+      component: SobrePage,
+    },
+    {
+      path: "/termos",
+      name: "TermosPage",
+      component: TermosPage,
+    },
+    {
       path: "/anuncio-ficticio",
       name: "AnuncioFicticio",
       component: AnuncioFicticioPage,
     },
+
     {
       path: "/anuncio-publicado",
       name: "AnuncioPublicado",

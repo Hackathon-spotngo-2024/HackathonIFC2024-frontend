@@ -35,10 +35,11 @@ import banner from '../assets/banner.jpg'
 }
 
 @media (max-width: 768px) {
-    .img-banner {
-        max-width: 100%;
-        border-radius: 15px;
-    }
+  .img-banner {
+    max-width: 100%;
+    border-radius: 15px;
+    scale: 0.9;
+  }
 }
 
 @media (max-width: 576px) {

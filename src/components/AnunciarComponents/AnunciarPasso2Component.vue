@@ -4,7 +4,7 @@ import L from 'leaflet' //Importando biblioteca Leaflet (mapa)
 import 'leaflet/dist/leaflet.css' //Importa o css da biblioteca
 import BotaoAvancarEVoltarComponent from '../BotaoAvancarEVoltarComponent.vue'
 import CampoVazioAlertComponent from '../CampoVazioAlertComponent.vue'
-import { useEndereco } from '../../../stores/dadosEndereco'
+import { useEndereco } from '../../stores/dadosEndereco'
 
 const enderecoStore = useEndereco()
 
@@ -368,5 +368,17 @@ input[type='number']::-webkit-outer-spin-button,
 input[type='number']::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+@media (max-width: 580px) {
+  .search-and-map-container, .form-endereco, .pais-wrapper, .endereco-info {
+    width: 360px;
+  }
+  #pais-input {
+    width: 370px !important;
+  }
+  .search-endereco {
+    width: 340px;
+  }
 }
 </style>
