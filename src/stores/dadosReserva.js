@@ -9,23 +9,25 @@ export const useReserva = defineStore('reserva', () => {
 
   const userReservas = reactive([])
   const dataVaziaAlert = ref(false)
+
+  
   const datasReserva = reactive({
     dataInicio: '',
     dataTermino: ''
   })
-
+  
   function isDataVazia() {
     if (datasReserva.dataInicio == '' || datasReserva.dataTermino == '') {
       return true
     }
     return false
   }
-
+  
   function verificarDatas() {
     if (datasReserva.dataInicio < datasReserva.dataTermino && !isDataVazia()) return false
     return true
   }
-
+  
   function adicionarReserva() {
     if (verificarDatas()) {
       dataVaziaAlert.value = true
@@ -34,7 +36,7 @@ export const useReserva = defineStore('reserva', () => {
       if (enderecoStore.dadosAnuncio) {
         userReservas.push({ ...enderecoStore.dadosAnuncio })
         console.log('reserva adicionada:', userReservas)
-        router.push({ name: "AnuncioReservado" })
+        router.push({ name: 'AnuncioReservado' })
       }
     }
   }
@@ -44,6 +46,6 @@ export const useReserva = defineStore('reserva', () => {
     adicionarReserva,
     dataVaziaAlert,
     datasReserva,
-    isDataVazia
+    isDataVazia,
   }
 })

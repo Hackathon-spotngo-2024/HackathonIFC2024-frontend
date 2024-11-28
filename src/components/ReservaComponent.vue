@@ -40,7 +40,9 @@ const reservaStore = useReserva()
         </div>
       </div>
       <button class="reserve-button" @click="reservaStore.adicionarReserva">Reservar</button>
-      <div v-if="reservaStore.dataVaziaAlert" class="data-vazia-alert"><p>Informe a data da visita.</p></div>
+      <div v-if="reservaStore.dataVaziaAlert" class="data-vazia-alert">
+        <p>Informe a data da visita.</p>
+      </div>
     </div>
   </section>
 </template>
