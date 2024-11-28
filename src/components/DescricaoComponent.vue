@@ -1,7 +1,10 @@
 <script setup>
-import { useEndereco } from '../stores/dadosEndereco'
-
-const enderecoStore = useEndereco()
+const props = defineProps({
+  anuncio: {
+    type: Object,
+    Required: true
+  }
+})
 </script>
 
 <template>
@@ -10,7 +13,7 @@ const enderecoStore = useEndereco()
     <div class="linha-divisoria"></div>
   </div>
   <div class="descricao">
-    <p>{{ enderecoStore.dadosAnuncio.descricao }}</p>
+    <p>{{ props.anuncio.descricao }}</p>
   </div>
   <div class="linha-container">
     <div class="linha-divisoria"></div>

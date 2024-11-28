@@ -21,7 +21,7 @@ const anuncioFicticioStore = useAnuncioFicticio()
   <CardSectionTitle />
   <div class="card-container">
     <CardFicticioComponent v-for="anuncio in anuncioFicticioStore.anuncios" :key="anuncio.id" :anuncio="anuncio"/> <!--FUNCIONANDO-->
-    <CardComponent v-for="anuncio in enderecoStore.anunciosCriados" :key="anuncio.id" />
+    <CardComponent v-for="anuncio in enderecoStore.anunciosCriados" :key="anuncio.id" :anuncio="anuncio"/>
   </div>
 </template>
 

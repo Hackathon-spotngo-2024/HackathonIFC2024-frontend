@@ -1,16 +1,19 @@
 <script setup>
-import { useEndereco } from '../stores/dadosEndereco';
-
-const enderecoStore = useEndereco()
+const props = defineProps({
+  anuncio: {
+    type: Object,
+    Required: true
+  }
+})
 </script>
 
 <template>
   <div class="imagens-container">
-    <div class="imagem-grande" id="left-radius"><img :src="enderecoStore.dadosAnuncio.imgs[0]" alt=""></div>
-    <div class="imagem-pequena"><img :src="enderecoStore.dadosAnuncio.imgs[1]" alt=""></div>
-    <div class="imagem-pequena" id="top-right-radius"><img id="top-right-radius" :src="enderecoStore.dadosAnuncio.imgs[2]" alt=""></div>
-    <div class="imagem-pequena"><img :src="enderecoStore.dadosAnuncio.imgs[3]" alt=""></div>
-    <div class="imagem-pequena" id="bottom-right-radius"><img id="bottom-right-radius" :src="enderecoStore.dadosAnuncio.imgs[4]" alt=""></div>
+    <div class="imagem-grande" id="left-radius"><img :src="props.anuncio.imgs[0]" alt=""></div>
+    <div class="imagem-pequena"><img :src="props.anuncio.imgs[1]" alt=""></div>
+    <div class="imagem-pequena" id="top-right-radius"><img id="top-right-radius" :src="props.anuncio.imgs[2]" alt=""></div>
+    <div class="imagem-pequena"><img :src="props.anuncio.imgs[3]" alt=""></div>
+    <div class="imagem-pequena" id="bottom-right-radius"><img id="bottom-right-radius" :src="props.anuncio.imgs[4]" alt=""></div>
   </div>
 </template>
 
