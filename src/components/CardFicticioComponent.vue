@@ -14,9 +14,9 @@ const props = defineProps({
       <img :src="anuncio.imgs[0]" />
     </div>
     <div class="card-infos">
-      <div class="card-titulo" >{{ anuncio.titulo }}</div>
-      <div class="card-preco">{{ `R$${anuncio.preco},00` }}</div>
-      <div class="card-loc">{{ `${anuncio.cidade}, ${anuncio.estado}` }}</div>
+      <div class="card-titulo" >{{ props.anuncio.titulo }}</div>
+      <div class="card-preco">{{ `R$${props.anuncio.preco},00` }}</div>
+      <div class="card-loc">{{ `${props.anuncio.cidade}, ${props.anuncio.estado}` }}</div>
     </div>
   </router-link>
 </div>
