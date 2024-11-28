@@ -1,35 +1,41 @@
 <script setup>
-import { useReserva } from '../stores/dadosReserva';
-const reservaStore = useReserva()
+import { useRoute } from 'vue-router';
+import { useAnuncioFicticio } from '../stores/anuncoFicticio'
+
+const anuncioFicticioStore = useAnuncioFicticio()
+const route = useRoute()
+
+const anuncioSelecionado = anuncioFicticioStore.anuncios.find(
+  (anuncio) => anuncio.id === Number(route.params.id)
+)
 </script>
 
 <template>
   <div class="pagina">
     <section class="container-geral">
-
-      <!-- <h1 class="titulo">Salão de festas</h1>
+      <h1 class="titulo">{{ anuncioSelecionado?.titulo }}</h1>
       <div class="container-reserva">
+
         <div class="imagens-component">
           <div class="imagens-container">
             <div class="imagem-grande" id="left-radius">
-              <img src="../../public/salaocasamento1.jpeg" alt="" />
+              <img :src="anuncioSelecionado.imgs[0]" alt="" />
             </div>
-            <div class="imagem-pequena"><img src="../../public/salaocasamento3.jpg" alt="" /></div>
+            <div class="imagem-pequena"><img :src="anuncioSelecionado.imgs[1]" alt="" /></div>
             <div class="imagem-pequena" id="top-right-radius">
-              <img id="top-right-radius" src="../../public/salaocasamento.jpg" alt="" />
+              <img id="top-right-radius" :src="anuncioSelecionado.imgs[2]" alt="" />
             </div>
-            <div class="imagem-pequena"><img src="../../public/salaocasamento3.jpg" alt="" /></div>
+            <div class="imagem-pequena"><img :src="anuncioSelecionado.imgs[3]" alt="" /></div>
             <div class="imagem-pequena" id="bottom-right-radius">
-              <img id="bottom-right-radius" src="../../public/salaocasamento.jpg" alt="" />
+              <img id="bottom-right-radius" :src="anuncioSelecionado.imgs[4]" alt="" />
             </div>
           </div>
         </div>
-
         <section class="reserva-component-e-descricao">
           <section class="descricao-container">
             <div class="titulos">
-              <h1 class="titulo-lugar">Joinville, Santa Catarina</h1>
-              <p class="titulo-visitantes">Até 350 visitantes</p>
+              <h1 class="titulo-lugar">{{ anuncioSelecionado.cidade }}, {{ anuncioSelecionado.estado }}</h1>
+              <p class="titulo-visitantes">Até {{ anuncioSelecionado.limiteVisitantes }} visitantes</p>
             </div>
             <div class="descricao-wrapper">
               <h2 class="titulo-descricao">Descrição</h2>
@@ -37,19 +43,7 @@ const reservaStore = useReserva()
                 <div class="linha-divisoria"></div>
               </div>
               <div class="descricao">
-                <p>
-                  Este salão de festas é um espaço versátil e acolhedor, ideal para eventos sociais e
-                  comemorações. Ele possui uma área ampla, bem iluminada, com capacidade para acomodar
-                  confortavelmente um grande número de convidados. O ambiente conta com janelas grandes
-                  que permitem a entrada de luz natural durante o dia e uma iluminação agradável e
-                  ajustável para a noite, criando uma atmosfera perfeita para qualquer tipo de evento. O
-                  salão é equipado com mesas e cadeiras que podem ser dispostas conforme a necessidade
-                  do evento, seja uma festa de aniversário, reunião familiar, ou um evento corporativo.
-                  Há um balcão de apoio para organização de alimentos e bebidas, além de um espaço
-                  reservado para uma pequena pista de dança ou área de apresentações, se desejado. Para
-                  o conforto dos convidados, o salão possui sistema de ventilação, climatização,
-                  banheiros próximos e acesso fácil para pessoas com mobilidade reduzida.
-                </p>
+                <p>{{ anuncioSelecionado.descricao }}</p>
               </div>
               <div class="linha-container">
                 <div class="linha-divisoria"></div>
@@ -57,20 +51,23 @@ const reservaStore = useReserva()
             </div>
           </section>
 
-
-
           <div class="reserva-component">
             <section class="reservation-card">
               <div class="card-content">
                 <div class="price">
-                  <p class="valor-preco">R$129,00</p>
+                  <p class="valor-preco">R${{ anuncioSelecionado.preco }},00</p>
                   <p class="price-period">dia</p>
                 </div>
                 <div class="date-range">
                   <div class="date-input start-date">
                     <div class="date-wrapper">
                       <label for="start-date" class="date-label">De:</label>
-                      <input type="text" id="start-date" class="date-value" placeholder="dd/mm/aa" />
+                      <input
+                        type="text"
+                        id="start-date"
+                        class="date-value"
+                        placeholder="dd/mm/aa"
+                      />
                     </div>
                   </div>
                   <div class="date-separator"></div>
@@ -81,12 +78,14 @@ const reservaStore = useReserva()
                     </div>
                   </div>
                 </div>
-                <button class="reserve-button" @click="reservaStore.adicionarReserva">Reservar</button>
+                <button class="reserve-button" @click="reservaStore.adicionarReserva">
+                  Reservar
+                </button>
               </div>
             </section>
           </div>
         </section>
-      </div> -->
+      </div>
     </section>
   </div>
 </template>

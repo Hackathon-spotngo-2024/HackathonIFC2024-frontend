@@ -9,7 +9,7 @@ const props = defineProps({
 
 <template>
 <div class="card">
-  <router-link to="/anuncio-ficticio" class="link">
+  <router-link :to="`/anuncio-ficticio/${anuncio.id}`" class="link">
     <div class="card-img">
       <img :src="anuncio.imgs[0]" />
     </div>
@@ -49,9 +49,10 @@ const props = defineProps({
 }
 
 .card-img>img {
-  width: 350px;
-  height: 300px;
+  width: 310px;
+  height: 280px;
   border-radius: 15px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.479);
   transition: 300ms ease-in-out;
 }
 

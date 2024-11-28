@@ -45,10 +45,11 @@ const enderecoStore = useEndereco()
 }
 
 .card-img>img {
-  width: 350px;
-  height: 300px;
+  width: 310px;
+  height: 280px;
   border-radius: 15px;
   transition: 300ms ease-in-out;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.479);
 }
 
 .card-img>img:hover {

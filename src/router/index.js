@@ -49,7 +49,7 @@ const router = createRouter({
       component: TermosPage,
     },
     {
-      path: "/anuncio-ficticio",
+      path: "/anuncio-ficticio/:id",
       name: "AnuncioFicticio",
       component: AnuncioFicticioPage,
     },
