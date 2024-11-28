@@ -6,7 +6,8 @@ const reservaStore = useReserva()
 <template>
   <div class="pagina">
     <section class="container-geral">
-      <h1 class="titulo">Salão de festas</h1>
+
+      <!-- <h1 class="titulo">Salão de festas</h1>
       <div class="container-reserva">
         <div class="imagens-component">
           <div class="imagens-container">
@@ -85,7 +86,7 @@ const reservaStore = useReserva()
             </section>
           </div>
         </section>
-      </div>
+      </div> -->
     </section>
   </div>
 </template>
