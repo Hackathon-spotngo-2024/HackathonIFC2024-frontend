@@ -1,7 +1,7 @@
 <script setup>
 import { useReserva } from '../stores/dadosReserva'
 import { useEndereco } from '@/stores/dadosEndereco'
-import { ref } from 'vue'
+import { ref } from 'vue';
 
 const enderecoStore = useEndereco()
 const reservaStore = useReserva()
@@ -21,9 +21,11 @@ const totalDays = subtractDate(
 )
 const totalPrice = totalDays * Number(enderecoStore.dadosAnuncio.preco)
 
-const details = ref(false)
-const showDetails = () => {
-  details.value = !details.value
+console.log(reservaStore.userReservas)
+
+const details = ref([])
+const showDetails = (index) => {
+  details.value[index] = !details.value[index]
 }
 </script>
 
@@ -47,21 +49,23 @@ const showDetails = () => {
           <i class="fas fa-map-marker-alt"></i>
           <p>{{ reserva.cidade + ', ' + reserva.estado }}</p>
         </div>
-        <button class="botao-detalhes" @click="showDetails">Ver detalhes</button>
-          <transition name="fade">
-        <div v-if="details" class="detalhes-endereco">
-          <ul class="endereco-completo">
-            <li>
-              <strong>Localidade:</strong> {{ enderecoStore.dadosAnuncio.cidade }},
-              {{ enderecoStore.dadosAnuncio.estado }}, {{ enderecoStore.dadosAnuncio.pais }}
-            </li>
-            <li>
-            <strong>Endereco:</strong> {{ enderecoStore.dadosAnuncio.rua }},
-              {{ enderecoStore.dadosAnuncio.numero }}, {{ enderecoStore.dadosAnuncio.bairro }}
-            </li>
-            <li><strong>CEP:</strong> {{ enderecoStore.dadosAnuncio.cep }}</li>
-          </ul>
-        </div>
+        <button class="botao-detalhes" @click="showDetails(index)">
+          Ver detalhes
+        </button>
+        <transition name="fade">
+          <div v-if="details[index]" class="detalhes-endereco">
+            <ul class="endereco-completo">
+              <li>
+                <strong>Localidade:</strong> {{ enderecoStore.dadosAnuncio.cidade }},
+                {{ enderecoStore.dadosAnuncio.estado }}, {{ enderecoStore.dadosAnuncio.pais }}
+              </li>
+              <li>
+                <strong>Endereco:</strong> {{ enderecoStore.dadosAnuncio.rua }},
+                {{ enderecoStore.dadosAnuncio.numero }}, {{ enderecoStore.dadosAnuncio.bairro }}
+              </li>
+              <li><strong>CEP:</strong> {{ enderecoStore.dadosAnuncio.cep }}</li>
+            </ul>
+          </div>
         </transition>
       </div>
     </div>
@@ -73,6 +77,7 @@ const showDetails = () => {
   display: flex;
   width: 80%;
   margin: auto;
+  flex-direction: column;
 }
 
 h1 {
@@ -151,7 +156,7 @@ h2 {
 }
 
 .endereco-completo {
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   list-style: none;
 }
 
@@ -159,11 +164,13 @@ h2 {
   font-size: 14px;
 }
 
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 150ms ease-in-out;
 }
 
-.fade-enter-from, .fade-leave-to {
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
 
