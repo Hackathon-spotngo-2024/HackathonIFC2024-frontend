@@ -13,6 +13,7 @@
   "dependencies": {
     "@vueuse/components": "^11.1.0",
     "@vueuse/core": "^11.1.0",
+    "axios": "^1.7.8",
     "leaflet": "^1.9.4",
     "pinia": "^2.2.6",
     "vue": "^3.4.29",
