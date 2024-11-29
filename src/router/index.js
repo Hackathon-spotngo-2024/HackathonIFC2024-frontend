@@ -24,7 +24,7 @@ const router = createRouter({
       component: AnunciarPage,
     },
     {
-      path: "/anuncio/",
+      path: "/anuncio/:id",
       name: "AnuncioPage",
       component: AnuncioPage,
     },
@@ -49,7 +49,7 @@ const router = createRouter({
       component: TermosPage,
     },
     {
-      path: "/anuncio-ficticio",
+      path: "/anuncio-ficticio/:id",
       name: "AnuncioFicticio",
       component: AnuncioFicticioPage,
     },

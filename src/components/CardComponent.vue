@@ -1,20 +1,23 @@
 <script setup>
-import { useEndereco } from '../stores/dadosEndereco'
-
-const enderecoStore = useEndereco()
+const props = defineProps({
+  anuncio: {
+    type: Object,
+    Required: true
+  }
+})
 </script>
 
 <template>
   <div class="card">
-    <router-link to="anuncio" class="link">
+    <router-link :to="`/anuncio/${anuncio.id}`" class="link">
       <div class="card-img">
-        <img :src="enderecoStore.dadosAnuncio.imgs[0]" alt="" />
+        <img :src="anuncio.imgs[0]" alt="" />
       </div>
       <div class="card-infos">
-        <div class="card-titulo">{{ enderecoStore.dadosAnuncio.titulo }}</div>
-        <div class="card-preco">{{ 'R$' + enderecoStore.dadosAnuncio.preco + ',00' }}</div>
+        <div class="card-titulo">{{ props.anuncio.titulo }}</div>
+        <div class="card-preco">{{ 'R$' + props.anuncio.preco + ',00' }}</div>
         <div class="card-loc">
-          {{ enderecoStore.dadosAnuncio.cidade + ', ' + enderecoStore.dadosAnuncio.estado }}
+          {{ props.anuncio.cidade + ', ' + props.anuncio.estado }}
         </div>
       </div>
     </router-link>
@@ -45,10 +48,11 @@ const enderecoStore = useEndereco()
 }
 
 .card-img>img {
-  width: 350px;
-  height: 300px;
+  width: 310px;
+  height: 280px;
   border-radius: 15px;
   transition: 300ms ease-in-out;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.479);
 }
 
 .card-img>img:hover {

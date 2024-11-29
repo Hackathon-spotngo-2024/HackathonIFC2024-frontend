@@ -16,7 +16,6 @@ onMounted(() => {
   <header>
     <component
       :is="navbarStore.isTelaPequena ? NavbarMobileComponent : NavbarComponent"
-      @openModal="openModal"
     />
   </header>
 

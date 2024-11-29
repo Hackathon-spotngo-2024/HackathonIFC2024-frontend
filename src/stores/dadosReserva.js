@@ -6,13 +6,16 @@ import { useRouter } from 'vue-router'
 export const useReserva = defineStore('reserva', () => {
   const enderecoStore = useEndereco()
   const router = useRouter()
-
+  
   const userReservas = reactive([])
   const dataVaziaAlert = ref(false)
+
   const datasReserva = reactive({
     dataInicio: '',
     dataTermino: ''
   })
+  
+  const details = ref(false)
 
   function isDataVazia() {
     if (datasReserva.dataInicio == '' || datasReserva.dataTermino == '') {
@@ -34,9 +37,13 @@ export const useReserva = defineStore('reserva', () => {
       if (enderecoStore.dadosAnuncio) {
         userReservas.push({ ...enderecoStore.dadosAnuncio })
         console.log('reserva adicionada:', userReservas)
-        router.push({ name: "AnuncioReservado" })
+        router.push({ name: 'AnuncioReservado' })
       }
     }
+  }
+
+  const showDetails = (index) => {
+    details.value[index] = !details.value[index]
   }
 
   return {
@@ -44,6 +51,7 @@ export const useReserva = defineStore('reserva', () => {
     adicionarReserva,
     dataVaziaAlert,
     datasReserva,
-    isDataVazia
+    isDataVazia,
+    showDetails,
   }
 })

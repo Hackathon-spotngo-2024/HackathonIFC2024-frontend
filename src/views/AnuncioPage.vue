@@ -3,35 +3,41 @@ import DescricaoComponent from '@/components/DescricaoComponent.vue'
 import ImagensComponent from '@/components/ImagensComponent.vue'
 import ReservaComponent from '@/components/ReservaComponent.vue'
 import { useEndereco } from '../stores/dadosEndereco'
+import { useRoute } from 'vue-router'
 
+const route = useRoute()
 const enderecoStore = useEndereco()
+
+const anuncioSelecionado = enderecoStore.anunciosCriados.find(
+  (anuncio) => anuncio.id === Number(route.params.id)
+)
 </script>
 
 <template>
   <div class="pagina">
     <section class="container-geral">
-      <h1 class="titulo">{{ enderecoStore.dadosAnuncio.titulo }}</h1>
+      <h1 class="titulo">{{ anuncioSelecionado?.titulo }}</h1>
       <div class="container-reserva">
         <div class="imagens-component">
-          <ImagensComponent />
+          <ImagensComponent :anuncio="anuncioSelecionado" />
         </div>
 
         <div class="reserva-e-descricao">
           <div class="titulo-e-descricao">
             <h1 class="titulo-lugar">
-              {{ enderecoStore.dadosAnuncio.cidade }}, {{ enderecoStore.dadosAnuncio.estado }}
+              {{ anuncioSelecionado?.cidade }}, {{ anuncioSelecionado?.estado }}
             </h1>
             <p class="titulo-visitantes">
-              Até {{ enderecoStore.dadosAnuncio.limiteVisitantes }} visitantes
+              Até {{ anuncioSelecionado?.limiteVisitantes }} visitantes
             </p>
             <section class="descricao">
               <div>
-                <DescricaoComponent />
+                <DescricaoComponent :anuncio="anuncioSelecionado" />
               </div>
             </section>
           </div>
           <div class="reserva-component">
-            <ReservaComponent />
+            <ReservaComponent :anuncio="anuncioSelecionado" />
           </div>
         </div>
       </div>

@@ -1,16 +1,22 @@
 <script setup>
+const props = defineProps({
+  anuncio: {
+    type: Object,
+    Required: true
+  }
+})
 </script>
 
 <template>
 <div class="card">
-  <router-link to="/anuncio-ficticio" class="link">
+  <router-link :to="`/anuncio-ficticio/${anuncio.id}`" class="link">
     <div class="card-img">
-      <img src="/public/salaocasamento1.jpeg" />
+      <img :src="anuncio.imgs[0]" />
     </div>
     <div class="card-infos">
-      <div class="card-titulo">Salão de festas</div>
-      <div class="card-preco">R$129,00</div>
-      <div class="card-loc">Joinville, Santa Catarina</div>
+      <div class="card-titulo" >{{ props.anuncio.titulo }}</div>
+      <div class="card-preco">{{ `R$${props.anuncio.preco},00` }}</div>
+      <div class="card-loc">{{ `${props.anuncio.cidade}, ${props.anuncio.estado}` }}</div>
     </div>
   </router-link>
 </div>
@@ -43,9 +49,10 @@
 }
 
 .card-img>img {
-  width: 350px;
-  height: 300px;
+  width: 310px;
+  height: 280px;
   border-radius: 15px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.479);
   transition: 300ms ease-in-out;
 }
 
