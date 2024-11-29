@@ -8,11 +8,9 @@ const numImagens = 5
 
 const onFileChange = (event) => {
   const files = event.target.files
-  // enderecoStore.dadosEndereco.imgs = []
   const selectedFiles = Array.from(files)
 
   if (selectedFiles.length != numImagens) {
-    console.log(selectedFiles.length)
     alert('Você deve adicionar 5 imagens ao seu anúncio.')
     return
   } else {

@@ -1,7 +1,32 @@
 <script setup>
 import { useReserva } from '../stores/dadosReserva'
+import { useEndereco } from '@/stores/dadosEndereco'
+import { ref } from 'vue';
 
+const enderecoStore = useEndereco()
 const reservaStore = useReserva()
+
+function subtractDate(date1, date2) {
+  const oneDay = 24 * 60 * 60 * 1000
+  const difference = date1.getTime() - date2.getTime()
+  return Math.round(difference / oneDay)
+}
+
+const formatDate = (date) => new Date(date).toLocaleDateString('pt-BR')
+
+const daysUntil = subtractDate(new Date(reservaStore.datasReserva.dataInicio), new Date())
+const totalDays = subtractDate(
+  new Date(reservaStore.datasReserva.dataTermino),
+  new Date(reservaStore.datasReserva.dataInicio)
+)
+const totalPrice = totalDays * Number(enderecoStore.dadosAnuncio.preco)
+
+console.log(reservaStore.userReservas)
+
+const details = ref([])
+const showDetails = (index) => {
+  details.value[index] = !details.value[index]
+}
 </script>
 
 <template>
@@ -10,8 +35,38 @@ const reservaStore = useReserva()
       <img :src="reserva.imgs[0]" alt="Salão de casamento" class="imagem-reserva" />
       <div class="detalhes-reserva">
         <h2>{{ reserva.titulo }}</h2>
-        <p>De {{ reservaStore.datasReserva.dataInicio }} à {{ reservaStore.datasReserva.dataTermino }}</p>
-        <p><i class="fas fa-map-marker-alt"></i> {{ reserva.cidade + ", " + reserva.estado }}</p>
+        <p>
+          De <strong>{{ formatDate(reservaStore.datasReserva.dataInicio) }}</strong> à
+          <strong>{{ formatDate(reservaStore.datasReserva.dataTermino) }}</strong>
+        </p>
+        <p>
+          Faltam <strong>{{ daysUntil }}</strong> dias para você poder aproveitar sua reserva!🎈
+        </p>
+        <p>
+          Valor total: <strong>R${{ totalPrice }},00</strong>
+        </p>
+        <div class="pais-estado">
+          <i class="fas fa-map-marker-alt"></i>
+          <p>{{ reserva.cidade + ', ' + reserva.estado }}</p>
+        </div>
+        <button class="botao-detalhes" @click="showDetails(index)">
+          Ver detalhes
+        </button>
+        <transition name="fade">
+          <div v-if="details[index]" class="detalhes-endereco">
+            <ul class="endereco-completo">
+              <li>
+                <strong>Localidade:</strong> {{ enderecoStore.dadosAnuncio.cidade }},
+                {{ enderecoStore.dadosAnuncio.estado }}, {{ enderecoStore.dadosAnuncio.pais }}
+              </li>
+              <li>
+                <strong>Endereco:</strong> {{ enderecoStore.dadosAnuncio.rua }},
+                {{ enderecoStore.dadosAnuncio.numero }}, {{ enderecoStore.dadosAnuncio.bairro }}
+              </li>
+              <li><strong>CEP:</strong> {{ enderecoStore.dadosAnuncio.cep }}</li>
+            </ul>
+          </div>
+        </transition>
       </div>
     </div>
   </div>
@@ -19,8 +74,10 @@ const reservaStore = useReserva()
 
 <style scoped>
 .container-reservas {
+  display: flex;
   width: 80%;
   margin: auto;
+  flex-direction: column;
 }
 
 h1 {
@@ -29,11 +86,12 @@ h1 {
 }
 
 .cartao-reserva {
+  height: 220px;
   display: flex;
-  align-items: center;
+  align-items: start;
   padding: 20px;
   margin-bottom: 10px;
-  border-bottom: 1px solid #ccc; 
+  border-bottom: 1px solid #ccc;
 }
 
 .detalhes-container {
@@ -67,19 +125,53 @@ h2 {
   margin: 5px 0;
   font-size: 14px;
 }
+
 .botao-detalhes {
-  background-color: white;
+  font-weight: 500;
+  background-color: #e9e9e9;
   color: black;
-  border: 1px solid #ccc;
-  padding: 10px 20px;
+  border: 0;
+  padding: 8px;
   text-align: center;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
   border-radius: 5px;
+  transition: 200ms ease-in-out;
 }
 
 .botao-detalhes:hover {
-  background-color: #f0f0f0;
+  background-color: #d8d8d8;
+}
+
+.botao-detalhes:active {
+  background-color: #b4b4b4;
+  transition: 180ms ease-in-out;
+}
+
+.pais-estado {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-direction: row;
+}
+
+.endereco-completo {
+  margin-top: 0.5rem;
+  list-style: none;
+}
+
+.endereco-completo li {
+  font-size: 14px;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 150ms ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 
 @media (max-width: 768px) {

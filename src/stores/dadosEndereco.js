@@ -24,7 +24,7 @@ export const useEndereco = defineStore('endereco', () => {
   const etapaStore = useEtapa()
   const router = useRouter()
 
-  const anunciosCriados = ref([])
+  const anunciosCriados = reactive([])
   const dadosAnuncio = ref(null)
 
   function setarDadosLocalStorage() {
@@ -39,11 +39,11 @@ export const useEndereco = defineStore('endereco', () => {
       const stringDados = window.localStorage.getItem('DadosEndereco')
       dadosAnuncio.value = JSON.parse(stringDados)
       
-      dadosAnuncio.value.id = anunciosCriados.value.length + 1
-      anunciosCriados.value.push({ ...dadosAnuncio.value })
+      dadosAnuncio.value.id = anunciosCriados.length + 1
+      anunciosCriados.push({ ...dadosAnuncio.value })
 
       setarDadosLocalStorage()
-      window.localStorage.setItem('DadosAnuncio', JSON.stringify(anunciosCriados.value))
+      window.localStorage.setItem('DadosAnuncio', JSON.stringify(anunciosCriados))
       
       etapaStore.etapaAtual = 0
       
