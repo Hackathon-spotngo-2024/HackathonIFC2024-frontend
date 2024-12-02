@@ -1,9 +1,6 @@
 <script setup>
 import { useReserva } from '../stores/dadosReserva'
-import { useEndereco } from '@/stores/dadosEndereco'
-import { ref } from 'vue';
-
-const enderecoStore = useEndereco()
+import { ref } from 'vue'
 const reservaStore = useReserva()
 
 function subtractDate(date1, date2) {
@@ -14,15 +11,6 @@ function subtractDate(date1, date2) {
 
 const formatDate = (date) => new Date(date).toLocaleDateString('pt-BR')
 
-const daysUntil = subtractDate(new Date(reservaStore.datasReserva.dataInicio), new Date())
-const totalDays = subtractDate(
-  new Date(reservaStore.datasReserva.dataTermino),
-  new Date(reservaStore.datasReserva.dataInicio)
-)
-const totalPrice = totalDays * Number(enderecoStore.dadosAnuncio.preco)
-
-console.log(reservaStore.userReservas)
-
 const details = ref([])
 const showDetails = (index) => {
   details.value[index] = !details.value[index]
@@ -32,38 +20,46 @@ const showDetails = (index) => {
 <template>
   <div class="container-reservas">
     <div class="cartao-reserva" v-for="(reserva, index) in reservaStore.userReservas" :key="index">
-      <img :src="reserva.imgs[0]" alt="Salão de casamento" class="imagem-reserva" />
+      <img :src="reserva.imgs[0]" class="imagem-reserva" />
       <div class="detalhes-reserva">
         <h2>{{ reserva.titulo }}</h2>
         <p>
-          De <strong>{{ formatDate(reservaStore.datasReserva.dataInicio) }}</strong> à
-          <strong>{{ formatDate(reservaStore.datasReserva.dataTermino) }}</strong>
+          De <strong>{{ formatDate(reserva.dataInicio) }}</strong> à
+          <strong>{{ formatDate(reserva.dataTermino) }}</strong>
         </p>
         <p>
-          Faltam <strong>{{ daysUntil }}</strong> dias para você poder aproveitar sua reserva!🎈
+          Faltam
+          <strong>{{
+            subtractDate(new Date(reserva.dataInicio), new Date())
+          }}</strong>
+          dias para você poder aproveitar sua reserva!🎈
         </p>
         <p>
-          Valor total: <strong>R${{ totalPrice }},00</strong>
+          Valor total:
+          <strong
+            >R${{
+              subtractDate(new Date(reserva.dataTermino), new Date(reserva.dataInicio)) *
+              Number(reserva.preco)
+            }},00</strong
+          >
         </p>
         <div class="pais-estado">
           <i class="fas fa-map-marker-alt"></i>
           <p>{{ reserva.cidade + ', ' + reserva.estado }}</p>
         </div>
-        <button class="botao-detalhes" @click="showDetails(index)">
-          Ver detalhes
-        </button>
+        <button class="botao-detalhes" @click="showDetails(index)">Ver detalhes</button>
         <transition name="fade">
           <div v-if="details[index]" class="detalhes-endereco">
             <ul class="endereco-completo">
               <li>
-                <strong>Localidade:</strong> {{ enderecoStore.dadosAnuncio.cidade }},
-                {{ enderecoStore.dadosAnuncio.estado }}, {{ enderecoStore.dadosAnuncio.pais }}
+                <strong>Localidade:</strong> {{ reserva.cidade }}, {{ reserva.estado }},
+                {{ reserva.pais }}
               </li>
               <li>
-                <strong>Endereco:</strong> {{ enderecoStore.dadosAnuncio.rua }},
-                {{ enderecoStore.dadosAnuncio.numero }}, {{ enderecoStore.dadosAnuncio.bairro }}
+                <strong>Endereco:</strong> {{ reserva.rua }}, {{ reserva.numero }},
+                {{ reserva.bairro }}
               </li>
-              <li><strong>CEP:</strong> {{ enderecoStore.dadosAnuncio.cep }}</li>
+              <li><strong>CEP:</strong> {{ reserva.cep }}</li>
             </ul>
           </div>
         </transition>
