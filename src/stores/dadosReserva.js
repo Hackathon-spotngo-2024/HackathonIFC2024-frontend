@@ -34,8 +34,8 @@ export const useReserva = defineStore('reserva', () => {
       dataVaziaAlert.value = true
       return
     } else {
-      if (enderecoStore.dadosAnuncio) {
-        userReservas.push({ ...enderecoStore.dadosAnuncio })
+      if (enderecoStore.anunciosCriados) {
+        userReservas.push({ ...enderecoStore.anunciosCriados })
         console.log('reserva adicionada:', userReservas)
         router.push({ name: 'AnuncioReservado' })
       }
