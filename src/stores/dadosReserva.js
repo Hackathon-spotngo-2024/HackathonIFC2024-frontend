@@ -42,6 +42,8 @@ export const useReserva = defineStore('reserva', () => {
           dataTermino: datasReserva.dataTermino
         }
         userReservas.push(novaReserva)
+        console.log(novaReserva)  //teste
+        console.log(`userReservas: ${userReservas}`) //teste
         router.push({ name: 'AnuncioReservado' })
       }
     }
@@ -49,6 +51,7 @@ export const useReserva = defineStore('reserva', () => {
 
   function deletarReserva(id) {
     const position = userReservas.findIndex((novaReserva) => novaReserva.id == id)
+    console.log(position, userReservas)
     userReservas.splice(position, 1)
   }
 
