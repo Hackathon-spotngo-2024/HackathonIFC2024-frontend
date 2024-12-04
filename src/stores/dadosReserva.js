@@ -9,6 +9,7 @@ export const useReserva = defineStore('reserva', () => {
 
   const userReservas = reactive([])
   const dataVaziaAlert = ref(false)
+  let novaReserva = {}
 
   const datasReserva = reactive({
     dataInicio: '',
@@ -35,15 +36,23 @@ export const useReserva = defineStore('reserva', () => {
       return
     } else {
       if (enderecoStore.dadosAnuncio) {
-        const novaReserva = {
+        novaReserva = {
           ...JSON.parse(JSON.stringify(enderecoStore.dadosAnuncio)),
           dataInicio: datasReserva.dataInicio,
           dataTermino: datasReserva.dataTermino
         }
         userReservas.push(novaReserva)
+        console.log(novaReserva)  //teste
+        console.log(`userReservas: ${userReservas}`) //teste
         router.push({ name: 'AnuncioReservado' })
       }
     }
+  }
+
+  function deletarReserva(id) {
+    const position = userReservas.findIndex((novaReserva) => novaReserva.id == id)
+    console.log(position, userReservas)
+    userReservas.splice(position, 1)
   }
 
   const showDetails = (index) => {
@@ -56,6 +65,7 @@ export const useReserva = defineStore('reserva', () => {
     dataVaziaAlert,
     datasReserva,
     isDataVazia,
-    showDetails
+    showDetails,
+    deletarReserva
   }
 })

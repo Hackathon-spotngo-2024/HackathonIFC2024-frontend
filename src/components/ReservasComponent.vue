@@ -29,9 +29,7 @@ const showDetails = (index) => {
         </p>
         <p>
           Faltam
-          <strong>{{
-            subtractDate(new Date(reserva.dataInicio), new Date())
-          }}</strong>
+          <strong>{{ subtractDate(new Date(reserva.dataInicio), new Date()) }}</strong>
           dias para você poder aproveitar sua reserva!🎈
         </p>
         <p>
@@ -48,6 +46,9 @@ const showDetails = (index) => {
           <p>{{ reserva.cidade + ', ' + reserva.estado }}</p>
         </div>
         <button class="botao-detalhes" @click="showDetails(index)">Ver detalhes</button>
+        <button class="cancelar-reserva" @click="reservaStore.deletarReserva(reserva.id)">
+          Cancelar reserva
+        </button>
         <transition name="fade">
           <div v-if="details[index]" class="detalhes-endereco">
             <ul class="endereco-completo">
@@ -74,6 +75,7 @@ const showDetails = (index) => {
   width: 80%;
   margin: auto;
   flex-direction: column;
+  height: 100vh;
 }
 
 h1 {
@@ -168,6 +170,23 @@ h2 {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+.cancelar-reserva {
+  border: 0;
+  font-weight: 500;
+  font-size: 14px;
+  margin-left: 8px;
+  padding: 8px;
+  background-color: var(--cor-botao-cancelar);
+  border-radius: 5px;
+  color: whitesmoke;
+  transition: 200ms ease-in-out;
+}
+
+.cancelar-reserva:hover {
+  cursor: pointer;
+  background-color: var(--cor-botao-cancelar-hover);
 }
 
 @media (max-width: 768px) {
