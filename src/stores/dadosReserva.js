@@ -42,8 +42,6 @@ export const useReserva = defineStore('reserva', () => {
           dataTermino: datasReserva.dataTermino
         }
         userReservas.push(novaReserva)
-        console.log(novaReserva)  //teste
-        console.log(`userReservas: ${userReservas}`) //teste
         router.push({ name: 'AnuncioReservado' })
       }
     }
