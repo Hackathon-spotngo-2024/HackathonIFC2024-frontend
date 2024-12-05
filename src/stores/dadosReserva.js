@@ -2,21 +2,49 @@ import { defineStore } from 'pinia'
 import { reactive, ref } from 'vue'
 import { useEndereco } from './dadosEndereco'
 import { useRouter } from 'vue-router'
+import Swal from 'sweetalert2';
+
 
 export const useReserva = defineStore('reserva', () => {
   const enderecoStore = useEndereco()
   const router = useRouter()
-
+  
   const userReservas = reactive([])
   const dataVaziaAlert = ref(false)
   let novaReserva = {}
+  
+  const details = ref(false)
 
+  const cancelarReservaId = ref(null)
+  const cancelarReservaModal = ref(false)
+
+  const isReservasEmpty = ref(false)
+  
   const datasReserva = reactive({
     dataInicio: '',
     dataTermino: ''
   })
 
-  const details = ref(false)
+  function reservasEmptyVerifier() {
+    if(userReservas.length == 0) isReservasEmpty.value = true
+    else isReservasEmpty.value = false
+    console.log(userReservas)
+  }
+  
+  const toggleCancelarModal = (id) => {
+    cancelarReservaId.value = id
+    cancelarReservaModal.value = !cancelarReservaModal.value
+  }
+  
+  function showAlert() {
+    Swal.fire({
+      title: 'Sucesso!',
+      text: 'Você cancelou sua reserva.',
+      icon: 'success',
+      timer: 2000,
+      showConfirmButton: false,
+    });
+  }
 
   function isDataVazia() {
     if (datasReserva.dataInicio == '' || datasReserva.dataTermino == '') {
@@ -42,6 +70,7 @@ export const useReserva = defineStore('reserva', () => {
           dataTermino: datasReserva.dataTermino
         }
         userReservas.push(novaReserva)
+        reservasEmptyVerifier()
         router.push({ name: 'AnuncioReservado' })
       }
     }
@@ -51,6 +80,9 @@ export const useReserva = defineStore('reserva', () => {
     const position = userReservas.findIndex((novaReserva) => novaReserva.id == id)
     console.log(position, userReservas)
     userReservas.splice(position, 1)
+    toggleCancelarModal()
+    reservasEmptyVerifier()
+    showAlert()
   }
 
   const showDetails = (index) => {
@@ -64,6 +96,11 @@ export const useReserva = defineStore('reserva', () => {
     datasReserva,
     isDataVazia,
     showDetails,
-    deletarReserva
+    deletarReserva,
+    cancelarReservaModal,
+    toggleCancelarModal,
+    cancelarReservaId,
+    isReservasEmpty,
+    reservasEmptyVerifier
   }
 })

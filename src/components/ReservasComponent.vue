@@ -46,7 +46,7 @@ const showDetails = (index) => {
           <p>{{ reserva.cidade + ', ' + reserva.estado }}</p>
         </div>
         <button class="botao-detalhes" @click="showDetails(index)">Ver detalhes</button>
-        <button class="cancelar-reserva" @click="reservaStore.deletarReserva(reserva.id)">
+        <button class="cancelar-reserva" @click="reservaStore.toggleCancelarModal(reserva.id)">
           Cancelar reserva
         </button>
         <transition name="fade">
