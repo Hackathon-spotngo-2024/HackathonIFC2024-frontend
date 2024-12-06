@@ -1,8 +1,17 @@
 <script setup>
+import { ref } from 'vue'
 import { useModal } from '../stores/dadosModal'
-import CampoVazioAlertComponent from './CampoVazioAlertComponent.vue';
+import { useAuthStore } from '@/stores/authStore'
+import CampoVazioAlertComponent from './CampoVazioAlertComponent.vue'
 
 const modalStore = useModal()
+const authStore = useAuthStore()
+const email = ref('')
+const password = ref('')
+
+const handleLogin = async () => {
+  await authStore.login({ email: email.value, password: password.value })
+}
 </script>
 
 <template>
@@ -20,7 +29,7 @@ const modalStore = useModal()
         <div class="containerInterno">
           <h1 class="title">Bem-vindo ao Spot'n Go</h1>
 
-          <div class="conteudo">
+          <form @submit.prevent="handleLogin" class="conteudo">
             <div class="form-item">
               <label for="email">E-mail</label>
               <input
@@ -43,8 +52,8 @@ const modalStore = useModal()
               />
             </div>
 
-            <button @click="modalStore.logar()">Continuar</button>
-            <CampoVazioAlertComponent v-if="modalStore.campoLoginVazio"/>
+            <button type="submit">Continuar</button>
+            <CampoVazioAlertComponent v-if="modalStore.campoLoginVazio" />
 
             <div class="criar-conta">
               <div class="linha">
@@ -54,17 +63,14 @@ const modalStore = useModal()
                 <p class="textoFinal">Ainda não está no Spot'n Go?</p>
                 <p>
                   <span
-                    @click="
-                      modalStore.closeLoginModal(),
-                      modalStore.openRegisterModal()
-                    "
+                    @click="modalStore.closeLoginModal(), modalStore.openRegisterModal()"
                     class="cadastro"
                     >Crie uma conta</span
                   >
                 </p>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -237,59 +243,59 @@ label {
 }
 
 @media (max-width: 1200px) {
-    .form-container {
-        width: 80%;
-    }
+  .form-container {
+    width: 80%;
+  }
 }
 
 @media (max-width: 992px) {
-    .form-container {
-        width: 70%;
-    }
+  .form-container {
+    width: 70%;
+  }
 }
 
 @media (max-width: 768px) {
-    .form-container {
-        width: 90%;
-        height: auto;
-        padding: 20px;
-    }
+  .form-container {
+    width: 90%;
+    height: auto;
+    padding: 20px;
+  }
 
-    input {
-        width: 100%;
-    }
+  input {
+    width: 100%;
+  }
 
-    button {
-        padding: 10px;
-        width: 100%;
-    }
+  button {
+    padding: 10px;
+    width: 100%;
+  }
 
-    .linha {
-        margin-left: 20px;
-        margin-right: 20px;
-    }
+  .linha {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
 }
 
 @media (max-width: 576px) {
-    .title {
-        font-size: 20px;
-    }
+  .title {
+    font-size: 20px;
+  }
 
-    .sub-title {
-        font-size: 16px;
-    }
+  .sub-title {
+    font-size: 16px;
+  }
 
-    .termo {
-        font-size: 8px;
-    }
+  .termo {
+    font-size: 8px;
+  }
 
-    .textoFinal {
-        font-size: 16px;
-    }
+  .textoFinal {
+    font-size: 16px;
+  }
 
-    .linha {
-        margin-left: 10px;
-        margin-right: 10px;
-    }
+  .linha {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 }
 </style>
