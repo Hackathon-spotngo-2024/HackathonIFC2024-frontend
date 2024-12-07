@@ -19,7 +19,7 @@
     --cor-texto-erro: rgb(255, 69, 69);
     --cor-placeholder: rgb(180, 180, 180);
     --cor-card-hover: rgb(216, 216, 216);
-    --cor-botao-login: linear-gradient(80deg, #76B08E, #4D735D);
+    --cor-botao-login: linear-gradient(80deg, #71b18c, #4D735D);
     --cor-botao-login-hover: linear-gradient(80deg, #4D735D, #76B08E);
 }
 

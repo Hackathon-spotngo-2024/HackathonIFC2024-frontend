@@ -1,33 +1,53 @@
 <script setup>
 import { ref } from 'vue'
-import { useAuthStore } from '@/stores/authStore';
+import { useAuthStore } from '@/stores/authStore'
 
-const authStore = useAuthStore();
-const passwordVisible = ref(false);
-const email = ref('');
-const password = ref('');
+const authStore = useAuthStore()
+const username = ref('')
+const email = ref('')
+const password = ref('')
+const confirmPassword = ref('')
+const passwordVisible = ref({
+  password: false,
+  confirmPassword: false
+})
 
-const handleLogin = async () => {
+const showPassword = (type) => {
+  passwordVisible.value[type] = !passwordVisible.value[type]
+}
+
+const handleRegister = async () => {
   try {
-  await authStore.login({email: email.value, password: password.value });
-  // window.location.href = '/'
+    await authStore.register({
+      email: email.value,
+      username: username.value,
+      password: password.value,
+      re_password: confirmPassword.value
+    })
+    if (authStore.userApproved) {
+      console.log('Usuário cadastrado com sucesso')
+      alert('Cadastro realizado com sucesso!')
+      window.location.href = '/login'
+    }
   } catch (error) {
-    alert('Erro ao realizar o login, verifique suas informações.');
+    alert('Erro ao realizar o cadastro, tente novamente.')
   }
-};
-
-const showPassword = () => {
-  passwordVisible.value = !passwordVisible.value;
-};
+}
 </script>
 <template>
   <div class="container">
     <div class="login-container">
       <section class="login-section">
-        <h1>LOGIN</h1>
+        <h1>REGISTRE-SE</h1>
         <p>Bem-vindo ao Spot 'n go.</p>
-        <form @submit.prevent="handleLogin" class="login-form">
+        <form @submit.prevent="handleRegister" class="login-form">
           <div class="username-input">
+            <div class="icon">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <input type="text" placeholder="Nome de usuário" v-model="username" />
+          </div>
+          <div class="email-input">
             <div class="icon">
               <i class="fa-solid fa-envelope"></i>
             </div>
@@ -38,20 +58,40 @@ const showPassword = () => {
               <i class="fa-solid fa-lock"></i>
             </div>
             <input
-              :type="passwordVisible ? 'text' : 'password'"
+              :type="passwordVisible.password ? 'text' : 'password'"
               placeholder="Senha"
               v-model="password"
             />
-            <button class="show-password-button" type="button" @click="showPassword">
-              <i :class="passwordVisible ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye'"></i>
+            <button class="show-password-button" type="button" @click="showPassword('password')">
+              <i
+                :class="passwordVisible.password ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye'"
+              ></i>
             </button>
           </div>
-          <button class="login-button" type="submit">Logar</button>
+          <div class="confirm-password-input">
+            <div class="icon">
+              <i class="fa-solid fa-lock"></i>
+            </div>
+            <input
+              :type="passwordVisible.confirm ? 'text' : 'password'"
+              placeholder="Confirmar senha"
+              v-model="confirmPassword"
+            />
+            <button class="show-password-button" type="button" @click="showPassword('confirm')">
+              <i
+                :class="passwordVisible.confirm ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye'"
+              ></i>
+            </button>
+          </div>
+          <button class="login-button" type="submit">Cadastrar</button>
+          <div class="error-message">
+            <p>{{ authStore.errorMessage }}</p>
+          </div>
         </form>
         <div class="linha"></div>
         <div class="cadastro-mensagem">
-          Não possui uma conta?
-          <router-link class="cadastrar-link" to="/register">Cadastrar</router-link>
+          Já possui uma conta?
+          <router-link class="cadastrar-link" to="/login">Login</router-link>
         </div>
       </section>
 
@@ -107,7 +147,10 @@ form {
   margin: 1rem 0 1rem 0;
 }
 
-.username-input {
+.username-input,
+.password-input,
+.email-input,
+.confirm-password-input {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -120,12 +163,14 @@ form {
   border: 0;
 }
 
-.username-input i,
-.password-input i {
+i {
   color: #464646;
 }
 
-.username-input input {
+.username-input input,
+.email-input input,
+.password-input input,
+.confirm-password-input input {
   border: none;
   outline: none;
   font-size: 1rem;
@@ -133,19 +178,6 @@ form {
   width: 250px;
   border-radius: 25px;
   background-color: #f0f3f5;
-}
-
-.password-input {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1rem;
-  width: calc(300px - 1rem);
-  height: calc(45px - 1rem);
-  padding: 1rem;
-  border-radius: 25px;
-  background-color: #f0f3f5;
-  border: 0;
 }
 
 .password-input input {
@@ -240,5 +272,14 @@ form {
 .green-pattern {
   height: 700px;
   border-radius: 0 25px 25px 0;
+}
+
+.error-message p {
+  font-size: 14px;
+}
+
+.error-message {
+  text-align: center;
+  width: 400px;
 }
 </style>
