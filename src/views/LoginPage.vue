@@ -1,25 +1,26 @@
 <script setup>
 import { ref } from 'vue'
-import { useAuthStore } from '@/stores/authStore';
+import { useAuthStore } from '@/stores/authStore'
 
-const authStore = useAuthStore();
-const passwordVisible = ref(false);
-const email = ref('');
-const password = ref('');
+const authStore = useAuthStore()
+const passwordVisible = ref(false)
+const email = ref('')
+const password = ref('')
 
 const handleLogin = async () => {
   try {
-  await authStore.login({email: email.value, password: password.value });
-  alert('login realizado com sucesso')
-  // window.location.href = '/'
+    await authStore.login({ email: email.value, password: password.value })
+    if (authStore.errorMessage) return
+    else alert('login realizado com sucesso')
+    window.location.href = '/'
   } catch (error) {
-    alert('Erro ao realizar o login, verifique suas informações.');
+    alert('Erro ao realizar o login, verifique suas informações.')
   }
-};
+}
 
 const showPassword = () => {
-  passwordVisible.value = !passwordVisible.value;
-};
+  passwordVisible.value = !passwordVisible.value
+}
 </script>
 <template>
   <div class="container">
@@ -48,6 +49,9 @@ const showPassword = () => {
             </button>
           </div>
           <button class="login-button" type="submit">Logar</button>
+          <div class="error-message">
+            <p>{{ authStore.errorMessage }}</p>
+          </div>
         </form>
         <div class="linha"></div>
         <div class="cadastro-mensagem">
@@ -212,6 +216,15 @@ form {
   opacity: 1;
 }
 
+.error-message p {
+  font-size: 14px;
+}
+
+.error-message {
+  text-align: center;
+  width: 400px;
+}
+
 .linha {
   display: block;
   height: 1px;
@@ -247,7 +260,9 @@ form {
   .container {
     height: 90vh;
   }
-  .login-container, .login-section, .illustration-section img {
+  .login-container,
+  .login-section,
+  .illustration-section img {
     height: 650px;
   }
 }

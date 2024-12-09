@@ -18,6 +18,8 @@ export const useAuthStore = defineStore('auth', () => {
       api.defaults.headers.common['Authorization'] = `Bearer ${accessToken.value}`
       await fetchUser()
     } catch (error) {
+      errorCode.value = error.response?.status
+      if (errorCode.value !== 200 && errorCode.value !== 201) errorMessage.value = 'Ocorreu um erro, tente novamente'
       console.log('Erro ao fazer login:', error.response?.data)
     }
   }
