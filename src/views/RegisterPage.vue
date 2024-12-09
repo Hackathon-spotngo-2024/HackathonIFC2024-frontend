@@ -175,16 +175,6 @@ i {
   outline: none;
   font-size: 1rem;
   height: 60px;
-  width: 250px;
-  border-radius: 25px;
-  background-color: #f0f3f5;
-}
-
-.password-input input {
-  border: none;
-  outline: none;
-  font-size: 1rem;
-  height: 60px;
   width: 220px;
   border-radius: 25px;
   background-color: #f0f3f5;
@@ -281,5 +271,14 @@ i {
 .error-message {
   text-align: center;
   width: 400px;
+}
+
+@media (max-height: 860px) {
+  .container {
+    height: 90vh;
+  }
+  .login-container, .login-section, .illustration-section img {
+    height: 650px;
+  }
 }
 </style>

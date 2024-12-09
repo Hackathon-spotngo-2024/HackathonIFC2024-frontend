@@ -1,5 +1,4 @@
 <script setup>
-import { useModal } from '../stores/dadosModal'
 
 const scrollTo = (id) => {
   const element = document.getElementById(id)
@@ -7,12 +6,7 @@ const scrollTo = (id) => {
     element.scrollIntoView({ behavior: 'smooth' })
   }
 }
-defineProps({
-  openModal: Function,
-  isModalOpen: Boolean
-})
 
-const modalStore = useModal()
 </script>
 
 <template>
@@ -33,20 +27,9 @@ const modalStore = useModal()
     <router-link to="/anunciar" id="anunciar-link" class="nav-link">Anunciar</router-link>
     <div class="profile-container">
       <button
-        class="entrar-link"
-        @click="modalStore.openLoginModal"
-        v-if="modalStore.isUserLogado == false"
-      >
+        class="entrar-link">
         Entrar
       </button>
-      <div class="profile-container">
-        <img
-          class="profile"
-          v-if="modalStore.isUserLogado"
-          src="/src/assets/profileimg.png"
-          alt=""
-        />
-      </div>
     </div>
   </div>
   <div class="linha-container">

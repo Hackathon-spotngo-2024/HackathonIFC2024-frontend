@@ -10,7 +10,6 @@ export const useAuthStore = defineStore('auth', () => {
   const errorCode = ref(null)
   const userApproved = ref(false)
 
-
   const login = async (credentials) => {
     try {
       const response = await api.post('/api/token/', credentials)
@@ -25,7 +24,11 @@ export const useAuthStore = defineStore('auth', () => {
 
   const register = async (userData) => {
     try {
-      const response = await api.post('users/', userData)
+      const response = await api.post('users/', userData, {
+        headers: {
+          'Authorization': `Bearer ${accessToken.value}`
+        }
+      })
       if (response.status === 200 || response.status === 201) userApproved.value = true
       console.log(response.status)
     } catch (error) {
@@ -37,16 +40,15 @@ export const useAuthStore = defineStore('auth', () => {
         if (errors.password) errorMessage.value = errors.password[0]
         else if (errors.email) errorMessage.value = errors.email[0]
         else if (errors.username) errorMessage.value = errors.username[0]
-        else if(errors.non_field_errors) errorMessage.value = errors.non_field_errors[0]
+        else if (errors.non_field_errors) errorMessage.value = errors.non_field_errors[0]
         else errorMessage.value = 'Ocorreu um erro desconhecido. Tente novamente.'
-      }
-      else errorMessage.value = 'Erro ao registrar usuário. Tente novamente.'
+      } else errorMessage.value = 'Erro ao registrar usuário. Tente novamente.'
     }
   }
 
   const fetchUser = async () => {
     try {
-      const response = await api.get('user/me/')
+      const response = await api.get('me/')
       user.value = response.data
     } catch (error) {
       console.error('Erro ao buscar usuário:', error.response?.data)
@@ -67,7 +69,7 @@ export const useAuthStore = defineStore('auth', () => {
   const refreshTokenHandler = async () => {
     try {
       const response = await api.post('/api/token/refresh/', {
-        refresh: refreshToken.value,
+        refresh: refreshToken.value
       })
       accessToken.value = response.data.access
       api.defaults.headers.common['Authorization'] = `Bearer ${accessToken.value}`
@@ -77,5 +79,16 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  return { accessToken, user, login, register, fetchUser, logout, refreshTokenHandler, errorMessage, errorCode, userApproved }
+  return {
+    accessToken,
+    user,
+    login,
+    register,
+    fetchUser,
+    logout,
+    refreshTokenHandler,
+    errorMessage,
+    errorCode,
+    userApproved
+  }
 })

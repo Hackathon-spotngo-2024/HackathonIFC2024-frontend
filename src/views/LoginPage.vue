@@ -6,10 +6,12 @@ const authStore = useAuthStore();
 const passwordVisible = ref(false);
 const email = ref('');
 const password = ref('');
+const username = ref('');
 
 const handleLogin = async () => {
   try {
   await authStore.login({email: email.value, password: password.value });
+  alert('login realizado com sucesso')
   // window.location.href = '/'
   } catch (error) {
     alert('Erro ao realizar o login, verifique suas informações.');
@@ -130,7 +132,7 @@ form {
   outline: none;
   font-size: 1rem;
   height: 60px;
-  width: 250px;
+  width: 220px;
   border-radius: 25px;
   background-color: #f0f3f5;
 }
@@ -240,5 +242,14 @@ form {
 .green-pattern {
   height: 700px;
   border-radius: 0 25px 25px 0;
+}
+
+@media (max-height: 860px) {
+  .container {
+    height: 90vh;
+  }
+  .login-container, .login-section, .illustration-section img {
+    height: 650px;
+  }
 }
 </style>
