@@ -16,6 +16,7 @@
     "axios": "^1.7.9",
     "leaflet": "^1.9.4",
     "pinia": "^2.3.0",
+    "sweetalert": "^2.1.2",
     "tsconfig": "^7.0.0",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
