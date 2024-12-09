@@ -6,7 +6,6 @@ const authStore = useAuthStore();
 const passwordVisible = ref(false);
 const email = ref('');
 const password = ref('');
-const username = ref('');
 
 const handleLogin = async () => {
   try {

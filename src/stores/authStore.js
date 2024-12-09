@@ -24,11 +24,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   const register = async (userData) => {
     try {
-      const response = await api.post('users/', userData, {
-        headers: {
-          'Authorization': `Bearer ${accessToken.value}`
-        }
-      })
+      const response = await api.post('users/', userData)
       if (response.status === 200 || response.status === 201) userApproved.value = true
       console.log(response.status)
     } catch (error) {
