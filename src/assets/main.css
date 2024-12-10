@@ -3,8 +3,8 @@
 /* Cores e fontes*/
 :root {
     --cor-principal: rgba(77, 115, 93, 1);
-    --search-bar-fill: rgb(244, 244, 244);
-    --search-bar-border: rgba(199, 199, 199, 1);
+    --search-bar-fill: #f8f7f7;
+    --search-bar-border: #d4d8db;
     --cor-principal-hover: rgb(67, 102, 82);
     --cor-linha-divisoria: rgba(203, 203, 203, 0.6);
     --cor-fonte-loc: rgb(71, 71, 71);
@@ -19,6 +19,8 @@
     --cor-texto-erro: rgb(255, 69, 69);
     --cor-placeholder: rgb(180, 180, 180);
     --cor-card-hover: rgb(216, 216, 216);
+    --cor-botao-login: linear-gradient(80deg, #71b18c, #4D735D);
+    --cor-botao-login-hover: linear-gradient(80deg, #4D735D, #76B08E);
     --cor-botao-cancelar: rgb(128,0,0);
     --cor-botao-cancelar-hover: rgb(100,0,0);
 }

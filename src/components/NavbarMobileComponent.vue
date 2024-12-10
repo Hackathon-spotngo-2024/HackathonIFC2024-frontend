@@ -19,7 +19,7 @@
     <router-link to="/anunciar" id="anunciar-link" class="nav-link"
       ><img src="../assets/anunciar-icon.png" alt=""
     /></router-link>
-    <button class="entrar-link" @click="modal"><img src="../assets/usuario.png" alt="" /></button>
+    <button class="entrar-link"><img src="../assets/usuario.png" alt="" /></button>
   </div>
 </template>
 

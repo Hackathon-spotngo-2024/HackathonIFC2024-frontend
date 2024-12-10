@@ -1,5 +1,7 @@
 <script setup>
-import { useModal } from '../stores/dadosModal'
+import { useAuthStore } from '@/stores/authStore'
+
+const authStore = useAuthStore()
 
 const scrollTo = (id) => {
   const element = document.getElementById(id)
@@ -7,12 +9,8 @@ const scrollTo = (id) => {
     element.scrollIntoView({ behavior: 'smooth' })
   }
 }
-defineProps({
-  openModal: Function,
-  isModalOpen: Boolean
-})
 
-const modalStore = useModal()
+authStore.userFirstLetter = window.localStorage.getItem('UserFirstLetter')
 </script>
 
 <template>
@@ -31,22 +29,31 @@ const modalStore = useModal()
       <input type="text" placeholder="Procure seu spot" class="search-input" />
     </div>
     <router-link to="/anunciar" id="anunciar-link" class="nav-link">Anunciar</router-link>
+    <div class="divisoria"></div>
     <div class="profile-container">
-      <button
-        class="entrar-link"
-        @click="modalStore.openLoginModal"
-        v-if="modalStore.isUserLogado == false"
-      >
-        Entrar
-      </button>
-      <div class="profile-container">
-        <img
-          class="profile"
-          v-if="modalStore.isUserLogado"
-          src="/src/assets/profileimg.png"
-          alt=""
-        />
+      <div class="profile" v-if="authStore.isAuthenticated">
+        <div class="dropdown">
+          <button
+            class="btn profile-btn dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            {{ authStore.userFirstLetter.toUpperCase() }}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li><a class="dropdown-item" href="#">Suas informações</a></li>
+            <li>
+              <button class="dropdown-item" @click="authStore.logout">Sair</button>
+            </li>
+          </ul>
+        </div>
       </div>
+
+      <button class="entrar-link" v-if="!authStore.isAuthenticated">
+        <router-link class="entrar-link-route" to="/login">Entrar</router-link>
+      </button>
     </div>
   </div>
   <div class="linha-container">
@@ -65,7 +72,7 @@ const modalStore = useModal()
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 2rem 10rem 0 10rem;
+  margin: 2rem 11rem 0 11rem;
   border-radius: 40px;
   padding: 0.5rem;
   box-shadow: 1px 3px 8px 3px rgba(0, 0, 0, 0.08);
@@ -121,9 +128,13 @@ button {
 .entrar-link {
   color: white;
   background-color: var(--cor-principal);
-  width: 6.25rem;
-  height: 3.125rem;
+  width: 5.5rem;
+  height: 3rem;
   transition: 100ms ease;
+}
+
+.entrar-link-route {
+  color: white;
 }
 
 .entrar-link:hover {
@@ -131,12 +142,13 @@ button {
 }
 
 .logo-img {
-  width: 200px;
-  height: 40px;
+  margin-left: 10px;
+  width: 170px;
+  height: 35px;
 }
 
 .search-bar {
-  width: 25rem;
+  width: 23rem;
   height: 2.5rem;
   border: 1px solid var(--search-bar-border);
   border-radius: 20px;
@@ -173,14 +185,56 @@ button {
   background-color: var(--cor-linha-divisoria);
 }
 
+.divisoria {
+  height: 2.3rem;
+  width: 1px;
+  background-color: var(--search-bar-border);
+}
+
 .profile-container {
+  width: fit-content;
   display: flex;
   justify-content: center;
 }
 
 .profile {
-  margin-right: 10px;
-  width: 40px;
+  margin-right: 1rem;
+  width: 38px;
+  height: 38px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ececec;
+}
+
+.profile-btn {
+  transition: 280ms ease-in-out !important;
+  width: 100%;
+  height: 100%;
+  background: none;
+  font-weight: 600;
+  color: var(--preto-alternativo);
+  border: none;
+}
+
+.profile-btn:hover {
+  background-color: #dfd7d7;
+}
+
+#dropdownMenuButton {
+  transition: 280ms ease-in-out !important;
+}
+
+.dropdown-item {
+  font-family: var(--fonte-principal) !important;
+  border-radius: 0 !important;
+  font-size: 14px !important;
+}
+
+.dropdown-item:active {
+  background-color: transparent !important;
+  color: #dfd7d7 !important;
 }
 
 @media (max-width: 1500px) {
