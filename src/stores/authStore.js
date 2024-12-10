@@ -19,8 +19,12 @@ export const useAuthStore = defineStore('auth', () => {
       await fetchUser()
     } catch (error) {
       errorCode.value = error.response?.status
-      if (errorCode.value !== 200 && errorCode.value !== 201) errorMessage.value = 'Ocorreu um erro, tente novamente'
-      console.log('Erro ao fazer login:', error.response?.data)
+      const errors = error.response.data //(objeto)
+      if (errors) {
+        errorCode.value = error.response?.status
+        console.log(errorCode.value)
+        if (errorCode.value == 401) errorMessage.value = 'Usuário e/ou senha incorreto(s)'
+      } else errorMessage.value = 'Ocorreu um erro desconhecido. Tente novamente'
     }
   }
 
@@ -39,8 +43,8 @@ export const useAuthStore = defineStore('auth', () => {
         else if (errors.email) errorMessage.value = errors.email[0]
         else if (errors.username) errorMessage.value = errors.username[0]
         else if (errors.non_field_errors) errorMessage.value = errors.non_field_errors[0]
-        else errorMessage.value = 'Ocorreu um erro desconhecido. Tente novamente.'
-      } else errorMessage.value = 'Erro ao registrar usuário. Tente novamente.'
+        else errorMessage.value = 'Ocorreu um erro desconhecido. Tente novamente'
+      } else errorMessage.value = 'Erro ao registrar usuário. Tente novamente'
     }
   }
 

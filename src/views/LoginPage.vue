@@ -14,7 +14,8 @@ const handleLogin = async () => {
     else alert('login realizado com sucesso')
     window.location.href = '/'
   } catch (error) {
-    alert('Erro ao realizar o login, verifique suas informações.')
+    console.log(error, authStore.errorMessage)
+    authStore.errorMessage = 'Ocorreu um erro desconhecido. Tente novamente.'
   }
 }
 
