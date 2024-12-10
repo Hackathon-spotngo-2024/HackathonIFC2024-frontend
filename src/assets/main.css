@@ -21,6 +21,8 @@
     --cor-card-hover: rgb(216, 216, 216);
     --cor-botao-login: linear-gradient(80deg, #71b18c, #4D735D);
     --cor-botao-login-hover: linear-gradient(80deg, #4D735D, #76B08E);
+    --cor-botao-cancelar: rgb(128,0,0);
+    --cor-botao-cancelar-hover: rgb(100,0,0);
 }
 
 * {

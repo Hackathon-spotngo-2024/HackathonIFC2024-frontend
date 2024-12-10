@@ -58,7 +58,7 @@ onMounted(() => {
           <button
             class="avancar-btn"
             @click="
-              enderecoStore.setarDadosLocalStorage();
+              enderecoStore.setarDadosLocalStorage(),
               enderecoStore.addAnuncio()
             "
           >

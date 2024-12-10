@@ -1,16 +1,21 @@
 <script setup>
-import { useEndereco } from '../stores/dadosEndereco'
 import { useReserva } from '../stores/dadosReserva'
 
-const enderecoStore = useEndereco()
 const reservaStore = useReserva()
+
+const props = defineProps({
+  anuncio: {
+    type: Object,
+    Required: true
+  }
+})
 </script>
 
 <template>
   <section class="reservation-card">
     <div class="card-content">
       <h2 class="price">
-        R${{ enderecoStore.dadosAnuncio.preco }} <span class="price-period"> dia</span>
+        R${{ props.anuncio.preco }} <span class="price-period"> dia</span>
       </h2>
       <div class="date-range">
         <div class="date-input start-date">
@@ -40,7 +45,9 @@ const reservaStore = useReserva()
         </div>
       </div>
       <button class="reserve-button" @click="reservaStore.adicionarReserva">Reservar</button>
-      <div v-if="reservaStore.dataVaziaAlert" class="data-vazia-alert"><p>Informe a data da visita.</p></div>
+      <div v-if="reservaStore.dataVaziaAlert" class="data-vazia-alert">
+        <p>Informe a data da visita.</p>
+      </div>
     </div>
   </section>
 </template>

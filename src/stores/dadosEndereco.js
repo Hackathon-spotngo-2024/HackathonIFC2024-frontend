@@ -24,7 +24,7 @@ export const useEndereco = defineStore('endereco', () => {
   const etapaStore = useEtapa()
   const router = useRouter()
 
-  const anunciosCriados = ref([])
+  const anunciosCriados = reactive([])
   const dadosAnuncio = ref(null)
 
   function setarDadosLocalStorage() {
@@ -32,36 +32,44 @@ export const useEndereco = defineStore('endereco', () => {
   }
 
   function addAnuncio() {
-   if (dadosEndereco.titulo == '' || dadosEndereco.preco == '' || dadosEndereco.imgs == []) {
+    if (dadosEndereco.titulo === '' || dadosEndereco.descricao === '' || dadosEndereco.imgs.length === 0) {
       campoVazioAlert.value = true
       return
     } else {
       const stringDados = window.localStorage.getItem('DadosEndereco')
       dadosAnuncio.value = JSON.parse(stringDados)
-      
-      dadosAnuncio.value.id = anunciosCriados.value.length + 1
-      anunciosCriados.value.push({ ...dadosAnuncio.value })
+
+      dadosAnuncio.value.id = anunciosCriados.length + 1
+      anunciosCriados.push({ ...dadosAnuncio.value })
 
       setarDadosLocalStorage()
-      window.localStorage.setItem('DadosAnuncio', JSON.stringify(anunciosCriados.value))
-      
+      window.localStorage.setItem('DadosAnuncio', JSON.stringify(anunciosCriados))
+
       etapaStore.etapaAtual = 0
-      
+
       for (const key in dadosEndereco) {
         if (typeof dadosEndereco[key] == 'string') dadosEndereco[key] = ''
         else if (typeof dadosEndereco[key] == 'number') dadosEndereco[key] = 0
         else dadosEndereco[key] = []
       }
-      router.push({ name: "AnuncioPublicado" })
-  }
+      router.push({ name: 'AnuncioPublicado' })
+    }
   }
 
   function verificarFormulario() {
-    if (dadosEndereco.pais == '' || dadosEndereco.rua == '' || dadosEndereco.numero == '' || dadosEndereco.bairro == '' || dadosEndereco.estado == '' || dadosEndereco.cidade == '' || dadosEndereco.cep == '') {
+    if (
+      dadosEndereco.pais == '' ||
+      dadosEndereco.rua == '' ||
+      dadosEndereco.numero == '' ||
+      dadosEndereco.bairro == '' ||
+      dadosEndereco.estado == '' ||
+      dadosEndereco.cidade == '' ||
+      dadosEndereco.cep == ''
+    ) {
       campoVazioAlert.value = true
     } else {
-    campoVazioAlert.value = false
-    etapaStore.proximaEtapa()
+      campoVazioAlert.value = false
+      etapaStore.proximaEtapa()
     }
   }
 
@@ -72,6 +80,6 @@ export const useEndereco = defineStore('endereco', () => {
     addAnuncio,
     setarDadosLocalStorage,
     anunciosCriados,
-    dadosAnuncio,
+    dadosAnuncio
   }
 })

@@ -29,9 +29,9 @@ const router = createRouter({
       meta: { requiresAuth: true }
     },
     {
-      path: '/anuncio/',
-      name: 'AnuncioPage',
-      component: AnuncioPage
+      path: "/anuncio/:id",
+      name: "AnuncioPage",
+      component: AnuncioPage,
     },
     {
       path: '/minhas-reservas',
@@ -55,9 +55,9 @@ const router = createRouter({
       component: TermosPage
     },
     {
-      path: '/anuncio-ficticio',
-      name: 'AnuncioFicticio',
-      component: AnuncioFicticioPage
+      path: "/anuncio-ficticio/:id",
+      name: "AnuncioFicticio",
+      component: AnuncioFicticioPage,
     },
 
     {
