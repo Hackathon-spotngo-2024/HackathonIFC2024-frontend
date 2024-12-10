@@ -1,7 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import { useAuthStore } from '@/stores/authStore'
-import AnimatedBallComponent from '@/components/AnimatedBallComponent.vue';
+import AnimatedBallComponent from '@/components/AnimatedBallComponent.vue'
+import BallReversedComponent from '@/components/BallReversedComponent.vue'
 
 const authStore = useAuthStore()
 const passwordVisible = ref(false)
@@ -32,7 +33,9 @@ const showPassword = () => {
 </script>
 <template>
   <div class="container">
-    <AnimatedBallComponent />
+    <div class="animated-ball">
+      <AnimatedBallComponent />
+    </div>
     <div class="login-container">
       <section class="login-section">
         <h1>LOGIN</h1>
@@ -73,6 +76,9 @@ const showPassword = () => {
         <img class="green-pattern" src="../assets/image-login.png" alt="" />
       </section>
     </div>
+      <div class="animated-ball-reverse">
+        <BallReversedComponent />
+    </div>
   </div>
 </template>
 
@@ -83,6 +89,14 @@ const showPassword = () => {
   align-items: center;
   width: 100%;
   height: 85vh;
+}
+
+.animated-ball {
+  margin-right: 1.5rem;
+}
+
+.animated-ball-reverse {
+  margin-left: 1.5rem;
 }
 
 .login-container {
@@ -148,6 +162,11 @@ form {
   border-radius: 25px;
   background-color: #f0f3f5;
 }
+
+input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px #f0f3f5 inset !important; /* Remove a borda amarela */
+}
+
 
 .password-input {
   display: flex;

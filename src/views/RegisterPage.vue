@@ -182,6 +182,10 @@ i {
   background-color: #f0f3f5;
 }
 
+input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px #f0f3f5 inset !important; /* Remove a borda amarela */
+}
+
 .show-password-button {
   display: flex;
   align-items: center;
