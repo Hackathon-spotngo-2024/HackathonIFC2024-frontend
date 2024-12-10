@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useAuthStore } from '@/stores/authStore'
+import AnimatedBallComponent from '@/components/AnimatedBallComponent.vue';
 
 const authStore = useAuthStore()
 const passwordVisible = ref(false)
@@ -30,6 +31,7 @@ const showPassword = () => {
 </script>
 <template>
   <div class="container">
+    <AnimatedBallComponent />
     <div class="login-container">
       <section class="login-section">
         <h1>LOGIN</h1>
@@ -269,7 +271,10 @@ form {
   .login-container,
   .login-section,
   .illustration-section img {
-    height: 650px;
+    height: 580px;
+  }
+  .login-container {
+    width: 1000px;
   }
 }
 </style>
