@@ -130,7 +130,7 @@ button {
   background-color: var(--cor-principal);
   width: 5.5rem;
   height: 3rem;
-  transition: 100ms ease;
+  transition: 200ms ease-in-out;
 }
 
 .entrar-link-route {
