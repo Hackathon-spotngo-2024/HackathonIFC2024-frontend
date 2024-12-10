@@ -4,11 +4,14 @@ import CardFicticioComponent from '@/components/CardFicticioComponent.vue'
 import BannerComponent from '@/components/BannerComponent.vue'
 import CardSectionTitle from '@/components/CardSectionTitle.vue'
 import CardComponent from '@/components/CardComponent.vue'
+import { useAuthStore } from '@/stores/authStore'
 
+const authStore = useAuthStore()
 const enderecoStore = useEndereco()
 </script>
 
 <template>
+  <button @click="authStore.logout">Logout</button>
   <BannerComponent />
   <CardSectionTitle />
   <div class="card-container">

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { ref } from 'vue'
 import { useAuthStore } from '@/stores/authStore'
 import AnunciarPage from '../views/AnunciarPage.vue'
 import HomePage from '../views/HomePage.vue'
@@ -76,22 +77,26 @@ const router = createRouter({
     {
       path: '/register',
       component: RegisterPage
-    },
+    }
   ],
 
   scrollBehavior(to, from) {
     return { top: 0 }
-  },
+  }
 })
 
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
-  if (to.meta.requiresAuth && !authStore.token) {
-    next('login');
-  }
-  else {
+  const isAuthenticated = ref(false)
+  const accessToken = localStorage.getItem('accessToken')
+  if (accessToken) isAuthenticated.value = true
+  console.log('rota:', to.path, 'isAuthenticated:', isAuthenticated.value);
+
+  if (to.meta.requiresAuth && isAuthenticated.value == false) {
+    return next({ path: '/login' });
+  } else {
     next();
   }
-})
+});
 
 export default router

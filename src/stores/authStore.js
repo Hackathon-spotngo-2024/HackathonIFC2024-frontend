@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import api from '../services/api'
 import { ref } from 'vue'
+import Swal from 'sweetalert2'
 
 export const useAuthStore = defineStore('auth', () => {
   const accessToken = ref(null)
@@ -10,13 +11,26 @@ export const useAuthStore = defineStore('auth', () => {
   const errorCode = ref(null)
   const userApproved = ref(false)
 
+  function showAlert() {
+    Swal.fire({
+      title: 'Login efetuado.',
+      text: "Agora você pode desfrutar do Spot 'n go!",
+      icon: 'success',
+      timer: 1500,
+      showConfirmButton: false,
+    });
+  }
+
   const login = async (credentials) => {
     try {
       const response = await api.post('/api/token/', credentials)
       accessToken.value = response.data.access
       refreshToken.value = response.data.refresh
+      localStorage.setItem('accessToken', accessToken.value)
+      localStorage.setItem('refreshToken', refreshToken.value)
       api.defaults.headers.common['Authorization'] = `Bearer ${accessToken.value}`
       await fetchUser()
+      // if (accessToken.value) window.location.href = '/'
     } catch (error) {
       errorCode.value = error.response?.status
       const errors = error.response.data //(objeto)
@@ -58,11 +72,15 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   const logout = async () => {
+    console.log(!!accessToken.value)
     try {
       accessToken.value = null
       refreshToken.value = null
       user.value = null
       delete api.defaults.headers.common['Authorization']
+      localStorage.removeItem('accessToken')
+      localStorage.removeItem('refreshToken')
+      console.log(!!accessToken.value)
     } catch (error) {
       console.log('Erro ao fazer logout', error.response.data[0])
     }
@@ -91,6 +109,7 @@ export const useAuthStore = defineStore('auth', () => {
     refreshTokenHandler,
     errorMessage,
     errorCode,
-    userApproved
+    userApproved,
+    showAlert,
   }
 })

@@ -6,13 +6,18 @@ const authStore = useAuthStore()
 const passwordVisible = ref(false)
 const email = ref('')
 const password = ref('')
+const goToHome = () => {
+  window.location.href = '/'
+}
 
 const handleLogin = async () => {
   try {
     await authStore.login({ email: email.value, password: password.value })
     if (authStore.errorMessage) return
-    else alert('login realizado com sucesso')
-    window.location.href = '/'
+    authStore.showAlert()
+    if (authStore.accessToken) {
+      setTimeout(goToHome, 1600)
+    }
   } catch (error) {
     console.log(error, authStore.errorMessage)
     authStore.errorMessage = 'Ocorreu um erro desconhecido. Tente novamente.'
