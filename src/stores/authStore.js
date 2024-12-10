@@ -13,6 +13,11 @@ export const useAuthStore = defineStore('auth', () => {
   const isAuthenticated = ref(false)
   const userFirstLetter = ref(null)
 
+  const getFirstLetter = (name) => {
+    userFirstLetter.value = name.substr(0, 1)
+    window.localStorage.setItem('UserFirstLetter', userFirstLetter.value)
+  }
+
   function showAlert() {
     Swal.fire({
       title: 'Login efetuado.',
@@ -113,6 +118,7 @@ export const useAuthStore = defineStore('auth', () => {
     userApproved,
     showAlert,
     isAuthenticated,
+    getFirstLetter,
     userFirstLetter
   }
 })

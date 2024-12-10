@@ -19,10 +19,10 @@
 
 @keyframes descer {
     0% {
-        transform: translateY(0)
+        transform: translateY(-200px)
     }
     100% {
-        transform: translateY(-200px);
+        transform: translateY(0);
     }
 }
 </style>

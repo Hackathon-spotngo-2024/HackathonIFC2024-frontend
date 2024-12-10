@@ -15,10 +15,11 @@ const goToHome = () => {
 const handleLogin = async () => {
   try {
     await authStore.login({ email: email.value, password: password.value })
-    authStore.userFirstLetter = email.value.substr(0, 1)
     if (authStore.errorMessage) return
     authStore.showAlert()
     if (authStore.accessToken) {
+      authStore.userFirstLetter = authStore.getFirstLetter(email.value)
+      console.log(authStore.userFirstLetter, email.value)
       setTimeout(goToHome, 1600)
     }
   } catch (error) {
@@ -76,8 +77,8 @@ const showPassword = () => {
         <img class="green-pattern" src="../assets/image-login.png" alt="" />
       </section>
     </div>
-      <div class="animated-ball-reverse">
-        <BallReversedComponent />
+    <div class="animated-ball-reverse">
+      <BallReversedComponent />
     </div>
   </div>
 </template>
@@ -166,7 +167,6 @@ form {
 input:-webkit-autofill {
   box-shadow: 0 0 0px 1000px #f0f3f5 inset !important; /* Remove a borda amarela */
 }
-
 
 .password-input {
   display: flex;

@@ -9,6 +9,8 @@ const scrollTo = (id) => {
     element.scrollIntoView({ behavior: 'smooth' })
   }
 }
+
+authStore.userFirstLetter = window.localStorage.getItem('UserFirstLetter')
 </script>
 
 <template>
@@ -28,7 +30,7 @@ const scrollTo = (id) => {
     </div>
     <router-link to="/anunciar" id="anunciar-link" class="nav-link">Anunciar</router-link>
     <div class="profile-container">
-      <div class="profile" v-if="authStore.isAuthenticated"><p>{{ authStore.userFirstLetter }}</p></div>
+      <div class="profile" v-if="authStore.isAuthenticated"><p>{{ authStore.userFirstLetter.toUpperCase() }}</p></div>
       <button class="entrar-link" v-if="!authStore.isAuthenticated"><router-link class="entrar-link-route" to='/login'>Entrar</router-link></button>
     </div>
   </div>
@@ -168,6 +170,13 @@ button {
 .profile {
   margin-right: 10px;
   width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f1f1f1;
+  font-weight: 500;
 }
 
 @media (max-width: 1500px) {
