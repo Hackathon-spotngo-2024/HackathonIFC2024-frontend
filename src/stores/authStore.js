@@ -10,6 +10,8 @@ export const useAuthStore = defineStore('auth', () => {
   const errorMessage = ref(null)
   const errorCode = ref(null)
   const userApproved = ref(false)
+  const isAuthenticated = ref(false)
+  const userFirstLetter = ref(null)
 
   function showAlert() {
     Swal.fire({
@@ -30,7 +32,6 @@ export const useAuthStore = defineStore('auth', () => {
       localStorage.setItem('refreshToken', refreshToken.value)
       api.defaults.headers.common['Authorization'] = `Bearer ${accessToken.value}`
       await fetchUser()
-      // if (accessToken.value) window.location.href = '/'
     } catch (error) {
       errorCode.value = error.response?.status
       const errors = error.response.data //(objeto)
@@ -80,7 +81,7 @@ export const useAuthStore = defineStore('auth', () => {
       delete api.defaults.headers.common['Authorization']
       localStorage.removeItem('accessToken')
       localStorage.removeItem('refreshToken')
-      console.log(!!accessToken.value)
+      window.location.href = '/' //redireciona para página home para recarregar e atualizar o icone do perfil
     } catch (error) {
       console.log('Erro ao fazer logout', error.response.data[0])
     }
@@ -111,5 +112,7 @@ export const useAuthStore = defineStore('auth', () => {
     errorCode,
     userApproved,
     showAlert,
+    isAuthenticated,
+    userFirstLetter
   }
 })

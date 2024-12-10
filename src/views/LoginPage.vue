@@ -14,6 +14,7 @@ const goToHome = () => {
 const handleLogin = async () => {
   try {
     await authStore.login({ email: email.value, password: password.value })
+    authStore.userFirstLetter = email.value.substr(0, 1)
     if (authStore.errorMessage) return
     authStore.showAlert()
     if (authStore.accessToken) {

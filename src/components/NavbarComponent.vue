@@ -1,4 +1,7 @@
 <script setup>
+import { useAuthStore } from "@/stores/authStore"
+
+const authStore = useAuthStore()
 
 const scrollTo = (id) => {
   const element = document.getElementById(id)
@@ -6,7 +9,6 @@ const scrollTo = (id) => {
     element.scrollIntoView({ behavior: 'smooth' })
   }
 }
-
 </script>
 
 <template>
@@ -26,10 +28,8 @@ const scrollTo = (id) => {
     </div>
     <router-link to="/anunciar" id="anunciar-link" class="nav-link">Anunciar</router-link>
     <div class="profile-container">
-      <button
-        class="entrar-link">
-        Entrar
-      </button>
+      <div class="profile" v-if="authStore.isAuthenticated"><p>{{ authStore.userFirstLetter }}</p></div>
+      <button class="entrar-link" v-if="!authStore.isAuthenticated"><router-link class="entrar-link-route" to='/login'>Entrar</router-link></button>
     </div>
   </div>
   <div class="linha-container">
@@ -107,6 +107,10 @@ button {
   width: 6.25rem;
   height: 3.125rem;
   transition: 100ms ease;
+}
+
+.entrar-link-route {
+  color: white;
 }
 
 .entrar-link:hover {

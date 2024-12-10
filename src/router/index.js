@@ -87,12 +87,11 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
-  const isAuthenticated = ref(false)
   const accessToken = localStorage.getItem('accessToken')
-  if (accessToken) isAuthenticated.value = true
-  console.log('rota:', to.path, 'isAuthenticated:', isAuthenticated.value);
+  if (accessToken) authStore.isAuthenticated = true
+  console.log('rota:', to.path, 'isAuthenticated:', authStore.isAuthenticated);
 
-  if (to.meta.requiresAuth && isAuthenticated.value == false) {
+  if (to.meta.requiresAuth && authStore.isAuthenticated == false) {
     return next({ path: '/login' });
   } else {
     next();

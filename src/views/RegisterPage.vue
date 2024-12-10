@@ -25,6 +25,8 @@ const handleRegister = async () => {
       re_password: confirmPassword.value
     })
     if (authStore.userApproved) {
+      authStore.userFirstLetter = email.value.substr(0, 1)
+      console.log(authStore.userFirstLetter)
       console.log('Usuário cadastrado com sucesso')
       alert('Cadastro realizado com sucesso!')
       window.location.href = '/login'
