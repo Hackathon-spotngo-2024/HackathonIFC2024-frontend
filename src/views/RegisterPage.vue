@@ -1,8 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 import { useAuthStore } from '@/stores/authStore'
-import AnimatedBallComponent from '@/components/AnimatedBallComponent.vue';
-import BallReversedComponent from '@/components/BallReversedComponent.vue';
+import AnimatedBallComponent from '@/components/AnimatedBallComponent.vue'
+import BallReversedComponent from '@/components/BallReversedComponent.vue'
+import router from '@/router'
 
 const authStore = useAuthStore()
 const username = ref('')
@@ -13,6 +14,9 @@ const passwordVisible = ref({
   password: false,
   confirmPassword: false
 })
+const goToLogin = () => {
+  router.push('/login')
+}
 
 const showPassword = (type) => {
   passwordVisible.value[type] = !passwordVisible.value[type]
@@ -24,15 +28,16 @@ const handleRegister = async () => {
       email: email.value,
       username: username.value,
       password: password.value,
-      re_password: confirmPassword.value,
+      re_password: confirmPassword.value
     })
     if (password.value != confirmPassword.value) authStore.errorMessage = 'As senhas deve coincidir'
-    else if (password.value.length < 6) authStore.errorMessage = 'A senha deve conter pelo menos 6 caracteres'
+    else if (password.value.length < 6)
+      authStore.errorMessage = 'A senha deve conter pelo menos 6 caracteres'
     else {
       if (authStore.userApproved) {
         authStore.userFirstLetter = email.value.substr(0, 1)
         authStore.showAlert('register')
-        setTimeout(authStore.goToHome, 1600)
+        setTimeout(goToLogin, 1600)
       }
     }
   } catch (error) {
@@ -66,19 +71,30 @@ const handleRegister = async () => {
             <div class="icon">
               <i class="fa-solid fa-lock"></i>
             </div>
-            <input :type="passwordVisible.password ? 'text' : 'password'" placeholder="Senha" v-model="password" />
+            <input
+              :type="passwordVisible.password ? 'text' : 'password'"
+              placeholder="Senha"
+              v-model="password"
+            />
             <button class="show-password-button" type="button" @click="showPassword('password')">
-              <i :class="passwordVisible.password ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye'"></i>
+              <i
+                :class="passwordVisible.password ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye'"
+              ></i>
             </button>
           </div>
           <div class="confirm-password-input">
             <div class="icon">
               <i class="fa-solid fa-lock"></i>
             </div>
-            <input :type="passwordVisible.confirm ? 'text' : 'password'" placeholder="Confirmar senha"
-              v-model="confirmPassword" />
+            <input
+              :type="passwordVisible.confirm ? 'text' : 'password'"
+              placeholder="Confirmar senha"
+              v-model="confirmPassword"
+            />
             <button class="show-password-button" type="button" @click="showPassword('confirm')">
-              <i :class="passwordVisible.confirm ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye'"></i>
+              <i
+                :class="passwordVisible.confirm ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye'"
+              ></i>
             </button>
           </div>
           <button class="login-button" type="submit">Cadastrar</button>
@@ -316,6 +332,112 @@ input:-webkit-autofill {
 
   .login-button {
     margin-top: 0.5rem;
+  }
+}
+
+@media (max-width: 1260px) {
+  .login-container {
+    width: 700px;
+    width: fit-content;
+  }
+  .illustration-section,
+  .green-pattern {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .login-container {
+    width: 350px;
+    height: 600px;
+  }
+  .login-section h1 {
+    font-size: 24px;
+  }
+  .login-section p {
+    font-size: 16px;
+  }
+  .login-form {
+    width: 280px;
+    margin-bottom: 8px;
+  }
+  .linha {
+    width: 220px;
+  }
+  .username-input,
+  .email-input,
+  .password-input,
+  .confirm-password-input {
+    border-radius: 18px;
+    padding: 12px;
+    width: 200px;
+  }
+  .username-input input,
+  .email-input input,
+  .password-input input,
+  .confirm-password-input input {
+    border-radius: 18px;
+    width: 130px;
+    height: 40px;
+    font-size: 14px;
+  }
+  .icon i {
+    font-size: 14px;
+  }
+  .login-button {
+    margin-top: 8px;
+    width: 90px;
+    height: 50px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 470px) {
+  .animated-ball,
+  .animated-ball-reverse {
+    height: 10px;
+  }
+  .login-container,
+  .login-section {
+    width: 240px;
+    height: 470px;
+  }
+  .login-section h1 {
+    font-size: 20px;
+  }
+  .login-section p {
+    font-size: 12px;
+  }
+  .login-form {
+    width: 200px;
+  }
+  .username-input,
+  .email-input,
+  .password-input,
+  .confirm-password-input {
+    padding: 8px;
+    width: 180px;
+    height: 25px;
+  }
+  .username-input input,
+  .email-input input,
+  .password-input input,
+  .confirm-password-input input {
+    width: 110px;
+    height: 40px;
+    font-size: 10px;
+  }
+  .icon i {
+    font-size: 12px;
+  }
+  .login-button {
+    margin-top: 8px;
+    width: 65px;
+    height: 35px;
+    font-size: 10px;
+  }
+  .cadastro-mensagem, .cadastrar-link {
+    font-size: 10px;
   }
 }
 </style>
