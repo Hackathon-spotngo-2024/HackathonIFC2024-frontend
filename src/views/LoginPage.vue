@@ -384,7 +384,7 @@ input:-webkit-autofill {
     font-size: 20px;
   }
   .login-section p {
-    font-size: 12px;
+    font-size: 14px;
   }
   .login-form {
     width: 200px;
@@ -403,7 +403,7 @@ input:-webkit-autofill {
   .confirm-password-input input {
     width: 110px;
     height: 40px;
-    font-size: 10px;
+    font-size: 14px;
   }
   .icon i {
     font-size: 12px;
@@ -412,10 +412,10 @@ input:-webkit-autofill {
     margin-top: 8px;
     width: 65px;
     height: 35px;
-    font-size: 10px;
+    font-size: 12px;
   }
   .cadastro-mensagem, .cadastrar-link {
-    font-size: 10px;
+    font-size: 12px;
   }
 }
 </style>
