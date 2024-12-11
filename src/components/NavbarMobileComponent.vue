@@ -31,7 +31,7 @@
 }
 
 .linha-divisoria {
-  width: 500px;
+  width: 300px;
   height: 1px;
   margin: 1.5rem 0rem 0 0;
   background-color: var(--cor-linha-divisoria);

@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import { useAuthStore } from '@/stores/authStore'
+import AnimatedBallComponent from '@/components/AnimatedBallComponent.vue';
+import BallReversedComponent from '@/components/BallReversedComponent.vue';
 
 const authStore = useAuthStore()
 const username = ref('')
@@ -38,6 +40,9 @@ const handleRegister = async () => {
 </script>
 <template>
   <div class="container">
+    <div class="animated-ball">
+      <AnimatedBallComponent />
+    </div>
     <div class="login-container">
       <section class="login-section">
         <h1>REGISTRE-SE</h1>
@@ -101,6 +106,9 @@ const handleRegister = async () => {
         <img class="green-pattern" src="../assets/image-login.png" alt="" />
       </section>
     </div>
+    <div class="animated-ball-reverse">
+      <BallReversedComponent />
+    </div>
   </div>
 </template>
 
@@ -111,6 +119,14 @@ const handleRegister = async () => {
   align-items: center;
   width: 100%;
   height: 85vh;
+}
+
+.animated-ball {
+  margin-right: 1.5rem;
+}
+
+.animated-ball-reverse {
+  margin-left: 1.5rem;
 }
 
 .login-container {

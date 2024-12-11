@@ -205,6 +205,8 @@ button {
   font-size: 1rem;
   background-color: var(--search-bar-fill);
   margin: 0 0 0 1rem;
+  padding: 0;
+  box-shadow: none !important;
 }
 
 .fa.fa-search {
