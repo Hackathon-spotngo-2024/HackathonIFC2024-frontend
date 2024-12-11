@@ -293,5 +293,129 @@ input:-webkit-autofill {
   .login-container {
     width: 900px;
   }
+  .username-input,
+    .email-input,
+    .password-input,
+    .confirm-password-input {
+      scale: 0.85;
+    }
+  
+    form {
+      gap: 0.2rem;
+      margin: 0.4rem 0 0.4rem 0;
+    }
+  
+    .login-button {
+      margin-top: 0.5rem;
+    }
+}
+
+@media (max-width: 1260px) {
+  .login-container {
+    width: 700px;
+    width: fit-content;
+  }
+  .illustration-section,
+  .green-pattern {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .login-container, .login-section {
+    width: 350px;
+    height: 450px;
+  }
+  .login-section h1 {
+    font-size: 24px;
+  }
+  .login-section p {
+    font-size: 16px;
+  }
+  .login-form {
+    width: 280px;
+    margin-bottom: 8px;
+  }
+  .linha {
+    width: 220px;
+  }
+  .username-input,
+  .email-input,
+  .password-input,
+  .confirm-password-input {
+    border-radius: 18px;
+    padding: 12px;
+    width: 200px;
+  }
+  .username-input input,
+  .email-input input,
+  .password-input input,
+  .confirm-password-input input {
+    border-radius: 18px;
+    width: 130px;
+    height: 40px;
+    font-size: 14px;
+  }
+  .icon i {
+    font-size: 14px;
+  }
+  .login-button {
+    margin-top: 8px;
+    width: 90px;
+    height: 50px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 470px) {
+  .container {
+    height: 80vh;
+  }
+  .animated-ball,
+  .animated-ball-reverse {
+    height: 10px;
+  }
+  .login-container,
+  .login-section {
+    width: 240px;
+    height: 370px;
+  }
+  .login-section h1 {
+    font-size: 20px;
+  }
+  .login-section p {
+    font-size: 12px;
+  }
+  .login-form {
+    width: 200px;
+  }
+  .username-input,
+  .email-input,
+  .password-input,
+  .confirm-password-input {
+    padding: 8px;
+    width: 180px;
+    height: 25px;
+  }
+  .username-input input,
+  .email-input input,
+  .password-input input,
+  .confirm-password-input input {
+    width: 110px;
+    height: 40px;
+    font-size: 10px;
+  }
+  .icon i {
+    font-size: 12px;
+  }
+  .login-button {
+    margin-top: 8px;
+    width: 65px;
+    height: 35px;
+    font-size: 10px;
+  }
+  .cadastro-mensagem, .cadastrar-link {
+    font-size: 10px;
+  }
 }
 </style>
