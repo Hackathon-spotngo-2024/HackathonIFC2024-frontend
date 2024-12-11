@@ -29,8 +29,8 @@ authStore.userFirstLetter = window.localStorage.getItem('UserFirstLetter')
       <input type="text" placeholder="Procure seu spot" class="search-input" />
     </div>
     <router-link to="/anunciar" id="anunciar-link" class="nav-link">Anunciar</router-link>
-    <div class="divisoria" v-if="authStore.isAuthenticated"></div>
     <div class="profile-container">
+    <div class="divisoria" v-if="authStore.isAuthenticated"></div>
       <div class="profile" v-if="authStore.isAuthenticated">
         <button
           id="dropdownDefaultButton"
@@ -111,7 +111,7 @@ authStore.userFirstLetter = window.localStorage.getItem('UserFirstLetter')
   justify-content: space-around;
   align-items: center;
   width: fit-content;
-  gap: 3rem;
+  gap: 5rem;
   margin: 2rem auto 0 auto;
   border-radius: 40px;
   padding: 0.5rem;
@@ -226,6 +226,7 @@ button {
 }
 
 .divisoria {
+  margin-right: 2rem;
   height: 2.3rem;
   width: 1px;
   background-color: var(--search-bar-border);
@@ -269,6 +270,7 @@ li a {
 @media (max-width: 1500px) {
   .nav-container {
     align-items: center;
+    gap: 3rem;
   }
   .logo-img {
     width: auto;
@@ -286,7 +288,7 @@ li a {
 
 @media (max-width: 1250px) {
   .nav-container {
-    margin: 16px 140px 16px;
+    gap: 2rem;
   }
   a {
     font-size: 14px;
@@ -300,13 +302,10 @@ li a {
 }
 
 @media (max-width: 1200px) {
-  .nav-container {
-    margin: 16px 130px 16px;
-    align-items: center;
-    text-align: center;
-    gap: 10px;
-  }
   .logo-img {
+    scale: 0.8;
+  }
+  .profile {
     scale: 0.8;
   }
 }
