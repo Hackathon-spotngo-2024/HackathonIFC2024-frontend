@@ -24,14 +24,16 @@ const handleRegister = async () => {
       email: email.value,
       username: username.value,
       password: password.value,
-      re_password: confirmPassword.value
+      re_password: confirmPassword.value,
     })
-    if (authStore.userApproved) {
-      authStore.userFirstLetter = email.value.substr(0, 1)
-      console.log(authStore.userFirstLetter)
-      console.log('Usuário cadastrado com sucesso')
-      alert('Cadastro realizado com sucesso!')
-      window.location.href = '/login'
+    if (password.value != confirmPassword.value) authStore.errorMessage = 'As senhas deve coincidir'
+    else if (password.value.length < 6) authStore.errorMessage = 'A senha deve conter pelo menos 6 caracteres'
+    else {
+      if (authStore.userApproved) {
+        authStore.userFirstLetter = email.value.substr(0, 1)
+        authStore.showAlert('register')
+        setTimeout(authStore.goToHome, 1600)
+      }
     }
   } catch (error) {
     alert('Erro ao realizar o cadastro, tente novamente.')
@@ -64,30 +66,19 @@ const handleRegister = async () => {
             <div class="icon">
               <i class="fa-solid fa-lock"></i>
             </div>
-            <input
-              :type="passwordVisible.password ? 'text' : 'password'"
-              placeholder="Senha"
-              v-model="password"
-            />
+            <input :type="passwordVisible.password ? 'text' : 'password'" placeholder="Senha" v-model="password" />
             <button class="show-password-button" type="button" @click="showPassword('password')">
-              <i
-                :class="passwordVisible.password ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye'"
-              ></i>
+              <i :class="passwordVisible.password ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye'"></i>
             </button>
           </div>
           <div class="confirm-password-input">
             <div class="icon">
               <i class="fa-solid fa-lock"></i>
             </div>
-            <input
-              :type="passwordVisible.confirm ? 'text' : 'password'"
-              placeholder="Confirmar senha"
-              v-model="confirmPassword"
-            />
+            <input :type="passwordVisible.confirm ? 'text' : 'password'" placeholder="Confirmar senha"
+              v-model="confirmPassword" />
             <button class="show-password-button" type="button" @click="showPassword('confirm')">
-              <i
-                :class="passwordVisible.confirm ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye'"
-              ></i>
+              <i :class="passwordVisible.confirm ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye'"></i>
             </button>
           </div>
           <button class="login-button" type="submit">Cadastrar</button>
@@ -134,7 +125,7 @@ const handleRegister = async () => {
   flex-direction: row;
   width: 1100px;
   height: 700px;
-  box-shadow: 20px 26px 100px 75px rgba(99, 147, 119, 0.25);
+  box-shadow: 20px 70px 100px 55px rgba(99, 147, 119, 0.2);
   border-radius: 25px;
 }
 
@@ -199,7 +190,8 @@ i {
 }
 
 input:-webkit-autofill {
-  box-shadow: 0 0 0px 1000px #f0f3f5 inset !important; /* Remove a borda amarela */
+  box-shadow: 0 0 0px 1000px #f0f3f5 inset !important;
+  /* Remove a borda amarela */
 }
 
 .show-password-button {
@@ -297,10 +289,33 @@ input:-webkit-autofill {
 
 @media (max-height: 860px) {
   .container {
-    height: 90vh;
+    height: 100vh;
   }
-  .login-container, .login-section, .illustration-section img {
-    height: 650px;
+
+  .login-container,
+  .login-section,
+  .illustration-section img {
+    height: 570px;
+  }
+
+  .login-container {
+    width: 900px;
+  }
+
+  .username-input,
+  .email-input,
+  .password-input,
+  .confirm-password-input {
+    scale: 0.85;
+  }
+
+  form {
+    gap: 0.2rem;
+    margin: 0.4rem 0 0.4rem 0;
+  }
+
+  .login-button {
+    margin-top: 0.5rem;
   }
 }
 </style>

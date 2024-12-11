@@ -8,19 +8,16 @@ const authStore = useAuthStore()
 const passwordVisible = ref(false)
 const email = ref('')
 const password = ref('')
-const goToHome = () => {
-  window.location.href = '/'
-}
 
 const handleLogin = async () => {
   try {
     await authStore.login({ email: email.value, password: password.value })
     if (authStore.errorMessage) return
-    authStore.showAlert()
+    authStore.showAlert('login')
     if (authStore.accessToken) {
       authStore.userFirstLetter = authStore.getFirstLetter(email.value)
       console.log(authStore.userFirstLetter, email.value)
-      setTimeout(goToHome, 1600)
+      setTimeout(authStore.goToHome, 1600)
     }
   } catch (error) {
     console.log(error, authStore.errorMessage)
@@ -105,7 +102,7 @@ const showPassword = () => {
   flex-direction: row;
   width: 1100px;
   height: 700px;
-  box-shadow: 20px 26px 100px 75px rgba(99, 147, 119, 0.25);
+  box-shadow: 20px 26px 100px 55px rgba(99, 147, 119, 0.2);
   border-radius: 25px;
 }
 
@@ -286,15 +283,15 @@ input:-webkit-autofill {
 
 @media (max-height: 860px) {
   .container {
-    height: 90vh;
+    height: 100vh;
   }
   .login-container,
   .login-section,
   .illustration-section img {
-    height: 580px;
+    height: 530px;
   }
   .login-container {
-    width: 1000px;
+    width: 900px;
   }
 }
 </style>
