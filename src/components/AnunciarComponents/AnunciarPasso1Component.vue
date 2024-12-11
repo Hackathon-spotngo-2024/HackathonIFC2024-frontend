@@ -48,6 +48,9 @@ onMounted(() => {
         </div>
       </div>
     </div>
+    <div class="house-image">
+      <img src="../../assets/house-image.svg" alt="">
+    </div>
     <div class="submit-botao-container">
       <button class="continue-botao" @click="etapaStore.proximaEtapa">Continue</button>
     </div>
@@ -100,6 +103,17 @@ onMounted(() => {
   margin: 120px 0 0 0;
 }
 
+.house-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.house-image img {
+  width: 120px;
+}
+
 .continue-botao {
   cursor: pointer;
   width: 580px;
@@ -124,17 +138,62 @@ onMounted(() => {
   .submit-botao-container {
     margin-top: 200px;
   }
+  .submit-botao-container button {
+    width: 500px;
+  }
 }
 
-@media (max-width: 645px) {
+@media (max-width: 675px) {
   h2 {
-    font-size: 20px;
+    font-size: 24px;
   }
-  p {
-    font-size: 14px;
+  .instrucao {
+    width: fit-content;
+  }
+  .instrucoes {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    margin-bottom: 0;
+  }
+  .submit-botao-container {
+    margin-top: 100px;
   }
   .titulo-instrucao {
     margin-bottom: 10px;
+  }
+  .submit-botao-container button {
+    width: 300px;
+  }
+}
+
+@media (max-width: 450px) {
+  .titulo-etapa-1 {
+    font-size: 24px;
+  }
+  .descricao-instrucao-container {
+    display: none;
+  }
+  .instrucoes {
+    gap: 2rem;
+  }
+  .instrucao {
+    height: fit-content;
+  }
+  .instrucao h2 {
+    font-size: 20px;
+  }
+  .submit-botao-container {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 370px) {
+  .instrucoes {
+    gap: 2rem;
+  }
+  .submit-botao-container button {
+    width: 270px;
   }
 }
 </style>
