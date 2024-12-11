@@ -34,3 +34,10 @@
 h1 {
     font-size: 2rem;
 }
+
+.limited-scope {
+  all: initial; /* Remove estilos herdados */
+  * {
+    all: unset; /* Remove estilos padrões */
+  }
+}
