@@ -7,17 +7,17 @@ const fileInput = ref(null)
 const numImagens = 5
 
 const onFileChange = (event) => {
-  const files = event.target.files
-  const selectedFiles = Array.from(files)
+  const files = event.target.files //files contem todas as imagens; é um obj filelist
+  const selectedFiles = Array.from(files) //transforma o obj em array
 
-  if (selectedFiles.length != numImagens) {
+  if (selectedFiles.length != numImagens) { //verifica
     alert('Você deve adicionar 5 imagens ao seu anúncio.')
     return
   } else {
     for (let i = 0; i < files.length; i++) {
       const file = files[i]
-      const imageUrl = URL.createObjectURL(file)
-      enderecoStore.dadosEndereco.imgs.push(imageUrl)
+      const imageUrl = URL.createObjectURL(file) //para cada imagem, url.createobjecturl cria uma url temporaria
+      enderecoStore.dadosEndereco.imgs.push(imageUrl) //pusha pra array de imagens mostrada no anuncio
     }
   }
 }
@@ -73,7 +73,7 @@ input {
   align-items: center;
   flex-direction: row;
   gap: 0.5rem;
-  border: 3px dashed var(--cor-principal);
+  border: 3px solid var(--cor-principal);
   border-radius: 15px;
   padding: 10px;
 }
@@ -91,5 +91,12 @@ input {
 .imagem img {
   width: 100px;
   height: 100px;
+}
+
+@media (max-width: 580px) {
+  .container-imagens {
+    display: grid;
+    grid: 150px / auto auto auto;
+  }
 }
 </style>

@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-import { useEtapa } from '../../stores/dadosEtapa';
-import { useEndereco } from '../../stores/dadosEndereco';
+import { useEtapa } from '../../stores/dadosEtapa'
+import { useEndereco } from '../../stores/dadosEndereco'
 
 const etapaStore = useEtapa()
 const enderecoStore = useEndereco()
@@ -47,6 +47,9 @@ onMounted(() => {
           <p>Defina o preço e publique seu anúncio. Fácil, não é?</p>
         </div>
       </div>
+    </div>
+    <div class="house-image">
+      <img src="../../assets/house-image.svg" alt="" />
     </div>
     <div class="submit-botao-container">
       <button class="continue-botao" @click="etapaStore.proximaEtapa">Continue</button>
@@ -100,12 +103,23 @@ onMounted(() => {
   margin: 120px 0 0 0;
 }
 
+.house-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.house-image img {
+  width: 120px;
+}
+
 .continue-botao {
   cursor: pointer;
   width: 580px;
   height: 80px;
   border-radius: 40px;
-  background-color: var(--cor-principal);
+  background: var(--cor-botao-login);
   border: none;
   color: white;
   font-size: 2rem;
@@ -114,7 +128,7 @@ onMounted(() => {
 }
 
 .continue-botao:hover {
-  background-color: var(--cor-principal-hover);
+  filter: brightness(0.85);
   transform: scale(1.01);
 }
 @media (max-width: 800px) {
@@ -124,17 +138,71 @@ onMounted(() => {
   .submit-botao-container {
     margin-top: 200px;
   }
+  .submit-botao-container button {
+    width: 500px;
+  }
+  .submit-botao-container {
+    margin-top: 50px;
+  }
+  .house-image {
+    height: 250px;
+  }
 }
 
-@media (max-width: 645px) {
+@media (max-width: 675px) {
   h2 {
-    font-size: 20px;
+    font-size: 24px;
   }
-  p {
-    font-size: 14px;
+  .instrucao {
+    width: fit-content;
+  }
+  .instrucoes {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    margin-bottom: 0;
+  }
+  .submit-botao-container {
+    margin-top: 20px;
   }
   .titulo-instrucao {
     margin-bottom: 10px;
+  }
+  .submit-botao-container button {
+    width: 300px;
+  }
+}
+
+@media (max-width: 450px) {
+  .house-image {
+    height: 130px;
+  }
+  .titulo-etapa-1 {
+    font-size: 24px;
+  }
+  .descricao-instrucao-container {
+    display: none;
+  }
+  .instrucoes {
+    gap: 2rem;
+  }
+  .instrucao {
+    height: fit-content;
+  }
+  .instrucao h2 {
+    font-size: 20px;
+  }
+  .submit-botao-container {
+    margin-top: 60px;
+  }
+}
+
+@media (max-width: 370px) {
+  .instrucoes {
+    gap: 2rem;
+  }
+  .submit-botao-container button {
+    width: 220px;
   }
 }
 </style>

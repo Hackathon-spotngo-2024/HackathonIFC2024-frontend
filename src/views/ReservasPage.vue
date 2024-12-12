@@ -64,4 +64,39 @@ onMounted(() => {
   margin-top: 7rem;
   width: 400px;
 }
+
+@media (max-width: 670px) {
+  .sem-reservas-container {
+    height: 60dvh;
+  }
+  .mensagem-sem-reservas {
+    font-size: 24px;
+  }
+  .illustration {
+    width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .reservas-component {
+    height: fit-content;
+  }
+  .sem-reservas-container {
+    height: 70dvh;
+  }
+  .container-reservas {
+    height: fit-content;
+  }
+  .mensagem-sem-reservas, p {
+    margin-top: 3rem;
+    width: 300px;
+    text-align: center;
+  }
+  p {
+    margin-top: 1rem;
+  }
+  .illustration {
+    width: 220px;
+  }
+}
 </style>

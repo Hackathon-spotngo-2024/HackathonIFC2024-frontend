@@ -372,13 +372,34 @@ input[type='number']::-webkit-inner-spin-button {
 
 @media (max-width: 580px) {
   .search-and-map-container, .form-endereco, .pais-wrapper, .endereco-info {
-    width: 360px;
+    width: 330px;
   }
-  #pais-input {
-    width: 370px !important;
+  .titulo-etapa-2 {
+    font-size: 28px;
+  }
+  .search-and-map-container {
+    width: 300px;
   }
   .search-endereco {
-    width: 340px;
+    width: 280px;
+  }
+  .autocomplete-list {
+    width: 296px;
+  }
+  #map {
+    height: 300px;
+  }
+  .info-wrapper, .pais-wrapper {
+    width: 332px;
+  }
+  .info-wrapper input, .pais-wrapper input {
+    width: 320px;
+  }
+  .titulo-principal-container {
+    margin-top: 50px;
+  }
+  .etapa-2-container {
+    padding: 0;
   }
 }
 </style>

@@ -52,9 +52,6 @@ onMounted(() => {
           <UploadImagemComponent />
         </div>
         <div class="botoes-wrapper">
-          <button class="voltar-btn" @click="etapaStore.etapaAnterior">
-            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-          </button>
           <button
             class="avancar-btn"
             @click="
@@ -63,6 +60,9 @@ onMounted(() => {
             "
           >
             Publicar
+          </button>
+          <button class="voltar-btn" @click="etapaStore.etapaAnterior">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
           </button>
         </div>
       </div>
@@ -221,7 +221,7 @@ p {
   cursor: pointer;
   width: 350px;
   height: 70px;
-  background-color: var(--cor-principal);
+  background: var(--cor-botao-login);
   border-radius: 40px;
   border: 0;
   color: white;
@@ -231,7 +231,7 @@ p {
 }
 
 .avancar-btn:hover {
-  background-color: var(--cor-principal-hover);
+  filter: brightness(0.85);
 }
 
 .campo-vazio-container {
@@ -273,8 +273,17 @@ p {
     font-size: 24px;
   }
   .botoes-wrapper {
+    flex-direction: column;
     gap: 10px;
     width: fit-content;
+  }
+  .etapa-4-container {
+    display: flex;
+    justify-content: start;
+    height: 1100px;
+  }
+  .mensagem {
+    margin-top: 50px;
   }
 }
 </style>
