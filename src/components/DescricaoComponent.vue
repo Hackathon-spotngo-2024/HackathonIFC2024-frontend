@@ -51,4 +51,26 @@ const props = defineProps({
   margin: 1.5rem 0rem 1.5rem 0;
   background-color: var(--cor-linha-divisoria);
 }
+
+@media (max-width: 1100px) {
+  .reserva-e-descricao {
+    width: 800px;
+  }
+  .linha-container {
+    width: 350px;
+  }
+}
+@media (max-width: 760px) {
+  .linha-container {
+    width: 250px;
+  }
+  .descricao {
+    width: fit-content;
+  }
+}
+@media (max-width: 600px) {
+  .linha-container {
+    width: 80dvw;
+  }
+}
 </style>

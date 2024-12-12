@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { ref } from 'vue'
 import { useAuthStore } from '@/stores/authStore'
 import AnunciarPage from '../views/AnunciarPage.vue'
 import HomePage from '../views/HomePage.vue'
@@ -20,7 +19,8 @@ const router = createRouter({
     {
       path: '/',
       name: 'HomePage',
-      component: HomePage
+      component: HomePage,
+      meta: { requiresAuth: true }
     },
     {
       path: '/anunciar',
@@ -32,6 +32,7 @@ const router = createRouter({
       path: "/anuncio/:id",
       name: "AnuncioPage",
       component: AnuncioPage,
+      meta: { requiresAuth: true }
     },
     {
       path: '/minhas-reservas',
@@ -58,17 +59,20 @@ const router = createRouter({
       path: "/anuncio-ficticio/:id",
       name: "AnuncioFicticio",
       component: AnuncioFicticioPage,
+      meta: { requiresAuth: true }
     },
 
     {
       path: '/anuncio-publicado',
       name: 'AnuncioPublicado',
-      component: AnuncioPublicadoPage
+      component: AnuncioPublicadoPage,
+      meta: { requiresAuth: true }
     },
     {
       path: '/anuncio-reservado',
       name: 'AnuncioReservado',
-      component: AnuncioReservadoPage
+      component: AnuncioReservadoPage,
+      meta: { requiresAuth: true }
     },
     {
       path: '/login',
@@ -89,7 +93,6 @@ router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
   const accessToken = localStorage.getItem('accessToken')
   if (accessToken) authStore.isAuthenticated = true
-  console.log('rota:', to.path, 'isAuthenticated:', authStore.isAuthenticated);
 
   if (to.meta.requiresAuth && authStore.isAuthenticated == false) {
     return next({ path: '/login' });

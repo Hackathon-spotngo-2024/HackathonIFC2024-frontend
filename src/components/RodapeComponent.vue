@@ -20,7 +20,7 @@
     <div class="linha">
       <hr />
     </div>
-    <div>
+    <div class="copy">
       <p class="copyright">&copy; 2024 Spot'n Go.</p>
     </div>
   </div>
@@ -75,5 +75,32 @@ a:hover {
 .link {
   text-decoration: none;
   color: black;
+}
+
+@media (max-width: 1100px) {
+  .info {
+    margin: 2rem auto;
+  }
+  .links, .copy {
+    text-align: center;
+  }
+  .linha {
+    margin: 4rem 2rem 0 2rem;
+  }
+  .copyright {
+    margin: 1.5rem 0 1.5rem 0;
+  }
+}
+
+@media (max-width: 500px) {
+  .info {
+    font-size: 14px;
+  }
+  .rodape {
+    height: 300px;
+  }
+  .linha {
+    margin: 1rem 2rem 0 2rem;
+  }
 }
 </style>

@@ -68,7 +68,7 @@ const etapaStore = useEtapa()
   cursor: pointer;
   width: 350px;
   height: 70px;
-  background-color: var(--cor-principal);
+  background: var(--cor-botao-login);
   border-radius: 40px;
   border: 0;
   color: white;
@@ -78,7 +78,7 @@ const etapaStore = useEtapa()
 }
 
 .avancar-btn:hover {
-  background-color: var(--cor-principal-hover);
+  filter: brightness(0.85);
 }
 
 @media (max-width: 580px) {

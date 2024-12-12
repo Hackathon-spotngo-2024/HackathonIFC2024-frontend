@@ -18,14 +18,18 @@ export const useAuthStore = defineStore('auth', () => {
     window.localStorage.setItem('UserFirstLetter', userFirstLetter.value)
   }
 
-  function showAlert() {
+  function showAlert(operation) {
     Swal.fire({
-      title: 'Login efetuado.',
+      title: operation == 'login' ? 'Login efetuado.' : 'Cadastro realizado.',
       text: "Agora você pode desfrutar do Spot 'n go!",
       icon: 'success',
       timer: 1500,
       showConfirmButton: false,
     });
+  }
+
+  const goToHome = () => {
+    window.location.href = '/'
   }
 
   const login = async (credentials) => {
@@ -119,6 +123,7 @@ export const useAuthStore = defineStore('auth', () => {
     showAlert,
     isAuthenticated,
     getFirstLetter,
-    userFirstLetter
+    userFirstLetter,
+    goToHome,
   }
 })

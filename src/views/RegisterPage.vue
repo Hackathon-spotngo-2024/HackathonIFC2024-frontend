@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 import { useAuthStore } from '@/stores/authStore'
+import AnimatedBallComponent from '@/components/AnimatedBallComponent.vue'
+import BallReversedComponent from '@/components/BallReversedComponent.vue'
+import router from '@/router'
 
 const authStore = useAuthStore()
 const username = ref('')
@@ -11,6 +14,9 @@ const passwordVisible = ref({
   password: false,
   confirmPassword: false
 })
+const goToLogin = () => {
+  router.push('/login')
+}
 
 const showPassword = (type) => {
   passwordVisible.value[type] = !passwordVisible.value[type]
@@ -24,12 +30,15 @@ const handleRegister = async () => {
       password: password.value,
       re_password: confirmPassword.value
     })
-    if (authStore.userApproved) {
-      authStore.userFirstLetter = email.value.substr(0, 1)
-      console.log(authStore.userFirstLetter)
-      console.log('Usuário cadastrado com sucesso')
-      alert('Cadastro realizado com sucesso!')
-      window.location.href = '/login'
+    if (password.value != confirmPassword.value) authStore.errorMessage = 'As senhas deve coincidir'
+    else if (password.value.length < 6)
+      authStore.errorMessage = 'A senha deve conter pelo menos 6 caracteres'
+    else {
+      if (authStore.userApproved) {
+        authStore.userFirstLetter = email.value.substr(0, 1)
+        authStore.showAlert('register')
+        setTimeout(goToLogin, 1600)
+      }
     }
   } catch (error) {
     alert('Erro ao realizar o cadastro, tente novamente.')
@@ -38,10 +47,13 @@ const handleRegister = async () => {
 </script>
 <template>
   <div class="container">
+    <div class="animated-ball">
+      <AnimatedBallComponent />
+    </div>
     <div class="login-container">
       <section class="login-section">
         <h1>REGISTRE-SE</h1>
-        <p>Bem-vindo ao Spot 'n go.</p>
+        <p>Bem-vindo ao <span class="spotngo">Spot 'n go.</span></p>
         <form @submit.prevent="handleRegister" class="login-form">
           <div class="username-input">
             <div class="icon">
@@ -101,6 +113,9 @@ const handleRegister = async () => {
         <img class="green-pattern" src="../assets/image-login.png" alt="" />
       </section>
     </div>
+    <div class="animated-ball-reverse">
+      <BallReversedComponent />
+    </div>
   </div>
 </template>
 
@@ -113,12 +128,20 @@ const handleRegister = async () => {
   height: 85vh;
 }
 
+.animated-ball {
+  margin-right: 1.5rem;
+}
+
+.animated-ball-reverse {
+  margin-left: 1.5rem;
+}
+
 .login-container {
   display: flex;
   flex-direction: row;
   width: 1100px;
   height: 700px;
-  box-shadow: 20px 26px 100px 75px rgba(99, 147, 119, 0.25);
+  box-shadow: 20px 70px 100px 55px rgba(99, 147, 119, 0.2);
   border-radius: 25px;
 }
 
@@ -130,6 +153,11 @@ const handleRegister = async () => {
   justify-content: center;
   gap: 1rem;
   align-items: center;
+}
+
+.spotngo {
+  font-weight: 600;
+  color: #313131;
 }
 
 .login-section p {
@@ -183,7 +211,8 @@ i {
 }
 
 input:-webkit-autofill {
-  box-shadow: 0 0 0px 1000px #f0f3f5 inset !important; /* Remove a borda amarela */
+  box-shadow: 0 0 0px 1000px #f0f3f5 inset !important;
+  /* Remove a borda amarela */
 }
 
 .show-password-button {
@@ -279,12 +308,124 @@ input:-webkit-autofill {
   width: 400px;
 }
 
+/* responsividade */
+
 @media (max-height: 860px) {
   .container {
-    height: 90vh;
+    height: 100vh;
   }
-  .login-container, .login-section, .illustration-section img {
-    height: 650px;
+
+  .login-container,
+  .login-section,
+  .illustration-section img {
+    height: 570px;
+  }
+
+  .login-container {
+    width: 900px;
+  }
+
+  .username-input,
+  .email-input,
+  .password-input,
+  .confirm-password-input {
+    scale: 0.85;
+  }
+
+  form {
+    gap: 0.2rem;
+    margin: 0.4rem 0 0.4rem 0;
+  }
+
+  .login-button {
+    margin-top: 0.5rem;
+  }
+}
+
+@media (max-width: 1260px) {
+  .login-container {
+    width: 700px;
+    width: fit-content;
+  }
+  .illustration-section,
+  .green-pattern {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .login-container {
+    width: 400px;
+    height: 600px;
+  }
+  .login-section h1 {
+    font-size: 30px;
+  }
+  .login-section p {
+    font-size: 1rem;
+  }
+  .login-form {
+    width: 280px;
+    margin-bottom: 8px;
+  }
+  .linha {
+    width: 220px;
+  }
+  .username-input,
+  .email-input,
+  .password-input,
+  .confirm-password-input {
+    border-radius: 18px;
+    width: 270px;
+  }
+  .username-input input,
+  .email-input input,
+  .password-input input,
+  .confirm-password-input input {
+    border-radius: 18px;
+    width: 260px;
+    font-size: 1rem;
+  }
+  .login-button {
+    margin-top: 8px;
+    width: 90px;
+    height: 50px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 486px) {
+  .container {
+    height: 100dvh;
+  }
+  .animated-ball,
+  .animated-ball-reverse {
+    display: none;
+  }
+  .login-container,
+  .login-section {
+    width: 100dvw;
+    height: 100dvh;
+  }
+  .login-form {
+    width: 100dvw;
+  }
+  .username-input,
+  .email-input,
+  .password-input,
+  .confirm-password-input {
+    width: 80dvw;
+
+  }
+  .username-input input,
+  .email-input input,
+  .password-input input,
+  .confirm-password-input input {
+    width: 90%;
+  }
+  .error-message {
+    margin-top: 1rem;
+    width: 80dvw;
   }
 }
 </style>

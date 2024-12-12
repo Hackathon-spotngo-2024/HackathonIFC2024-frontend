@@ -84,7 +84,7 @@ h1 {
 }
 
 .cartao-reserva {
-  height: 220px;
+  height: fit-content;
   display: flex;
   align-items: start;
   padding: 20px;

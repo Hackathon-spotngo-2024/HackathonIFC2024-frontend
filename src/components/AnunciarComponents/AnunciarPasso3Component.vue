@@ -243,4 +243,13 @@ input[type='number'] {
     width: 100px;
   }
 }
+
+@media (max-width: 580px) {
+  .etapa-3-infos {
+    align-items: center;
+  }
+  .titulo-principal-container {
+    margin-top: 50px;
+  }
+}
 </style>

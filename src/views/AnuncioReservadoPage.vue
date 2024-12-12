@@ -92,4 +92,20 @@ const linkToHome = ref('Voltar à página inicial')
     width: 500px;
   }
 }
+@media (max-width: 600px) {
+  .titulo-e-subtitulo {
+    width: 300px;
+    text-align: center;
+  }
+  .mensagem-spotngo {
+    display: none;
+  }
+  .imagem-publicado {
+    width: 330px;
+    height: 350px;
+  }
+  .imagem-publicado img {
+    width: 330px;
+  }
+}
 </style>

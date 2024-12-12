@@ -36,7 +36,7 @@ const linkToHome = ref('Voltar à página inicial')
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 
 .link-home {
@@ -71,7 +71,8 @@ const linkToHome = ref('Voltar à página inicial')
   h1 {
     font-size: 24px;
   }
-  .mensagem-spotngo, .link-home {
+  .mensagem-spotngo,
+  .link-home {
     font-size: 20px;
   }
   .imagem-publicado {
@@ -91,6 +92,22 @@ const linkToHome = ref('Voltar à página inicial')
   }
   .imagem-publicado img {
     width: 500px;
+  }
+}
+@media (max-width: 600px) {
+  .titulo-e-subtitulo {
+    width: 300px;
+    text-align: center;
+  }
+  .mensagem-spotngo {
+    display: none;
+  }
+  .imagem-publicado {
+    width: 330px;
+    height: 350px;
+  }
+  .imagem-publicado img {
+    width: 330px;
   }
 }
 </style>
