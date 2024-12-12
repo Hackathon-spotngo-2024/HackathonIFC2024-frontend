@@ -20,7 +20,8 @@ const router = createRouter({
     {
       path: '/',
       name: 'HomePage',
-      component: HomePage
+      component: HomePage,
+      meta: { requiresAuth: true }
     },
     {
       path: '/anunciar',

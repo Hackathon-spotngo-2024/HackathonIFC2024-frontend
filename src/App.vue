@@ -4,8 +4,10 @@ import NavbarComponent from './components/NavbarComponent.vue'
 import NavbarMobileComponent from './components/NavbarMobileComponent.vue'
 import { useNavbar } from './stores/dadosNavbar'
 import RodapeComponent from './components/RodapeComponent.vue'
+import { useAuthStore } from './stores/authStore'
 
 const navbarStore = useNavbar()
+const authStore = useAuthStore()
 
 onMounted(() => {
   navbarStore.trocarNavbar()
@@ -15,7 +17,7 @@ onMounted(() => {
 <template>
   <header>
     <component
-      :is="navbarStore.isTelaPequena ? NavbarMobileComponent : NavbarComponent"
+      :is="navbarStore.isTelaPequena && authStore.isAuthenticated ? NavbarMobileComponent : NavbarComponent"
     />
   </header>
 
@@ -24,7 +26,7 @@ onMounted(() => {
   </main>
 
   <footer>
-    <RodapeComponent />
+    <RodapeComponent v-if="authStore.isAuthenticated"/>
   </footer>
 </template>
 

@@ -11,12 +11,12 @@ export const useNavbar = defineStore('navbar', () => {
     }
 
     onMounted(() => {
-        trocarNavbar() // Verifica o tamanho da tela inicial
+        trocarNavbar() // confere o tamanho da tela inicial
         window.addEventListener('resize', trocarNavbar)
     })
 
     onUnmounted(() => {
-        window.removeEventListener('resize', trocarNavbar) // Removve quando desmonta o componente
+        window.removeEventListener('resize', trocarNavbar) // troca quando desmonta o componente
     })
 
     return {

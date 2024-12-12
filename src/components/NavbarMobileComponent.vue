@@ -1,4 +1,10 @@
-<script setup></script>
+<script setup>
+import { useAuthStore } from '@/stores/authStore';
+
+const authStore = useAuthStore()
+
+authStore.userFirstLetter = window.localStorage.getItem('UserFirstLetter')
+</script>
 
 <template>
   <div class="topo">
@@ -13,17 +19,76 @@
     <router-link to="/" class="home-link"
       ><img class="logo-img" src="../assets/home-icon.png" alt=""
     /></router-link>
-    <router-link to="/Reservas" id="Reservas-link" class="nav-link"
+    <router-link to="/minhas-reservas" id="Reservas-link" class="nav-link"
       ><img src="../assets/minhas-reservas-ison.png" alt=""
     /></router-link>
     <router-link to="/anunciar" id="anunciar-link" class="nav-link"
       ><img src="../assets/anunciar-icon.png" alt=""
     /></router-link>
-    <button class="entrar-link"><img src="../assets/usuario.png" alt="" /></button>
+
+    <div class="profile-container">
+      <div class="profile" v-if="authStore.isAuthenticated">
+        <button
+          id="dropdownDefaultButton"
+          data-dropdown-toggle="dropdown"
+          class="text-black focus:outline-none font-bold text-center items-center"
+          type="button"
+        >
+          {{ authStore.userFirstLetter.toUpperCase() }}
+          <svg
+            class="w-2.5 h-2.5 ms-1"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 10 6"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m1 1 4 4 4-4"
+            />
+          </svg>
+        </button>
+
+        <!-- Dropdown menu -->
+        <div
+          id="dropdown"
+          class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+        >
+          <ul
+            class="py-2 text-sm text-gray-700 dark:text-gray-200"
+            aria-labelledby="dropdownDefaultButton"
+          >
+            <li>
+              <a
+                href="#"
+                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                >Suas informações</a
+              >
+            </li>
+            <li>
+              <a
+                @click="authStore.logout"
+                href="#"
+                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                >Sair</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped>
+@import 'flowbite';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .linha-container {
   display: flex;
   justify-content: center;
@@ -89,13 +154,98 @@
   width: 40px;
   height: 40px;
 }
-.nav-container button {
-  background: 0;
-  outline: none;
-  border: none;
+
+a {
+  font-family: 'Montserrat';
+  font-weight: 500;
+  text-decoration: none;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 35px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button {
+  font-family: 'Montserrat';
+  font-weight: 500;
+  text-decoration: none;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 35px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: 0;
+}
+
+.entrar-link {
+  color: white;
+  background-color: var(--cor-principal);
+  width: 4rem;
+  height: 3rem;
+  transition: 100ms ease;
+}
+
+.entrar-link-route {
+  width: 100%;
+  height: 100%;
+  color: white;
+}
+
+.entrar-link:hover {
+  background-color: var(--cor-principal-hover);
+}
+
+.logo-img {
+  margin-left: 10px;
+  width: 170px;
+  height: 35px;
+}
+
+.profile-container {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+}
+
+.profile {
+  width: 40px;
+  height: 40px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  border: 1px solid var(--preto-alternativo);
+}
+
+#dropdownDefaultButton {
+  transition: 220ms ease-in-out !important;
+  background-color: #f0f0f0;
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+}
+
+#dropdownDefaultButton:hover {
+  background-color: #d8d8d8;
+}
+
+@media (max-width: 500px) {
+  .search-bar,
+  .imgTopo {
+    scale: 0.8;
+  }
 }
 
 @media (max-width: 380px) {
+  .nav-container {
+    width: 100dvw;
+  }
   .nav-container button,
   .nav-container img {
     width: 30px;
@@ -106,12 +256,6 @@
   }
 }
 
-@media (max-width: 500px) {
-  .search-bar,
-  .imgTopo {
-    scale: 0.8;
-  }
-}
 
 @media (max-width: 370px) {
   .search-bar,

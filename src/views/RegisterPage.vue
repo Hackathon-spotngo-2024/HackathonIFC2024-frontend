@@ -303,6 +303,8 @@ input:-webkit-autofill {
   width: 400px;
 }
 
+/* responsividade */
+
 @media (max-height: 860px) {
   .container {
     height: 100vh;
@@ -348,14 +350,14 @@ input:-webkit-autofill {
 
 @media (max-width: 760px) {
   .login-container {
-    width: 350px;
+    width: 400px;
     height: 600px;
   }
   .login-section h1 {
-    font-size: 24px;
+    font-size: 30px;
   }
   .login-section p {
-    font-size: 16px;
+    font-size: 1rem;
   }
   .login-form {
     width: 280px;
@@ -369,20 +371,15 @@ input:-webkit-autofill {
   .password-input,
   .confirm-password-input {
     border-radius: 18px;
-    padding: 12px;
-    width: 200px;
+    width: 270px;
   }
   .username-input input,
   .email-input input,
   .password-input input,
   .confirm-password-input input {
     border-radius: 18px;
-    width: 130px;
-    height: 40px;
-    font-size: 14px;
-  }
-  .icon i {
-    font-size: 14px;
+    width: 260px;
+    font-size: 1rem;
   }
   .login-button {
     margin-top: 8px;
@@ -392,52 +389,38 @@ input:-webkit-autofill {
   }
 }
 
-@media (max-width: 470px) {
+@media (max-width: 486px) {
+  .container {
+    height: 100dvh;
+  }
   .animated-ball,
   .animated-ball-reverse {
-    height: 10px;
+    display: none;
   }
   .login-container,
   .login-section {
-    width: 240px;
-    height: 470px;
-  }
-  .login-section h1 {
-    font-size: 20px;
-  }
-  .login-section p {
-    font-size: 14px;
+    width: 100dvw;
+    height: 100dvh;
   }
   .login-form {
-    width: 200px;
+    width: 100dvw;
   }
   .username-input,
   .email-input,
   .password-input,
   .confirm-password-input {
-    padding: 8px;
-    width: 180px;
-    height: 25px;
+    width: 80dvw;
+
   }
   .username-input input,
   .email-input input,
   .password-input input,
   .confirm-password-input input {
-    width: 110px;
-    height: 40px;
-    font-size: 12px;
+    width: 90%;
   }
-  .icon i {
-    font-size: 12px;
-  }
-  .login-button {
-    margin-top: 8px;
-    width: 65px;
-    height: 35px;
-    font-size: 12px;
-  }
-  .cadastro-mensagem, .cadastrar-link {
-    font-size: 14px;
+  .error-message {
+    margin-top: 1rem;
+    width: 80dvw;
   }
 }
 </style>

@@ -1,7 +1,9 @@
 <script setup>
 import { useAuthStore } from '@/stores/authStore'
+import { useNavbar } from '@/stores/dadosNavbar';
 
 const authStore = useAuthStore()
+const navbarStore = useNavbar()
 
 const scrollTo = (id) => {
   const element = document.getElementById(id)
@@ -14,23 +16,21 @@ authStore.userFirstLetter = window.localStorage.getItem('UserFirstLetter')
 </script>
 
 <template>
-  <div class="nav-container">
-    <router-link to="/" class="home-link"
+  <div class="nav-container" v-if="!navbarStore.isTelaPequena">
+    <router-link to="/" class="home-link" 
       ><img class="logo-img" src="../assets/logo.png" alt=""
     /></router-link>
-    <a href="#card-section-title" @click.prevent="scrollTo('card-section-title')" class="nav-link"
+    <a v-if="authStore.isAuthenticated" href="#card-section-title" @click.prevent="scrollTo('card-section-title')" class="nav-link"
       >Alugar</a
     >
-    <router-link to="/minhas-reservas" id="Reservas-link" class="nav-link"
+    <router-link to="/minhas-reservas" id="Reservas-link" class="nav-link" v-if="authStore.isAuthenticated"
       >Minhas reservas</router-link
     >
-    <div class="search-bar">
+    <div class="search-bar" v-if="authStore.isAuthenticated">
       <i class="fa fa-search"></i>
       <input type="text" placeholder="Procure seu spot" class="search-input" />
     </div>
-    <router-link to="/anunciar" id="anunciar-link" class="nav-link">Anunciar</router-link>
-    <div class="profile-container">
-    <div class="divisoria" v-if="authStore.isAuthenticated"></div>
+    <router-link v-if="authStore.isAuthenticated" to="/anunciar" id="anunciar-link" class="nav-link">Anunciar</router-link>
       <div class="profile" v-if="authStore.isAuthenticated">
         <button
           id="dropdownDefaultButton"
@@ -83,13 +83,8 @@ authStore.userFirstLetter = window.localStorage.getItem('UserFirstLetter')
           </ul>
         </div>
       </div>
-
-      <button class="entrar-link" v-if="!authStore.isAuthenticated">
-        <router-link class="entrar-link-route" to="/login">Entrar</router-link>
-      </button>
     </div>
-  </div>
-  <div class="linha-container">
+  <div class="linha-container" v-if="authStore.isAuthenticated">
     <div class="linha-divisoria"></div>
   </div>
 </template>
@@ -99,11 +94,6 @@ authStore.userFirstLetter = window.localStorage.getItem('UserFirstLetter')
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-.imgUsuario {
-  height: 40px;
-  width: 40px;
-}
 
 .nav-container {
   display: flex;
@@ -184,7 +174,7 @@ button {
 }
 
 .logo-img {
-  margin-left: 10px;
+  margin: 0 10px 0 10px;
   width: 170px;
   height: 35px;
 }
