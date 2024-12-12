@@ -30,7 +30,7 @@ const handleRegister = async () => {
       password: password.value,
       re_password: confirmPassword.value
     })
-    if (password.value != confirmPassword.value) authStore.errorMessage = 'As senhas deve coincidir'
+    if (password.value != confirmPassword.value) authStore.errorMessage = 'As senhas devem coincidir'
     else if (password.value.length < 6)
       authStore.errorMessage = 'A senha deve conter pelo menos 6 caracteres'
     else {
