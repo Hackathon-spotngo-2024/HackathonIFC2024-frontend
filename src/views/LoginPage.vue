@@ -3,7 +3,9 @@ import { ref } from 'vue'
 import { useAuthStore } from '@/stores/authStore'
 import AnimatedBallComponent from '@/components/AnimatedBallComponent.vue'
 import BallReversedComponent from '@/components/BallReversedComponent.vue'
+import { useNavbar } from '@/stores/dadosNavbar'
 
+const navbarStore = useNavbar()
 const authStore = useAuthStore()
 const passwordVisible = ref(false)
 const email = ref('')
@@ -37,7 +39,7 @@ const showPassword = () => {
     <div class="login-container">
       <section class="login-section">
         <h1>LOGIN</h1>
-        <p>Bem-vindo ao Spot 'n go.</p>
+        <p>Bem-vindo ao <strong>Spot 'n go.</strong></p>
         <form @submit.prevent="handleLogin" class="login-form">
           <div class="username-input">
             <div class="icon">
@@ -104,6 +106,10 @@ const showPassword = () => {
   height: 700px;
   box-shadow: 20px 26px 100px 55px rgba(99, 147, 119, 0.2);
   border-radius: 25px;
+}
+
+.logo-img {
+  scale: 0.5;
 }
 
 .login-section {

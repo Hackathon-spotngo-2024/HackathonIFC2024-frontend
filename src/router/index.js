@@ -33,6 +33,7 @@ const router = createRouter({
       path: "/anuncio/:id",
       name: "AnuncioPage",
       component: AnuncioPage,
+      meta: { requiresAuth: true }
     },
     {
       path: '/minhas-reservas',
@@ -59,17 +60,20 @@ const router = createRouter({
       path: "/anuncio-ficticio/:id",
       name: "AnuncioFicticio",
       component: AnuncioFicticioPage,
+      meta: { requiresAuth: true }
     },
 
     {
       path: '/anuncio-publicado',
       name: 'AnuncioPublicado',
-      component: AnuncioPublicadoPage
+      component: AnuncioPublicadoPage,
+      meta: { requiresAuth: true }
     },
     {
       path: '/anuncio-reservado',
       name: 'AnuncioReservado',
-      component: AnuncioReservadoPage
+      component: AnuncioReservadoPage,
+      meta: { requiresAuth: true }
     },
     {
       path: '/login',

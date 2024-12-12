@@ -53,7 +53,7 @@ const handleRegister = async () => {
     <div class="login-container">
       <section class="login-section">
         <h1>REGISTRE-SE</h1>
-        <p>Bem-vindo ao Spot 'n go.</p>
+        <p>Bem-vindo ao <span class="spotngo">Spot 'n go.</span></p>
         <form @submit.prevent="handleRegister" class="login-form">
           <div class="username-input">
             <div class="icon">
@@ -153,6 +153,11 @@ const handleRegister = async () => {
   justify-content: center;
   gap: 1rem;
   align-items: center;
+}
+
+.spotngo {
+  font-weight: 600;
+  color: #313131;
 }
 
 .login-section p {
