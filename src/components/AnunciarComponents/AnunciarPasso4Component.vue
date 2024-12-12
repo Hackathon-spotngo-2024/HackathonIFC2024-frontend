@@ -221,7 +221,7 @@ p {
   cursor: pointer;
   width: 350px;
   height: 70px;
-  background-color: var(--cor-principal);
+  background: var(--cor-botao-login);
   border-radius: 40px;
   border: 0;
   color: white;
@@ -231,7 +231,7 @@ p {
 }
 
 .avancar-btn:hover {
-  background-color: var(--cor-principal-hover);
+  filter: brightness(0.85);
 }
 
 .campo-vazio-container {

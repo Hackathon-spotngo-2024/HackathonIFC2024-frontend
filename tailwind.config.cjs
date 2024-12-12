@@ -5,7 +5,7 @@ export default {
     preflight: false, // Remove estilos globais padrão
   },
   mode: "jit",
-  content: ['./components/NavbarComponent.vue', "./src/**/*.{html,vue,js,ts}",],
+  content: ["./node_modules/flowbite/**/*.js", './components/NavbarComponent.vue', './components/ImagensComponent.vue', './views/AnuncioPage.vue', "./src/**/*.{html,vue,js,ts}",],
   theme: {
     extend: {}
   },

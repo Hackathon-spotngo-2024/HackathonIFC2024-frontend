@@ -94,7 +94,6 @@ router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
   const accessToken = localStorage.getItem('accessToken')
   if (accessToken) authStore.isAuthenticated = true
-  console.log('rota:', to.path, 'isAuthenticated:', authStore.isAuthenticated);
 
   if (to.meta.requiresAuth && authStore.isAuthenticated == false) {
     return next({ path: '/login' });

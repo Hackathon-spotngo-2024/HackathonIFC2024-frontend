@@ -15,7 +15,6 @@
     "@vueuse/components": "^11.1.0",
     "@vueuse/core": "^11.1.0",
     "axios": "^1.7.9",
-    "bootstrap-vue": "^1.5.1",
     "css-loader": "^7.1.2",
     "flowbite": "^2.5.2",
     "leaflet": "^1.9.4",

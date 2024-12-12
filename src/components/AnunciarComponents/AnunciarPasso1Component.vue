@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-import { useEtapa } from '../../stores/dadosEtapa';
-import { useEndereco } from '../../stores/dadosEndereco';
+import { useEtapa } from '../../stores/dadosEtapa'
+import { useEndereco } from '../../stores/dadosEndereco'
 
 const etapaStore = useEtapa()
 const enderecoStore = useEndereco()
@@ -49,7 +49,7 @@ onMounted(() => {
       </div>
     </div>
     <div class="house-image">
-      <img src="../../assets/house-image.svg" alt="">
+      <img src="../../assets/house-image.svg" alt="" />
     </div>
     <div class="submit-botao-container">
       <button class="continue-botao" @click="etapaStore.proximaEtapa">Continue</button>
@@ -119,7 +119,7 @@ onMounted(() => {
   width: 580px;
   height: 80px;
   border-radius: 40px;
-  background-color: var(--cor-principal);
+  background: var(--cor-botao-login);
   border: none;
   color: white;
   font-size: 2rem;
@@ -128,7 +128,7 @@ onMounted(() => {
 }
 
 .continue-botao:hover {
-  background-color: var(--cor-principal-hover);
+  filter: brightness(0.85);
   transform: scale(1.01);
 }
 @media (max-width: 800px) {
@@ -140,6 +140,12 @@ onMounted(() => {
   }
   .submit-botao-container button {
     width: 500px;
+  }
+  .submit-botao-container {
+    margin-top: 50px;
+  }
+  .house-image {
+    height: 250px;
   }
 }
 
@@ -157,7 +163,7 @@ onMounted(() => {
     margin-bottom: 0;
   }
   .submit-botao-container {
-    margin-top: 100px;
+    margin-top: 20px;
   }
   .titulo-instrucao {
     margin-bottom: 10px;

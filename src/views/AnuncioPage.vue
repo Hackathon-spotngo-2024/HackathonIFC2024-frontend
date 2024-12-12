@@ -4,6 +4,13 @@ import ImagensComponent from '@/components/ImagensComponent.vue'
 import ReservaComponent from '@/components/ReservaComponent.vue'
 import { useEndereco } from '../stores/dadosEndereco'
 import { useRoute } from 'vue-router'
+import 'flowbite'
+import { onMounted } from 'vue'
+import { initFlowbite } from 'flowbite'
+
+onMounted(() => {
+  initFlowbite()
+})
 
 const route = useRoute()
 const enderecoStore = useEndereco()
@@ -16,7 +23,9 @@ const anuncioSelecionado = enderecoStore.anunciosCriados.find(
 <template>
   <div class="pagina">
     <section class="container-geral">
-      <h1 class="titulo">{{ anuncioSelecionado?.titulo }}</h1>
+      <div class="titulo">
+        <h1>{{ anuncioSelecionado?.titulo }}</h1>
+      </div>
       <div class="container-reserva">
         <div class="imagens-component">
           <ImagensComponent :anuncio="anuncioSelecionado" />
@@ -46,6 +55,11 @@ const anuncioSelecionado = enderecoStore.anunciosCriados.find(
 </template>
 
 <style scoped>
+@import 'flowbite';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .pagina {
   width: 100%;
   display: flex;
@@ -69,6 +83,7 @@ const anuncioSelecionado = enderecoStore.anunciosCriados.find(
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .imagens-component {
@@ -80,6 +95,7 @@ const anuncioSelecionado = enderecoStore.anunciosCriados.find(
 .reserva-e-descricao {
   display: flex;
   flex-direction: row;
+  width: 1000px;
   justify-content: space-between;
 }
 
@@ -90,6 +106,7 @@ const anuncioSelecionado = enderecoStore.anunciosCriados.find(
 
 .reserva-component {
   margin-left: 25px;
+  width: fit-content;
 }
 
 .titulo-lugar {
@@ -106,5 +123,35 @@ const anuncioSelecionado = enderecoStore.anunciosCriados.find(
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+@media (max-width: 1100px) {
+  .reserva-e-descricao {
+    width: 850px;
+    margin-top: 3rem;
+  }
+  .reserva-component {
+    width: 300px;
+    margin-left: 0;
+  }
+  .imagens-component {
+    height: 400px;
+  }
+  .titulo {
+    width: 700px;
+    margin: 1rem 0 0 100px;
+  }
+}
+@media (max-width: 990px) {
+  .titulo {
+    width: 600px;
+    margin: 1rem 0 0 150px;
+  }
+  .reserva-e-descricao {
+    width: fit-content;
+  }
+  .titulo-e-descricao {
+    width: 400px;
+  }
 }
 </style>
