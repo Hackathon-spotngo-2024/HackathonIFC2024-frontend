@@ -24,7 +24,6 @@ const anuncioFicticioStore = useAnuncioFicticio()
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
   row-gap: 3rem;
 }
 </style>

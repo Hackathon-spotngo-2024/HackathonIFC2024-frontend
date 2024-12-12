@@ -28,6 +28,7 @@ const props = defineProps({
 .card {
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin: 1rem auto;
   width: 90%;
   max-width: 400px;

@@ -69,7 +69,7 @@ authStore.userFirstLetter = window.localStorage.getItem('UserFirstLetter')
               <a
                 href="#"
                 class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                >Suas informações</a
+                ><router-link to="/minhas-reservas">Suas reservas</router-link></a
               >
             </li>
             <li>
@@ -256,6 +256,7 @@ button {
 }
 
 li a {
+  text-align: center;
   border-radius: 0;
   font-size: 14px;
   transition: 220ms ease-in-out;

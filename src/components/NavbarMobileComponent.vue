@@ -63,9 +63,8 @@ authStore.userFirstLetter = window.localStorage.getItem('UserFirstLetter')
           >
             <li>
               <a
-                href="#"
                 class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                >Suas informações</a
+                ><router-link to="/minhas-reservas">Suas reservas</router-link></a
               >
             </li>
             <li>
@@ -235,10 +234,28 @@ button {
   background-color: #d8d8d8;
 }
 
+li a {
+  text-align: center;
+  border-radius: 0;
+  transition: 220ms ease-in-out;
+}
+
 @media (max-width: 500px) {
+  .nav-container button,
+  .nav-container img {
+    width: 28px;
+    height: 28px;
+    background: 0;
+    outline: none;
+    border: none;
+  }
   .search-bar,
   .imgTopo {
     scale: 0.8;
+  }
+  .profile {
+    width: 35px;
+    height: 35px;
   }
 }
 
@@ -248,11 +265,15 @@ button {
   }
   .nav-container button,
   .nav-container img {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     background: 0;
     outline: none;
     border: none;
+  }
+  .profile {
+    width: 32px;
+    height: 32px;
   }
 }
 
