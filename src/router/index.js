@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { ref } from 'vue'
 import { useAuthStore } from '@/stores/authStore'
 import AnunciarPage from '../views/AnunciarPage.vue'
 import HomePage from '../views/HomePage.vue'

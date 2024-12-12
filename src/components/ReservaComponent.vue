@@ -21,26 +21,16 @@ const props = defineProps({
         <div class="date-input start-date">
           <div class="date-wrapper">
             <label for="start-date" class="date-label">De:</label>
-            <input
-              type="date"
-              id="start-date"
-              class="date-value"
-              placeholder="dd/mm/aa"
-              v-model="reservaStore.datasReserva.dataInicio"
-            />
+            <input type="date" id="start-date" class="date-value" placeholder="dd/mm/aa"
+              v-model="reservaStore.datasReserva.dataInicio" />
           </div>
         </div>
         <div class="date-separator"></div>
         <div class="date-input end-date">
           <div class="date-wrapper">
             <label for="end-date" class="date-label">Até:</label>
-            <input
-              type="date"
-              id="end-date"
-              class="date-value"
-              placeholder="dd/mm/aa"
-              v-model="reservaStore.datasReserva.dataTermino"
-            />
+            <input type="date" id="end-date" class="date-value" placeholder="dd/mm/aa"
+              v-model="reservaStore.datasReserva.dataTermino" />
           </div>
         </div>
       </div>
@@ -145,7 +135,8 @@ const props = defineProps({
 
 .date-separator {
   width: 1px;
-  background-color: #bbbbbb;;
+  background-color: #bbbbbb;
+  ;
   margin: 0 5px;
 }
 
@@ -181,14 +172,48 @@ const props = defineProps({
 }
 
 @media (max-width: 1100px) {
-  .reservation-card, .card-content {
-    width: 250px;
+
+  .reservation-card,
+  .card-content {
+    width: 260px;
   }
+
   .date-range {
-    width: 250px;
+    width: 220px;
   }
+
   .date-wrapper {
     width: 100px;
+  }
+}
+
+@media (max-width: 760px) {
+  .linha-container {
+    width: 250px;
+  }
+  .card-content {
+    width: 220px;
+  }
+  .date-range {
+    width: 210px
+  }
+  .reservation-card {
+    width: 260px;
+    width: fit-content;
+    margin-right: 0;
+  }
+  .date-input.start-date, .date-wrapper {
+    width: 40px;
+  }
+  .date-input {
+    display: flex;
+    justify-content: start;
+  }
+}
+
+@media (max-width: 600px) {
+  .reservation-card {
+    margin: .5rem 0 0 0;
   }
 }
 </style>

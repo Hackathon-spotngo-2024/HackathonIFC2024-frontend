@@ -11,6 +11,8 @@ const password = ref('')
 
 const handleLogin = async () => {
   try {
+    authStore.errorMessage = null;
+    authStore.userFirstLetter = null;
     await authStore.login({ email: email.value, password: password.value })
     if (authStore.errorMessage) return
     authStore.showAlert('login')
@@ -368,7 +370,7 @@ input:-webkit-autofill {
 
 @media (max-width: 486px) {
   .container {
-    height: 100dvh;
+    height: 80dvh;
   }
   .animated-ball,
   .animated-ball-reverse {
@@ -376,8 +378,9 @@ input:-webkit-autofill {
   }
   .login-container,
   .login-section {
+    box-shadow: none;
     width: 100dvw;
-    height: 100dvh;
+    height: 80dvh;
   }
   .login-form {
     width: 100dvw;

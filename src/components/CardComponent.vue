@@ -30,7 +30,7 @@ const props = defineProps({
   flex-direction: column;
   align-items: center;
   margin: 1rem auto;
-  width: 90%;
+  width: fit-content;
   max-width: 400px;
   border: 0;
 }

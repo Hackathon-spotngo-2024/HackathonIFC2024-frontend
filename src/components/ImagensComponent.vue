@@ -1,12 +1,7 @@
 <script setup>
 import { useNavbar } from '@/stores/dadosNavbar'
-import { onMounted } from 'vue'
-import { initFlowbite } from 'flowbite'
-import 'flowbite'
-
-onMounted(() => {
-  initFlowbite()
-})
+import 'vue3-carousel/dist/carousel.css'
+import { Carousel, Slide, Pagination } from 'vue3-carousel'
 
 const navbarStore = useNavbar()
 const props = defineProps({
@@ -30,102 +25,29 @@ const props = defineProps({
     </div>
   </div>
 
-  <div
-    id="default-carousel"
-    class="relative w-full"
-    data-carousel="slide"
-  >
-    <!-- Carousel wrapper -->
-    <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-      <!-- Item 1 -->
-      <div class="hidden duration-700 ease-in-out" data-carousel-item>
-        <img
-          :src="props.anuncio.imgs[0]"
-          class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-          alt="..."
-        />
-      </div>
-      <!-- Item 2 -->
-      <div class="hidden duration-700 ease-in-out" data-carousel-item>
-        <img
-          :src="props.anuncio.imgs[1]"
-          class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-          alt="..."
-        />
-      </div>
-      <!-- Item 3 -->
-      <div class="hidden duration-700 ease-in-out" data-carousel-item>
-        <img
-          :src="props.anuncio.imgs[2]"
-          class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-          alt="..."
-        />
-      </div>
-      <!-- Item 4 -->
-      <div class="hidden duration-700 ease-in-out" data-carousel-item>
-        <img
-          :src="props.anuncio.imgs[3]"
-          class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-          alt="..."
-        />
-      </div>
-      <!-- Item 5 -->
-      <div class="hidden duration-700 ease-in-out" data-carousel-item>
-        <img
-          :src="props.anuncio.imgs[4]"
-          class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-          alt="..."
-        />
-      </div>
-    </div>
-    <!-- Slider indicators -->
-    <div
-      class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse"
-    >
-      <button
-        type="button"
-        class="w-3 h-3 rounded-full"
-        aria-current="true"
-        aria-label="Slide 1"
-        data-carousel-slide-to="0"
-      ></button>
-      <button
-        type="button"
-        class="w-3 h-3 rounded-full"
-        aria-current="false"
-        aria-label="Slide 2"
-        data-carousel-slide-to="1"
-      ></button>
-      <button
-        type="button"
-        class="w-3 h-3 rounded-full"
-        aria-current="false"
-        aria-label="Slide 3"
-        data-carousel-slide-to="2"
-      ></button>
-      <button
-        type="button"
-        class="w-3 h-3 rounded-full"
-        aria-current="false"
-        aria-label="Slide 4"
-        data-carousel-slide-to="3"
-      ></button>
-      <button
-        type="button"
-        class="w-3 h-3 rounded-full"
-        aria-current="false"
-        aria-label="Slide 5"
-        data-carousel-slide-to="4"
-      ></button>
-    </div>
-  </div>
+  <carousel class="carousel" :items-to-show="1" v-if="navbarStore.isTelaMobile">
+    <slide v-for="(imagem, index) in props.anuncio.imgs" :key="index">
+      <img class="carousel-img" :src="imagem" alt="">
+    </slide>
+
+    <template #addons>
+      <pagination />
+    </template>
+  </carousel>
 </template>
 
 <style scoped>
-@import 'flowbite';
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+.carousel {
+  width: 500px;
+}
+
+.carousel-img {
+  background-color: lightgray;
+  height: 400px;
+  width: 500px;
+  height: 400px;
+  border-radius: 15px;
+}
 
 .imagens-container {
   display: grid;
@@ -156,6 +78,7 @@ const props = defineProps({
   width: 240px;
 }
 
+
 .imagem-pequena img {
   width: 100%;
   height: 100%;
@@ -184,13 +107,24 @@ img:hover {
 }
 
 @media (max-width: 1100px) {
-    .imagens-container {
-      scale: 0.85;
-    }
+  .imagens-container {
+    scale: 0.85;
+  }
 }
+
 @media (max-width: 990px) {
-    .imagens-container {
-      scale: 0.7;
-    }
+  .imagens-container {
+    scale: 0.7;
+  }
+}
+@media (max-width: 540px) {
+  .carousel, .carousel-img {
+    width: 100dvw;
+    height: 380px;
+  }
+  .navigation {
+    display: none;
+    overflow: hidden;
+  }
 }
 </style>

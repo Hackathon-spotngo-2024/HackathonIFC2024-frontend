@@ -133,25 +133,84 @@ const anuncioSelecionado = enderecoStore.anunciosCriados.find(
   .reserva-component {
     width: 300px;
     margin-left: 0;
+    display: flex;
+    justify-content: end;
   }
   .imagens-component {
-    height: 400px;
+    height: 430px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
   }
   .titulo {
     width: 700px;
-    margin: 1rem 0 0 100px;
+    margin: 1rem 0 0 80px;
+  }
+  .reserva-e-descricao {
+    margin-top: 1.5rem;
   }
 }
+
 @media (max-width: 990px) {
   .titulo {
     width: 600px;
-    margin: 1rem 0 0 150px;
+    margin: 1rem 0 .5rem 150px;
   }
   .reserva-e-descricao {
     width: fit-content;
+    display: flex;
+    margin-top: 1rem;
   }
   .titulo-e-descricao {
     width: 400px;
+  }
+  .imagens-component {
+    height: 350px;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .titulo-e-descricao {
+    width: 250px;
+  }
+  .container-reserva {
+    height: 100dvh;
+  }
+  .titulo {
+    margin: 1rem 0 1rem 130px;
+  }
+  .reserva-e-descricao {
+    display: flex;
+    margin-top: 2rem;
+    width: 500px;
+    justify-content: space-between;
+  }
+  .imagens-component {
+    margin-bottom: 1rem;
+  }
+}
+@media (max-width: 600px) {
+  .container-geral, .container-reserva {
+    width: 100dvw;
+  }
+  .pagina {
+    width: 100dvw;
+    height: 970px;
+  }
+  .reserva-component {
+    width: fit-content;
+  }
+  .reserva-e-descricao {
+    display: flex;
+    flex-direction: column;
+  }
+  .titulo-e-descricao {
+    width: 80dvw;
+  }
+  .imagens-component {
+    margin-bottom: 0;
   }
 }
 </style>

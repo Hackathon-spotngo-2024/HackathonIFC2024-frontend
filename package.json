@@ -24,6 +24,7 @@
     "tsconfig": "^7.0.0",
     "vue": "^3.5.13",
     "vue-router": "^4.3.3",
+    "vue3-carousel": "^0.9.0",
     "vue3-popper": "^1.5.0"
   },
   "devDependencies": {

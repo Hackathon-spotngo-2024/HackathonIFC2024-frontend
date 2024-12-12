@@ -60,4 +60,17 @@ const props = defineProps({
     width: 350px;
   }
 }
+@media (max-width: 760px) {
+  .linha-container {
+    width: 250px;
+  }
+  .descricao {
+    width: fit-content;
+  }
+}
+@media (max-width: 600px) {
+  .linha-container {
+    width: 80dvw;
+  }
+}
 </style>

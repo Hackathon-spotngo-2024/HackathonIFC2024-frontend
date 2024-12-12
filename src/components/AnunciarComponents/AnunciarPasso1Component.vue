@@ -174,6 +174,9 @@ onMounted(() => {
 }
 
 @media (max-width: 450px) {
+  .house-image {
+    height: 130px;
+  }
   .titulo-etapa-1 {
     font-size: 24px;
   }
@@ -190,7 +193,7 @@ onMounted(() => {
     font-size: 20px;
   }
   .submit-botao-container {
-    margin-top: 40px;
+    margin-top: 60px;
   }
 }
 
