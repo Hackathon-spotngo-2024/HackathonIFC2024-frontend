@@ -73,7 +73,7 @@ input {
   align-items: center;
   flex-direction: row;
   gap: 0.5rem;
-  border: 3px dashed var(--cor-principal);
+  border: 3px solid var(--cor-principal);
   border-radius: 15px;
   padding: 10px;
 }
@@ -91,5 +91,12 @@ input {
 .imagem img {
   width: 100px;
   height: 100px;
+}
+
+@media (max-width: 580px) {
+  .container-imagens {
+    display: grid;
+    grid: 150px / auto auto auto;
+  }
 }
 </style>

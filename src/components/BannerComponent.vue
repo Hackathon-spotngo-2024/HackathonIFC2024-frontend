@@ -12,7 +12,7 @@ import banner from '../assets/banner.jpg'
 .banner {
     display: flex;
     justify-content: center;
-    margin: 6rem 0 4.6rem 0;
+    margin: 3rem 0 4.6rem 0;
 }
 
 .img-banner {

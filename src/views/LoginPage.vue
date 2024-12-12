@@ -3,9 +3,7 @@ import { ref } from 'vue'
 import { useAuthStore } from '@/stores/authStore'
 import AnimatedBallComponent from '@/components/AnimatedBallComponent.vue'
 import BallReversedComponent from '@/components/BallReversedComponent.vue'
-import { useNavbar } from '@/stores/dadosNavbar'
 
-const navbarStore = useNavbar()
 const authStore = useAuthStore()
 const passwordVisible = ref(false)
 const email = ref('')

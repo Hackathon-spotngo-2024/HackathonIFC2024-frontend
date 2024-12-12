@@ -193,7 +193,7 @@ onMounted(() => {
     gap: 2rem;
   }
   .submit-botao-container button {
-    width: 270px;
+    width: 220px;
   }
 }
 </style>
